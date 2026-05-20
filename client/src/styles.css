@@ -377,39 +377,37 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
 .donut-hint { font-size: 12px; font-weight: 500; margin-top: 4px; }
 
 /* ---- rotate buttons (question detail) ---- */
-/* Anchored just outside the 760px detail article on wide screens;
-   clamp to viewport edges on narrow screens. Subtle ghost styling. */
+.detail-rotate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
 .rotate-btn {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   padding: 0;
-  border-radius: 10px;
+  border-radius: 8px;
   background: transparent;
   border: 1px solid var(--border);
   color: var(--muted);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  opacity: 0.55;
-  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-  z-index: 40;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .rotate-btn:hover,
 .rotate-btn:focus-visible {
   opacity: 1;
   color: var(--text);
-  background: var(--panel);
   border-color: var(--accent);
   outline: none;
 }
-.rotate-prev { left: max(12px, calc(50% - 380px - 56px)); }
-.rotate-next { right: max(12px, calc(50% - 380px - 56px)); }
+.rotate-spacer { visibility: hidden; }
 
 /* ---- subject modal (pie click) ---- */
 .subject-modal-backdrop {
@@ -524,15 +522,6 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   .toolbar { gap: 8px; }
   .search { flex-basis: 100%; min-width: 0; }
   .chip { padding: 5px 12px; font-size: 13px; }
-
-  .rotate-btn {
-    width: 30px;
-    height: 42px;
-    font-size: 20px;
-    border-radius: 8px;
-  }
-  .rotate-prev { left: 4px; }
-  .rotate-next { right: 4px; }
 
   .subject-modal-backdrop { padding: 0; }
   .subject-modal {

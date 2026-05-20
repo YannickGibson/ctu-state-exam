@@ -94,6 +94,33 @@ export default function QuestionDetailPage() {
 
   return (
     <article className="detail">
+      <nav className="detail-rotate" aria-label="Navigate questions">
+        {prevId ? (
+          <Link
+            to={`/questions/${prevId}`}
+            className="rotate-btn"
+            aria-label="Previous question"
+            title="Previous question"
+          >
+            ‹
+          </Link>
+        ) : (
+          <span className="rotate-btn rotate-spacer" aria-hidden />
+        )}
+        {nextId ? (
+          <Link
+            to={`/questions/${nextId}`}
+            className="rotate-btn"
+            aria-label="Next question"
+            title="Next question"
+          >
+            ›
+          </Link>
+        ) : (
+          <span className="rotate-btn rotate-spacer" aria-hidden />
+        )}
+      </nav>
+
       <div className="detail-meta">
         <span className="pill">{question.group}</span>
         <span className="pill">{question.id}</span>
@@ -124,31 +151,6 @@ export default function QuestionDetailPage() {
           Reset
         </button>
       </div>
-
-      {(prevId || nextId) && (
-        <>
-          {prevId && (
-            <Link
-              to={`/questions/${prevId}`}
-              className="rotate-btn rotate-prev"
-              aria-label="Previous question"
-              title="Previous question"
-            >
-              ‹
-            </Link>
-          )}
-          {nextId && (
-            <Link
-              to={`/questions/${nextId}`}
-              className="rotate-btn rotate-next"
-              aria-label="Next question"
-              title="Next question"
-            >
-              ›
-            </Link>
-          )}
-        </>
-      )}
 
       {showAnswer && (
         <section className="answer">
