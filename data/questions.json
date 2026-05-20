@@ -1,0 +1,380 @@
+[
+  {
+    "id": "NI-SPOL-1",
+    "group": "SPOL",
+    "number": 1,
+    "subject": "NI-MPI",
+    "subjectCode": "MPI",
+    "subjectIndex": 1,
+    "text": "Teorie grup: Grupoidy, pologrupy, monoidy a grupy. Podgrupy, cyklické grupy a jejich generátory."
+  },
+  {
+    "id": "NI-SPOL-2",
+    "group": "SPOL",
+    "number": 2,
+    "subject": "NI-MPI",
+    "subjectCode": "MPI",
+    "subjectIndex": 2,
+    "text": "Tělesa a okruhy: Základní definice a vlastnosti. Konečná tělesa. Okruhy polynomů, ireducibilní polynom."
+  },
+  {
+    "id": "NI-SPOL-3",
+    "group": "SPOL",
+    "number": 3,
+    "subject": "NI-MPI",
+    "subjectCode": "MPI",
+    "subjectIndex": 3,
+    "text": "Funkce více proměnných: gradient, Hessián, definitnost matic, extrémy funkcí více proměnných bez omezení a s rovnostními omezeními."
+  },
+  {
+    "id": "NI-SPOL-4",
+    "group": "SPOL",
+    "number": 4,
+    "subject": "NI-MPI",
+    "subjectCode": "MPI",
+    "subjectIndex": 4,
+    "text": "Integrál funkcí více proměnných (Darbouxova konstrukce)."
+  },
+  {
+    "id": "NI-SPOL-5",
+    "group": "SPOL",
+    "number": 5,
+    "subject": "NI-MPI",
+    "subjectCode": "MPI",
+    "subjectIndex": 5,
+    "text": "Numerická matematika: reprezentace čísel v počítači, chyby vznikající při výpočtech s pohyblivou řádovou čárkou, podmíněnost úlohy a stabilita numerických algoritmů."
+  },
+  {
+    "id": "NI-SPOL-6",
+    "group": "SPOL",
+    "number": 6,
+    "subject": "NI-VSM",
+    "subjectCode": "VSM",
+    "subjectIndex": 1,
+    "text": "Testování statistických hypotéz. T-testy, testy nezávislosti, testy dobré shody."
+  },
+  {
+    "id": "NI-SPOL-7",
+    "group": "SPOL",
+    "number": 7,
+    "subject": "NI-VSM",
+    "subjectCode": "VSM",
+    "subjectIndex": 2,
+    "text": "Základy teorie informace a kódování, entropie."
+  },
+  {
+    "id": "NI-SPOL-8",
+    "group": "SPOL",
+    "number": 8,
+    "subject": "NI-VSM",
+    "subjectCode": "VSM",
+    "subjectIndex": 3,
+    "text": "Markovské řetězce s diskrétním časem. Jejich limitní vlastnosti."
+  },
+  {
+    "id": "NI-SPOL-9",
+    "group": "SPOL",
+    "number": 9,
+    "subject": "NI-VSM",
+    "subjectCode": "VSM",
+    "subjectIndex": 4,
+    "text": "Markovské řetězce se spojitým časem. Souvislost s Markovskými řetezci s diskrétním časem a s Poissonovým procesem."
+  },
+  {
+    "id": "NI-SPOL-10",
+    "group": "SPOL",
+    "number": 10,
+    "subject": "NI-VSM",
+    "subjectCode": "VSM",
+    "subjectIndex": 5,
+    "text": "Systémy hromadné obsluhy a jejich limitní vlastnosti. Souvislost s Markovskými řetězci se spojitým časem."
+  },
+  {
+    "id": "NI-SPOL-11",
+    "group": "SPOL",
+    "number": 11,
+    "subject": "NI-KOP",
+    "subjectCode": "KOP",
+    "subjectIndex": 1,
+    "text": "Význam tříd NP a NPH pro praktické výpočty."
+  },
+  {
+    "id": "NI-SPOL-12",
+    "group": "SPOL",
+    "number": 12,
+    "subject": "NI-KOP",
+    "subjectCode": "KOP",
+    "subjectIndex": 2,
+    "text": "Experimentální vyhodnocení algoritmů, zejména randomizovaných."
+  },
+  {
+    "id": "NI-SPOL-13",
+    "group": "SPOL",
+    "number": 13,
+    "subject": "NI-KOP",
+    "subjectCode": "KOP",
+    "subjectIndex": 3,
+    "text": "Princip lokálních heuristik, pojem globálního a lokálního minima, obrana před uváznutím v lokálním minimu."
+  },
+  {
+    "id": "NI-SPOL-14",
+    "group": "SPOL",
+    "number": 14,
+    "subject": "NI-KOP",
+    "subjectCode": "KOP",
+    "subjectIndex": 4,
+    "text": "Princip genetických algoritmů, význam selekčního tlaku pro jejich funkci."
+  },
+  {
+    "id": "NI-SPOL-15",
+    "group": "SPOL",
+    "number": 15,
+    "subject": "NI-KOP",
+    "subjectCode": "KOP",
+    "subjectIndex": 5,
+    "text": "Princip simulovaného ochlazování, význam parametrů a způsoby jejich řízení."
+  },
+  {
+    "id": "NI-SPOL-16",
+    "group": "SPOL",
+    "number": 16,
+    "subject": "NI-PDP",
+    "subjectCode": "PDP",
+    "subjectIndex": 1,
+    "text": "Výkonnostní měřítka paralelních algoritmů, PRAM model, APRAM model, škálovatelnost."
+  },
+  {
+    "id": "NI-SPOL-17",
+    "group": "SPOL",
+    "number": 17,
+    "subject": "NI-PDP",
+    "subjectCode": "PDP",
+    "subjectIndex": 2,
+    "text": "Programování nad sdílenou pamětí, programový model OpenMP, datový a funkční paralelismus, synchronizace vláken, vícevláknové algoritmy (násobení polynomů, násobení matic a vektorů, řazení)."
+  },
+  {
+    "id": "NI-SPOL-18",
+    "group": "SPOL",
+    "number": 18,
+    "subject": "NI-PDP",
+    "subjectCode": "PDP",
+    "subjectIndex": 3,
+    "text": "Programování nad distribuovanou pamětí, programový model MPI (vícevláknové procesy, komunikátory, 2-bodové blokující a neblokující komunikační operace, kolektivní operace), paralelní násobení hustých matic, paralelní mocninná metoda."
+  },
+  {
+    "id": "NI-SPOL-19",
+    "group": "SPOL",
+    "number": 19,
+    "subject": "NI-PDP",
+    "subjectCode": "PDP",
+    "subjectIndex": 4,
+    "text": "Přímé ortogonální a hyperkubické propojovací sítě paralelních počítačů (definice, vlastnosti, vnořování)."
+  },
+  {
+    "id": "NI-SPOL-20",
+    "group": "SPOL",
+    "number": 20,
+    "subject": "NI-PDP",
+    "subjectCode": "PDP",
+    "subjectIndex": 5,
+    "text": "Paralelní algoritmy pro redukci, prefixový součet a segmentový prefixový součet na PRAM, v ortogonálních, hyperkubických a obecných topologiích, aplikace."
+  },
+  {
+    "id": "NI-ZI-1",
+    "group": "ZI",
+    "number": 1,
+    "subject": "NI-UMI",
+    "subjectCode": "UMI",
+    "subjectIndex": 1,
+    "text": "Automatické plánování, plánovací graf, kompilace plánování do jiných formalismů."
+  },
+  {
+    "id": "NI-ZI-2",
+    "group": "ZI",
+    "number": 2,
+    "subject": "NI-UMI",
+    "subjectCode": "UMI",
+    "subjectIndex": 2,
+    "text": "Splňování omezení s konečnými doménami (CSP), pokročilé prohledávání."
+  },
+  {
+    "id": "NI-ZI-3",
+    "group": "ZI",
+    "number": 3,
+    "subject": "NI-UMI",
+    "subjectCode": "UMI",
+    "subjectIndex": 3,
+    "text": "Systematické a lokální splňování v logice (DPLL, CDCL, WalkSAT)."
+  },
+  {
+    "id": "NI-ZI-4",
+    "group": "ZI",
+    "number": 4,
+    "subject": "NI-PDD",
+    "subjectCode": "PDD",
+    "subjectIndex": 1,
+    "text": "Metody hodnocení a výběru příznaků: univariátní/multivariátní a filtrační přístupy."
+  },
+  {
+    "id": "NI-ZI-5",
+    "group": "ZI",
+    "number": 5,
+    "subject": "NI-PDD",
+    "subjectCode": "PDD",
+    "subjectIndex": 2,
+    "text": "Algoritmy pro řešení chybějících hodnot, detekci odlehlých hodnot a vyvažování dat."
+  },
+  {
+    "id": "NI-ZI-6",
+    "group": "ZI",
+    "number": 6,
+    "subject": "NI-PDD",
+    "subjectCode": "PDD",
+    "subjectIndex": 3,
+    "text": "Lineární projekce dat: PCA, LDA a nelineární redukce dimenze."
+  },
+  {
+    "id": "NI-ZI-7",
+    "group": "ZI",
+    "number": 7,
+    "subject": "NI-MVI",
+    "subjectCode": "MVI",
+    "subjectIndex": 1,
+    "text": "Učení dopředných neuronových sítí, konvoluční neuronové sítě."
+  },
+  {
+    "id": "NI-ZI-8",
+    "group": "ZI",
+    "number": 8,
+    "subject": "NI-MVI",
+    "subjectCode": "MVI",
+    "subjectIndex": 2,
+    "text": "Autoenkodéry a generativní neuronové sítě."
+  },
+  {
+    "id": "NI-ZI-9",
+    "group": "ZI",
+    "number": 9,
+    "subject": "NI-MVI",
+    "subjectCode": "MVI",
+    "subjectIndex": 3,
+    "text": "Rekurentní neuronové sítě a neuroevoluce."
+  },
+  {
+    "id": "NI-ZI-10",
+    "group": "ZI",
+    "number": 10,
+    "subject": "NI-MVI",
+    "subjectCode": "MVI",
+    "subjectIndex": 4,
+    "text": "Transformery, mechanismy pozornosti, transfer a meta learning."
+  },
+  {
+    "id": "NI-ZI-11",
+    "group": "ZI",
+    "number": 11,
+    "subject": "NI-ADM",
+    "subjectCode": "ADM",
+    "subjectIndex": 1,
+    "text": "Ansámblové metody (Bagging, Boosting) a bias-variance rozklad."
+  },
+  {
+    "id": "NI-ZI-12",
+    "group": "ZI",
+    "number": 12,
+    "subject": "NI-ADM",
+    "subjectCode": "ADM",
+    "subjectIndex": 2,
+    "text": "Jádrové metody, jádrová regrese a Support Vector Machines."
+  },
+  {
+    "id": "NI-ZI-13",
+    "group": "ZI",
+    "number": 13,
+    "subject": "NI-ADM",
+    "subjectCode": "ADM",
+    "subjectIndex": 3,
+    "text": "Doporučovací algoritmy a faktorizační metody."
+  },
+  {
+    "id": "NI-ZI-14",
+    "group": "ZI",
+    "number": 14,
+    "subject": "NI-BML",
+    "subjectCode": "BML",
+    "subjectIndex": 1,
+    "text": "Principy bayesovského modelování: apriorní/aposteriorní rozdělení a konjugovaná rozdělení."
+  },
+  {
+    "id": "NI-ZI-15",
+    "group": "ZI",
+    "number": 15,
+    "subject": "NI-BML",
+    "subjectCode": "BML",
+    "subjectIndex": 2,
+    "text": "Stavové modely, sekvenční bayesovský odhad a nelineární odhad stavu."
+  },
+  {
+    "id": "NI-ZI-16",
+    "group": "ZI",
+    "number": 16,
+    "subject": "NI-BML",
+    "subjectCode": "BML",
+    "subjectIndex": 3,
+    "text": "Rejection a importance sampling a metody vážení."
+  },
+  {
+    "id": "NI-ZI-17",
+    "group": "ZI",
+    "number": 17,
+    "subject": "NI-PON",
+    "subjectCode": "PON",
+    "subjectIndex": 1,
+    "text": "QR rozklad: metody výpočtu a aplikace pro vlastní čísla."
+  },
+  {
+    "id": "NI-ZI-18",
+    "group": "ZI",
+    "number": 18,
+    "subject": "NI-PON",
+    "subjectCode": "PON",
+    "subjectIndex": 2,
+    "text": "SVD rozklad matice, výpočet a aplikace ve strojovém učení."
+  },
+  {
+    "id": "NI-ZI-19",
+    "group": "ZI",
+    "number": 19,
+    "subject": "NI-PON",
+    "subjectCode": "PON",
+    "subjectIndex": 3,
+    "text": "Hladká optimalizace bez omezení, gradientní metody a volba kroku."
+  },
+  {
+    "id": "NI-ZI-20",
+    "group": "ZI",
+    "number": 20,
+    "subject": "NI-SCR",
+    "subjectCode": "SCR",
+    "subjectIndex": 1,
+    "text": "Dekompozice časových řad, typy stacionarity, náhodná procházka a bílý šum."
+  },
+  {
+    "id": "NI-ZI-21",
+    "group": "ZI",
+    "number": 21,
+    "subject": "NI-SCR",
+    "subjectCode": "SCR",
+    "subjectIndex": 2,
+    "text": "Autoregresní a klouzavé průměrové modely s metodami identifikace."
+  },
+  {
+    "id": "NI-ZI-22",
+    "group": "ZI",
+    "number": 22,
+    "subject": "NI-SCR",
+    "subjectCode": "SCR",
+    "subjectIndex": 3,
+    "text": "ARIMA modely: integrace, diferencování a reprezentace parametrů."
+  }
+]

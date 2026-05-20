@@ -1,0 +1,19 @@
+{
+  "subject": "NI-MVI",
+  "subjectCode": "MVI",
+  "group": "ZI",
+  "title": "MVI quiz",
+  "questions": [
+    {
+      "prompt": "Placeholder question for NI-MVI. Replace with real content.",
+      "choices": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correctIndex": 0,
+      "explanation": "Explanation for the correct answer goes here."
+    }
+  ]
+}

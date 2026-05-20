@@ -1,0 +1,19 @@
+{
+  "subject": "NI-PDP",
+  "subjectCode": "PDP",
+  "group": "SPOL",
+  "title": "PDP quiz",
+  "questions": [
+    {
+      "prompt": "Placeholder question for NI-PDP. Replace with real content.",
+      "choices": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correctIndex": 0,
+      "explanation": "Explanation for the correct answer goes here."
+    }
+  ]
+}
