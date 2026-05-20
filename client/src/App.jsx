@@ -20,7 +20,7 @@ function Header() {
 
   return (
     <header className="app-header">
-      <span className="app-title">SZZ Study</span>
+      <span className="app-title">State Exams</span>
       <nav>
         <NavLink to="/questions">Questions</NavLink>
         <NavLink to="/quizzes">Quizzes</NavLink>

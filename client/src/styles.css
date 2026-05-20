@@ -341,10 +341,20 @@ button.ghost:hover:not(:disabled) { background: #eef3fe; }
   .app-main { padding: 14px 12px; }
   .app-header {
     padding: 10px 12px;
-    gap: 12px;
+    gap: 8px 12px;
     flex-wrap: wrap;
   }
-  .app-header nav { gap: 12px; }
+  .app-header nav {
+    order: 3;
+    flex-basis: 100%;
+    gap: 16px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .app-header nav a { flex: 0 0 auto; }
+  .header-spacer { flex: 1; }
+  .header-user { margin-left: auto; }
   h1 { font-size: 19px; }
 
   .toolbar { gap: 8px; }
