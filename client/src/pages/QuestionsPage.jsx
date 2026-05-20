@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { getProgress, getQuestions } from '../api.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import ProgressDonut from '../components/ProgressDonut.jsx';
 
 const ZERO = { practicedCount: 0, readPassively: false };
+const LAST_VIEWED_KEY = 'questions:lastViewedId';
 
 export default function QuestionsPage() {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [progress, setProgress] = useState({});
   const [error, setError] = useState(null);
@@ -14,7 +17,7 @@ export default function QuestionsPage() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    document.title = 'Questions · SZZ Study';
+    document.title = 'Questions · State Exams';
     Promise.all([getQuestions(), getProgress()])
       .then(([qs, pg]) => {
         setQuestions(qs);
@@ -41,6 +44,24 @@ export default function QuestionsPage() {
       );
     });
   }, [merged, group, search]);
+
+  function rotate(direction) {
+    if (questions.length === 0) return;
+    const lastId =
+      typeof sessionStorage !== 'undefined'
+        ? sessionStorage.getItem(LAST_VIEWED_KEY)
+        : null;
+    const idx = lastId ? questions.findIndex((q) => q.id === lastId) : -1;
+    let nextIdx;
+    if (idx < 0) {
+      nextIdx = direction > 0 ? 0 : questions.length - 1;
+    } else {
+      nextIdx = (idx + direction + questions.length) % questions.length;
+    }
+    const target = questions[nextIdx];
+    sessionStorage.setItem(LAST_VIEWED_KEY, target.id);
+    navigate(`/questions/${target.id}`);
+  }
 
   if (loading) return <p className="muted">Loading…</p>;
   if (error) return <p className="error">Error: {error}</p>;
@@ -95,19 +116,33 @@ export default function QuestionsPage() {
               </td>
               <td className="q-text">{q.text}</td>
               <td className="col-open">
-                <a
-                  className="open-btn"
-                  href={`/questions/${q.id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open ↗
-                </a>
+                <Link className="open-btn" to={`/questions/${q.id}`}>
+                  Open
+                </Link>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <button
+        type="button"
+        className="rotate-btn rotate-prev"
+        onClick={() => rotate(-1)}
+        aria-label="Previous question"
+        title="Previous question"
+      >
+        ‹
+      </button>
+      <button
+        type="button"
+        className="rotate-btn rotate-next"
+        onClick={() => rotate(1)}
+        aria-label="Next question"
+        title="Next question"
+      >
+        ›
+      </button>
     </div>
   );
 }

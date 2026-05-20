@@ -52,6 +52,7 @@ export default function QuestionDetailPage() {
         setProgress(p);
       })
       .catch((e) => setError(e.message));
+    sessionStorage.setItem('questions:lastViewedId', id);
   }, [id]);
 
   useEffect(() => {

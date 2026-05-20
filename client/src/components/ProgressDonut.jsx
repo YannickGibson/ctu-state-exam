@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import StatusBadge from './StatusBadge.jsx';
 
 const COLORS = {
@@ -34,7 +35,8 @@ function annularSector(cx, cy, rOuter, rInner, startA, endA) {
 }
 
 export default function ProgressDonut({ questions }) {
-  const [openSubject, setOpenSubject] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const openSubject = searchParams.get('subject');
 
   const data = useMemo(() => {
     const bySubject = new Map();
@@ -77,18 +79,27 @@ export default function ProgressDonut({ questions }) {
     ? data.subjects.find((s) => s.subject === openSubject)
     : null;
 
+  function openModal(subject) {
+    setSearchParams({ subject }, { replace: false });
+  }
+
+  function closeModal() {
+    setSearchParams({}, { replace: true });
+  }
+
   useEffect(() => {
     if (!modalSubject) return undefined;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const onKey = (e) => {
-      if (e.key === 'Escape') setOpenSubject(null);
+      if (e.key === 'Escape') closeModal();
     };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener('keydown', onKey);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalSubject]);
 
   if (data.total === 0) {
@@ -138,7 +149,6 @@ export default function ProgressDonut({ questions }) {
     cursor = endA + effectiveGap;
   }
 
-  const pct = Math.round((data.practiced / data.total) * 100);
   const LABEL_MIN_RAD = (12 * Math.PI) / 180;
 
   return (
@@ -156,13 +166,13 @@ export default function ProgressDonut({ questions }) {
                 d={annularSector(cx, cy, rOuter, rInner, a.startA, a.endA)}
                 fill={COLORS[a.kind]}
                 className="donut-segment"
-                onClick={() => setOpenSubject(seg.subject.subject)}
+                onClick={() => openModal(seg.subject.subject)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    setOpenSubject(seg.subject.subject);
+                    openModal(seg.subject.subject);
                   }
                 }}
               >
@@ -181,18 +191,21 @@ export default function ProgressDonut({ questions }) {
                 textAnchor="middle"
                 dominantBaseline="middle"
                 className="donut-label"
-                onClick={() => setOpenSubject(seg.subject.subject)}
+                onClick={() => openModal(seg.subject.subject)}
                 style={{ cursor: 'pointer' }}
               >
                 {seg.subject.subjectCode}
               </text>
             )
           )}
-          <text x={cx} y={cy - 6} textAnchor="middle" className="donut-center-main">
+          <text
+            x={cx}
+            y={cy}
+            textAnchor="middle"
+            dominantBaseline="central"
+            className="donut-center-main"
+          >
             {data.practiced} / {data.total}
-          </text>
-          <text x={cx} y={cy + 20} textAnchor="middle" className="donut-center-sub">
-            {pct}% practiced
           </text>
         </svg>
       </div>
@@ -212,7 +225,7 @@ export default function ProgressDonut({ questions }) {
       {modalSubject && (
         <div
           className="subject-modal-backdrop"
-          onClick={() => setOpenSubject(null)}
+          onClick={closeModal}
           role="dialog"
           aria-modal="true"
           aria-label={`${modalSubject.subject} questions`}
@@ -232,7 +245,7 @@ export default function ProgressDonut({ questions }) {
               <button
                 type="button"
                 className="ghost subject-modal-close"
-                onClick={() => setOpenSubject(null)}
+                onClick={closeModal}
                 aria-label="Close"
               >
                 ×
@@ -241,10 +254,8 @@ export default function ProgressDonut({ questions }) {
             <ul className="subject-modal-list">
               {modalSubject.questions.map((q) => (
                 <li key={q.id}>
-                  <a
-                    href={`/questions/${q.id}`}
-                    target="_blank"
-                    rel="noreferrer"
+                  <Link
+                    to={`/questions/${q.id}`}
                     className="subject-modal-item"
                   >
                     <span className="subject-modal-status">
@@ -257,7 +268,7 @@ export default function ProgressDonut({ questions }) {
                       {q.group} {q.number}
                     </span>
                     <span className="subject-modal-text">{q.text}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
