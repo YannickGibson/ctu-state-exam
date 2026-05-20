@@ -1,12 +1,41 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { getProgressFor, getQuestion, patchProgress } from '../api.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 
 const ZERO = { practicedCount: 0, readPassively: false };
+
+// A "source-PDF" link is `[text](/pdfs/X)` with no fragment and no leading `!`
+// (i.e. not an image). Inline page references like `/pdfs/X.pdf#page=12` and
+// image embeds `![alt](/pdfs/X.svg)` are deliberately excluded.
+const SOURCE_LINK_RE = /(?<!!)\[[^\]]+\]\((\/pdfs\/[^\s)#]+)\)/g;
+
+function extractSources(markdown) {
+  if (!markdown) return { body: '', sources: [] };
+  const sources = [];
+  const seen = new Set();
+  const kept = [];
+  for (const line of markdown.split('\n')) {
+    SOURCE_LINK_RE.lastIndex = 0;
+    let match;
+    let hadSource = false;
+    while ((match = SOURCE_LINK_RE.exec(line)) !== null) {
+      hadSource = true;
+      const url = match[1];
+      if (!seen.has(url)) {
+        seen.add(url);
+        sources.push(url);
+      }
+    }
+    if (!hadSource) kept.push(line);
+  }
+  const body = kept.join('\n').replace(/^\s*\n+/, '').replace(/\n+\s*$/, '');
+  return { body, sources };
+}
 
 export default function QuestionDetailPage() {
   const { id } = useParams();
@@ -45,6 +74,7 @@ export default function QuestionDetailPage() {
   if (!question) return <p className="muted">Loading…</p>;
 
   const practiced = progress.practicedCount > 0;
+  const { body, sources } = extractSources(question.answer);
 
   return (
     <article className="detail">
@@ -82,24 +112,35 @@ export default function QuestionDetailPage() {
       {showAnswer && (
         <section className="answer">
           {question.answer ? (
-            <ReactMarkdown
-              remarkPlugins={[remarkMath]}
-              rehypePlugins={[rehypeKatex]}
-              components={{
-                a: ({ href, children, ...rest }) =>
-                  href && href.startsWith('/pdfs/') ? (
-                    <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
-                      {children}
+            <>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+                components={{
+                  a: ({ href, children, ...rest }) =>
+                    href && href.startsWith('/pdfs/') ? (
+                      <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+                        {children}
+                      </a>
+                    ) : (
+                      <a href={href} {...rest}>
+                        {children}
+                      </a>
+                    ),
+                }}
+              >
+                {body}
+              </ReactMarkdown>
+              {sources.length > 0 && (
+                <div className="answer-sources">
+                  {sources.map((url) => (
+                    <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+                      Otevřít zdrojový soubor
                     </a>
-                  ) : (
-                    <a href={href} {...rest}>
-                      {children}
-                    </a>
-                  ),
-              }}
-            >
-              {question.answer}
-            </ReactMarkdown>
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <p className="muted">
               Answer not written yet. Create <code>data/answers/{question.id}.md</code>.
