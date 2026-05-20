@@ -75,8 +75,8 @@ export default function QuestionsPage() {
         <thead>
           <tr>
             <th className="col-status">Status</th>
-            <th className="col-num">#</th>
-            <th className="col-subject">Subject</th>
+            <th className="col-num">Subject</th>
+            <th className="col-subject">#</th>
             <th>Question</th>
             <th className="col-open"></th>
           </tr>
@@ -88,9 +88,11 @@ export default function QuestionsPage() {
                 <StatusBadge progress={q.progress} />
               </td>
               <td className="col-num">
+                {q.subject} {q.subjectIndex}
+              </td>
+              <td className="col-subject">
                 {q.group} {q.number}
               </td>
-              <td className="col-subject">{q.subject}</td>
               <td className="q-text">{q.text}</td>
               <td className="col-open">
                 <a

@@ -108,8 +108,10 @@ table.questions {
 .questions tr:last-child td { border-bottom: none; }
 .questions tr:hover td { background: #fafbfc; }
 .col-status { width: 132px; }
-.col-num { width: 78px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.col-subject { width: 96px; }
+.col-num { width: 96px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.col-subject { width: 78px; }
+.questions td.col-num { font-weight: 700; }
+.questions td.col-subject { color: var(--muted); }
 .col-open { width: 86px; }
 .q-text { color: var(--text); }
 
@@ -269,7 +271,9 @@ button.ghost:hover:not(:disabled) { background: #eef3fe; }
 }
 .progress-donut svg { width: 100%; height: auto; display: block; }
 .progress-donut svg path { transition: opacity 0.15s ease; }
-.progress-donut svg path:hover { opacity: 0.82; cursor: default; }
+.progress-donut svg path.donut-segment { cursor: pointer; }
+.progress-donut svg path.donut-segment:hover { opacity: 0.82; }
+.progress-donut svg path.donut-segment:focus { outline: none; opacity: 0.82; }
 
 .donut-label {
   font-size: 14px;
@@ -308,6 +312,69 @@ button.ghost:hover:not(:disabled) { background: #eef3fe; }
   border-radius: 4px;
   flex: 0 0 auto;
 }
+.donut-hint { font-size: 12px; font-weight: 500; margin-top: 4px; }
+
+/* ---- subject modal (pie click) ---- */
+.subject-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 22, 36, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+.subject-modal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 720px;
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(15, 22, 36, 0.25);
+}
+.subject-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.subject-modal-head h2 { margin: 0 0 4px; font-size: 20px; }
+.subject-modal-head p { margin: 0; font-size: 13px; }
+.subject-modal-close {
+  font-size: 22px;
+  line-height: 1;
+  padding: 2px 10px;
+  border-radius: 8px;
+}
+.subject-modal-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+}
+.subject-modal-list li + li { margin-top: 4px; }
+.subject-modal-item {
+  display: grid;
+  grid-template-columns: 132px 110px 80px 1fr;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid transparent;
+}
+.subject-modal-item:hover { background: #f3f6fb; border-color: var(--border); }
+.subject-modal-num { font-weight: 700; }
+.subject-modal-group { font-size: 13px; }
+.subject-modal-text { color: var(--text); }
 
 /* ---- math overflow protection ---- */
 .answer .katex-display,
@@ -324,8 +391,8 @@ button.ghost:hover:not(:disabled) { background: #eef3fe; }
   h1 { font-size: 20px; }
   .questions th, .questions td { padding: 8px 10px; }
   .col-status { width: 110px; }
-  .col-num { width: 64px; }
-  .col-subject { width: 84px; }
+  .col-num { width: 84px; }
+  .col-subject { width: 64px; }
   .col-open { width: 74px; }
   .detail-question { font-size: 18px; }
   .answer { padding: 4px 16px 16px; }
@@ -360,6 +427,27 @@ button.ghost:hover:not(:disabled) { background: #eef3fe; }
   .toolbar { gap: 8px; }
   .search { flex-basis: 100%; min-width: 0; }
   .chip { padding: 5px 12px; font-size: 13px; }
+
+  .subject-modal-backdrop { padding: 0; }
+  .subject-modal {
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  .subject-modal-item {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "status status"
+      "num    group"
+      "text   text";
+    gap: 4px 10px;
+  }
+  .subject-modal-status { grid-area: status; }
+  .subject-modal-num { grid-area: num; }
+  .subject-modal-group { grid-area: group; justify-self: end; }
+  .subject-modal-text { grid-area: text; }
 
   /* Questions: table -> cards */
   table.questions {

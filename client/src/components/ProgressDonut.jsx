@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import StatusBadge from './StatusBadge.jsx';
 
 const COLORS = {
   practiced: '#36974a',
@@ -33,6 +34,8 @@ function annularSector(cx, cy, rOuter, rInner, startA, endA) {
 }
 
 export default function ProgressDonut({ questions }) {
+  const [openSubject, setOpenSubject] = useState(null);
+
   const data = useMemo(() => {
     const bySubject = new Map();
     const order = [];
@@ -46,11 +49,18 @@ export default function ProgressDonut({ questions }) {
           practiced: 0,
           read: 0,
           none: 0,
+          questions: [],
         });
       }
       const s = bySubject.get(q.subject);
       s.total++;
       s[classify(q.progress)]++;
+      s.questions.push(q);
+    }
+    for (const s of bySubject.values()) {
+      s.questions.sort(
+        (a, b) => (a.subjectIndex ?? 0) - (b.subjectIndex ?? 0)
+      );
     }
     const subjects = order.map((k) => bySubject.get(k));
     const sum = (key) => subjects.reduce((n, s) => n + s[key], 0);
@@ -62,6 +72,24 @@ export default function ProgressDonut({ questions }) {
       none: sum('none'),
     };
   }, [questions]);
+
+  const modalSubject = openSubject
+    ? data.subjects.find((s) => s.subject === openSubject)
+    : null;
+
+  useEffect(() => {
+    if (!modalSubject) return undefined;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpenSubject(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [modalSubject]);
 
   if (data.total === 0) {
     return (
@@ -78,9 +106,7 @@ export default function ProgressDonut({ questions }) {
   const rInner = 78;
   const labelR = rOuter + 16;
   const TWO_PI = 2 * Math.PI;
-  // Gap between subjects (radians). Scales down if many subjects.
   const gap = Math.min((2 * Math.PI) / 180, TWO_PI / data.subjects.length / 8);
-  // Don't draw gaps if there's only one subject.
   const effectiveGap = data.subjects.length > 1 ? gap : 0;
 
   const segments = [];
@@ -113,7 +139,6 @@ export default function ProgressDonut({ questions }) {
   }
 
   const pct = Math.round((data.practiced / data.total) * 100);
-  // Hide labels that won't fit (sector arc too thin).
   const LABEL_MIN_RAD = (12 * Math.PI) / 180;
 
   return (
@@ -130,9 +155,19 @@ export default function ProgressDonut({ questions }) {
                 key={`${seg.subject.subject}-${a.kind}`}
                 d={annularSector(cx, cy, rOuter, rInner, a.startA, a.endA)}
                 fill={COLORS[a.kind]}
+                className="donut-segment"
+                onClick={() => setOpenSubject(seg.subject.subject)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setOpenSubject(seg.subject.subject);
+                  }
+                }}
               >
                 <title>
-                  {`${seg.subject.subject} — ${seg.subject.practiced} practiced, ${seg.subject.read} read, ${seg.subject.none} not started (${seg.subject.total} total)`}
+                  {`${seg.subject.subject} — ${seg.subject.practiced} practiced, ${seg.subject.read} read, ${seg.subject.none} not started (${seg.subject.total} total). Click to list questions.`}
                 </title>
               </path>
             ))
@@ -146,6 +181,8 @@ export default function ProgressDonut({ questions }) {
                 textAnchor="middle"
                 dominantBaseline="middle"
                 className="donut-label"
+                onClick={() => setOpenSubject(seg.subject.subject)}
+                style={{ cursor: 'pointer' }}
               >
                 {seg.subject.subjectCode}
               </text>
@@ -169,7 +206,64 @@ export default function ProgressDonut({ questions }) {
         <li>
           <i style={{ background: COLORS.none }} /> Not started ({data.none})
         </li>
+        <li className="donut-hint muted">Tip: click a slice to jump to a question.</li>
       </ul>
+
+      {modalSubject && (
+        <div
+          className="subject-modal-backdrop"
+          onClick={() => setOpenSubject(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${modalSubject.subject} questions`}
+        >
+          <div
+            className="subject-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <header className="subject-modal-head">
+              <div>
+                <h2>{modalSubject.subject}</h2>
+                <p className="muted">
+                  {modalSubject.total} questions · {modalSubject.practiced} practiced
+                  {modalSubject.read ? ` · ${modalSubject.read} read` : ''}
+                </p>
+              </div>
+              <button
+                type="button"
+                className="ghost subject-modal-close"
+                onClick={() => setOpenSubject(null)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </header>
+            <ul className="subject-modal-list">
+              {modalSubject.questions.map((q) => (
+                <li key={q.id}>
+                  <a
+                    href={`/questions/${q.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="subject-modal-item"
+                  >
+                    <span className="subject-modal-status">
+                      <StatusBadge progress={q.progress} />
+                    </span>
+                    <span className="subject-modal-num">
+                      {q.subject} {q.subjectIndex}
+                    </span>
+                    <span className="subject-modal-group muted">
+                      {q.group} {q.number}
+                    </span>
+                    <span className="subject-modal-text">{q.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
