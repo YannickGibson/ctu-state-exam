@@ -22,8 +22,8 @@ function Header() {
     <header className="app-header">
       <span className="app-title">State Exams</span>
       <nav>
-        <NavLink to="/questions">Questions</NavLink>
-        <NavLink to="/quizzes">Quizzes</NavLink>
+        <NavLink to="/questions" end>Questions</NavLink>
+        <NavLink to="/quizzes" end>Quizzes</NavLink>
         {profile?.show_leaderboard && (
           <NavLink to="/leaderboard">Leaderboard</NavLink>
         )}
