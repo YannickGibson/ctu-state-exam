@@ -377,12 +377,18 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
 .donut-hint { font-size: 12px; font-weight: 500; margin-top: 4px; }
 
 /* ---- rotate buttons (question detail) ---- */
-.detail-rotate {
+.detail-meta-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
+.detail-meta-row .detail-meta {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.detail-meta-row .rotate-btn { flex: 0 0 auto; }
 .rotate-btn {
   width: 32px;
   height: 32px;

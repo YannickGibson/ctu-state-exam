@@ -94,7 +94,7 @@ export default function QuestionDetailPage() {
 
   return (
     <article className="detail">
-      <nav className="detail-rotate" aria-label="Navigate questions">
+      <div className="detail-meta-row">
         {prevId ? (
           <Link
             to={`/questions/${prevId}`}
@@ -107,6 +107,12 @@ export default function QuestionDetailPage() {
         ) : (
           <span className="rotate-btn rotate-spacer" aria-hidden />
         )}
+        <div className="detail-meta">
+          <span className="pill">{question.group}</span>
+          <span className="pill">{question.id}</span>
+          <span className="pill">{question.subject}</span>
+          <StatusBadge progress={progress} />
+        </div>
         {nextId ? (
           <Link
             to={`/questions/${nextId}`}
@@ -119,13 +125,6 @@ export default function QuestionDetailPage() {
         ) : (
           <span className="rotate-btn rotate-spacer" aria-hidden />
         )}
-      </nav>
-
-      <div className="detail-meta">
-        <span className="pill">{question.group}</span>
-        <span className="pill">{question.id}</span>
-        <span className="pill">{question.subject}</span>
-        <StatusBadge progress={progress} />
       </div>
 
       <h1 className="detail-question">
