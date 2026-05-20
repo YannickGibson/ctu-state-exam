@@ -5,6 +5,8 @@
     { "source": "/api/(.*)", "destination": "/api/index" }
   ],
   "functions": {
-    "api/index.js": { "includeFiles": "data/**" }
+    "api/index.js": {
+      "includeFiles": "data/{questions.json,answers/*.md,quizzes/*.json}"
+    }
   }
 }

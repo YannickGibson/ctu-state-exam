@@ -1,7 +1,12 @@
 /*
- * Express app: API + static mounts. Used by:
- *   - server/index.js (local dev — wraps in app.listen)
- *   - api/index.js   (Vercel serverless function)
+ * Express app: API routes only. Used by:
+ *   - server/index.js (local dev — adds static mounts + frontend fallback, then listens)
+ *   - api/index.js   (Vercel serverless function — only the /api/* surface)
+ *
+ * IMPORTANT: do NOT reference sources/ or data/answers/imgs/ from this file.
+ * Vercel's file tracer follows `express.static(...)` paths and bundles whatever
+ * they resolve to into the function — which blew past the 300 MB limit when
+ * sources/ (189 MB) was reachable from here.
  */
 const express = require('express');
 const fs = require('fs');
@@ -24,12 +29,6 @@ const loadQuestions = () => readJSON(path.join(dataDir, 'questions.json'), []);
 
 const app = express();
 app.use(express.json());
-
-// Local-dev static mounts. On Vercel these are unused — sources/ and
-// data/answers/imgs/ are copied into client/dist at build time and served
-// straight by Vercel's static layer.
-app.use('/pdfs', express.static(path.join(root, 'sources')));
-app.use('/answer-imgs', express.static(path.join(answersDir, 'imgs')));
 
 app.get('/api/questions', (req, res) => {
   res.json(loadQuestions());
@@ -70,13 +69,5 @@ app.get('/api/quizzes/:subject', (req, res) => {
   if (!quiz) return res.status(404).json({ error: 'quiz not found' });
   res.json(quiz);
 });
-
-// Serve the built frontend in local prod mode (npm start). On Vercel the
-// static layer handles this before the function is ever invoked.
-const dist = path.join(root, 'client', 'dist');
-if (fs.existsSync(dist)) {
-  app.use(express.static(dist));
-  app.get('*', (req, res) => res.sendFile(path.join(dist, 'index.html')));
-}
 
 module.exports = app;
