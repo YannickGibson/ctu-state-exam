@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { getProgressFor, getQuestion, patchProgress } from '../api.js';
+import { getProgressFor, getQuestion, getQuestions, patchProgress } from '../api.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 
 const ZERO = { practicedCount: 0, readPassively: false };
@@ -41,6 +41,7 @@ export default function QuestionDetailPage() {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
   const [progress, setProgress] = useState(ZERO);
+  const [questions, setQuestions] = useState([]);
   const [error, setError] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -52,8 +53,22 @@ export default function QuestionDetailPage() {
         setProgress(p);
       })
       .catch((e) => setError(e.message));
-    sessionStorage.setItem('questions:lastViewedId', id);
   }, [id]);
+
+  useEffect(() => {
+    getQuestions().then(setQuestions).catch(() => {});
+  }, []);
+
+  const { prevId, nextId } = useMemo(() => {
+    if (questions.length === 0) return { prevId: null, nextId: null };
+    const idx = questions.findIndex((q) => q.id === id);
+    if (idx < 0) return { prevId: null, nextId: null };
+    const n = questions.length;
+    return {
+      prevId: questions[(idx - 1 + n) % n].id,
+      nextId: questions[(idx + 1) % n].id,
+    };
+  }, [questions, id]);
 
   useEffect(() => {
     if (question) document.title = `${question.subjectCode} ${question.subjectIndex}`;
@@ -109,6 +124,31 @@ export default function QuestionDetailPage() {
           Reset
         </button>
       </div>
+
+      {(prevId || nextId) && (
+        <>
+          {prevId && (
+            <Link
+              to={`/questions/${prevId}`}
+              className="rotate-btn rotate-prev"
+              aria-label="Previous question"
+              title="Previous question"
+            >
+              ‹
+            </Link>
+          )}
+          {nextId && (
+            <Link
+              to={`/questions/${nextId}`}
+              className="rotate-btn rotate-next"
+              aria-label="Next question"
+              title="Next question"
+            >
+              ›
+            </Link>
+          )}
+        </>
+      )}
 
       {showAnswer && (
         <section className="answer">
