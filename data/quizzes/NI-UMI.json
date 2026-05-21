@@ -3,17 +3,17 @@
   "subjectCode": "UMI",
   "group": "ZI",
   "title": "UMI quiz",
-  "questions": [
-    {
-      "prompt": "Placeholder question for NI-UMI. Replace with real content.",
-      "choices": [
-        "Option A",
-        "Option B",
-        "Option C",
-        "Option D"
-      ],
-      "correctIndex": 0,
-      "explanation": "Explanation for the correct answer goes here."
-    }
-  ]
+  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
+  "_template": {
+    "prompt": "Placeholder question for NI-UMI. Replace with real content.",
+    "choices": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctIndex": 0,
+    "explanation": "Explanation for the correct answer goes here."
+  },
+  "questions": []
 }

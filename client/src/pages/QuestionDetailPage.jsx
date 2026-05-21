@@ -8,6 +8,7 @@ import { getProgressFor, getQuestion, getQuestions, patchProgress } from '../api
 import StatusBadge from '../components/StatusBadge.jsx';
 
 const ZERO = { practicedCount: 0, readPassively: false };
+const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
 
 // A "source-PDF" link is `[text](/pdfs/X)` with no fragment and no leading `!`
 // (i.e. not an image). Inline page references like `/pdfs/X.pdf#page=12` and
@@ -37,6 +38,72 @@ function extractSources(markdown) {
   return { body, sources };
 }
 
+function stripTrim(text) {
+  return text
+    .split('\n')
+    .filter((l) => !/^\s*-{3,}\s*$/.test(l))
+    .join('\n')
+    .replace(/^\s*\n+/, '')
+    .replace(/\n+\s*$/, '');
+}
+
+function splitIntoSections(body) {
+  if (!body) return { intro: '', sections: [] };
+  const introLines = [];
+  const sections = [];
+  let current = null;
+  for (const line of body.split('\n')) {
+    const m = /^##\s+(.+?)\s*$/.exec(line);
+    if (m) {
+      if (current) sections.push({ title: current.title, content: stripTrim(current.lines.join('\n')) });
+      current = { title: m[1], lines: [] };
+    } else if (current) {
+      current.lines.push(line);
+    } else {
+      introLines.push(line);
+    }
+  }
+  if (current) sections.push({ title: current.title, content: stripTrim(current.lines.join('\n')) });
+  return { intro: stripTrim(introLines.join('\n')), sections };
+}
+
+function readCollapseDefault() {
+  try {
+    return localStorage.getItem(COLLAPSE_DEFAULT_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function writeCollapseDefault(val) {
+  try {
+    localStorage.setItem(COLLAPSE_DEFAULT_KEY, val ? 'true' : 'false');
+  } catch {}
+}
+
+function AnswerMarkdown({ children }) {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm, remarkMath]}
+      rehypePlugins={[rehypeKatex]}
+      components={{
+        a: ({ href, children: kids, ...rest }) =>
+          href && href.startsWith('/pdfs/') ? (
+            <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+              {kids}
+            </a>
+          ) : (
+            <a href={href} {...rest}>
+              {kids}
+            </a>
+          ),
+      }}
+    >
+      {children}
+    </ReactMarkdown>
+  );
+}
+
 export default function QuestionDetailPage() {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
@@ -45,6 +112,12 @@ export default function QuestionDetailPage() {
   const [error, setError] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [collapseAll, setCollapseAll] = useState(() => readCollapseDefault());
+  const [overrides, setOverrides] = useState({});
+
+  useEffect(() => {
+    setOverrides({});
+  }, [id]);
 
   useEffect(() => {
     Promise.all([getQuestion(id), getProgressFor(id)])
@@ -91,6 +164,17 @@ export default function QuestionDetailPage() {
 
   const practiced = progress.practicedCount > 0;
   const { body, sources } = extractSources(question.answer);
+  const { intro, sections } = splitIntoSections(body);
+
+  const isExpanded = (i) => (overrides[i] !== undefined ? overrides[i] : !collapseAll);
+  const toggleSection = (i) => {
+    setOverrides((prev) => ({ ...prev, [i]: !isExpanded(i) }));
+  };
+  const setAllCollapsed = (val) => {
+    setCollapseAll(val);
+    writeCollapseDefault(val);
+    setOverrides({});
+  };
 
   return (
     <article className="detail">
@@ -133,46 +217,59 @@ export default function QuestionDetailPage() {
       </h1>
 
       <div className="detail-actions">
-        <button onClick={() => setShowAnswer((v) => !v)}>
-          {showAnswer ? 'Hide answer' : 'Show answer'}
-        </button>
-        <button onClick={() => mark('practice')} disabled={busy}>
-          Mark practiced
-        </button>
-        <button
-          onClick={() => mark('readPassively')}
-          disabled={busy || practiced}
-          title={practiced ? 'Already practiced - read-passively no longer applies' : ''}
-        >
-          Mark read passively
-        </button>
-        <button className="ghost" onClick={() => mark('reset')} disabled={busy}>
-          Reset
-        </button>
+        <div className="detail-actions-left">
+          <button onClick={() => setShowAnswer((v) => !v)}>
+            {showAnswer ? 'Hide answer' : 'Show answer'}
+          </button>
+          {showAnswer && sections.length > 0 && (
+            <button className="ghost" onClick={() => setAllCollapsed(!collapseAll)}>
+              {collapseAll ? 'Expand all' : 'Collapse all'}
+            </button>
+          )}
+        </div>
+        <div className="detail-actions-right">
+          <button onClick={() => mark('practice')} disabled={busy}>
+            Mark practiced
+          </button>
+          <button
+            onClick={() => mark('readPassively')}
+            disabled={busy || practiced}
+            title={practiced ? 'Already practiced - read-passively no longer applies' : ''}
+          >
+            Mark read passively
+          </button>
+          <button className="ghost" onClick={() => mark('reset')} disabled={busy}>
+            Reset
+          </button>
+        </div>
       </div>
 
       {showAnswer && (
         <section className="answer">
           {question.answer ? (
             <>
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm, remarkMath]}
-                rehypePlugins={[rehypeKatex]}
-                components={{
-                  a: ({ href, children, ...rest }) =>
-                    href && href.startsWith('/pdfs/') ? (
-                      <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
-                        {children}
-                      </a>
-                    ) : (
-                      <a href={href} {...rest}>
-                        {children}
-                      </a>
-                    ),
-                }}
-              >
-                {body}
-              </ReactMarkdown>
+              {intro && <AnswerMarkdown>{intro}</AnswerMarkdown>}
+              {sections.map((s, i) => {
+                const expanded = isExpanded(i);
+                return (
+                  <div className={`answer-section${expanded ? '' : ' collapsed'}`} key={i}>
+                    <button
+                      type="button"
+                      className="answer-section-toggle"
+                      aria-expanded={expanded}
+                      onClick={() => toggleSection(i)}
+                    >
+                      <span className="answer-section-caret" aria-hidden>▾</span>
+                      <span className="answer-section-title">{s.title}</span>
+                    </button>
+                    {expanded && (
+                      <div className="answer-section-body">
+                        <AnswerMarkdown>{s.content}</AnswerMarkdown>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
               {sources.length > 0 && (
                 <div className="answer-sources">
                   {sources.map((url) => (

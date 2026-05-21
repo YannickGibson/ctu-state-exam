@@ -5,15 +5,104 @@
   "title": "MPI quiz",
   "questions": [
     {
-      "prompt": "Placeholder question for NI-MPI. Replace with real content.",
-      "choices": [
-        "Option A",
-        "Option B",
-        "Option C",
-        "Option D"
-      ],
-      "correctIndex": 0,
-      "explanation": "Explanation for the correct answer goes here."
+      "questionId": "NI-SPOL-1",
+      "prompt": "Struktura $(\\mathbb{R}, \\circ)$, kde $a \\circ b = a + b - 3$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Nejsilnější struktura, kterou dvojice tvoří:",
+          "kind": "choice",
+          "choices": ["grupoid", "pologrupa", "monoid", "grupa"],
+          "correctIndex": 3,
+          "explanation": "Operace je uzavřená, asociativní ($a+b+c-6$), má neutrální prvek a inverze ⇒ grupa (dokonce abelovská)."
+        },
+        {
+          "label": "b",
+          "prompt": "Neutrální prvek $e =$",
+          "kind": "text",
+          "correctAnswer": "3",
+          "explanation": "$a + e - 3 = a \\Rightarrow e = 3$."
+        },
+        {
+          "label": "c",
+          "prompt": "Inverzní prvek k $a$ (vzorec, např. `6-a`):",
+          "kind": "text",
+          "correctAnswer": "6-a",
+          "explanation": "$a + a^{-1} - 3 = 3 \\Rightarrow a^{-1} = 6 - a$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-1",
+      "prompt": "Kritérium podgrupy v $(\\mathbb{Z}, +)$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Tvoří sudá čísla $2\\mathbb{Z}$ podgrupu $(\\mathbb{Z}, +)$?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "Pro $a = 2k$, $b = 2m$ platí $a + (-b) = 2(k - m) \\in 2\\mathbb{Z}$ ⇒ podle kritéria je $2\\mathbb{Z}$ podgrupa."
+        },
+        {
+          "label": "b",
+          "prompt": "Tvoří lichá čísla podgrupu $(\\mathbb{Z}, +)$?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "Lichá čísla neobsahují neutrální prvek $0$ a nejsou uzavřená ($1 + 1 = 2$) ⇒ není podgrupa."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-1",
+      "prompt": "Lagrangeova věta",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Kolik podgrup má $\\mathbb{Z}^+_{12}$?",
+          "kind": "text",
+          "correctAnswer": "6",
+          "explanation": "$\\mathbb{Z}^+_{12}$ má 6 podgrup řádů 1, 2, 3, 4, 6, 12."
+        },
+        {
+          "label": "b",
+          "prompt": "Řád podgrupy konečné grupy vždy ___ řád grupy:",
+          "kind": "choice",
+          "choices": ["dělí", "je roven", "převyšuje"],
+          "correctIndex": 0,
+          "explanation": "Lagrangeova věta: řád podgrupy dělí řád grupy."
+        },
+        {
+          "label": "c",
+          "prompt": "Kolik podgrup má $\\mathbb{Z}^+_{11}$?",
+          "kind": "text",
+          "correctAnswer": "2",
+          "explanation": "$11$ je prvočíslo ⇒ jen triviální podgrupy $\\{0\\}$ a celá grupa."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-1",
+      "prompt": "Cyklické grupy a generátory",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Všechny generátory $\\mathbb{Z}^+_{12}$ (čísla oddělená čárkou):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "1,5,7,11",
+          "explanation": "Generátory $\\mathbb{Z}^+_n$ jsou čísla nesoudělná s $n$; pro $n = 12$ to jsou 1, 5, 7, 11."
+        },
+        {
+          "label": "b",
+          "prompt": "Je grupa $\\mathbb{Z}^\\times_8 = (\\{1, 3, 5, 7\\}, \\times_8)$ cyklická?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "Každý netriviální prvek má řád 2 ($3^2 = 5^2 = 7^2 = 1$), žádný negeneruje celou grupu ⇒ není cyklická."
+        }
+      ]
     }
   ]
 }

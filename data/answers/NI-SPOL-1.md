@@ -4,7 +4,7 @@ Zdroj: [MPI_Merged.pdf](/pdfs/SPOL/MPI_Merged.pdf) (skripta NI-MPI)
 
 ---
 
-## Hierarchie: grupoid → pologrupa → monoid → grupa
+## Hierarchie: grupoid, pologrupa, monoid, grupa
 
 ([otevřít v PDF, str. 82](/pdfs/SPOL/MPI_Merged.pdf#page=82))
 

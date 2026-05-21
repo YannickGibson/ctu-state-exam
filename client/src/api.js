@@ -131,23 +131,27 @@ export async function getLeaderboard() {
     .sort((a, b) => b.score - a.score || a.username.localeCompare(b.username));
 }
 
-// Finishing a subject quiz: increment practiced_count for every question of that subject.
-export async function completeQuiz(subject) {
+// Finishing a quiz: increment practiced_count for the specified question ids.
+// If no ids are passed, falls back to every question of the subject.
+export async function completeQuiz(subject, questionIds) {
   const userId = await currentUserId();
-  const questions = await getQuestions();
-  const subjectIds = questions.filter((q) => q.subject === subject).map((q) => q.id);
-  if (subjectIds.length === 0) throw new Error('unknown subject');
+  let ids = questionIds;
+  if (!Array.isArray(ids) || ids.length === 0) {
+    const questions = await getQuestions();
+    ids = questions.filter((q) => q.subject === subject).map((q) => q.id);
+  }
+  if (ids.length === 0) throw new Error('no questions to mark');
 
   const { data: existing, error: selErr } = await supabase
     .from('question_progress')
     .select('question_id, practiced_count')
     .eq('user_id', userId)
-    .in('question_id', subjectIds);
+    .in('question_id', ids);
   if (selErr) throw selErr;
   const byId = new Map((existing || []).map((r) => [r.question_id, r.practiced_count]));
 
   const now = new Date().toISOString();
-  const rows = subjectIds.map((qid) => ({
+  const rows = ids.map((qid) => ({
     user_id: userId,
     question_id: qid,
     practiced_count: (byId.get(qid) || 0) + 1,
@@ -158,5 +162,5 @@ export async function completeQuiz(subject) {
     .from('question_progress')
     .upsert(rows, { onConflict: 'user_id,question_id' });
   if (error) throw error;
-  return { subject, updated: subjectIds };
+  return { subject, updated: ids };
 }

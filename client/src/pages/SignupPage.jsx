@@ -51,8 +51,10 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="auth-card">
-      <h1>Create account</h1>
+    <>
+      <h2 className="auth-tagline">State Exam Practice and Organization</h2>
+      <div className="auth-card">
+        <h1>Create account</h1>
       <form onSubmit={submit} className="auth-form">
         <label>
           Username
@@ -87,5 +89,6 @@ export default function SignupPage() {
         Already have an account? <Link to="/login">Log in</Link>
       </p>
     </div>
+    </>
   );
 }

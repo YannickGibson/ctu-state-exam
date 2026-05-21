@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getLeaderboard, getQuestions } from '../api.js';
+import DonutChart from '../components/DonutChart.jsx';
 
 export default function LeaderboardPage() {
   const [entries, setEntries] = useState([]);
@@ -19,33 +20,21 @@ export default function LeaderboardPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const qById = useMemo(() => {
-    const m = new Map();
-    for (const q of questions) m.set(q.id, q);
-    return m;
-  }, [questions]);
-
-  const decorated = useMemo(
-    () =>
-      entries.map((e) => {
-        const bySubject = new Map();
-        for (const r of e.rows) {
-          const q = qById.get(r.question_id);
-          const key = q?.subjectCode || q?.subject || '?';
-          bySubject.set(key, (bySubject.get(key) || 0) + r.practiced_count);
-        }
-        const subjectChips = [...bySubject.entries()].sort((a, b) => b[1] - a[1]);
-        const practicedQuestions = e.rows
-          .map((r) => ({ ...r, question: qById.get(r.question_id) }))
-          .sort(
-            (a, b) =>
-              b.practiced_count - a.practiced_count ||
-              (a.question?.subject || '').localeCompare(b.question?.subject || '')
-          );
-        return { ...e, subjectChips, practicedQuestions };
-      }),
-    [entries, qById]
-  );
+  const decorated = useMemo(() => {
+    return entries.map((e) => {
+      const byId = new Map(e.rows.map((r) => [r.question_id, r]));
+      const userQuestions = questions.map((q) => {
+        const r = byId.get(q.id);
+        return {
+          ...q,
+          progress: r
+            ? { practicedCount: r.practiced_count, readPassively: false }
+            : null,
+        };
+      });
+      return { ...e, userQuestions };
+    });
+  }, [entries, questions]);
 
   if (loading) return <p className="muted">Loading…</p>;
   if (error) return <p className="error">Error: {error}</p>;
@@ -78,15 +67,14 @@ export default function LeaderboardPage() {
                   <span className="lb-rank">#{rank}</span>
                   <span className="lb-name">{e.username}</span>
                   <span className="lb-stats">
-                    <strong>{e.score}</strong> events ·{' '}
-                    <span className="muted">{e.questionsCount} questions</span>
-                  </span>
-                  <span className="lb-subjects">
-                    {e.subjectChips.map(([code, n]) => (
-                      <span key={code} className="lb-chip">
-                        {code} <em>{n}</em>
-                      </span>
-                    ))}
+                    <span className="lb-stat lb-stat-dim">
+                      <em>{e.questionsCount}</em>
+                      <small>Unique</small>
+                    </span>
+                    <span className="lb-stat">
+                      <em>{e.score}</em>
+                      <small>Total</small>
+                    </span>
                   </span>
                   <span className="lb-caret" aria-hidden>
                     {open ? '▾' : '▸'}
@@ -94,30 +82,7 @@ export default function LeaderboardPage() {
                 </button>
                 {open && (
                   <div className="lb-detail">
-                    <table className="lb-detail-table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Subject</th>
-                          <th>Question</th>
-                          <th className="lb-count-col">Practiced</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {e.practicedQuestions.map((r) => (
-                          <tr key={r.question_id}>
-                            <td className="lb-q-num">
-                              {r.question?.group} {r.question?.number}
-                            </td>
-                            <td className="lb-q-subject">{r.question?.subject || '—'}</td>
-                            <td className="lb-q-text">
-                              {r.question?.text || r.question_id}
-                            </td>
-                            <td className="lb-q-count">×{r.practiced_count}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                    <DonutChart questions={e.userQuestions} compact />
                   </div>
                 )}
               </li>

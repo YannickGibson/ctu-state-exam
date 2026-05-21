@@ -2,6 +2,7 @@ import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom'
 import QuestionsPage from './pages/QuestionsPage.jsx';
 import QuestionDetailPage from './pages/QuestionDetailPage.jsx';
 import QuizzesPage from './pages/QuizzesPage.jsx';
+import QuizSelectionPage from './pages/QuizSelectionPage.jsx';
 import QuizRunnerPage from './pages/QuizRunnerPage.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
@@ -83,6 +84,14 @@ export default function App() {
           />
           <Route
             path="/quizzes/:subject"
+            element={
+              <RequireAuth>
+                <QuizSelectionPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/quizzes/:subject/:scope"
             element={
               <RequireAuth>
                 <QuizRunnerPage />

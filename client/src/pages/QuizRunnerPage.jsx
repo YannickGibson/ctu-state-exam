@@ -13,11 +13,63 @@ function Markdown({ children }) {
   );
 }
 
+function normalize(value) {
+  return String(value ?? '')
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/\s+/g, '');
+}
+
+function normalizeList(value) {
+  return normalize(value)
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .sort()
+    .join(',');
+}
+
+function textIsCorrect(part, input) {
+  if (part.compare === 'list') {
+    return normalizeList(input) === normalizeList(part.correctAnswer);
+  }
+  return normalize(input) === normalize(part.correctAnswer);
+}
+
+// Normalize old single-shape questions into the same multipart form.
+function asParts(q) {
+  if (Array.isArray(q.parts)) return q.parts;
+  return [
+    {
+      label: '',
+      prompt: '',
+      kind: 'choice',
+      choices: q.choices || [],
+      correctIndex: q.correctIndex,
+      explanation: q.explanation,
+    },
+  ];
+}
+
+function partKey(qi, pi) {
+  return `${qi}:${pi}`;
+}
+
+function partIsAnswered(part, value) {
+  if (part.kind === 'text') return typeof value === 'string' && value.trim().length > 0;
+  return Number.isInteger(value);
+}
+
+function partIsCorrect(part, value) {
+  if (part.kind === 'text') return textIsCorrect(part, value);
+  return value === part.correctIndex;
+}
+
 export default function QuizRunnerPage() {
-  const { subject } = useParams();
+  const { subject, scope } = useParams();
   const [quiz, setQuiz] = useState(null);
   const [error, setError] = useState(null);
-  const [answers, setAnswers] = useState({}); // questionIndex -> choiceIndex
+  const [answers, setAnswers] = useState({}); // key "qi:pi" -> string | number
   const [submitted, setSubmitted] = useState(false);
   const [completeError, setCompleteError] = useState(null);
 
@@ -31,21 +83,42 @@ export default function QuizRunnerPage() {
     if (quiz) document.title = `${quiz.title || subject} · Quiz`;
   }, [quiz, subject]);
 
+  // Reset state when the scope changes so retake/back doesn't keep stale picks.
+  useEffect(() => {
+    setAnswers({});
+    setSubmitted(false);
+    setCompleteError(null);
+  }, [scope, subject]);
+
   if (error) return <p className="error">Error: {error}</p>;
   if (!quiz) return <p className="muted">Loading…</p>;
 
-  const questions = quiz.questions || [];
-  const allAnswered = questions.every((_, i) => answers[i] !== undefined);
-  const score = questions.reduce(
-    (n, q, i) => n + (answers[i] === q.correctIndex ? 1 : 0),
+  const allQuestions = quiz.questions || [];
+  const scopeIsAll = !scope || scope === 'all';
+  const questions = scopeIsAll
+    ? allQuestions
+    : allQuestions.filter((q) => q.questionId === scope);
+  const flatParts = questions.flatMap((q, qi) =>
+    asParts(q).map((part, pi) => ({ qi, pi, part }))
+  );
+  const allAnswered = flatParts.every(({ qi, pi, part }) =>
+    partIsAnswered(part, answers[partKey(qi, pi)])
+  );
+  const score = flatParts.reduce(
+    (n, { qi, pi, part }) =>
+      n + (partIsCorrect(part, answers[partKey(qi, pi)]) ? 1 : 0),
     0
   );
+  const total = flatParts.length;
 
   async function submit() {
     setSubmitted(true);
     try {
-      // Finishing the quiz marks the subject's questions as practiced.
-      await completeQuiz(subject);
+      // Mark only the SPOL questions covered by the quiz we just ran.
+      const ids = Array.from(
+        new Set(questions.map((q) => q.questionId).filter(Boolean))
+      );
+      await completeQuiz(subject, ids.length > 0 ? ids : undefined);
     } catch (e) {
       setCompleteError(e.message);
     }
@@ -57,53 +130,78 @@ export default function QuizRunnerPage() {
     setCompleteError(null);
   }
 
+  function setAnswer(qi, pi, value) {
+    setAnswers((a) => ({ ...a, [partKey(qi, pi)]: value }));
+  }
+
   return (
     <div className="quiz-runner">
       <p>
-        <Link to="/quizzes">← All quizzes</Link>
+        <Link to={`/quizzes/${subject}`}>← Back to {subject}</Link>
       </p>
       <h1>{quiz.title || subject}</h1>
-      <p className="muted">{subject}</p>
+      <p className="muted">
+        {subject}
+        {!scopeIsAll && ` · ${scope}`}
+      </p>
 
-      {questions.length === 0 && <p className="muted">This quiz has no questions yet.</p>}
+      {questions.length === 0 && (
+        <p className="muted">
+          {scopeIsAll
+            ? 'This quiz has no questions yet.'
+            : `No questions match ${scope}.`}
+        </p>
+      )}
 
       <ol className="quiz-questions">
-        {questions.map((q, qi) => (
-          <li key={qi} className="quiz-question">
-            <div className="quiz-prompt">
-              <Markdown>{q.prompt}</Markdown>
-            </div>
-            <div className="quiz-choices">
-              {q.choices.map((choice, ci) => {
-                const chosen = answers[qi] === ci;
-                let cls = 'choice';
-                if (submitted) {
-                  if (ci === q.correctIndex) cls += ' correct';
-                  else if (chosen) cls += ' wrong';
-                } else if (chosen) {
-                  cls += ' chosen';
-                }
-                return (
-                  <label key={ci} className={cls}>
-                    <input
-                      type="radio"
-                      name={`q${qi}`}
-                      checked={chosen}
-                      disabled={submitted}
-                      onChange={() => setAnswers((a) => ({ ...a, [qi]: ci }))}
-                    />
-                    <Markdown>{String(choice)}</Markdown>
-                  </label>
-                );
-              })}
-            </div>
-            {submitted && q.explanation && (
-              <p className="quiz-explanation">
-                <strong>Why:</strong> {q.explanation}
-              </p>
-            )}
-          </li>
-        ))}
+        {questions.map((q, qi) => {
+          const parts = asParts(q);
+          return (
+            <li key={qi} className="quiz-question">
+              {q.prompt && (
+                <div className="quiz-prompt">
+                  <Markdown>{q.prompt}</Markdown>
+                </div>
+              )}
+              <div className="quiz-parts">
+                {parts.map((part, pi) => {
+                  const value = answers[partKey(qi, pi)];
+                  return (
+                    <div key={pi} className="quiz-part">
+                      {(part.label || part.prompt) && (
+                        <div className="quiz-part-prompt">
+                          {part.label && <span className="quiz-part-label">{part.label})</span>}
+                          {part.prompt && <Markdown>{part.prompt}</Markdown>}
+                        </div>
+                      )}
+                      {part.kind === 'text' ? (
+                        <TextPart
+                          part={part}
+                          value={value}
+                          submitted={submitted}
+                          onChange={(v) => setAnswer(qi, pi, v)}
+                        />
+                      ) : (
+                        <ChoicePart
+                          part={part}
+                          name={`q${qi}p${pi}`}
+                          value={value}
+                          submitted={submitted}
+                          onChange={(ci) => setAnswer(qi, pi, ci)}
+                        />
+                      )}
+                      {submitted && part.explanation && (
+                        <div className="quiz-explanation">
+                          <strong>Why:</strong> <Markdown>{part.explanation}</Markdown>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </li>
+          );
+        })}
       </ol>
 
       {!submitted && questions.length > 0 && (
@@ -115,19 +213,78 @@ export default function QuizRunnerPage() {
       {submitted && (
         <div className="quiz-result">
           <p className="quiz-score">
-            Score: {score} / {questions.length}
+            Score: {score} / {total}
           </p>
           {completeError ? (
             <p className="error">Could not record practice: {completeError}</p>
           ) : (
             <p className="muted">
-              All <strong>{subject}</strong> questions marked as practiced (+1).
+              {scopeIsAll ? (
+                <>All <strong>{subject}</strong> questions covered by this quiz marked as practiced (+1).</>
+              ) : (
+                <><strong>{scope}</strong> marked as practiced (+1).</>
+              )}
             </p>
           )}
           <button className="ghost" onClick={reset}>
             Retake
           </button>
         </div>
+      )}
+    </div>
+  );
+}
+
+function ChoicePart({ part, name, value, submitted, onChange }) {
+  return (
+    <div className="quiz-choices">
+      {part.choices.map((choice, ci) => {
+        const chosen = value === ci;
+        let cls = 'choice';
+        if (submitted) {
+          if (ci === part.correctIndex) cls += ' correct';
+          else if (chosen) cls += ' wrong';
+        } else if (chosen) {
+          cls += ' chosen';
+        }
+        return (
+          <label key={ci} className={cls}>
+            <input
+              type="radio"
+              name={name}
+              checked={chosen}
+              disabled={submitted}
+              onChange={() => onChange(ci)}
+            />
+            <Markdown>{String(choice)}</Markdown>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+function TextPart({ part, value, submitted, onChange }) {
+  const correct = submitted && textIsCorrect(part, value);
+  const wrong = submitted && !correct;
+  let cls = 'quiz-text-input';
+  if (correct) cls += ' correct';
+  else if (wrong) cls += ' wrong';
+  return (
+    <div className="quiz-text">
+      <input
+        type="text"
+        className={cls}
+        value={value ?? ''}
+        disabled={submitted}
+        onChange={(e) => onChange(e.target.value)}
+        autoComplete="off"
+        spellCheck={false}
+      />
+      {wrong && (
+        <span className="quiz-text-answer">
+          správně: <code>{part.correctAnswer}</code>
+        </span>
       )}
     </div>
   );
