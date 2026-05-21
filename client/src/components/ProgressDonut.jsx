@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import StatusBadge from './StatusBadge.jsx';
 import DonutChart, { buildDonutData } from './DonutChart.jsx';
+import DeadlinePace from './DeadlinePace.jsx';
 
 export default function ProgressDonut({ questions }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +39,11 @@ export default function ProgressDonut({ questions }) {
 
   return (
     <>
-      <DonutChart questions={questions} onSliceClick={openModal} showHint />
+      <DonutChart
+        questions={questions}
+        onSliceClick={openModal}
+        hint={<DeadlinePace remaining={data.total - data.practiced} />}
+      />
 
       {modalSubject && (
         <div

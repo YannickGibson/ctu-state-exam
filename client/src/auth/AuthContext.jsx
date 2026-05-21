@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
     let cancelled = false;
     supabase
       .from('profiles')
-      .select('id, username, show_leaderboard')
+      .select('id, username, show_leaderboard, exam_date')
       .eq('id', session.user.id)
       .single()
       .then(({ data }) => {
@@ -64,6 +64,16 @@ export function AuthProvider({ children }) {
       async signOut() {
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
+      },
+      async setExamDate(value) {
+        if (!session) throw new Error('Not signed in');
+        const next = value === '' ? null : value;
+        const { error } = await supabase
+          .from('profiles')
+          .update({ exam_date: next })
+          .eq('id', session.user.id);
+        if (error) throw error;
+        setProfile((p) => (p ? { ...p, exam_date: next } : p));
       },
     }),
     [session, profile, ready]

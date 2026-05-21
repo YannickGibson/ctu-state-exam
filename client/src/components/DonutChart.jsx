@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { daysUntilExam, formatExamDate } from '../config/exam.js';
 
 export const DONUT_COLORS = {
   practiced: '#36974a',
@@ -72,7 +71,7 @@ export default function DonutChart({
   questions,
   onSliceClick,
   showLegend = true,
-  showHint = false,
+  hint = null,
   compact = false,
 }) {
   const data = useMemo(() => buildDonutData(questions), [questions]);
@@ -102,14 +101,23 @@ export default function DonutChart({
     const startA = cursor;
     const endA = startA + Math.max(span, 0.0001);
     const arcs = [];
+    const perQ = (endA - startA) / s.total;
     let sub = startA;
-    for (const kind of ['practiced', 'read', 'none']) {
-      const count = s[kind];
-      if (count === 0) continue;
-      const next = sub + (count / s.total) * (endA - startA);
-      arcs.push({ kind, startA: sub, endA: next });
-      sub = next;
+    let runKind = null;
+    let runStart = startA;
+    for (const q of s.questions) {
+      const kind = classify(q.progress);
+      if (runKind === null) {
+        runKind = kind;
+        runStart = sub;
+      } else if (kind !== runKind) {
+        arcs.push({ kind: runKind, startA: runStart, endA: sub });
+        runKind = kind;
+        runStart = sub;
+      }
+      sub += perQ;
     }
+    if (runKind !== null) arcs.push({ kind: runKind, startA: runStart, endA: sub });
     const midA = startA + (endA - startA) / 2;
     const [lx, ly] = pt(cx, cy, labelR, midA);
     segments.push({
@@ -136,7 +144,7 @@ export default function DonutChart({
           aria-label={`Question progress: ${data.practiced} of ${data.total} practiced`}
         >
           {segments.map((seg) =>
-            seg.arcs.map((a) => {
+            seg.arcs.map((a, i) => {
               const props = interactive
                 ? {
                     onClick: () => onSliceClick(seg.subject.subject),
@@ -152,7 +160,7 @@ export default function DonutChart({
                 : {};
               return (
                 <path
-                  key={`${seg.subject.subject}-${a.kind}`}
+                  key={`${seg.subject.subject}-${i}-${a.kind}`}
                   d={annularSector(cx, cy, rOuter, rInner, a.startA, a.endA)}
                   fill={DONUT_COLORS[a.kind]}
                   className={`donut-segment${interactive ? '' : ' static'}`}
@@ -205,23 +213,7 @@ export default function DonutChart({
           <li>
             <i style={{ background: DONUT_COLORS.none }} /> Not started ({data.none})
           </li>
-          {showHint && (
-            <li className="donut-hint muted">
-              {(() => {
-                const date = formatExamDate();
-                const days = daysUntilExam();
-                const remaining = data.total - data.practiced;
-                if (days < 0) return `Exam date (${date}) has passed.`;
-                if (days === 0)
-                  return remaining > 0
-                    ? `Exam today (${date}) · ${remaining} left`
-                    : `Exam today (${date})`;
-                if (remaining === 0) return `${days} days left until ${date} · all practiced`;
-                const perDay = (Math.ceil((remaining / days) * 100) / 100).toFixed(2);
-                return `${days} days left until ${date} · ${perDay} / day`;
-              })()}
-            </li>
-          )}
+          {hint && <li className="donut-hint muted">{hint}</li>}
         </ul>
       )}
     </section>

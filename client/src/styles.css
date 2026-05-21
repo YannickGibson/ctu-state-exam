@@ -628,6 +628,52 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   flex: 0 0 auto;
 }
 .donut-hint { font-size: 12px; font-weight: 500; margin-top: 4px; }
+.deadline-adjust,
+.deadline-adjust:hover:not(:disabled) {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin-left: 4px;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 500;
+  font-size: 10px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.deadline-adjust:hover:not(:disabled) { color: var(--text-strong); opacity: 0.95; }
+.deadline-edit {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.deadline-edit input[type="date"] {
+  font: inherit;
+  font-size: 12px;
+  padding: 2px 4px;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.deadline-btn {
+  font: inherit;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.deadline-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.deadline-btn:hover { filter: brightness(1.1); }
+.deadline-btn:disabled { opacity: 0.5; cursor: default; }
+.deadline-err { color: var(--wrong-fg); font-size: 11px; }
 
 /* ---- rotate buttons (question detail) ---- */
 .detail-meta-row {

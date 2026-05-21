@@ -30,8 +30,13 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   username text unique not null,
   show_leaderboard boolean not null default false,
+  exam_date date,
   created_at timestamptz not null default now()
 );
+
+-- For existing deployments, add the per-user exam-date column. The app falls back
+-- to the EXAM_DATE constant in client/src/config/exam.js when this is null.
+alter table public.profiles add column if not exists exam_date date;
 
 -- question_progress: one row per (user, question).
 create table if not exists public.question_progress (
