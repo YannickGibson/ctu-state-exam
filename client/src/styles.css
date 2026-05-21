@@ -74,16 +74,18 @@ a { color: var(--accent); }
 .header-spacer { flex: 1; }
 .header-user { display: flex; align-items: center; gap: 10px; }
 .header-user button { padding: 5px 10px; font-size: 13px; }
-.header-oss {
+.app-header nav a.header-oss {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   color: var(--muted);
   text-decoration: none;
-  padding: 4px;
-  border-radius: 6px;
+  padding: 6px;
+  border-radius: 50%;
   line-height: 0;
 }
-.header-oss:hover { color: var(--text); background: var(--surface-2); }
+.app-header nav a.header-oss.active { border-bottom: none; }
+.app-header nav a.header-oss:hover { color: var(--text); background: var(--surface-2); }
 
 /* ---- auth pages ---- */
 .auth-tagline {

@@ -31,10 +31,7 @@ function Header() {
         {profile?.show_leaderboard && (
           <NavLink to="/leaderboard">Leaderboard</NavLink>
         )}
-      </nav>
-      <div className="header-spacer" />
-      {session && (
-        <div className="header-user">
+        {session && (
           <a
             className="header-oss"
             href="https://github.com/YannickGibson/ctu-state-exam"
@@ -45,6 +42,11 @@ function Header() {
           >
             <GitHubMark size={18} />
           </a>
+        )}
+      </nav>
+      <div className="header-spacer" />
+      {session && (
+        <div className="header-user">
           <span className="muted">{profile?.username || '…'}</span>
           <button className="ghost" onClick={handleSignOut}>
             Sign out
