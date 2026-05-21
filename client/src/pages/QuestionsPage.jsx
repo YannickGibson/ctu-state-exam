@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { getProgress, getQuestions } from '../api.js';
+import { useNavigate } from 'react-router-dom';
+import { getProgress, getQuestions, patchProgress } from '../api.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import ProgressDonut from '../components/ProgressDonut.jsx';
+import QuestionActions from '../components/QuestionActions.jsx';
 
 const ZERO = { practicedCount: 0, readPassively: false };
 
@@ -64,6 +65,31 @@ export default function QuestionsPage() {
     });
   }, [merged, group, search]);
 
+  async function handleAction(id, action) {
+    const prev = progress[id] || ZERO;
+    let optimistic;
+    if (action === 'practice') {
+      optimistic = { readPassively: false, practicedCount: prev.practicedCount + 1 };
+    } else if (action === 'readPassively') {
+      optimistic = {
+        readPassively: prev.practicedCount === 0,
+        practicedCount: prev.practicedCount,
+      };
+    } else if (action === 'reset') {
+      optimistic = ZERO;
+    } else {
+      return;
+    }
+    setProgress((p) => ({ ...p, [id]: optimistic }));
+    try {
+      const { progress: next } = await patchProgress(id, action);
+      setProgress((p) => ({ ...p, [id]: next }));
+    } catch (e) {
+      setProgress((p) => ({ ...p, [id]: prev }));
+      setError(e.message);
+    }
+  }
+
   if (loading) return <p className="muted">Loading…</p>;
   if (error) return <p className="error">Error: {error}</p>;
 
@@ -100,7 +126,7 @@ export default function QuestionsPage() {
             <th className="col-num">Subject</th>
             <th className="col-subject">#</th>
             <th>Question</th>
-            <th className="col-open"></th>
+            <th className="col-actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -120,10 +146,12 @@ export default function QuestionsPage() {
                 {q.group} {q.number}
               </td>
               <td className="q-text">{q.text}</td>
-              <td className="col-open">
-                <Link className="open-btn" to={`/questions/${q.id}`}>
-                  Open
-                </Link>
+              <td className="col-actions">
+                <QuestionActions
+                  progress={q.progress}
+                  onAction={(action) => handleAction(q.id, action)}
+                  compact
+                />
               </td>
             </tr>
           ))}

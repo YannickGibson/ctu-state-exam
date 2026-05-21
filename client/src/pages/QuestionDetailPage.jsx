@@ -6,6 +6,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { getProgressFor, getQuestion, getQuestions, patchProgress } from '../api.js';
 import StatusBadge from '../components/StatusBadge.jsx';
+import QuestionActions from '../components/QuestionActions.jsx';
 
 const ZERO = { practicedCount: 0, readPassively: false };
 const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
@@ -148,11 +149,27 @@ export default function QuestionDetailPage() {
   }, [question]);
 
   async function mark(action) {
+    const prev = progress;
+    let optimistic;
+    if (action === 'practice') {
+      optimistic = { readPassively: false, practicedCount: prev.practicedCount + 1 };
+    } else if (action === 'readPassively') {
+      optimistic = {
+        readPassively: prev.practicedCount === 0,
+        practicedCount: prev.practicedCount,
+      };
+    } else if (action === 'reset') {
+      optimistic = ZERO;
+    } else {
+      return;
+    }
+    setProgress(optimistic);
     setBusy(true);
     try {
       const { progress: next } = await patchProgress(id, action);
       setProgress(next);
     } catch (e) {
+      setProgress(prev);
       setError(e.message);
     } finally {
       setBusy(false);
@@ -162,7 +179,6 @@ export default function QuestionDetailPage() {
   if (error) return <p className="error">Error: {error}</p>;
   if (!question) return <p className="muted">Loading…</p>;
 
-  const practiced = progress.practicedCount > 0;
   const { body, sources } = extractSources(question.answer);
   const { intro, sections } = splitIntoSections(body);
 
@@ -228,19 +244,7 @@ export default function QuestionDetailPage() {
           )}
         </div>
         <div className="detail-actions-right">
-          <button onClick={() => mark('practice')} disabled={busy}>
-            Mark practiced
-          </button>
-          <button
-            onClick={() => mark('readPassively')}
-            disabled={busy || practiced}
-            title={practiced ? 'Already practiced - read-passively no longer applies' : ''}
-          >
-            Mark read passively
-          </button>
-          <button className="ghost" onClick={() => mark('reset')} disabled={busy}>
-            Reset
-          </button>
+          <QuestionActions progress={progress} onAction={mark} disabled={busy} />
         </div>
       </div>
 

@@ -210,21 +210,64 @@ table.questions {
 .col-subject { width: 78px; }
 .questions td.col-num { font-weight: 700; }
 .questions td.col-subject { color: var(--muted); }
-.col-open { width: 86px; }
+.col-actions { width: 96px; }
 .q-text { color: var(--text); }
+.questions td.col-actions { text-align: right; }
 
-.open-btn {
-  display: inline-block;
-  text-decoration: none;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  border-radius: 7px;
-  padding: 4px 10px;
-  font-weight: 600;
-  font-size: 13px;
-  white-space: nowrap;
+/* ---- inline question action buttons ---- */
+.q-actions {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
 }
-.open-btn:hover { background: var(--accent); color: #fff; }
+.q-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.12s;
+}
+.q-action-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.q-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.q-actions.compact .q-action-btn { width: 28px; height: 28px; border-radius: 6px; }
+.q-action-count {
+  font-weight: 700;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.q-action-btn.count { color: #fff; border-color: transparent; }
+.q-action-btn.count.p1 { background: #6cbf73; }
+.q-action-btn.count.p2 { background: #36974a; }
+.q-action-btn.count.p3 { background: #1f6b32; }
+.q-action-btn.count:hover:not(:disabled) {
+  filter: brightness(1.08);
+  color: #fff;
+}
+.q-action-btn.reset:hover:not(:disabled) {
+  border-color: var(--warn-fg, #b45309);
+  color: var(--warn-fg, #b45309);
+}
+.q-action-btn[data-just-changed='true'] {
+  animation: q-action-pulse 0.26s ease-out;
+}
+@keyframes q-action-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
 
 /* ---- status badges ---- */
 .badge {
@@ -793,7 +836,7 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   .col-status { width: 110px; }
   .col-num { width: 84px; }
   .col-subject { width: 64px; }
-  .col-open { width: 74px; }
+  .col-actions { width: 84px; }
   .detail-question { font-size: 18px; }
   .answer { padding: 4px 16px 16px; }
   .quiz-question { padding: 12px 14px 12px 48px; }
@@ -883,7 +926,13 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
     width: auto;
   }
   .col-status { grid-column: 1; grid-row: 1; }
-  table.questions td.col-open { display: none; }
+  table.questions td.col-actions {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    width: auto;
+  }
   .col-num {
     grid-column: 1 / -1;
     grid-row: 2;
