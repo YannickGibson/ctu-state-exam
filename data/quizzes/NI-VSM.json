@@ -3,17 +3,699 @@
   "subjectCode": "VSM",
   "group": "SPOL",
   "title": "VSM quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-VSM. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-SPOL-6",
+      "prompt": "Chyby 1. a 2. druhu, hladina významnosti $\\alpha$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Chyba 1. druhu znamená:",
+          "kind": "choice",
+          "choices": [
+            "zamítneme $H_0$, ač platí",
+            "nezamítneme $H_0$, ač platí $H_A$",
+            "přijmeme $H_A$, ač platí $H_A$",
+            "zamítneme $H_A$, ač platí $H_0$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Chyba 1. druhu = zamítnutí pravdivé nulové hypotézy; její pravděpodobnost je nejvýše $\\alpha$."
+        },
+        {
+          "label": "b",
+          "prompt": "Test, který minimalizuje chybu 2. druhu při dané $\\alpha$, se nazývá:",
+          "kind": "text",
+          "correctAnswer": "nejsilnější",
+          "explanation": "Nejsilnější test má při zafixované hladině významnosti minimální pravděpodobnost chyby 2. druhu (= maximální sílu)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-6",
+      "prompt": "p-hodnota a její rozdělení za platnosti $H_0$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "p-hodnota je definována jako:",
+          "kind": "choice",
+          "choices": [
+            "pravděpodobnost, že platí $H_0$",
+            "infimum hladin $\\alpha$, na kterých ještě zamítáme $H_0$",
+            "pravděpodobnost chyby 2. druhu",
+            "supremum hladin, na kterých $H_0$ nezamítáme"
+          ],
+          "correctIndex": 1,
+          "explanation": "$\\hat p = \\inf\\{\\alpha \\mid X \\in W_\\alpha\\}$ — nejmenší hladina, na které ještě lze $H_0$ zamítnout."
+        },
+        {
+          "label": "b",
+          "prompt": "Jaké rozdělení má p-hodnota za platnosti $H_0$ (pro spojitou testovou statistiku)?",
+          "kind": "text",
+          "correctAnswer": "U(0,1)",
+          "explanation": "Za platnosti $H_0$ je p-hodnota rovnoměrně rozdělená na $(0,1)$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-6",
+      "prompt": "Jednovýběrový vs párový t-test pro $X_1,\\ldots,X_n \\sim N(\\mu, \\sigma^2)$ s neznámým $\\sigma^2$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Statistika $T = \\frac{\\bar X_n - \\mu_0}{s_n/\\sqrt n}$ má za $H_0$ rozdělení:",
+          "kind": "choice",
+          "choices": [
+            "$N(0,1)$",
+            "$t_{n-1}$",
+            "$\\chi^2_{n-1}$",
+            "$F_{n-1,n}$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Při neznámém $\\sigma^2$ se používá výběrový rozptyl $s_n^2$ a statistika má Studentovo rozdělení s $n-1$ stupni volnosti."
+        },
+        {
+          "label": "b",
+          "prompt": "Počet stupňů volnosti párového t-testu pro $n$ párů (číslo):",
+          "kind": "text",
+          "correctAnswer": "n-1",
+          "explanation": "Párový t-test pracuje s $n$ rozdíly $Z_i = X_i - Y_i$, takže má $n-1$ stupňů volnosti."
+        },
+        {
+          "label": "c",
+          "prompt": "Dvouvýběrový t-test (homoskedastická varianta) o velikostech vzorků $n$ a $m$ má kolik stupňů volnosti?",
+          "kind": "text",
+          "correctAnswer": "n+m-2",
+          "explanation": "Při předpokladu shodných rozptylů má dvouvýběrový t-test $n+m-2$ stupňů volnosti."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-6",
+      "prompt": "$\\chi^2$ testy dobré shody a nezávislosti",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pearsonův $\\chi^2$ test dobré shody pro diskrétní rozdělení o $k$ kategoriích se $m$ odhadovanými parametry má počet stupňů volnosti:",
+          "kind": "text",
+          "correctAnswer": "k-m-1",
+          "explanation": "Asymptotické rozdělení je $\\chi^2_{k-m-1}$ — počet kategorií mínus počet odhadovaných parametrů mínus 1."
+        },
+        {
+          "label": "b",
+          "prompt": "Kontingenční tabulka $r \\times c$ — počet stupňů volnosti testu nezávislosti:",
+          "kind": "text",
+          "correctAnswer": "(r-1)(c-1)",
+          "explanation": "Pro test nezávislosti v $r \\times c$ tabulce je počet stupňů volnosti $(r-1)(c-1)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Cochranovo pravidlo pro použitelnost $\\chi^2$ aproximace vyžaduje pro každou kategorii přibližně:",
+          "kind": "choice",
+          "choices": [
+            "$np_i \\ge 1$",
+            "$np_i \\ge 5$",
+            "$np_i \\ge 30$",
+            "$np_i \\ge n/k$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Očekávaná četnost v každé buňce by měla být alespoň 5, aby $\\chi^2$ aproximace fungovala."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-7",
+      "prompt": "Entropie diskrétní náhodné veličiny",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Entropie $H(X)$ závisí:",
+          "kind": "choice",
+          "choices": [
+            "na hodnotách $X$, ne na rozdělení",
+            "na rozdělení $p$, ne na hodnotách $X$",
+            "na střední hodnotě $X$",
+            "na rozptylu $X$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Entropie je funkce pouze rozdělení pravděpodobností — je invariantní vůči libovolné prosté transformaci hodnot."
+        },
+        {
+          "label": "b",
+          "prompt": "Entropie spravedlivé mince $X \\sim \\mathrm{Be}(1/2)$ v bitech:",
+          "kind": "text",
+          "correctAnswer": "1",
+          "explanation": "$H(X) = -\\tfrac12\\log_2\\tfrac12 - \\tfrac12\\log_2\\tfrac12 = 1$ bit (maximum binární entropie)."
+        },
+        {
+          "label": "c",
+          "prompt": "Entropie jistého jevu (tj. $P(X = a) = 1$) je:",
+          "kind": "text",
+          "correctAnswer": "0",
+          "explanation": "Jistý jev nemá žádnou neurčitost — $H(X) = 0$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-7",
+      "prompt": "Sdružená, podmíněná entropie a vzájemná informace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Řetězové pravidlo zní:",
+          "kind": "choice",
+          "choices": [
+            "$H(X,Y) = H(X) \\cdot H(Y\\mid X)$",
+            "$H(X,Y) = H(X) + H(Y\\mid X)$",
+            "$H(X,Y) = H(X) + H(Y) - H(Y\\mid X)$",
+            "$H(X,Y) = H(X) - H(Y\\mid X)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Řetězové pravidlo entropie: $H(X,Y) = H(X) + H(Y\\mid X)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro vzájemnou informaci $I(X;X)$ platí $I(X;X) =$:",
+          "kind": "text",
+          "correctAnswer": "H(X)",
+          "explanation": "$I(X;Y) = H(X) - H(X\\mid Y)$; pro $Y=X$ je $H(X\\mid X) = 0$, takže $I(X;X) = H(X)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Je Kullback-Leiblerova divergence $D(p\\|q)$ metrikou?",
+          "kind": "choice",
+          "choices": [
+            "ano, splňuje všechny axiomy metriky",
+            "ne, není symetrická a neplatí trojúhelníková nerovnost",
+            "ano, ale jen pro spojitá rozdělení",
+            "ne, může být záporná"
+          ],
+          "correctIndex": 1,
+          "explanation": "KL je nezáporná a $=0$ právě když $p=q$, ale není symetrická a neplatí pro ni trojúhelníková nerovnost."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-7",
+      "prompt": "Kraftova nerovnost a hierarchie kódů",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro každý instantní $D$-ární kód s délkami slov $\\ell_1,\\ldots,\\ell_n$ platí:",
+          "kind": "choice",
+          "choices": [
+            "$\\sum_i D^{-\\ell_i} \\le 1$",
+            "$\\sum_i D^{\\ell_i} \\le 1$",
+            "$\\sum_i \\ell_i \\le D$",
+            "$\\prod_i D^{-\\ell_i} \\le 1$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kraftova nerovnost je nutná i postačující podmínka pro existenci instantního kódu s danými délkami."
+        },
+        {
+          "label": "b",
+          "prompt": "Která hierarchie tříd kódů je správná (od nejužší po nejširší)?",
+          "kind": "choice",
+          "choices": [
+            "instantní ⊂ jednoznačně dekódovatelný ⊂ nesingulární",
+            "nesingulární ⊂ jednoznačně dekódovatelný ⊂ instantní",
+            "instantní ⊂ nesingulární ⊂ jednoznačně dekódovatelný",
+            "jednoznačně dekódovatelný ⊂ instantní ⊂ nesingulární"
+          ],
+          "correctIndex": 0,
+          "explanation": "Hierarchie: instantní (prefixové) ⊂ jednoznačně dekódovatelné ⊂ nesingulární ⊂ všechny kódy."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-7",
+      "prompt": "Shannonova věta o zdrojovém kódování",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Dolní mez střední délky $L(C)$ instantního $D$-árního kódu je:",
+          "kind": "text",
+          "correctAnswer": "H_D(X)",
+          "explanation": "Pro každý instantní (resp. JD) kód platí $L(C) \\ge H_D(X)$; rovnost nastává, právě když $D^{-\\ell_i} = p_i$."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro optimální (např. Huffmanův) kód platí:",
+          "kind": "choice",
+          "choices": [
+            "$L(C) < H_D(X)$",
+            "$H_D(X) \\le L(C) < H_D(X) + 1$",
+            "$L(C) = H_D(X)$ vždy",
+            "$L(C) \\ge 2 H_D(X)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Shannonova konstrukce $\\ell_i = \\lceil \\log_D 1/p_i \\rceil$ dává $H_D(X) \\le L(C) < H_D(X) + 1$; optimální kód není horší."
+        },
+        {
+          "label": "c",
+          "prompt": "Huffmanův algoritmus v každém kroku spojuje:",
+          "kind": "choice",
+          "choices": [
+            "dva nejpravděpodobnější symboly",
+            "dva nejméně pravděpodobné symboly",
+            "symboly s nejdelším kódem",
+            "náhodnou dvojici symbolů"
+          ],
+          "correctIndex": 1,
+          "explanation": "Huffmanův algoritmus opakovaně spojuje dva nejméně pravděpodobné symboly; kódy přiřazuje zpětně."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-8",
+      "prompt": "Definice markovského řetězce s diskrétním časem",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Markovská podmínka znamená:",
+          "kind": "choice",
+          "choices": [
+            "$X_n$ je nezávislé na $X_{n-1}$",
+            "$P(X_n = s \\mid X_{n-1}, \\ldots, X_0) = P(X_n = s \\mid X_{n-1})$",
+            "$X_n$ má stejné rozdělení pro všechna $n$",
+            "$P(X_n = s) = P(X_0 = s)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Budoucnost závisí jen na současnosti — řetězec „zapomíná historii\"."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro homogenní řetězec platí $\\mathbf P(n) =$:",
+          "kind": "text",
+          "correctAnswer": "P^n",
+          "explanation": "$n$-kroková matice přechodu je $n$-tá mocnina jednokrokové matice $\\mathbf P$."
+        },
+        {
+          "label": "c",
+          "prompt": "Co charakterizuje stochastickou matici $\\mathbf P$?",
+          "kind": "choice",
+          "choices": [
+            "$P_{ij} \\ge 0$ a řádkové součty $= 1$",
+            "$P_{ij} \\ge 0$ a sloupcové součty $= 1$",
+            "$P_{ij} \\le 1$ a determinant $= 1$",
+            "$P_{ij} \\in \\{0, 1\\}$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Stochastická matice má nezáporné prvky a řádkové součty rovny 1."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-8",
+      "prompt": "Klasifikace stavů",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stav $i$ je trvalý (rekurentní), pokud:",
+          "kind": "choice",
+          "choices": [
+            "$P(\\exists n: X_n = i \\mid X_0 = i) = 1$",
+            "$P(\\exists n: X_n = i \\mid X_0 = i) < 1$",
+            "$P_{ii} = 1$",
+            "$\\mu_i = \\infty$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Trvalý stav se s pravděpodobností 1 navrátí; přechodný má tuto pravděpodobnost ostře menší než 1."
+        },
+        {
+          "label": "b",
+          "prompt": "Perioda aperiodického stavu $d(i) =$:",
+          "kind": "text",
+          "correctAnswer": "1",
+          "explanation": "Aperiodický stav má $d(i) = \\gcd\\{n: P_{ii}(n) > 0\\} = 1$."
+        },
+        {
+          "label": "c",
+          "prompt": "Ergodický stav je:",
+          "kind": "choice",
+          "choices": [
+            "přechodný a aperiodický",
+            "trvalý nenulový a aperiodický",
+            "trvalý nulový a periodický",
+            "absorpční"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ergodický stav je trvalý nenulový a aperiodický (má konečnou střední dobu návratu a periodu 1)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-8",
+      "prompt": "Limitní věta pro aperiodické stavy",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro aperiodický stav $i$ platí $\\lim_{n\\to\\infty} P_{ii}(n) =$:",
+          "kind": "text",
+          "correctAnswer": "1/mu_i",
+          "explanation": "Limitní pravděpodobnost návratu do aperiodického stavu je převrácená hodnota střední doby návratu $\\mu_i$."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro trvalý nulový stav $i$ ($\\mu_i = \\infty$) je $\\lim P_{ii}(n) =$:",
+          "kind": "text",
+          "correctAnswer": "0",
+          "explanation": "Trvalý nulový stav má nekonečnou střední dobu návratu, takže $\\lim P_{ii}(n) = 1/\\mu_i = 0$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-8",
+      "prompt": "Stacionární rozdělení nerozložitelného řetězce",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stacionární rozdělení $\\boldsymbol\\pi$ splňuje:",
+          "kind": "choice",
+          "choices": [
+            "$\\boldsymbol\\pi = \\mathbf P \\boldsymbol\\pi$",
+            "$\\boldsymbol\\pi \\mathbf P = \\boldsymbol\\pi$",
+            "$\\mathbf P \\boldsymbol\\pi = \\mathbf 0$",
+            "$\\boldsymbol\\pi \\mathbf P = \\mathbf 0$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Stacionární rozdělení je levý vlastní vektor matice $\\mathbf P$ k vlastnímu číslu 1."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro nerozložitelný řetězec s trvalými nenulovými stavy platí $\\pi_j =$:",
+          "kind": "text",
+          "correctAnswer": "1/mu_j",
+          "explanation": "Stacionární pravděpodobnost stavu je převrácená hodnota střední doby návratu do něj."
+        },
+        {
+          "label": "c",
+          "prompt": "Existuje vždy stacionární rozdělení pro konečnou množinu stavů $S$?",
+          "kind": "choice",
+          "choices": [
+            "ano",
+            "ne",
+            "pouze pokud je řetězec aperiodický",
+            "pouze pokud je řetězec nerozložitelný"
+          ],
+          "correctIndex": 0,
+          "explanation": "Pro konečné $S$ vždy existuje stacionární rozdělení — každá uzavřená třída obsahuje alespoň jeden trvalý nenulový stav."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-9",
+      "prompt": "Poissonův proces s intenzitou $\\lambda$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Doby mezi po sobě jdoucími událostmi Poissonova procesu mají rozdělení:",
+          "kind": "choice",
+          "choices": [
+            "$\\mathrm{Geom}(\\lambda)$",
+            "$\\mathrm{Exp}(\\lambda)$",
+            "$N(0, \\lambda)$",
+            "$\\mathrm{Poisson}(\\lambda)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Mezi-časy Poissonova procesu jsou i.i.d. exponenciální s parametrem $\\lambda$."
+        },
+        {
+          "label": "b",
+          "prompt": "Přírůstek $N_t - N_s$ má rozdělení:",
+          "kind": "text",
+          "correctAnswer": "Poisson(lambda(t-s))",
+          "explanation": "$N_t - N_s \\sim \\mathrm{Poisson}(\\lambda(t-s))$; přírůstky jsou nezávislé."
+        },
+        {
+          "label": "c",
+          "prompt": "Které spojité rozdělení je jediné, jež má vlastnost bezpaměťovosti?",
+          "kind": "text",
+          "correctAnswer": "exponencialni",
+          "explanation": "Exponenciální rozdělení je jediné spojité s vlastností $P(T > t+s \\mid T > t) = P(T > s)$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-9",
+      "prompt": "Matice skokových intenzit $\\mathbf Q$ pro CTMC",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Vlastnosti matice $\\mathbf Q$:",
+          "kind": "choice",
+          "choices": [
+            "$Q_{ij} \\ge 0$ pro $i \\ne j$, $Q_{ii} \\le 0$, řádkový součet $= 0$",
+            "$Q_{ij} \\ge 0$, řádkový součet $= 1$",
+            "$Q_{ii} \\ge 0$, mimo diagonálu $\\le 0$",
+            "$Q_{ij} \\in [0,1]$, sloupcové součty $= 1$"
+          ],
+          "correctIndex": 0,
+          "explanation": "$\\mathbf Q$ má nezáporné mimodiagonální prvky, nekladné diagonální prvky a řádkové součty rovny 0."
+        },
+        {
+          "label": "b",
+          "prompt": "$\\mathbf Q = \\mathbf P'(0)$ pro CTMC. Řešení Kolmogorovy dopředné rovnice $\\mathbf P'(t) = \\mathbf P(t)\\mathbf Q$ je:",
+          "kind": "text",
+          "correctAnswer": "e^{Qt}",
+          "explanation": "Maticová exponenciála $\\mathbf P(t) = e^{\\mathbf Q t}$ je jednoznačné řešení s počáteční podmínkou $\\mathbf P(0) = \\mathbf I$."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro Poissonův proces má matice $\\mathbf Q$ na diagonále hodnotu:",
+          "kind": "text",
+          "correctAnswer": "-lambda",
+          "explanation": "$Q_{nn} = -\\lambda$, $Q_{n,n+1} = \\lambda$, ostatní prvky jsou nuly."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-9",
+      "prompt": "Vztah CTMC, DTMC a Poissonova procesu",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Mějme DTMC $\\{Y_n\\}$ s maticí $\\mathbf D$ a Poissonův proces $\\{N_t\\}$ s intenzitou $\\lambda$. Proces $X_t = Y_{N_t}$ je CTMC s maticí intenzit:",
+          "kind": "choice",
+          "choices": [
+            "$\\mathbf Q = \\lambda \\mathbf D$",
+            "$\\mathbf Q = \\lambda(\\mathbf D - \\mathbf I)$",
+            "$\\mathbf Q = \\mathbf D - \\lambda \\mathbf I$",
+            "$\\mathbf Q = \\mathbf D/\\lambda$"
+          ],
+          "correctIndex": 1,
+          "explanation": "DTMC „časovaný\" Poissonovým procesem dává CTMC s $\\mathbf Q = \\lambda(\\mathbf D - \\mathbf I)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Je Poissonův proces homogenním CTMC?",
+          "kind": "choice",
+          "choices": [
+            "ano",
+            "ne"
+          ],
+          "correctIndex": 0,
+          "explanation": "Poissonův proces splňuje markovskou podmínku, má spojitý čas a nezávislé stacionární přírůstky — je homogenní CTMC."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-9",
+      "prompt": "Stacionární rozdělení CTMC",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stacionární rozdělení $\\boldsymbol\\pi$ CTMC charakterizuje rovnice:",
+          "kind": "choice",
+          "choices": [
+            "$\\boldsymbol\\pi \\mathbf P(t) = \\mathbf 0$",
+            "$\\boldsymbol\\pi \\mathbf Q = \\mathbf 0$",
+            "$\\mathbf Q \\boldsymbol\\pi = \\boldsymbol\\pi$",
+            "$\\boldsymbol\\pi \\mathbf Q = \\boldsymbol\\pi$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$\\boldsymbol\\pi \\mathbf P(t) = \\boldsymbol\\pi$ pro každé $t$ je ekvivalentní s $\\boldsymbol\\pi \\mathbf Q = \\mathbf 0$."
+        },
+        {
+          "label": "b",
+          "prompt": "Detailní rovnováha (reverzibilita) zní:",
+          "kind": "choice",
+          "choices": [
+            "$\\pi_i Q_{ij} = \\pi_j Q_{ji}$",
+            "$\\pi_i + Q_{ij} = \\pi_j + Q_{ji}$",
+            "$\\pi_i Q_{ii} = \\pi_j Q_{jj}$",
+            "$\\pi_i / \\pi_j = Q_{ii}/Q_{jj}$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Detailní rovnováha $\\pi_i Q_{ij} = \\pi_j Q_{ji}$ je postačující podmínka pro stacionární $\\boldsymbol\\pi$."
+        },
+        {
+          "label": "c",
+          "prompt": "Existuje stacionární rozdělení vždy pro CTMC s konečnou $S$?",
+          "kind": "choice",
+          "choices": [
+            "ano",
+            "ne"
+          ],
+          "correctIndex": 0,
+          "explanation": "Pro konečnou množinu stavů stacionární rozdělení vždy existuje."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-10",
+      "prompt": "Systém $M|M|1$ a podmínka stability",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Zátěž $\\varrho$ systému $M|M|1$ s intenzitou příchodů $\\lambda$ a obsluhy $\\mu$:",
+          "kind": "text",
+          "correctAnswer": "lambda/mu",
+          "explanation": "Pro 1 server je $\\varrho = \\lambda/\\mu$; obecně $\\varrho = \\lambda/(c\\mu)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Stacionární rozdělení existuje, právě když:",
+          "kind": "choice",
+          "choices": [
+            "$\\varrho \\le 1$",
+            "$\\varrho < 1$",
+            "$\\varrho \\ge 1$",
+            "$\\varrho > 1$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pro $\\varrho \\ge 1$ počet zákazníků uniká do nekonečna a stacionární rozdělení neexistuje."
+        },
+        {
+          "label": "c",
+          "prompt": "Stacionární rozdělení $\\pi_n$ systému $M|M|1$ je:",
+          "kind": "choice",
+          "choices": [
+            "Poissonovo",
+            "geometrické: $(1-\\varrho)\\varrho^n$",
+            "rovnoměrné",
+            "exponenciální"
+          ],
+          "correctIndex": 1,
+          "explanation": "Stacionární rozdělení $M|M|1$ je geometrické: $\\pi_n = (1-\\varrho)\\varrho^n$ pro $n = 0, 1, 2, \\ldots$"
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-10",
+      "prompt": "Střední hodnoty v $M|M|1$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Střední počet zákazníků v systému $EN =$:",
+          "kind": "text",
+          "correctAnswer": "rho/(1-rho)",
+          "explanation": "$EN = \\varrho/(1-\\varrho)$ pro stabilní $M|M|1$ ($\\varrho < 1$)."
+        },
+        {
+          "label": "b",
+          "prompt": "Pravděpodobnost, že příchozí zákazník nemusí čekat, je $P(W = 0) =$:",
+          "kind": "text",
+          "correctAnswer": "1-rho",
+          "explanation": "Server je s pravděpodobností $1-\\varrho$ volný; tehdy $W = 0$."
+        },
+        {
+          "label": "c",
+          "prompt": "Podmíněně na $W > 0$ má doba čekání rozdělení:",
+          "kind": "choice",
+          "choices": [
+            "$\\mathrm{Exp}(\\mu)$",
+            "$\\mathrm{Exp}(\\mu - \\lambda)$",
+            "$\\mathrm{Exp}(\\lambda)$",
+            "$\\mathrm{Exp}(\\lambda + \\mu)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$(W \\mid W > 0) \\sim \\mathrm{Exp}(\\mu - \\lambda)$ — efektivní intenzita odbavování fronty."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-10",
+      "prompt": "Systém $M|M|\\infty$ a Kendallova notace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co znamená symbol „M\" v Kendallově notaci?",
+          "kind": "choice",
+          "choices": [
+            "deterministické (degenerované) rozdělení",
+            "obecné (general) rozdělení",
+            "exponenciální (markovské) rozdělení",
+            "multinomické rozdělení"
+          ],
+          "correctIndex": 2,
+          "explanation": "„M\" označuje exponenciální (markovské) rozdělení mezi-časů či doby obsluhy."
+        },
+        {
+          "label": "b",
+          "prompt": "Stacionární rozdělení systému $M|M|\\infty$ je:",
+          "kind": "choice",
+          "choices": [
+            "geometrické",
+            "Poissonovo s parametrem $\\lambda/\\mu$",
+            "exponenciální",
+            "rovnoměrné na $\\{0,1,\\ldots\\}$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$\\pi_n = e^{-\\lambda/\\mu}(\\lambda/\\mu)^n/n!$ — Poissonovo rozdělení s parametrem $\\lambda/\\mu$."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro jaké hodnoty $\\lambda$ je $M|M|\\infty$ stabilní?",
+          "kind": "choice",
+          "choices": [
+            "pouze pro $\\lambda < \\mu$",
+            "pro libovolné $\\lambda > 0$",
+            "pouze pro $\\lambda < 1$",
+            "nikdy"
+          ],
+          "correctIndex": 1,
+          "explanation": "Nekonečno serverů obslouží libovolnou intenzitu příchodů — stabilní pro každé $\\lambda$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-10",
+      "prompt": "Littleho věta",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Littleho věta tvrdí, že pro striktně stacionární proces hromadné obsluhy platí:",
+          "kind": "choice",
+          "choices": [
+            "$EN = \\lambda \\cdot ET$",
+            "$EN = ET / \\lambda$",
+            "$ET = \\lambda \\cdot EN$",
+            "$EN = \\lambda + ET$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Střední počet zákazníků v systému je intenzita příchodů krát střední doba strávená v systému."
+        },
+        {
+          "label": "b",
+          "prompt": "Střední doba $ET$ v systému $M|M|1$ podle Littleho věty:",
+          "kind": "text",
+          "correctAnswer": "1/(mu-lambda)",
+          "explanation": "$ET = EN/\\lambda = \\varrho/(\\lambda(1-\\varrho)) = 1/(\\mu - \\lambda)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Vyžaduje Littleho věta předpoklad markovskosti procesu?",
+          "kind": "choice",
+          "choices": [
+            "ano, jen pro M|M|c systémy",
+            "ne, je velmi obecná a neklade téměř žádné požadavky na rozdělení",
+            "ano, vyžaduje Poissonovy příchody",
+            "ano, vyžaduje exponenciální obsluhu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Littleho věta platí pro každý striktně stacionární proces — nezávisle na rozdělení příchodů, obsluhy či disciplíně."
+        }
+      ]
+    }
+  ]
 }

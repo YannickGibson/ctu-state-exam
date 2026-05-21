@@ -3,17 +3,767 @@
   "subjectCode": "PDP",
   "group": "SPOL",
   "title": "PDP quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-PDP. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-SPOL-16",
+      "prompt": "Paralelní zrychlení a efektivnost",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Horní mez zrychlení $S(n,p)$ na $p$ procesorech:",
+          "kind": "choice",
+          "choices": [
+            "$\\log p$",
+            "$p$",
+            "$p \\log p$",
+            "$p^2$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$S(n,p) = SU(n)/T(n,p) \\le p$; nadlineární zrychlení je až na cache efekty teoreticky nemožné."
+        },
+        {
+          "label": "b",
+          "prompt": "Paralelní efektivnost $E(n,p)$ je definovaná jako:",
+          "kind": "choice",
+          "choices": [
+            "$SU(n)/T(n,p)$",
+            "$SU(n)/C(n,p)$",
+            "$C(n,p)/SU(n)$",
+            "$T(n,p)\\cdot p$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$E(n,p) = SU(n)/C(n,p) = S(n,p)/p \\le 1$ — zrychlení připadající na jedno jádro."
+        },
+        {
+          "label": "c",
+          "prompt": "Cíl paralelizace: lineární zrychlení, tj. $S(n,p) = \\Theta($ ___ $)$ (doplň výraz):",
+          "kind": "text",
+          "correctAnswer": "p",
+          "explanation": "Lineární zrychlení = $\\Theta(p)$, tedy zrychlení roste asymptoticky s počtem procesorů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-16",
+      "prompt": "Amdahlův vs. Gustafsonův zákon",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Amdahlův zákon (fixní $n$) říká, že $S(n,p) \\le$ ___, kde $f_s$ je sekvenční podíl:",
+          "kind": "text",
+          "correctAnswer": "1/f_s",
+          "explanation": "Při fixní velikosti úlohy paralelismus saturuje na $1/f_s$ — sekvenční část tvoří strop zrychlení."
+        },
+        {
+          "label": "b",
+          "prompt": "Gustafsonův zákon (rostoucí $n$ úměrně $p$) tvrdí, že:",
+          "kind": "choice",
+          "choices": [
+            "zrychlení je vždy konstantní",
+            "$\\lim_{n\\to\\infty} S(n,p) = p$",
+            "zrychlení klesá s $p$",
+            "$S(n,p) = O(\\log p)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Když roste i problém, sekvenční podíl se zmenšuje a zrychlení se asymptoticky blíží $p$ — větší úlohy ve stejném čase."
+        },
+        {
+          "label": "c",
+          "prompt": "Schopnost algoritmu držet paralelní optimalitu při růstu $n$ i $p$ se nazývá:",
+          "kind": "text",
+          "correctAnswer": "škálovatelnost",
+          "explanation": "Škálovatelnost (scalability) je dlouhodobé udržení efektivnosti při souběžném růstu velikosti úlohy a počtu procesorů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-16",
+      "prompt": "PRAM model",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která zkratka PRAM povoluje současný zápis více procesorů na tutéž buňku?",
+          "kind": "choice",
+          "choices": [
+            "EREW",
+            "CREW",
+            "CRCW",
+            "ERCW"
+          ],
+          "correctIndex": 2,
+          "explanation": "Concurrent Read Concurrent Write povoluje souběh čtení i zápisu; subvarianty Priority/Arbitrary/Common řeší konflikt zápisu."
+        },
+        {
+          "label": "b",
+          "prompt": "Která PRAM varianta zakazuje souběžné čtení i zápis?",
+          "kind": "text",
+          "correctAnswer": "EREW",
+          "explanation": "Exclusive Read Exclusive Write — nejslabší (a nejrealističtější) varianta PRAM."
+        },
+        {
+          "label": "c",
+          "prompt": "PRAM předpokládá přístup do sdílené paměti:",
+          "kind": "choice",
+          "choices": [
+            "asynchronní s bariérou",
+            "jednotkový a synchronní",
+            "v čase $\\Theta(\\log p)$",
+            "blokující"
+          ],
+          "correctIndex": 1,
+          "explanation": "PRAM má synchronní procesory a jednotkový globální READ/WRITE; APRAM teprve uvolňuje synchronnost a zavádí $d$, $B(p)$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-16",
+      "prompt": "APRAM model",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co APRAM přidává oproti PRAM?",
+          "kind": "choice",
+          "choices": [
+            "synchronní jednotkový přístup",
+            "asynchronní procesory a bariérovou synchronizaci",
+            "exkluzivní zápis za $\\Theta(p)$",
+            "garanci CRCW Priority"
+          ],
+          "correctIndex": 1,
+          "explanation": "APRAM modeluje skutečné SMP — procesory nejsou synchronní, mezi fázemi je potřeba bariéra $B(p)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Doba $k$ po sobě jdoucích READ/WRITE v APRAM (parametr $d$):",
+          "kind": "text",
+          "correctAnswer": "d+k-1",
+          "explanation": "Pipelined model: první R/W $= d$, každý další $+1$, tedy celkem $d + k - 1$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-17",
+      "prompt": "OpenMP a model fork-join",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "OpenMP používá programovací model:",
+          "kind": "choice",
+          "choices": [
+            "zasílání zpráv",
+            "fork-join",
+            "MapReduce",
+            "data-flow"
+          ],
+          "correctIndex": 1,
+          "explanation": "Sekvenční start, na `#pragma omp parallel` fork týmu vláken, na konci implicitní join."
+        },
+        {
+          "label": "b",
+          "prompt": "Direktiva, která otevírá novou paralelní oblast:",
+          "kind": "text",
+          "correctAnswer": "parallel",
+          "explanation": "`#pragma omp parallel` vytvoří tým vláken; ostatní konstrukce (`for`, `single`, `task`) běží uvnitř ní."
+        },
+        {
+          "label": "c",
+          "prompt": "OpenMP je primárně určen pro:",
+          "kind": "choice",
+          "choices": [
+            "distribuovanou paměť",
+            "sdílenou paměť",
+            "GPU SIMT",
+            "FPGA"
+          ],
+          "correctIndex": 1,
+          "explanation": "OpenMP cílí SMP/NUMA architektury se sdílenou pamětí; pro distribuovanou paměť slouží MPI."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-17",
+      "prompt": "Vlastnosti proměnných v OpenMP",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Klauzule, která vytvoří lokální kopii proměnné inicializovanou hodnotou před vstupem do oblasti:",
+          "kind": "choice",
+          "choices": [
+            "private",
+            "firstprivate",
+            "lastprivate",
+            "shared"
+          ],
+          "correctIndex": 1,
+          "explanation": "`firstprivate` na rozdíl od `private` přenese hodnotu zvenku do soukromé kopie vlákna."
+        },
+        {
+          "label": "b",
+          "prompt": "Klauzule pro souběžnou agregaci dílčích výsledků se nazývá:",
+          "kind": "text",
+          "correctAnswer": "reduction",
+          "explanation": "`reduction(op:var)` udržuje soukromé akumulátory a na konci je spojí pomocí asociativní operace `op`."
+        },
+        {
+          "label": "c",
+          "prompt": "Hodnota proměnné s klauzulí `private` po výstupu z paralelní oblasti je:",
+          "kind": "choice",
+          "choices": [
+            "nedefinovaná",
+            "rovna poslední iteraci",
+            "součtem všech vláken",
+            "rovna hodnotě před vstupem"
+          ],
+          "correctIndex": 0,
+          "explanation": "Privátní kopie zaniká, vnější proměnná zůstává s nedefinovanou hodnotou; pro propsání lze použít `lastprivate`."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-17",
+      "prompt": "Datový vs. funkční paralelismus a rozvrhování",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro rekurzivní algoritmy (MergeSort, Strassen) je v OpenMP nejvhodnější:",
+          "kind": "choice",
+          "choices": [
+            "parallel for",
+            "task / taskwait",
+            "sections",
+            "barrier"
+          ],
+          "correctIndex": 1,
+          "explanation": "`task` realizuje funkční paralelismus s task poolem; vhodné pro nepravidelné rekurzivní stromy úloh."
+        },
+        {
+          "label": "b",
+          "prompt": "Které schedule přiděluje iterace dynamicky s klesající velikostí bloku?",
+          "kind": "choice",
+          "choices": [
+            "static",
+            "dynamic",
+            "guided",
+            "runtime"
+          ],
+          "correctIndex": 2,
+          "explanation": "`schedule(guided)` startuje s velkými bloky a zmenšuje je — nízká režie i dobré vyvážení zátěže."
+        },
+        {
+          "label": "c",
+          "prompt": "Direktiva pro datově paralelní iterační cyklus:",
+          "kind": "text",
+          "correctAnswer": "parallel for",
+          "explanation": "`#pragma omp parallel for` distribuuje iterace cyklu mezi vlákna podle zvoleného `schedule`."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-17",
+      "prompt": "Synchronizace vláken",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro jednu atomickou aktualizaci skaláru (např. `cnt++`) je nejlevnější:",
+          "kind": "choice",
+          "choices": [
+            "critical",
+            "atomic",
+            "barrier",
+            "master"
+          ],
+          "correctIndex": 1,
+          "explanation": "`atomic` se mapuje na HW atomickou instrukci; `critical` je dražší zámek vhodný pro celé bloky kódu."
+        },
+        {
+          "label": "b",
+          "prompt": "Direktiva, kterou provede přesně jedno (libovolné) vlákno z týmu:",
+          "kind": "text",
+          "correctAnswer": "single",
+          "explanation": "`single` zaručuje jediné provedení libovolným vláknem; `master` je analogie omezená na vlákno 0."
+        },
+        {
+          "label": "c",
+          "prompt": "Implicitní bariéra je na konci direktivy:",
+          "kind": "choice",
+          "choices": [
+            "parallel",
+            "atomic",
+            "flush",
+            "task"
+          ],
+          "correctIndex": 0,
+          "explanation": "Konec `parallel`, `for`, `single`, `sections` synchronizuje tým, pokud není potlačeno klauzulí `nowait`."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-18",
+      "prompt": "Základy MPI",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "MPI cílí především architektury s pamětí:",
+          "kind": "choice",
+          "choices": [
+            "sdílenou",
+            "distribuovanou",
+            "transakční",
+            "stack-only"
+          ],
+          "correctIndex": 1,
+          "explanation": "MPI je standard zasílání zpráv mezi procesy na propojených uzlech (NUMA, klastry)."
+        },
+        {
+          "label": "b",
+          "prompt": "Implicitní komunikátor obsahující všechny procesy aplikace:",
+          "kind": "text",
+          "correctAnswer": "MPI_COMM_WORLD",
+          "explanation": "`MPI_COMM_WORLD` je intra-komunikátor vytvořený automaticky `MPI_Init`."
+        },
+        {
+          "label": "c",
+          "prompt": "Volání, které vrací rank volajícího procesu v daném komunikátoru:",
+          "kind": "choice",
+          "choices": [
+            "MPI_Comm_size",
+            "MPI_Comm_rank",
+            "MPI_Get_processor_name",
+            "MPI_Comm_split"
+          ],
+          "correctIndex": 1,
+          "explanation": "`MPI_Comm_rank(comm, &rank)` přiřadí volajícímu procesu jeho rank; `MPI_Comm_size` vrací počet procesů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-18",
+      "prompt": "Bodové komunikační operace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Které volání zaručuje, že návrat nastane až po inicializaci odpovídajícího příjmu (nelokální)?",
+          "kind": "choice",
+          "choices": [
+            "MPI_Send",
+            "MPI_Bsend",
+            "MPI_Ssend",
+            "MPI_Rsend"
+          ],
+          "correctIndex": 2,
+          "explanation": "Synchronous send `MPI_Ssend` je nelokální — návrat čeká na inicializaci příjmu, čímž se zaručuje rendezvous."
+        },
+        {
+          "label": "b",
+          "prompt": "Funkce, kterou se čeká na dokončení neblokující operace iniciované `MPI_Isend`:",
+          "kind": "text",
+          "correctAnswer": "MPI_Wait",
+          "explanation": "`MPI_Wait` zablokuje proces dokud requestor neoznámí dokončení; `MPI_Test` je neblokující dotaz."
+        },
+        {
+          "label": "c",
+          "prompt": "Buffered send (`MPI_Bsend`) je:",
+          "kind": "choice",
+          "choices": [
+            "lokální, používá uživatelský buffer",
+            "nelokální, čeká na příjem",
+            "kolektivní",
+            "atomická"
+          ],
+          "correctIndex": 0,
+          "explanation": "Buffered mode pracuje s uživatelsky alokovaným bufferem (`MPI_Buffer_attach`) a vrací se lokálně."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-18",
+      "prompt": "Kolektivní operace a `MPI_Init_thread`",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která úroveň `MPI_Init_thread` povoluje volat MPI z více vláken bez serializace?",
+          "kind": "choice",
+          "choices": [
+            "MPI_THREAD_SINGLE",
+            "MPI_THREAD_FUNNELED",
+            "MPI_THREAD_SERIALIZED",
+            "MPI_THREAD_MULTIPLE"
+          ],
+          "correctIndex": 3,
+          "explanation": "Jen `MPI_THREAD_MULTIPLE` umožňuje plně paralelní volání MPI z více vláken jednoho procesu."
+        },
+        {
+          "label": "b",
+          "prompt": "Kolektivní operace, která rozešle pole z `root` rovnoměrně po blocích všem (Scatter):",
+          "kind": "text",
+          "correctAnswer": "MPI_Scatter",
+          "explanation": "`MPI_Scatter` je operace OAS (One-All Scatter) — rozdistribuce disjunktních bloků."
+        },
+        {
+          "label": "c",
+          "prompt": "Která dvojice patří mezi operace „všichni–všichni\"?",
+          "kind": "choice",
+          "choices": [
+            "MPI_Bcast a MPI_Scatter",
+            "MPI_Gather a MPI_Reduce",
+            "MPI_Allgather a MPI_Alltoall",
+            "MPI_Send a MPI_Recv"
+          ],
+          "correctIndex": 2,
+          "explanation": "`MPI_Allgather` (AAG) a `MPI_Alltoall` (AAS) jsou klasické all-to-all kolektivy."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-18",
+      "prompt": "Paralelní násobení matic a mocninná metoda",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Paměťově optimální MMM algoritmus na šachovnicovém mapování s cyklickým posuvem:",
+          "kind": "choice",
+          "choices": [
+            "RowWise",
+            "Standard MMM (broadcasty)",
+            "Cannon",
+            "Strassen na hyperkrychli"
+          ],
+          "correctIndex": 2,
+          "explanation": "Cannon iterativně cyklicky posouvá submatice $A$ doleva a $B$ nahoru — žádná replikace, asymptoticky $O(n^2/p)$ paměti na proces."
+        },
+        {
+          "label": "b",
+          "prompt": "Jak vypadá zaokrouhlení/normalizace v jedné iteraci mocninné metody (volné slovo):",
+          "kind": "text",
+          "correctAnswer": "x = y / ||y||",
+          "explanation": "Mocninná metoda: $y \\leftarrow Ax$, $\\alpha = \\|y\\|_2$, $x \\leftarrow y/\\alpha$, dokud nekonverguje."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro mocninnou metodu nad libovolně mapovanou řídkou maticí se redukce $y = \\sum_i y^{(i)}$ řeší typicky voláním:",
+          "kind": "choice",
+          "choices": [
+            "MPI_Bcast",
+            "MPI_Allreduce",
+            "MPI_Scatter",
+            "MPI_Alltoall"
+          ],
+          "correctIndex": 1,
+          "explanation": "`MPI_Allreduce(MPI_IN_PLACE, y, n, MPI_DOUBLE, MPI_SUM, comm)` — výsledek redukce skončí u všech procesů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-19",
+      "prompt": "Hyperkrychle $Q_n$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stupeň každého uzlu hyperkrychle $Q_n$:",
+          "kind": "text",
+          "correctAnswer": "n",
+          "explanation": "Uzly $Q_n$ jsou binární řetězce délky $n$; soused se liší v 1 bitu ⇒ stupeň $= n$."
+        },
+        {
+          "label": "b",
+          "prompt": "Průměr $\\mathrm{diam}(Q_n)$:",
+          "kind": "choice",
+          "choices": [
+            "$\\log n$",
+            "$n$",
+            "$2^{n-1}$",
+            "$n^2$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Maximální Hammingova vzdálenost dvou $n$-bitových řetězců je $n$."
+        },
+        {
+          "label": "c",
+          "prompt": "Bisekční šířka $\\mathrm{bw}_e(Q_n)$:",
+          "kind": "choice",
+          "choices": [
+            "$1$",
+            "$n$",
+            "$2^{n-1}$",
+            "$2^n - 1$"
+          ],
+          "correctIndex": 2,
+          "explanation": "Řez podle libovolné souřadnice rozdělí $Q_n$ na dvě poloviny po $2^{n-1}$ uzlech, mezi nimi vede $2^{n-1}$ hran."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-19",
+      "prompt": "Mřížky a toroidy",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která topologie je uzlově symetrická?",
+          "kind": "choice",
+          "choices": [
+            "mřížka $M(z_1, z_2)$",
+            "toroid $K(z_1, z_2)$",
+            "obě",
+            "ani jedna"
+          ],
+          "correctIndex": 1,
+          "explanation": "Toroid je uzlově symetrický díky cyklickým rotacím; mřížka nikoli — krajní vs vnitřní uzly mají různé stupně."
+        },
+        {
+          "label": "b",
+          "prompt": "Toroid $K(z_1, \\ldots, z_n)$ je bipartitní právě tehdy, když:",
+          "kind": "choice",
+          "choices": [
+            "alespoň jedno $z_i$ je sudé",
+            "všechna $z_i$ jsou sudá",
+            "součin $z_i$ je prvočíslo",
+            "$n$ je liché"
+          ],
+          "correctIndex": 1,
+          "explanation": "Cykly v dimenzích jsou sudé právě, když je každá strana sudá ⇒ celá konstrukce bipartitní."
+        },
+        {
+          "label": "c",
+          "prompt": "Operátor používaný ke konstrukci ortogonálních topologií se nazývá ___ součin grafů:",
+          "kind": "text",
+          "correctAnswer": "kartézský",
+          "explanation": "$G = G_1 \\times G_2$ s $V(G) = V(G_1)\\times V(G_2)$ — základní stavební blok mřížek, toroidů i $Q_n$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-19",
+      "prompt": "Požadavky na propojovací sítě a řídké hyperkubické sítě",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Spodní mez průměru každé řídké $N$-uzlové sítě:",
+          "kind": "choice",
+          "choices": [
+            "$\\Omega(1)$",
+            "$\\Omega(\\log N)$",
+            "$\\Omega(\\sqrt N)$",
+            "$\\Omega(N)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Při konstantním stupni nelze obsáhnout $N$ uzlů rychleji než logaritmicky ⇒ $\\mathrm{diam} = \\Omega(\\log N)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Stupeň uzlu zabaleného motýlka $wBF_n$:",
+          "kind": "text",
+          "correctAnswer": "4",
+          "explanation": "Každý uzel má 2 sousedy v rámci sloupce a 2 mezi sloupci ⇒ stupeň $= 4$ (konstantní)."
+        },
+        {
+          "label": "c",
+          "prompt": "Hyperkrychle $Q_n$ je řídká:",
+          "kind": "choice",
+          "choices": [
+            "ano, stupeň je konstantní",
+            "ne, stupeň roste logaritmicky s $N$",
+            "ano, díky bisekci",
+            "ne, není regulární"
+          ],
+          "correctIndex": 1,
+          "explanation": "$\\deg = n = \\log_2 N$ — $Q_n$ není řídká; proto motyl, krychle apod. — \"odbalí\" uzel."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-19",
+      "prompt": "Vnořování (embedding) topologií",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Které měřítko kvality vnoření měří maximální délku obrazu hrany?",
+          "kind": "choice",
+          "choices": [
+            "load",
+            "expanze",
+            "dilatace",
+            "zahlcení"
+          ],
+          "correctIndex": 2,
+          "explanation": "Dilatace (dilation) = maximální délka cesty $\\xi(e)$ v hostiteli odpovídající jedné hraně zdroje."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro vnoření s $|V(G)| = |V(H)|$ a load $= 1$ je dolní mez dilatace:",
+          "kind": "choice",
+          "choices": [
+            "$\\lceil \\mathrm{diam}(G)/\\mathrm{diam}(H)\\rceil$",
+            "$\\lceil \\mathrm{diam}(H)/\\mathrm{diam}(G)\\rceil$",
+            "$\\log |V(H)|$",
+            "vždy 1"
+          ],
+          "correctIndex": 1,
+          "explanation": "Průměrový argument: cesta v hostiteli musí překonat průměr $H$, zatímco v $G$ stačí $\\mathrm{diam}(G)$ ⇒ dolní mez $\\lceil \\mathrm{diam}(H)/\\mathrm{diam}(G)\\rceil$."
+        },
+        {
+          "label": "c",
+          "prompt": "Křivka pro vnoření $Q_{2k} \\hookrightarrow M(2^k, 2^k)$ s load $= 1$ a dilatací $2^{k-1}$:",
+          "kind": "text",
+          "correctAnswer": "Mortonova",
+          "explanation": "Mortonova (Z-)křivka linearizuje 2-D index do bitově prokládaných souřadnic — dává dilataci $2^{k-1}$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-20",
+      "prompt": "Paralelní redukce",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Dolní mez paralelní redukce $n$ prvků:",
+          "kind": "choice",
+          "choices": [
+            "$\\Omega(1)$",
+            "$\\Omega(\\log n)$",
+            "$\\Omega(\\sqrt n)$",
+            "$\\Omega(n)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Binární redukční strom má hloubku $\\lceil \\log n\\rceil$ — méně paralelních kroků není možné."
+        },
+        {
+          "label": "b",
+          "prompt": "Operace, jejíž výsledek skončí u všech procesů, je v MPI:",
+          "kind": "text",
+          "correctAnswer": "MPI_Allreduce",
+          "explanation": "`MPI_Allreduce` je AAR — uzlově symetrická all-to-all redukce."
+        },
+        {
+          "label": "c",
+          "prompt": "Asymptotický čas redukce na $p$ procesorech na hyperkrychli (n prvků, $p \\le n$):",
+          "kind": "choice",
+          "choices": [
+            "$O(n/p)$",
+            "$O(\\log p)$",
+            "$O(n/p + \\log p)$",
+            "$O(n\\log p)$"
+          ],
+          "correctIndex": 2,
+          "explanation": "Lokální redukce $\\alpha n/p$ + normální hyperkubická redukce $\\beta\\log p$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-20",
+      "prompt": "Prefixový součet (PPS)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Počet kroků PPS na EREW PRAM s $n$ procesory:",
+          "kind": "choice",
+          "choices": [
+            "$\\Theta(1)$",
+            "$\\Theta(\\log n)$",
+            "$\\Theta(\\sqrt n)$",
+            "$\\Theta(n)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Indukční zdvojnásobovací algoritmus: po kroku $j$ obsahuje $M[k]$ částečný součet délky $2^{j+1}$ ⇒ $\\lceil\\log n\\rceil$ kroků."
+        },
+        {
+          "label": "b",
+          "prompt": "Klasická aplikace PPS pro stabilní řazení:",
+          "kind": "text",
+          "correctAnswer": "CountingSort",
+          "explanation": "CountingSort využívá PPS nad histogramem k výpočtu cílových pozic; rozšíření na RadixSort iteruje $\\log N$ krát."
+        },
+        {
+          "label": "c",
+          "prompt": "Škálovatelný 3-fázový PPS dosahuje času:",
+          "kind": "choice",
+          "choices": [
+            "$O(\\log p)$",
+            "$O(n/p)$",
+            "$O(n/p + \\log p)$",
+            "$O(n \\log p)$"
+          ],
+          "correctIndex": 2,
+          "explanation": "(1) lokální sekv. PPS, (2) globální PPS přes součty bloků, (3) lokální posun — stejná škálovatelnost jako redukce."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-20",
+      "prompt": "PPS v různých topologiích",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "PPS na hyperkrychli $Q_r$ trvá:",
+          "kind": "choice",
+          "choices": [
+            "$1$ krok",
+            "$r$ kroků",
+            "$2^r$ kroků",
+            "$r^2$ kroků"
+          ],
+          "correctIndex": 1,
+          "explanation": "Po lexikografickém uspořádání projde algoritmus $r$ dimenzí; v každé jedna AAB kombinace + aktualizace prefixu."
+        },
+        {
+          "label": "b",
+          "prompt": "PPS na nepřímém binárním stromu se realizuje pomocí ___ a sestupných vln (doplň):",
+          "kind": "text",
+          "correctAnswer": "vzestupných",
+          "explanation": "Vzestupná vlna spočítá podstromové součty, sestupná je propaguje jako prefixy ⇒ $2h(T)$ kroků."
+        },
+        {
+          "label": "c",
+          "prompt": "Na libovolné řídké topologii lze PPS realizovat za:",
+          "kind": "choice",
+          "choices": [
+            "$O(1)$ kroků",
+            "$O(\\mathrm{diam}(G))$ kroků",
+            "$O(|V|)$ kroků",
+            "$O(\\log^2 |V|)$ kroků"
+          ],
+          "correctIndex": 1,
+          "explanation": "Konstruuje se BFS kostra, na ní POSTORDER číslování — počet kroků úměrný průměru grafu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-20",
+      "prompt": "Segmentovaný PPS (SPPS)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hlavní trik SPPS je realizace přes 1 globální PPS s:",
+          "kind": "choice",
+          "choices": [
+            "neasociativní operací",
+            "modifikovanou binární operací $\\overline{\\oplus}$",
+            "dvěma průchody zleva i zprava",
+            "broadcastem segmentů"
+          ],
+          "correctIndex": 1,
+          "explanation": "Modifikovaná operace pracuje na párech (hodnota, značka segmentu); resetuje akumulátor na hraně segmentu. Zachovává asociativitu."
+        },
+        {
+          "label": "b",
+          "prompt": "MPI volání, které realizuje (segmentovaný) prefixový součet napříč procesy:",
+          "kind": "text",
+          "correctAnswer": "MPI_Scan",
+          "explanation": "`MPI_Scan` provede prefixovou redukci s uživatelskou operací; pro SPPS se zaregistruje přes `MPI_Op_create`."
+        },
+        {
+          "label": "c",
+          "prompt": "Aplikace SPPS pro paralelní rozdělení podle pivotu se používá ve verzi:",
+          "kind": "choice",
+          "choices": [
+            "BubbleSort",
+            "stabilního QuickSortu",
+            "HeapSortu",
+            "SelectionSortu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Paralelní stabilní QuickSort využívá SPPS k jedním průchodem spočítat cílové pozice prvků nalevo/napravo od pivotu."
+        }
+      ]
+    }
+  ]
 }

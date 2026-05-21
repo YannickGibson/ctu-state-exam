@@ -3,17 +3,682 @@
   "subjectCode": "KOP",
   "group": "SPOL",
   "title": "KOP quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-KOP. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-SPOL-11",
+      "prompt": "Vztah tříd $P$ a $NP$ a důsledky pro praxi",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co dnes víme jistě o vztahu $P$ a $NP$?",
+          "kind": "choice",
+          "choices": [
+            "$P = NP$ je dokázáno",
+            "$P \\neq NP$ je dokázáno",
+            "$P \\subseteq NP$, rovnost je otevřený problém",
+            "$NP \\subsetneq P$"
+          ],
+          "correctIndex": 2,
+          "explanation": "Triviálně $P \\subseteq NP$ (deterministický stroj je zvláštní případ nedeterministického); rovnost je slavný otevřený problém."
+        },
+        {
+          "label": "b",
+          "prompt": "Co charakterizuje problémy v $NP$ z pohledu praxe?",
+          "kind": "choice",
+          "choices": [
+            "řešení lze zkonstruovat v polynomiálním čase",
+            "existující svědek řešení lze v polynomiálním čase ověřit",
+            "úloha má vždy unikátní řešení",
+            "úloha je rozhodnutelná v lineárním čase"
+          ],
+          "correctIndex": 1,
+          "explanation": "Definice $NP$: existuje polynomiální verifikátor pro daného svědka (certifikát) — proto je kontrola levná, hledání drahé."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-11",
+      "prompt": "NP-úplnost (NPC) a NP-těžkost (NPH)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Problém $X$ je NP-úplný, právě když:",
+          "kind": "choice",
+          "choices": [
+            "$X \\in P$ a $X$ je NP-těžký",
+            "$X \\in NP$ a $X$ je NP-těžký",
+            "$X \\in NP$ a $X \\in P$",
+            "$X$ je NP-těžký a není v NP"
+          ],
+          "correctIndex": 1,
+          "explanation": "$NPC = NP \\cap NPH$: úloha je v NP a zároveň na ni lze polynomiálně redukovat libovolný problém z NP."
+        },
+        {
+          "label": "b",
+          "prompt": "Doplňte vztah (množinová notace, např. `NP ∩ NPH`): $NPC =$",
+          "kind": "text",
+          "correctAnswer": "np ∩ nph",
+          "explanation": "NP-úplné = nejtěžší problémy v NP, tedy průnik tříd NP a NPH."
+        },
+        {
+          "label": "c",
+          "prompt": "Pokud někdo najde polynomiální algoritmus pro jeden NPC problém, pak:",
+          "kind": "choice",
+          "choices": [
+            "řeší tím polynomiálně pouze daný problém",
+            "vyvrátí $P \\subseteq NP$",
+            "dostane polynomiální algoritmus pro všechny problémy z NP",
+            "důsledek závisí na konkrétním problému"
+          ],
+          "correctIndex": 2,
+          "explanation": "Karpova redukce v polynomiálním čase převede libovolnou úlohu z NP na NPC — řešení jednoho NPC ⇒ řešení celé NP, tedy $P = NP$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-11",
+      "prompt": "Cookova věta",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Který problém Cookova věta označuje za NP-úplný?",
+          "kind": "choice",
+          "choices": [
+            "TSP",
+            "SAT (splnitelnost booleovských formulí)",
+            "MAX-CLIQUE",
+            "Hamiltonovský cyklus"
+          ],
+          "correctIndex": 1,
+          "explanation": "Cook (1971) dokázal NP-úplnost problému SAT; tím byla třída NPC poprvé prokázána neprázdnou."
+        },
+        {
+          "label": "b",
+          "prompt": "Proč je Cookova věta zásadní pro praktické výpočty?",
+          "kind": "choice",
+          "choices": [
+            "dává polynomiální algoritmus pro SAT",
+            "ukazuje, že NPC je neprázdná, a poskytuje cíl pro Karpovy redukce",
+            "vyvrací $P = NP$",
+            "tvrdí, že každý NP problém je rozhodnutelný v lineárním čase"
+          ],
+          "correctIndex": 1,
+          "explanation": "Cookova věta dává první NPC problém; ostatní úlohy se dokazují jako NP-úplné polynomiální redukcí na/ze SAT."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-11",
+      "prompt": "Praktický dopad zařazení úlohy do NPC",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pokud je úloha v NPC, znamená to v praxi:",
+          "kind": "choice",
+          "choices": [
+            "úloha je neřešitelná na žádném vstupu",
+            "v nejhorším případě je exaktní řešení časově neúnosné, ale konkrétní instance lze řešit heuristikami/aproximacemi",
+            "existuje pseudopolynomiální algoritmus, který je vždy rychlý",
+            "stačí použít libovolnou greedy heuristiku"
+          ],
+          "correctIndex": 1,
+          "explanation": "NPC = pravděpodobně bez polynomiálního algoritmu v nejhorším případě, ale konkrétní instance se zvládají heuristikami, aproximacemi, ILP solvery, SAT solvery atd."
+        },
+        {
+          "label": "b",
+          "prompt": "Karpova redukce na známý řešič (např. SAT) je v praxi:",
+          "kind": "choice",
+          "choices": [
+            "vždy nejrychlejší cesta k řešení",
+            "není vyloučena, ale nemusí být prakticky výhodná",
+            "matematicky nelegitimní",
+            "garantuje polynomiální čas"
+          ],
+          "correctIndex": 1,
+          "explanation": "Redukce zachovává polynomialitu, ale konstanty a velikost zakódování často dělají specializovaný algoritmus rychlejším než univerzální solver po redukci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-12",
+      "prompt": "Metriky a obecné schéma experimentální algoritmiky",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "V experimentálním vyhodnocení primárně sledujeme:",
+          "kind": "choice",
+          "choices": [
+            "pouze čas běhu na jedné instanci",
+            "závislost výstupní metriky (kvalita, čas) na vstupní metrice (velikost, hustota)",
+            "počet řádků zdrojového kódu",
+            "spotřebu paměti na nejmenší instanci"
+          ],
+          "correctIndex": 1,
+          "explanation": "Cílem je vystihnout funkční závislost: jak se mění výstupní metrika v závislosti na zvolené vstupní metrice."
+        },
+        {
+          "label": "b",
+          "prompt": "Generátor instancí ve schématu slouží především k:",
+          "kind": "choice",
+          "choices": [
+            "zrychlení algoritmu",
+            "potlačení variance v instancích a kontrole jejich vlastností",
+            "zmenšení paměťové stopy",
+            "vyhnutí se randomizaci v algoritmu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kontrolovaný generátor umožní opakovat experiment a vyloučit instance jako zdroj systematické chyby."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-12",
+      "prompt": "Dva zdroje variance u randomizovaných algoritmů",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "U randomizovaného algoritmu na sadě instancí jsou hlavní zdroje variance:",
+          "kind": "choice",
+          "choices": [
+            "pouze instance",
+            "pouze RNG (random number generator)",
+            "instance + RNG (vnitřní randomizace algoritmu)",
+            "operační systém a HW"
+          ],
+          "correctIndex": 2,
+          "explanation": "Variance pochází jednak z instancí (vnější), jednak z náhodných rozhodnutí algoritmu (vnitřní) — proto dvojstupňové zpracování."
+        },
+        {
+          "label": "b",
+          "prompt": "Doporučený postup statistického zpracování randomizovaného alg. na sadě instancí je:",
+          "kind": "choice",
+          "choices": [
+            "jediný běh na jedné instanci",
+            "více běhů na jediné instanci a průměr",
+            "více běhů na každé instanci → statistika přes RNG, pak statistika přes instance",
+            "průměr přes všechny běhy bez ohledu na instanci"
+          ],
+          "correctIndex": 2,
+          "explanation": "Dva zdroje variance → dva stupně zpracování (statistika ze statistik)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-12",
+      "prompt": "ECDF (Estimated Cumulative Distribution Function)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co graf ECDF zachycuje?",
+          "kind": "choice",
+          "choices": [
+            "pro každý krok pravděpodobnost úspěšného ukončení algoritmu",
+            "průměrný čas běhu na nejhorší instanci",
+            "počet voláných funkcí",
+            "rozdíl mezi heuristikou a optimem"
+          ],
+          "correctIndex": 0,
+          "explanation": "ECDF na ose $x$ má krok/čas, na $y$ podíl běhů, které do té doby skončily úspěšně — vhodné pro srovnávání variant randomizovaných algoritmů."
+        },
+        {
+          "label": "b",
+          "prompt": "ECDF je obzvlášť užitečné při porovnávání:",
+          "kind": "choice",
+          "choices": [
+            "deterministických algoritmů s pevným časem",
+            "randomizovaných algoritmů s různou pravděpodobností úspěchu v čase",
+            "jednoinstančních problémů bez opakování",
+            "paměťových nároků"
+          ],
+          "correctIndex": 1,
+          "explanation": "ECDF agreguje rozdělení doby do úspěchu napříč běhy a umožní vidět, který algoritmus má větší šanci na úspěch v daném časovém rozpočtu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-12",
+      "prompt": "Statistická charakteristika jednoho měření",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro jednu hodnotu zadané metriky uvádíme typicky:",
+          "kind": "choice",
+          "choices": [
+            "pouze maximum",
+            "průměr/medián a parametr rozptylu (např. $\\sigma$)",
+            "pouze počet měření",
+            "jediný náhodný vzorek"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bodový odhad střední hodnoty + míra rozptylu, ideálně po kontrole rozložení (gaussovské vs jiné)."
+        },
+        {
+          "label": "b",
+          "prompt": "Doplňte typický parametr středu rozdělení (jeden řecký symbol):",
+          "kind": "text",
+          "correctAnswer": "μ",
+          "explanation": "Střední hodnota se značí $\\mu$; rozptyl pak $\\sigma^2$ resp. směrodatná odchylka $\\sigma$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-13",
+      "prompt": "Princip lokálních heuristik",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Lokální heuristika v každém kroku:",
+          "kind": "choice",
+          "choices": [
+            "náhodně teleportuje do libovolného stavu prostoru",
+            "vybírá souseda v okolí aktuálního stavu a případně se do něj přesune",
+            "vždy přijme libovolného souseda",
+            "ignoruje hodnotící funkci $E$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Princip: prohledávání po sousedech (try) v okolí aktuálního stavu, lepšího souseda akceptujeme jako nový aktuální/best."
+        },
+        {
+          "label": "b",
+          "prompt": "Hlavní omezení čisté lokální heuristiky (hill climbing) je:",
+          "kind": "choice",
+          "choices": [
+            "neumí pracovat s diskrétními úlohami",
+            "uváznutí v lokálním minimu",
+            "vyžaduje exponenciální paměť",
+            "vyžaduje znalost globálního optima předem"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bez mechanismu úniku se algoritmus zastaví v prvním lokálním minimu, kterého dosáhne."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-13",
+      "prompt": "Lokální vs globální minimum a hloubka",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stav $s$ je **lokálním minimem**, právě když:",
+          "kind": "choice",
+          "choices": [
+            "v okolí má aspoň jednoho horšího souseda",
+            "na hladině $E(s)$ z něj nelze dosáhnout lepšího stavu",
+            "$E(s) = 0$",
+            "$E(s)$ je nejnižší v celém prostoru"
+          ],
+          "correctIndex": 1,
+          "explanation": "Lokální minimum: žádný dosažitelný soused na stejné nebo nižší hladině $E$ nevede k lepšímu stavu."
+        },
+        {
+          "label": "b",
+          "prompt": "Jaká je hloubka lokálního minima u globálního optima?",
+          "kind": "text",
+          "correctAnswer": "+∞",
+          "explanation": "Pro globální minimum se hloubka definuje jako $+\\infty$ (nelze z něj uniknout do lepšího stavu, protože žádný lepší neexistuje)."
+        },
+        {
+          "label": "c",
+          "prompt": "Hloubka lokálního minima (mimo globální) je intuitivně:",
+          "kind": "choice",
+          "choices": [
+            "největší možný pokles $E$",
+            "nejmenší přípustný nárůst $E$, který umožní dosáhnout lepšího stavu",
+            "průměr hodnot $E$ v okolí",
+            "počet sousedů s vyšší hodnotou $E$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Hloubka = energetická bariéra, kterou je třeba překonat, abychom z lokálního minima unikli k lepšímu řešení."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-13",
+      "prompt": "Obrana proti uváznutí: diverzifikace vs intenzifikace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co znamená **diverzifikace** v lokálních heuristikách?",
+          "kind": "choice",
+          "choices": [
+            "soustředění výpočtu kolem nejlepšího nalezeného řešení",
+            "připuštění akce, která řešení zhorší, aby se prozkoumal širší prostor",
+            "snížení velikosti okolí",
+            "ukončení výpočtu po prvním lokálním minimu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Diverzifikace zlepšuje pokrytí stavového prostoru tím, že umožní zhoršující kroky a širší prohledávání."
+        },
+        {
+          "label": "b",
+          "prompt": "**Intenzifikace** naopak znamená:",
+          "kind": "choice",
+          "choices": [
+            "náhodné restarty",
+            "důkladné prohledání okolí slibných (dobrých) řešení",
+            "akceptaci libovolného souseda",
+            "zvyšování teploty"
+          ],
+          "correctIndex": 1,
+          "explanation": "Intenzifikace = exploitace dobrých oblastí prostoru, jemnější prohledávání kolem nejlepších kandidátů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-13",
+      "prompt": "Konkrétní techniky úniku z lokálních minim",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která z následujících metod NEPATŘÍ mezi standardní techniky úniku z lokálního minima?",
+          "kind": "choice",
+          "choices": [
+            "zvětšení okolí (k-okolí, Kernighan-Lin)",
+            "připuštění zhoršujících akcí (SA, tabu)",
+            "práce s více konfiguracemi (populace, restarty)",
+            "pevné zafixování prvního nalezeného lokálního minima jako výsledku"
+          ],
+          "correctIndex": 3,
+          "explanation": "Zafixování lokálního minima je přesně to, čeho se chceme zbavit; ostatní tři jsou hlavní rodiny technik diverzifikace."
+        },
+        {
+          "label": "b",
+          "prompt": "Kvalita výsledku čisté lokální heuristiky silně závisí na:",
+          "kind": "choice",
+          "choices": [
+            "operačním systému",
+            "kvalitě počátečního řešení",
+            "počtu CPU jader",
+            "barvě grafu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bez mechanismu úniku je výsledek determinován bazinou přitažlivosti, ve které začneme — proto multistart, GRASP apod."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-14",
+      "prompt": "Kostra genetického algoritmu",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Které kroky tvoří jeden cyklus (generaci) GA?",
+          "kind": "choice",
+          "choices": [
+            "selekce → křížení → mutace",
+            "mutace → selekce → křížení",
+            "křížení → ohřev → ochlazení",
+            "selekce → ochlazení → křížení"
+          ],
+          "correctIndex": 0,
+          "explanation": "Standardní cyklus: selekce (intenzifikace) → křížení/rekombinace → mutace (diverzifikace) → nová generace."
+        },
+        {
+          "label": "b",
+          "prompt": "Který operátor v GA odpovídá hlavně za **diverzifikaci**?",
+          "kind": "choice",
+          "choices": [
+            "selekce",
+            "křížení",
+            "mutace",
+            "elitismus"
+          ],
+          "correctIndex": 2,
+          "explanation": "Mutace náhodně mění geny → vnáší nový genetický materiál, plní roli diverzifikace; selekce naopak intenzifikuje."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-14",
+      "prompt": "Definice selekčního tlaku",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Selekční tlak je definován jako:",
+          "kind": "choice",
+          "choices": [
+            "pravděpodobnost mutace nejlepšího genu",
+            "pravděpodobnost výběru nejlepšího jedince populace",
+            "podíl mutací ku křížením",
+            "průměrná zdatnost populace"
+          ],
+          "correctIndex": 1,
+          "explanation": "Selekční tlak $p$ = pravděpodobnost, že selekce vybere nejlepšího jedince populace."
+        },
+        {
+          "label": "b",
+          "prompt": "Hraniční hodnota selekčního tlaku pro $n$-prvkovou populaci, při níž selekce **nezáleží na zdatnosti** (uniformní výběr):",
+          "kind": "text",
+          "correctAnswer": "1/n",
+          "explanation": "Pro $p = 1/n$ má každý jedinec stejnou šanci → čistě uniformní výběr, žádná intenzifikace."
+        },
+        {
+          "label": "c",
+          "prompt": "Selekční tlak $p = 1$ odpovídá:",
+          "kind": "choice",
+          "choices": [
+            "čisté diverzifikaci",
+            "čisté intenzifikaci (vždy vybíráme nejlepšího)",
+            "neutrální evoluci",
+            "tabu prohledávání"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pokud je $p = 1$, vždy bereme nejlepšího jedince → extrémní intenzifikace, populace se rychle degeneruje."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-14",
+      "prompt": "Důsledky velikosti selekčního tlaku",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "**Velký** selekční tlak vede zpravidla k:",
+          "kind": "choice",
+          "choices": [
+            "pomalé konvergenci a širokému průzkumu",
+            "degeneraci populace a uváznutí v lokálním optimu",
+            "rovnoměrnému vzorkování celého prostoru",
+            "konvergenci ke globálnímu optimu za všech podmínek"
+          ],
+          "correctIndex": 1,
+          "explanation": "Vysoký tlak → ztráta genetické rozmanitosti → populace zdegeneruje, GA uvízne v lokálním optimu."
+        },
+        {
+          "label": "b",
+          "prompt": "**Malý** selekční tlak má naopak za následek:",
+          "kind": "choice",
+          "choices": [
+            "okamžité nalezení globálního optima",
+            "pomalou konvergenci, šum z mutace může převážit ⇒ divergence",
+            "stejné chování jako $p = 1$",
+            "deterministické chování"
+          ],
+          "correctIndex": 1,
+          "explanation": "Při nízkém tlaku převažuje náhoda (mutace), populace se nezlepšuje cíleně — riskujeme divergenci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-14",
+      "prompt": "Způsoby řízení selekčního tlaku",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která z metod NEPATŘÍ mezi standardní techniky řízení selekčního tlaku?",
+          "kind": "choice",
+          "choices": [
+            "scaling (lineární škálování zdatnosti)",
+            "ranking (výběr podle pořadí, ne podle hodnoty)",
+            "truncation selection (zkrácený výběr nejlepších)",
+            "ohřev a ochlazení teploty"
+          ],
+          "correctIndex": 3,
+          "explanation": "Ohřev/ochlazení patří k simulovanému ochlazování; v GA se selekční tlak řídí škálováním, rankingem nebo truncation selection."
+        },
+        {
+          "label": "b",
+          "prompt": "Ranking selection se od ruletového výběru podle zdatnosti liší tím, že:",
+          "kind": "choice",
+          "choices": [
+            "používá pouze nejhoršího jedince",
+            "pravděpodobnost výběru závisí na **pořadí** jedince, ne na absolutní hodnotě zdatnosti",
+            "ignoruje populaci a vybírá náhodně",
+            "vybírá podle barvy"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ranking potlačí extrémně velké rozdíly fitness — zabrání degeneraci, udrží kontrolovatelný tlak."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-15",
+      "prompt": "Metropolisovo kritérium",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "S jakou pravděpodobností $p$ přijímá SA zhoršující sousední stav s rozdílem energie $\\delta > 0$ při teplotě $T$? (zápis, např. `exp(-d/T)`)",
+          "kind": "text",
+          "correctAnswer": "exp(-δ/t)",
+          "explanation": "Metropolisovo kritérium: $p = \\exp(-\\delta/T)$. Pro $T \\to 0$ jde $p \\to 0$ (intenzifikace), pro $T \\to \\infty$ jde $p \\to 1$ (diverzifikace)."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro $T \\to \\infty$ se SA chová jako:",
+          "kind": "choice",
+          "choices": [
+            "greedy hill climbing",
+            "čistá náhodná procházka (diverzifikace)",
+            "deterministický branch & bound",
+            "tabu search"
+          ],
+          "correctIndex": 1,
+          "explanation": "Vysoká teplota → každý soused je přijat s pravděpodobností blízkou 1 → náhodná procházka prostorem."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro $T \\to 0$ se SA naopak chová jako:",
+          "kind": "choice",
+          "choices": [
+            "náhodná procházka",
+            "hill climbing / čistá intenzifikace",
+            "genetický algoritmus",
+            "Hajekův rozvrh"
+          ],
+          "correctIndex": 1,
+          "explanation": "Nízká teplota → zhoršující akce nepřijímáme → algoritmus se mění na čistý hill climbing."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-15",
+      "prompt": "Hajekův teoretický rozvrh",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hajekův rozvrh pro asymptotickou konvergenci do globálního optima (zápis, např. `c/log(1+k)`):",
+          "kind": "text",
+          "correctAnswer": "c/log(1+k)",
+          "explanation": "$t_k = c / \\log(1+k)$, kde $c$ je největší hloubka lokálního optima v prostoru."
+        },
+        {
+          "label": "b",
+          "prompt": "Co konstanta $c$ v Hajekově rozvrhu znamená?",
+          "kind": "choice",
+          "choices": [
+            "velikost stavového prostoru",
+            "největší hloubku lokálního optima",
+            "počet iterací do konvergence",
+            "průměrnou zdatnost populace"
+          ],
+          "correctIndex": 1,
+          "explanation": "$c$ musí pokrýt nejhlubší bariéru, aby z ní byl nenulový tok pravděpodobnosti — jinak konvergence není zaručena."
+        },
+        {
+          "label": "c",
+          "prompt": "Hajekův výsledek je v praxi:",
+          "kind": "choice",
+          "choices": [
+            "přímo použitelný — rychlý algoritmus",
+            "teoretická záruka asymptotické konvergence, prakticky příliš pomalý rozvrh",
+            "vyvrácený",
+            "ekvivalentní greedy algoritmu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Logaritmické chladnutí konverguje teoreticky, ale je tak pomalé, že se v praxi nahrazuje geometrickým rozvrhem $\\alpha T$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-15",
+      "prompt": "Volba počáteční teploty $T_0$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pokud známe typickou hloubku lokálního optima $\\delta$ a požadujeme pravděpodobnost úniku $P$, jak nastavíme $T_0$? (vzorec, např. `-d/ln(P)`)",
+          "kind": "text",
+          "correctAnswer": "-δ/ln(p)",
+          "explanation": "Z Metropolise $P = \\exp(-\\delta/T_0) \\Rightarrow T_0 = -\\delta / \\ln P$."
+        },
+        {
+          "label": "b",
+          "prompt": "Pokud hloubku optim neznáme, $T_0$ lze nastavit:",
+          "kind": "choice",
+          "choices": [
+            "náhodně z $[0, 1]$",
+            "pomocí pilotních běhů: nasbírat $\\delta$ ze zhoršujících akcí a teplotu odvodit",
+            "vždy na $T_0 = 1$",
+            "nastavit $T_0 = 0$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Praktický postup: provést krátký průzkum, změřit typická $\\delta$ a teplotu nastavit tak, aby přijetí zhoršující akce bylo dostatečně pravděpodobné."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-15",
+      "prompt": "Rozvrh ochlazování a podmínky zastavení",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Typický geometrický rozvrh `cool()` má tvar:",
+          "kind": "choice",
+          "choices": [
+            "$T_{k+1} = T_k + \\alpha$",
+            "$T_{k+1} = \\alpha T_k$ s $\\alpha \\in (0{,}8;\\\\ 0{,}999)$",
+            "$T_{k+1} = T_k^2$",
+            "$T_{k+1} = T_0 / k$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Geometrické chladnutí $T_{k+1} = \\alpha T_k$ s $\\alpha$ blízko 1 je v praxi standard (rychlejší než Hajekův logaritmický rozvrh, dobré výsledky)."
+        },
+        {
+          "label": "b",
+          "prompt": "Co typicky používáme jako podmínku `equilibrium()` (vnitřní smyčka)?",
+          "kind": "choice",
+          "choices": [
+            "nikdy neukončit",
+            "pevný počet kroků $N$ nebo $N$ přijatých akcí na dané teplotě",
+            "ukončit, když se zhorší jeden krok",
+            "ukončit, jakmile teplota klesne pod 1"
+          ],
+          "correctIndex": 1,
+          "explanation": "Vnitřní smyčka má proběhnout dostatečně dlouho, aby se systém přiblížil rovnováze při dané $T$."
+        },
+        {
+          "label": "c",
+          "prompt": "Která z podmínek NEPATŘÍ mezi obvyklé podmínky `frozen()` (zastavení SA)?",
+          "kind": "choice",
+          "choices": [
+            "pevná dolní mez teploty",
+            "stagnace — četnost změn pod prahem",
+            "četnost zlepšujících změn pod prahem",
+            "selekční tlak dosáhl $1/n$"
+          ],
+          "correctIndex": 3,
+          "explanation": "Selekční tlak je pojem genetických algoritmů, ne SA. Standardní `frozen()`: nízká $T$, stagnace, žádná zlepšení."
+        }
+      ]
+    }
+  ]
 }

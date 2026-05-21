@@ -3,17 +3,419 @@
   "subjectCode": "PDD",
   "group": "ZI",
   "title": "PDD quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-PDD. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-4",
+      "prompt": "Taxonomie metod výběru příznaků: Filter / Wrapper / Embedded",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která metoda hodnotí relevanci příznaků nezávisle na klasifikátoru?",
+          "kind": "choice",
+          "choices": ["filter", "wrapper", "embedded"],
+          "correctIndex": 0,
+          "explanation": "Filter používá statistické kritérium (např. $\\chi^2$, MI, korelaci) bez ohledu na zvolený klasifikátor — proto je rychlý a robustní k overfittingu."
+        },
+        {
+          "label": "b",
+          "prompt": "Která metoda je typicky nejnáročnější výpočetně a nejnáchylnější k overfittingu?",
+          "kind": "choice",
+          "choices": ["filter", "wrapper", "embedded"],
+          "correctIndex": 1,
+          "explanation": "Wrapper opakovaně trénuje klasifikátor na různých podmnožinách (např. forward/backward selection) — vysoká cena i riziko overfittingu cross-validation skóre."
+        },
+        {
+          "label": "c",
+          "prompt": "Kam patří LASSO (L1) a feature importance rozhodovacího stromu?",
+          "kind": "choice",
+          "choices": ["filter", "wrapper", "embedded"],
+          "correctIndex": 2,
+          "explanation": "Embedded metody provádějí výběr příznaků uvnitř trénovacího algoritmu (L1-regularizace, splity stromu) — kompromis mezi rychlostí filteru a kvalitou wrapperu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-4",
+      "prompt": "Univariátní vs multivariátní hodnocení příznaků",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Univariátní metoda hodnotí relevanci:",
+          "kind": "choice",
+          "choices": [
+            "jednoho příznaku $X_i$ vůči výstupu $Y$",
+            "celé podmnožiny příznaků společně",
+            "pouze interakce mezi dvojicemi příznaků"
+          ],
+          "correctIndex": 0,
+          "explanation": "Univariate FS posuzuje každý příznak izolovaně (t-test, $\\chi^2$, korelace, mutual information) — ignoruje redundanci a interakce."
+        },
+        {
+          "label": "b",
+          "prompt": "Která vlastnost dat univariátní metody NEzachytí, zatímco multivariátní ano?",
+          "kind": "choice",
+          "choices": [
+            "rozptyl jednotlivých příznaků",
+            "redundanci a interakce mezi příznaky",
+            "marginální rozdělení každého příznaku"
+          ],
+          "correctIndex": 1,
+          "explanation": "Multivariátní metody (MRMR, ReliefF, CFS) hodnotí podmnožiny společně, a tak detekují redundantní i synergické rysy."
+        },
+        {
+          "label": "c",
+          "prompt": "Vzorec vzájemné informace $I(X;Y) = H(X) - $ ___ (doplň pravou stranu, např. `H(X|Y)`):",
+          "kind": "text",
+          "correctAnswer": "H(X|Y)",
+          "explanation": "$I(X;Y) = H(X) - H(X\\mid Y)$ — vzájemná informace zachycuje i nelineární závislosti."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-4",
+      "prompt": "MRMR a tři složky FS frameworku",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co zkratka MRMR znamená?",
+          "kind": "choice",
+          "choices": [
+            "Maximum Relevance, Minimum Redundancy",
+            "Multivariate Ranking, Multivariate Regression",
+            "Mean Relevance, Mean Redundancy"
+          ],
+          "correctIndex": 0,
+          "explanation": "MRMR maximalizuje vzájemnou informaci s targetem a zároveň minimalizuje redundanci mezi vybranými příznaky."
+        },
+        {
+          "label": "b",
+          "prompt": "Tři složky (\"ingredients\") obecného FS frameworku jsou Criterion, Search a ___ :",
+          "kind": "text",
+          "correctAnswer": "assessment",
+          "explanation": "Criterion (jak měřit relevanci), Search (jak procházet prostor podmnožin), Assessment (jak ohodnotit kvalitu — CV, statistický test, performance bound)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-4",
+      "prompt": "Vyhledávací strategie ve wrapper metodách",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Forward selection začíná s podmnožinou:",
+          "kind": "choice",
+          "choices": [
+            "prázdnou a postupně přidává nejlepší příznak",
+            "úplnou a postupně odstraňuje nejhorší příznak",
+            "náhodnou a swapuje páry příznaků"
+          ],
+          "correctIndex": 0,
+          "explanation": "Forward selection inkrementálně přidává příznak, který nejvíce zlepší kritérium; backward elimination naopak ubírá z plné množiny."
+        },
+        {
+          "label": "b",
+          "prompt": "Proč se exhaustive search používá zřídka?",
+          "kind": "choice",
+          "choices": [
+            "protože poskytuje pouze lokální optimum",
+            "počet podmnožin roste exponenciálně ($2^n$)",
+            "vyžaduje gaussovské rozdělení dat"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pro $n$ příznaků je $2^n$ podmnožin — pro reálné $n$ je úplné prohledání neproveditelné."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-5",
+      "prompt": "Typy chybějících hodnot (Little & Rubin)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "MCAR znamená, že pravděpodobnost chybění:",
+          "kind": "choice",
+          "choices": [
+            "nezávisí ani na pozorovaných, ani na nepozorovaných hodnotách",
+            "závisí jen na pozorovaných hodnotách",
+            "závisí na samotné nepozorované hodnotě"
+          ],
+          "correctIndex": 0,
+          "explanation": "MCAR (Missing Completely At Random): mechanismus chybění je zcela nezávislý na datech, listwise deletion je nezkresleným odhadem."
+        },
+        {
+          "label": "b",
+          "prompt": "MAR znamená, že pravděpodobnost chybění závisí:",
+          "kind": "choice",
+          "choices": [
+            "jen na pozorovaných hodnotách",
+            "jen na nepozorovaných hodnotách",
+            "vůbec ne na datech"
+          ],
+          "correctIndex": 0,
+          "explanation": "MAR (Missing At Random): podmíněno pozorovanými proměnnými je chybění náhodné — vhodné pro multiple imputation a EM."
+        },
+        {
+          "label": "c",
+          "prompt": "Zkratka pro případ, kdy chybění závisí na samotné chybějící hodnotě:",
+          "kind": "text",
+          "correctAnswer": "MNAR",
+          "explanation": "MNAR (Missing Not At Random) — nejtěžší případ; běžné imputační metody dávají vychýlené odhady."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-5",
+      "prompt": "Metody imputace chybějících hodnot",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která jednoduchá imputace systematicky podhodnocuje rozptyl proměnné?",
+          "kind": "choice",
+          "choices": [
+            "mean/median imputace jednou hodnotou",
+            "multiple imputation (MICE)",
+            "k-NN imputace"
+          ],
+          "correctIndex": 0,
+          "explanation": "Doplnění konstantou (průměrem/mediánem) zužuje rozdělení a podceňuje varianci i kovariance — proto se preferuje multiple imputation."
+        },
+        {
+          "label": "b",
+          "prompt": "Která metoda agreguje výsledky z několika imputovaných datasetů (správný rozptyl odhadu)?",
+          "kind": "choice",
+          "choices": ["listwise deletion", "mean imputation", "multiple imputation (MICE)"],
+          "correctIndex": 2,
+          "explanation": "MICE vytvoří více imputací (např. 5–10), trénink/odhad proběhne na každé a výsledky se agregují Rubinovými pravidly — zohlední nejistotu imputace."
+        },
+        {
+          "label": "c",
+          "prompt": "Pomocný příznak \"hodnota byla chybějící (0/1)\" se nazývá ___ proměnná:",
+          "kind": "text",
+          "correctAnswer": "indicator",
+          "explanation": "Indicator (missingness) variable zachytí informativní chybění — užitečné, pokud sám fakt chybění nese signál."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-5",
+      "prompt": "Detekce odlehlých hodnot (outlier detection)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pravidlo IQR označí $x$ za outlier, pokud leží mimo interval:",
+          "kind": "choice",
+          "choices": [
+            "$[Q_1 - 1{,}5\\,\\mathrm{IQR},\\ Q_3 + 1{,}5\\,\\mathrm{IQR}]$",
+            "$[\\mu - \\sigma,\\ \\mu + \\sigma]$",
+            "$[Q_1 - \\mathrm{IQR},\\ Q_3 + \\mathrm{IQR}]$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Tukey: outlier = mimo $[Q_1 - 1{,}5\\,\\mathrm{IQR},\\ Q_3 + 1{,}5\\,\\mathrm{IQR}]$, kde $\\mathrm{IQR} = Q_3 - Q_1$ (vizualizace boxplotem)."
+        },
+        {
+          "label": "b",
+          "prompt": "Která metoda izoluje outliery náhodnými řezy a měří délku cesty ve stromu?",
+          "kind": "choice",
+          "choices": ["Local Outlier Factor", "Isolation Forest", "Mahalanobisova vzdálenost"],
+          "correctIndex": 1,
+          "explanation": "Isolation Forest: outliery jsou izolovány rychleji (krátká path length) než inlieři — anomálie skóre $= 2^{-E(h(x))/c(n)}$."
+        },
+        {
+          "label": "c",
+          "prompt": "Která metrika zohlední kovarianční strukturu pro multivariate outliery?",
+          "kind": "choice",
+          "choices": ["euklidovská vzdálenost", "Mahalanobisova vzdálenost", "Manhattanská vzdálenost"],
+          "correctIndex": 1,
+          "explanation": "$d_M(x) = (x - \\mu)^T \\Sigma^{-1} (x - \\mu)$ — vzdálenost v jednotkách standardní odchylky podél hlavních os kovarianční matice."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-5",
+      "prompt": "SMOTE a vyvažování tříd",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "SMOTE generuje syntetické body podle vzorce $x_{new} = x + \\lambda(x_{NN} - x)$, kde $\\lambda$ je z rozdělení:",
+          "kind": "choice",
+          "choices": ["$U(0,1)$", "$\\mathcal N(0,1)$", "$\\mathrm{Bernoulli}(0{,}5)$"],
+          "correctIndex": 0,
+          "explanation": "$\\lambda \\sim U(0,1)$ — bod leží na úsečce mezi minority bodem a jeho k-NN sousedem ze stejné třídy."
+        },
+        {
+          "label": "b",
+          "prompt": "Proč je accuracy špatná metrika pro silně nevyvážená data (např. 99 % majority)?",
+          "kind": "choice",
+          "choices": [
+            "trivální predikce \"vždy majority\" má vysokou accuracy, ale nulový recall menšiny",
+            "accuracy nelze spočítat na nevyvážených datech",
+            "accuracy ignoruje true positives"
+          ],
+          "correctIndex": 0,
+          "explanation": "Při 99 % majority dosáhne konstantní klasifikátor 99 % accuracy, ale 0 % recall menšiny — proto se používají F1, PR-AUC, MCC."
+        },
+        {
+          "label": "c",
+          "prompt": "Algoritmická alternativa k samplingu, která zvyšuje váhu menšinové třídy v loss funkci:",
+          "kind": "text",
+          "correctAnswer": "class weights",
+          "explanation": "Class weighting / cost-sensitive learning přiřadí menšinové třídě vyšší cenu chyb — nemění distribuci dat, jen optimalizační kritérium."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-6",
+      "prompt": "Princip PCA",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "PCA hledá směry, podél kterých:",
+          "kind": "choice",
+          "choices": [
+            "je rozptyl projekcí maximální",
+            "jsou třídy maximálně separované",
+            "se zachovají geodetické vzdálenosti"
+          ],
+          "correctIndex": 0,
+          "explanation": "PCA maximalizuje rozptyl projekce, což je ekvivalentní minimalizaci rekonstrukční chyby $\\|x - \\hat x\\|^2$."
+        },
+        {
+          "label": "b",
+          "prompt": "Hlavní komponenty jsou:",
+          "kind": "choice",
+          "choices": [
+            "vlastní vektory kovarianční matice s největšími vlastními čísly",
+            "náhodně ortonormalizované vektory",
+            "vlastní vektory matice $S_W^{-1} S_B$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Z eigen-decomposition $C = V \\Lambda V^T$ vybíráme top-$k$ vlastních vektorů — ekvivalentně top-$k$ pravých singulárních vektorů z SVD."
+        },
+        {
+          "label": "c",
+          "prompt": "Je PCA supervised nebo unsupervised (`supervised`/`unsupervised`)?",
+          "kind": "text",
+          "correctAnswer": "unsupervised",
+          "explanation": "PCA nezná labels — používá jen kovarianci dat. Proto jí třídy mohou \"splynout\" a nemusí být ideální pro klasifikaci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-6",
+      "prompt": "LDA a Fisherovo kritérium",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Fisherovo kritérium $J(w)$ maximalizuje:",
+          "kind": "choice",
+          "choices": [
+            "$\\frac{w^T S_B w}{w^T S_W w}$",
+            "$\\frac{w^T S_W w}{w^T S_B w}$",
+            "$w^T C w$"
+          ],
+          "correctIndex": 0,
+          "explanation": "$S_B$ = between-class scatter, $S_W$ = within-class scatter. Maximum dosaženo zobecněným eigenproblémem $S_W^{-1} S_B$."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro klasifikaci do $c$ tříd má LDA nejvýše ___ dimenzí (číslo):",
+          "kind": "text",
+          "correctAnswer": "c-1",
+          "explanation": "$\\mathrm{rank}(S_B) \\le c - 1$, proto získáme maximálně $c-1$ netriviálních diskriminačních směrů. Pro binární úlohu jen 1 dimenze."
+        },
+        {
+          "label": "c",
+          "prompt": "Hlavní rozdíl LDA vs PCA:",
+          "kind": "choice",
+          "choices": [
+            "LDA je supervised (využívá labels), PCA unsupervised",
+            "PCA je supervised, LDA unsupervised",
+            "obě jsou supervised, liší se jen normalizací"
+          ],
+          "correctIndex": 0,
+          "explanation": "LDA potřebuje třídy ($S_B$, $S_W$); PCA jen kovarianci dat. PCA maximalizuje rozptyl, LDA separaci tříd."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-6",
+      "prompt": "Nelineární redukce dimenze: t-SNE a UMAP",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "t-SNE v cílovém prostoru modeluje podobnosti pomocí:",
+          "kind": "choice",
+          "choices": [
+            "Studentova $t$-rozdělení s 1 stupněm volnosti (heavy-tailed)",
+            "gaussovského rozdělení",
+            "uniformního rozdělení"
+          ],
+          "correctIndex": 0,
+          "explanation": "V originálním prostoru gaussovské podobnosti, v low-dim Studentovo $t$ s 1 d.f. — heavy tails redukují \"crowding problem\". Optimalizuje KL divergenci."
+        },
+        {
+          "label": "b",
+          "prompt": "Které tvrzení o UMAP vs t-SNE platí?",
+          "kind": "choice",
+          "choices": [
+            "UMAP bývá rychlejší a lépe zachovává globální strukturu",
+            "UMAP je deterministický a vždy ekvivalentní s PCA",
+            "UMAP nemá hyperparametry"
+          ],
+          "correctIndex": 0,
+          "explanation": "UMAP (fuzzy simplicial sets) je rychlejší a lépe drží globální vztahy, hlavní hyperparametry `n_neighbors` a `min_dist`."
+        },
+        {
+          "label": "c",
+          "prompt": "Která metoda zachovává geodetické vzdálenosti na manifoldu pomocí k-NN grafu a Dijkstry?",
+          "kind": "choice",
+          "choices": ["Isomap", "LLE", "Kernel PCA"],
+          "correctIndex": 0,
+          "explanation": "Isomap = k-NN graf → shortest paths (Dijkstra) → klasický MDS na geodetické matici vzdáleností."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-6",
+      "prompt": "ICA a Kernel PCA",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Klíčový rozdíl mezi PCA a ICA:",
+          "kind": "choice",
+          "choices": [
+            "PCA hledá nekorelované komponenty, ICA nezávislé (silnější podmínka)",
+            "ICA je lineární verze PCA",
+            "PCA vyžaduje non-Gaussian zdroje, ICA Gaussian"
+          ],
+          "correctIndex": 0,
+          "explanation": "Nekorelovanost = nulová kovariance (2. moment), nezávislost = faktorizace celé hustoty. ICA proto potřebuje non-Gaussian zdroje (max 1 Gaussian) a maximalizuje ne-gaussianitu (kurtosis/negentropy)."
+        },
+        {
+          "label": "b",
+          "prompt": "První krok FastICA algoritmu je:",
+          "kind": "choice",
+          "choices": [
+            "whitening (dekorelace přes $C^{-1/2}$)",
+            "K-means clustering",
+            "výpočet $S_W^{-1} S_B$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Po vystředění následuje whitening — pak už zbývá najít rotaci maximalizující ne-gaussianitu komponent."
+        },
+        {
+          "label": "c",
+          "prompt": "Kernel PCA získá nelineární komponenty pomocí:",
+          "kind": "choice",
+          "choices": [
+            "kernel triku (PCA v RKHS)",
+            "trénování neuronové sítě",
+            "Dijkstrova algoritmu na k-NN grafu"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kernel PCA aplikuje PCA implicitně v reprodukčním jádrovém Hilbertově prostoru přes Gramovu matici $K_{ij} = k(x_i, x_j)$ — bez explicitního mapování."
+        }
+      ]
+    }
+  ]
 }

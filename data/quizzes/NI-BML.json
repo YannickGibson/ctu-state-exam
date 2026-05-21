@@ -3,17 +3,403 @@
   "subjectCode": "BML",
   "group": "ZI",
   "title": "BML quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-BML. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-14",
+      "prompt": "Bayesova věta a slovník bayesovské inference",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co ve vztahu $p(\\theta \\mid \\mathcal D) = \\frac{p(\\mathcal D \\mid \\theta)\\,p(\\theta)}{p(\\mathcal D)}$ představuje $p(\\mathcal D)$?",
+          "kind": "choice",
+          "choices": ["likelihood", "prior", "marginální věrohodnost (evidence)", "posterior"],
+          "correctIndex": 2,
+          "explanation": "$p(\\mathcal D) = \\int p(\\mathcal D\\mid\\theta)p(\\theta)\\,d\\theta$ je marginální věrohodnost, plní roli normalizační konstanty."
+        },
+        {
+          "label": "b",
+          "prompt": "Doplňte: posterior je úměrný součinu ___ a prioru.",
+          "kind": "text",
+          "correctAnswer": "likelihood",
+          "explanation": "$p(\\theta\\mid\\mathcal D) \\propto p(\\mathcal D\\mid\\theta)\\,p(\\theta)$ — proporčně k likelihood krát prior."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro plochý prior se MAP odhad redukuje na:",
+          "kind": "choice",
+          "choices": ["posterior mean", "MLE", "posterior median", "Jeffreysův odhad"],
+          "correctIndex": 1,
+          "explanation": "Při konstantním $p(\\theta)$ je $\\arg\\max p(\\theta\\mid\\mathcal D) = \\arg\\max p(\\mathcal D\\mid\\theta)$ ⇒ MLE."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-14",
+      "prompt": "Konjugované páry rozdělení",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Konjugovaný prior k Bernoulli/Binomial likelihoodu je:",
+          "kind": "choice",
+          "choices": ["Gamma", "Beta", "Dirichlet", "Inverse-Gamma"],
+          "correctIndex": 1,
+          "explanation": "Beta$(\\alpha,\\beta)$ má hustotu $\\propto p^{\\alpha-1}(1-p)^{\\beta-1}$, tvarem souhlasí s binomickou likelihood."
+        },
+        {
+          "label": "b",
+          "prompt": "Konjugovaný prior k Poissonově likelihoodu (parametr $\\lambda$):",
+          "kind": "text",
+          "correctAnswer": "gamma",
+          "explanation": "Gamma$(\\alpha,\\beta)$ je konjugovaná; posterior je Gamma$(\\alpha+\\sum x_i, \\beta+n)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Co znamená, že rodina $\\mathcal P$ je konjugovaná k danému likelihoodu?",
+          "kind": "choice",
+          "choices": [
+            "prior i posterior leží ve stejné rodině $\\mathcal P$",
+            "MAP odhad je roven MLE",
+            "marginální věrohodnost je rovna 1",
+            "Fisherova informace je konstantní"
+          ],
+          "correctIndex": 0,
+          "explanation": "Konjugovanost = pro libovolný prior z $\\mathcal P$ je posterior také v $\\mathcal P$ ⇒ jen aktualizace hyperparametrů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-14",
+      "prompt": "Beta-Binomial: posterior z $n=10$ hodů, $k=7$ orlů, prior $\\mathrm{Beta}(2,2)$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Parametry aposteriorního rozdělení (formát `alpha,beta`):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "9,5",
+          "explanation": "Posterior je $\\mathrm{Beta}(\\alpha+k,\\beta+n-k) = \\mathrm{Beta}(2+7, 2+3) = \\mathrm{Beta}(9,5)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Posterior mean $E[p\\mid\\mathcal D] =$ (zlomek `a/b`):",
+          "kind": "text",
+          "correctAnswer": "9/14",
+          "explanation": "Pro $\\mathrm{Beta}(\\alpha',\\beta')$ je $E[p] = \\alpha'/(\\alpha'+\\beta') = 9/14$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-14",
+      "prompt": "Bodové odhady a intervaly",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Který bayesovský bodový odhad minimalizuje očekávanou kvadratickou chybu (MSE)?",
+          "kind": "choice",
+          "choices": ["MAP", "posterior median", "posterior mean", "MLE"],
+          "correctIndex": 2,
+          "explanation": "Posterior mean $E[\\theta\\mid\\mathcal D]$ je Bayes-optimální vůči kvadratické ztrátě; medián je optimální pro absolutní ztrátu."
+        },
+        {
+          "label": "b",
+          "prompt": "Bayesovský credible interval má (na rozdíl od frekvenčního CI) přímou pravděpodobnostní interpretaci podmíněnou daty.",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "$P(\\theta \\in [\\theta_L,\\theta_U] \\mid \\mathcal D) = 1-\\alpha$ — výrok o $\\theta$ při fixních datech, zatímco frekvenční CI je výrok o intervalu při náhodných datech."
+        },
+        {
+          "label": "c",
+          "prompt": "Jeffreysův prior pro Bernoulliho parametr odpovídá rozdělení:",
+          "kind": "choice",
+          "choices": ["$\\mathrm{Beta}(1,1)$", "$\\mathrm{Beta}(0,0)$", "$\\mathrm{Beta}(1/2,1/2)$", "$\\mathrm{Beta}(2,2)$"],
+          "correctIndex": 2,
+          "explanation": "Jeffreys $\\propto \\sqrt{|\\det I(\\theta)|}$ ⇒ pro Bernoulli vychází $\\mathrm{Beta}(1/2,1/2)$ a je invariantní vůči reparametrizaci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-15",
+      "prompt": "Stavové modely a sekvenční bayesovský filtr",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která rovnice je pozorovací (observation) rovnicí stavového modelu?",
+          "kind": "choice",
+          "choices": [
+            "$x_t = f(x_{t-1}, w_t)$",
+            "$y_t = h(x_t, v_t)$",
+            "$p(x_t \\mid y_{1:t-1}) = \\int p(x_t\\mid x_{t-1})p(x_{t-1}\\mid y_{1:t-1})dx_{t-1}$",
+            "$\\hat x_t = A\\hat x_{t-1} + Bu_t$"
+          ],
+          "correctIndex": 1,
+          "explanation": "State equation popisuje vývoj latentního stavu; observation equation $y_t = h(x_t, v_t)$ váže stav na pozorování."
+        },
+        {
+          "label": "b",
+          "prompt": "Krok predict (časová aktualizace) je založen na rovnici:",
+          "kind": "choice",
+          "choices": [
+            "Bayesovo pravidlo",
+            "Chapman-Kolmogorovova rovnice",
+            "Itôovo lemma",
+            "Wiener-Khinchinova věta"
+          ],
+          "correctIndex": 1,
+          "explanation": "Predict integruje předchozí filtrované rozdělení přes přechodový model — Chapman-Kolmogorov."
+        },
+        {
+          "label": "c",
+          "prompt": "Filtrovaná hustota se značí (vyplňte `p(x_t|...)`):",
+          "kind": "text",
+          "correctAnswer": "p(x_t|y_{1:t})",
+          "explanation": "Filtrování = posterior stavu při dosud pozorovaných datech $y_{1:t}$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-15",
+      "prompt": "Kalmanův filtr (LGSS)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro lineární gaussovský model je Kalmanův filtr optimální ve smyslu:",
+          "kind": "choice",
+          "choices": ["MAP", "MMSE", "max entropy", "min L1"],
+          "correctIndex": 1,
+          "explanation": "KF dává podmíněnou střední hodnotu = MMSE odhad; pro pouze-lineární modely je BLUE."
+        },
+        {
+          "label": "b",
+          "prompt": "Inovaci $\\nu_t$ definujeme jako:",
+          "kind": "choice",
+          "choices": [
+            "$y_t - H\\hat x_t^-$",
+            "$\\hat x_t - \\hat x_{t-1}$",
+            "$y_t - y_{t-1}$",
+            "$K_t(y_t - \\hat x_t^-)$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inovace = rozdíl pozorování a jeho predikce $H\\hat x_t^-$; vstupuje do update s Kalmanovým ziskem."
+        },
+        {
+          "label": "c",
+          "prompt": "Vzorec pro Kalmanův zisk (doplňte za $K_t = P_t^- H^T$ ... ):",
+          "kind": "text",
+          "correctAnswer": "(H P_t^- H^T + R)^{-1}",
+          "explanation": "$K_t = P_t^- H^T (H P_t^- H^T + R)^{-1}$ — váží predikci kovariance proti šumu pozorování $R$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-15",
+      "prompt": "Nelineární odhad: EKF vs UKF",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "EKF aproximuje nelineární $f, h$ tak, že:",
+          "kind": "choice",
+          "choices": [
+            "vzorkuje deterministické sigma points",
+            "linearizuje přes Jacobiány v aktuálním odhadu",
+            "spouští MCMC řetězec",
+            "reprezentuje stav částicemi"
+          ],
+          "correctIndex": 1,
+          "explanation": "EKF používá Taylorův rozvoj 1. řádu — Jacobiány $F_t, H_t$ vyhodnocené v $\\hat x$."
+        },
+        {
+          "label": "b",
+          "prompt": "Hlavní výhoda UKF oproti EKF:",
+          "kind": "choice",
+          "choices": [
+            "nepotřebuje výpočet Jacobiánů a je přesnější (přesný do 3. řádu)",
+            "garantuje gaussovský posterior pro libovolné $f$",
+            "běží v $O(1)$ čase nezávisle na dimenzi",
+            "nepotřebuje šum $Q, R$"
+          ],
+          "correctIndex": 0,
+          "explanation": "UKF propaguje deterministické sigma points přes nelineární $f, h$ bez gradientu, přesné do Taylorova 3. řádu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-15",
+      "prompt": "Particle filter (SIR)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "U bootstrap particle filtru (proposal $q = p(x_t\\mid x_{t-1})$) je váhový update:",
+          "kind": "choice",
+          "choices": [
+            "$w_t^{(i)} \\propto w_{t-1}^{(i)} \\cdot p(y_t \\mid x_t^{(i)})$",
+            "$w_t^{(i)} = 1/N$",
+            "$w_t^{(i)} \\propto p(x_t^{(i)} \\mid x_{t-1}^{(i)})$",
+            "$w_t^{(i)} \\propto 1/p(y_t \\mid x_t^{(i)})$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Při proposalu $q = p(x_t\\mid x_{t-1})$ se v sekvenčním IS váha redukuje na $p(y_t\\mid x_t^{(i)})$."
+        },
+        {
+          "label": "b",
+          "prompt": "Jak se nazývá jev, kdy postupem času jediná částice nese skoro veškerou váhu?",
+          "kind": "text",
+          "correctAnswer": "degenerace vah",
+          "explanation": "Weight degeneracy — řeší se resamplingem (multinomial, systematic, residual), když ESS klesne pod práh."
+        },
+        {
+          "label": "c",
+          "prompt": "Particle filter zvládá ne-Gaussovský šum i silně nelineární $f$:",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "PF je obecná metoda; cenou je curse of dimensionality — počet částic roste s dimenzí stavu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-16",
+      "prompt": "Rejection sampling",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro proposal $q$ a obálku $p(x) \\le M q(x)$ je vzorek $x \\sim q$ přijat, pokud $u \\sim U(0,1)$ splňuje:",
+          "kind": "choice",
+          "choices": [
+            "$u \\le M q(x)/p(x)$",
+            "$u \\le p(x)/(M q(x))$",
+            "$u \\le p(x) q(x)$",
+            "$u \\le 1/M$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Akceptační pravidlo: $u \\le p(x)/(Mq(x))$. Marginalizací vyjde, že přijaté $x$ má rozdělení $p$."
+        },
+        {
+          "label": "b",
+          "prompt": "Marginální pravděpodobnost přijetí jednoho navrhovaného vzorku je:",
+          "kind": "text",
+          "correctAnswer": "1/M",
+          "explanation": "$P(\\text{accept}) = \\int p(x)/(Mq(x))\\,q(x)dx = 1/M$ ⇒ velké $M$ znamená velmi neefektivní algoritmus."
+        },
+        {
+          "label": "c",
+          "prompt": "Proposal $q$ musí mít vůči $p$:",
+          "kind": "choice",
+          "choices": ["lehčí ocasy", "těžší ocasy", "stejné momenty", "diskrétní support"],
+          "correctIndex": 1,
+          "explanation": "Bez těžších ocasů $q$ nelze najít konečné $M$ tak, aby $p \\le Mq$ všude."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-16",
+      "prompt": "Importance sampling — váhy a estimátor",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Importance weight $w(x)$ pro vzorek $x \\sim q$ je:",
+          "kind": "choice",
+          "choices": [
+            "$q(x)/p(x)$",
+            "$p(x)/q(x)$",
+            "$p(x)q(x)$",
+            "$\\log p(x) - \\log q(x)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Z identity $E_p[f] = E_q[f \\cdot p/q]$ ⇒ $w(x) = p(x)/q(x)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Kdy je nutné použít self-normalized IS místo klasického IS?",
+          "kind": "choice",
+          "choices": [
+            "když $p$ známe jen do normalizační konstanty",
+            "když $f$ je nezáporná",
+            "když $q$ má stejné momenty jako $p$",
+            "vždy, protože dává nulový bias"
+          ],
+          "correctIndex": 0,
+          "explanation": "SNIS dělí váženou sumou vah ⇒ konstanta se vykrátí. Cena: $O(1/N)$ bias, ale stále konzistentní."
+        },
+        {
+          "label": "c",
+          "prompt": "Aby variance IS estimátoru nedivergovala, ocasy $q$ musí být ___ než ocasy $p$.",
+          "kind": "text",
+          "correctAnswer": "těžší",
+          "explanation": "Pokud $q$ klesá rychleji než $p$, váhy $p/q$ explodují → nekonečná variance."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-16",
+      "prompt": "Effective sample size a diagnostika",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Effective sample size se definuje vzorcem:",
+          "kind": "choice",
+          "choices": [
+            "$(\\sum w_i)^2 / \\sum w_i^2$",
+            "$\\sum w_i^2 / (\\sum w_i)^2$",
+            "$\\sum w_i$",
+            "$N - \\sum w_i^2$"
+          ],
+          "correctIndex": 0,
+          "explanation": "$\\mathrm{ESS} = (\\sum w_i)^2/\\sum w_i^2 \\le N$; rovnost nastane pro uniformní váhy."
+        },
+        {
+          "label": "b",
+          "prompt": "Spočtěte ESS pro váhy $w = (4, 1, 1)$:",
+          "kind": "text",
+          "correctAnswer": "2",
+          "explanation": "$(\\sum w_i)^2/\\sum w_i^2 = 36/18 = 2$."
+        },
+        {
+          "label": "c",
+          "prompt": "Vysoké Pareto-$k$ (např. $k > 0.7$) z PSIS diagnostiky znamená, že:",
+          "kind": "choice",
+          "choices": [
+            "IS odhad je velmi spolehlivý",
+            "váhy mají těžké ocasy a IS je nespolehlivý",
+            "proposal $q = p$",
+            "ESS dosáhlo maxima $N$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Velké $k$ indikuje těžké ocasy distribuce vah ⇒ varianci nelze odhadnout, IS estimátor je nespolehlivý."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-16",
+      "prompt": "Vážení v sekvenčních metodách",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Sequential Importance Resampling (SIR) řeší degeneraci vah pomocí:",
+          "kind": "choice",
+          "choices": [
+            "MCMC Gibbsova kroku",
+            "převzorkování (resampling) podle vah a resetu na $1/N$",
+            "zvětšení obálkové konstanty $M$",
+            "přidání L2 regularizace"
+          ],
+          "correctIndex": 1,
+          "explanation": "Resampling vybere $N$ částic s opakováním úměrně vahám a nastaví váhy na $1/N$ ⇒ likviduje téměř nulové váhy."
+        },
+        {
+          "label": "b",
+          "prompt": "V annealed importance sampling (AIS) se mezi $q_0$ a cílovým $p$ vkládají:",
+          "kind": "choice",
+          "choices": [
+            "mezilehlá rozdělení $q_1, \\ldots, q_{n-1}$",
+            "MAP odhady",
+            "Jacobiány",
+            "Kalmanovy update kroky"
+          ],
+          "correctIndex": 0,
+          "explanation": "AIS zavádí teplotní žíhání: posloupnost mírně se lišících rozdělení ⇒ malá divergence v každém kroku, robustní pro multimodální posterior."
+        }
+      ]
+    }
+  ]
 }

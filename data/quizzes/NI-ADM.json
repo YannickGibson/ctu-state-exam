@@ -3,17 +3,414 @@
   "subjectCode": "ADM",
   "group": "ZI",
   "title": "ADM quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-ADM. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-11",
+      "prompt": "Bias-variance rozklad chyby",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Celková střední kvadratická chyba predikce je rovna:",
+          "kind": "choice",
+          "choices": [
+            "$\\text{Bias} + \\text{Variance}$",
+            "$\\text{Bias}^2 + \\text{Variance} + \\sigma_\\epsilon^2$",
+            "$\\text{Bias}^2 \\cdot \\text{Variance}$",
+            "$\\text{Bias} + \\text{Variance}^2 + \\sigma_\\epsilon^2$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$E[(Y-\\hat f)^2] = \\sigma_\\epsilon^2 + \\text{Bias}^2[\\hat f] + \\text{Var}[\\hat f]$ — neredukovatelný šum, kvadrát biasu a rozptyl."
+        },
+        {
+          "label": "b",
+          "prompt": "Model s vysokým biasem typicky trpí na:",
+          "kind": "choice",
+          "choices": ["underfitting", "overfitting", "vysoký rozptyl"],
+          "correctIndex": 0,
+          "explanation": "Vysoký bias znamená, že predikce jsou systematicky vzdálené od pravdy — model je příliš jednoduchý (underfitting)."
+        },
+        {
+          "label": "c",
+          "prompt": "Která složka chyby je neredukovatelná?",
+          "kind": "text",
+          "correctAnswer": "noise",
+          "explanation": "$\\sigma_\\epsilon^2$ (šum / noise) je vlastnost dat, nikoli modelu, a nelze ji odstranit lepším modelem."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-11",
+      "prompt": "Bagging a redukce rozptylu",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro $M$ nezávislých modelů s rozptylem $\\sigma^2$ je rozptyl jejich průměru roven:",
+          "kind": "choice",
+          "choices": [
+            "$\\sigma^2$",
+            "$M\\sigma^2$",
+            "$\\sigma^2/M$",
+            "$\\sigma^2/\\sqrt{M}$"
+          ],
+          "correctIndex": 2,
+          "explanation": "$\\mathrm{Var}[\\bar f] = \\mathrm{Var}[\\hat f]/M$ — průměr nezávislých veličin snižuje rozptyl lineárně s počtem modelů."
+        },
+        {
+          "label": "b",
+          "prompt": "Z čeho se vzorkují trénovací sady jednotlivých modelů v baggingu?",
+          "kind": "text",
+          "correctAnswer": "bootstrap",
+          "explanation": "Bagging = Bootstrap Aggregating: trénink na bootstrap vzorcích (výběr s opakováním) původní sady."
+        },
+        {
+          "label": "c",
+          "prompt": "Pokud jsou modely silně korelované (průměrná korelace $\\rho \\to 1$), redukce rozptylu baggingem:",
+          "kind": "choice",
+          "choices": ["roste s $M$", "je omezená — rozptyl se blíží $\\rho\\sigma^2$", "je vždy nulová"],
+          "correctIndex": 1,
+          "explanation": "$\\mathrm{Var}[\\bar f] = \\rho\\sigma^2 + (1-\\rho)\\sigma^2/M \\to \\rho\\sigma^2$ — proto Random Forests dekorelují stromy náhodným výběrem příznaků."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-11",
+      "prompt": "Boosting jako aditivní model",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Na co se v iteraci $i$ zaměřuje nový slabý model $\\hat f_i$?",
+          "kind": "choice",
+          "choices": [
+            "Na náhodný bootstrap vzorek",
+            "Na rezidua $r_i = y - \\sum_{j<i} \\alpha_j \\hat f_j$ předchozích modelů",
+            "Na celou trénovací sadu se stejnými vahami"
+          ],
+          "correctIndex": 1,
+          "explanation": "Boosting je sekvenční: každý nový model modeluje chyby (rezidua) ansámblu doposud — tím postupně snižuje bias."
+        },
+        {
+          "label": "b",
+          "prompt": "Jakou složku chyby primárně redukuje boosting?",
+          "kind": "text",
+          "correctAnswer": "bias",
+          "explanation": "Boosting kombinuje slabé modely (vysoký bias, nízká variance) do silného modelu s nízkým biasem."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-11",
+      "prompt": "Random Forests vs. Gradient Boosting",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Random Forests jsou postaveny na principu:",
+          "kind": "choice",
+          "choices": ["bagging", "boosting", "stacking"],
+          "correctIndex": 0,
+          "explanation": "RF = bagging nad rozhodovacími stromy + náhodný výběr příznaků v každém uzlu (dekorelace stromů)."
+        },
+        {
+          "label": "b",
+          "prompt": "Která metoda modeluje rezidua předchozích modelů (např. XGBoost, LightGBM)?",
+          "kind": "text",
+          "correctAnswer": "gradient boosting",
+          "explanation": "Gradient Boosting fituje nový strom na gradient ztráty (pro MSE = rezidua) předchozího ansámblu."
+        },
+        {
+          "label": "c",
+          "prompt": "Random Forest snižuje primárně:",
+          "kind": "choice",
+          "choices": ["bias", "variance", "noise"],
+          "correctIndex": 1,
+          "explanation": "Hluboké stromy mají nízký bias, ale vysokou variance; bagging průměruje a tím snižuje rozptyl."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-12",
+      "prompt": "OLS a ridge regrese",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Řešení OLS pro $\\|\\boldsymbol Y - \\mathbf X \\boldsymbol w\\|^2$ má tvar:",
+          "kind": "choice",
+          "choices": [
+            "$\\hat{\\boldsymbol w} = \\mathbf X^T \\boldsymbol Y$",
+            "$\\hat{\\boldsymbol w} = (\\mathbf X^T \\mathbf X)^{-1} \\mathbf X^T \\boldsymbol Y$",
+            "$\\hat{\\boldsymbol w} = (\\mathbf X \\mathbf X^T)^{-1} \\boldsymbol Y$",
+            "$\\hat{\\boldsymbol w} = \\mathbf X^{-1} \\boldsymbol Y$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Z normálních rovnic $\\mathbf X^T \\mathbf X \\boldsymbol w = \\mathbf X^T \\boldsymbol Y$ plyne $\\hat{\\boldsymbol w} = (\\mathbf X^T \\mathbf X)^{-1} \\mathbf X^T \\boldsymbol Y$."
+        },
+        {
+          "label": "b",
+          "prompt": "Ridge řešení $\\hat{\\boldsymbol w}_\\lambda = (\\mathbf X^T \\mathbf X + \\lambda \\mathbf I)^{-1} \\mathbf X^T \\boldsymbol Y$ je dobře definované pro:",
+          "kind": "choice",
+          "choices": [
+            "libovolné $\\lambda \\ge 0$",
+            "$\\lambda > 0$ vždy (matice je regulární)",
+            "jen $\\lambda = 0$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pro $\\lambda > 0$ je $\\mathbf X^T \\mathbf X + \\lambda \\mathbf I$ vždy pozitivně definitní (regulární), i když $\\mathbf X$ není plné hodnosti."
+        },
+        {
+          "label": "c",
+          "prompt": "Jaký druh regularizace přidává ridge?",
+          "kind": "text",
+          "correctAnswer": "l2",
+          "explanation": "Ridge přidává $L_2$ penalizaci $\\lambda \\|\\boldsymbol w\\|^2$ — sráží váhy plynule směrem k nule."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-12",
+      "prompt": "Kernel trick a Gram matrix",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "V duální formulaci jádrové regrese vstupní vektory vystupují pouze jako:",
+          "kind": "choice",
+          "choices": [
+            "explicitní souřadnice $\\boldsymbol x_i$",
+            "skalární součiny $\\boldsymbol\\varphi(\\boldsymbol x_i)^T \\boldsymbol\\varphi(\\boldsymbol x_j)$",
+            "rozdíly $\\boldsymbol x_i - \\boldsymbol x_j$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Trénink i predikce závisí jen na skalárních součinech v featurovém prostoru — proto je lze nahradit jádrem $k(\\boldsymbol x_i, \\boldsymbol x_j)$ bez explicitní transformace."
+        },
+        {
+          "label": "b",
+          "prompt": "Prvek Gramovy matice $G_{ij}$ je roven:",
+          "kind": "text",
+          "correctAnswer": "k(x_i, x_j)",
+          "explanation": "$G_{ij} = \\boldsymbol\\varphi(\\boldsymbol x_i)^T \\boldsymbol\\varphi(\\boldsymbol x_j) = k(\\boldsymbol x_i, \\boldsymbol x_j)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Duální optimum jádrové regrese je:",
+          "kind": "choice",
+          "choices": [
+            "$\\hat{\\boldsymbol\\alpha} = (\\mathbf G + \\lambda \\mathbf I)^{-1} \\boldsymbol Y$",
+            "$\\hat{\\boldsymbol\\alpha} = \\mathbf G \\boldsymbol Y$",
+            "$\\hat{\\boldsymbol\\alpha} = \\mathbf G^{-1} \\mathbf X^T \\boldsymbol Y$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Minimalizace $\\mathrm{RSS}_\\lambda(\\boldsymbol\\alpha)$ s $\\boldsymbol w = \\boldsymbol\\Phi^T\\boldsymbol\\alpha$ vede k $\\hat{\\boldsymbol\\alpha} = (\\mathbf G + \\lambda\\mathbf I)^{-1}\\boldsymbol Y$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-12",
+      "prompt": "Pozitivně semidefinitní jádra",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Funkce $k$ je platným PSD (Mercerovým) jádrem právě když:",
+          "kind": "choice",
+          "choices": [
+            "je spojitá",
+            "Gramova matice $(k(\\boldsymbol x_i, \\boldsymbol x_j))$ je PSD pro libovolnou konečnou množinu bodů",
+            "je symetrická a nezáporná"
+          ],
+          "correctIndex": 1,
+          "explanation": "Mercerova podmínka: PSD Gramova matice na libovolné konečné množině zajistí existenci odpovídajícího featurového prostoru."
+        },
+        {
+          "label": "b",
+          "prompt": "Tvar Gaussovského (RBF) jádra:",
+          "kind": "choice",
+          "choices": [
+            "$k(x,y) = x^T y$",
+            "$k(x,y) = (x^T y + c)^d$",
+            "$k(x,y) = \\exp(-\\|x-y\\|^2 / 2l^2)$",
+            "$k(x,y) = \\tanh(\\alpha x^T y + c)$"
+          ],
+          "correctIndex": 2,
+          "explanation": "RBF/Gaussian kernel: $k(x,y)=\\exp(-\\|x-y\\|^2/2l^2)$ — odpovídá nekonečně-dimenzionálnímu featurovému prostoru."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-12",
+      "prompt": "Support Vector Machines",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co SVM v základní (hard-margin) podobě maximalizuje?",
+          "kind": "choice",
+          "choices": [
+            "počet správně klasifikovaných bodů",
+            "margin — vzdálenost rozhodovací nadroviny od nejbližších bodů",
+            "entropii predikované distribuce"
+          ],
+          "correctIndex": 1,
+          "explanation": "Hard-margin SVM: $\\min_{w,b} \\tfrac12 \\|w\\|^2$ s podmínkami $y_i(w^T x_i + b) \\ge 1$ — maximalizuje margin $1/\\|w\\|$."
+        },
+        {
+          "label": "b",
+          "prompt": "Jaká ztrátová funkce odpovídá soft-margin SVM?",
+          "kind": "text",
+          "correctAnswer": "hinge",
+          "explanation": "Hinge loss $L_i = \\max(0, 1 - y_i f(x_i))$ — penalizuje body uvnitř marginu nebo nesprávně klasifikované."
+        },
+        {
+          "label": "c",
+          "prompt": "Predikce kernel SVM má tvar:",
+          "kind": "choice",
+          "choices": [
+            "$f(\\boldsymbol x) = \\boldsymbol w^T \\boldsymbol x + b$",
+            "$f(\\boldsymbol x) = \\sum_i \\alpha_i y_i k(\\boldsymbol x_i, \\boldsymbol x) + b$",
+            "$f(\\boldsymbol x) = \\sum_i \\alpha_i k(\\boldsymbol x_i, \\boldsymbol x_i)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Lagrangeova duální forma SVM vede přes skalární součiny ⇒ kernel trick: $f(x) = \\sum_i \\alpha_i y_i k(x_i, x) + b$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-13",
+      "prompt": "Maticová faktorizace ratingové matice",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Cílem maticové faktorizace je aproximovat $R$ ve tvaru:",
+          "kind": "choice",
+          "choices": [
+            "$R \\approx U + V$",
+            "$R \\approx U V^T$, kde $U \\in \\mathbb R^{m \\times d}$, $V \\in \\mathbb R^{n \\times d}$, $d \\ll \\min(m,n)$",
+            "$R \\approx U^T U$"
+          ],
+          "correctIndex": 1,
+          "explanation": "MF: rozklad na dvě nízkohodnostové matice latentních faktorů uživatelů a položek, $d \\ll \\min(m,n)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Přes které prvky matice $R$ se v ztrátě sčítá?",
+          "kind": "choice",
+          "choices": [
+            "přes všechny prvky matice",
+            "jen přes známé (pozorované) prvky $\\Omega$",
+            "jen přes neznámé prvky"
+          ],
+          "correctIndex": 1,
+          "explanation": "$\\arg\\min \\sum_{(i,j)\\in\\Omega}(r_{ij} - \\boldsymbol u_i^T \\boldsymbol v_j)^2 + \\lambda(\\sum\\|\\boldsymbol u_i\\|^2 + \\sum\\|\\boldsymbol v_j\\|^2)$ — neznámé prvky jsou predikované, ne trénované."
+        },
+        {
+          "label": "c",
+          "prompt": "Dvě běžné optimalizační metody pro MF (oddělené čárkou):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "sgd,als",
+          "explanation": "Stochastic Gradient Descent a Alternating Least Squares — ALS alternuje fixaci $U$ a $V$ a řeší kvadratické problémy."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-13",
+      "prompt": "Míry podobnosti pro k-NN doporučování",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Jaccardova podobnost dvou množin uživatelů $U_i, U_l$ je:",
+          "kind": "choice",
+          "choices": [
+            "$|U_i \\cap U_l|$",
+            "$|U_i \\cap U_l| / |U_i \\cup U_l|$",
+            "$|U_i \\cup U_l| / |U_i \\cap U_l|$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$J(i,l) = |U_i \\cap U_l| / |U_i \\cup U_l| \\in [0,1]$ — normalizuje překryv velikostí sjednocení."
+        },
+        {
+          "label": "b",
+          "prompt": "Která podobnost je vhodná pro ratingové (explicitní) vektory?",
+          "kind": "text",
+          "correctAnswer": "cosine",
+          "explanation": "Kosinová podobnost $\\cos\\theta = \\langle a,b\\rangle / (\\|a\\|\\|b\\|)$ — pracuje s číselnými hodnoceními, ne jen s indikátory interakcí."
+        },
+        {
+          "label": "c",
+          "prompt": "Memory-based k-NN doporučovač:",
+          "kind": "choice",
+          "choices": [
+            "potřebuje trénovací fázi s gradient descent",
+            "agreguje hodnocení $k$ nejbližších uživatelů (žádný explicitní trénink)",
+            "faktorizuje matici $R$ pomocí SVD"
+          ],
+          "correctIndex": 1,
+          "explanation": "Collaborative filtering / memory-based: pro daného uživatele se najde $k$ nejpodobnějších a jejich hodnocení se agreguje váženým průměrem."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-13",
+      "prompt": "Pokročilé doporučovací modely",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Které modely využívají self-attention nad sekvencemi interakcí?",
+          "kind": "choice",
+          "choices": [
+            "ALS, SVD",
+            "SASRec, BERT4Rec",
+            "LightGCN, NGCF",
+            "k-NN, Jaccard"
+          ],
+          "correctIndex": 1,
+          "explanation": "SASRec a BERT4Rec jsou sequential / transformer-based doporučovače — self-attention nad sekvencí uživatelových interakcí."
+        },
+        {
+          "label": "b",
+          "prompt": "LightGCN a NGCF patří do rodiny:",
+          "kind": "choice",
+          "choices": [
+            "memory-based k-NN",
+            "Graph Neural Networks na bipartitním user-item grafu",
+            "Bayesovských MF"
+          ],
+          "correctIndex": 1,
+          "explanation": "GNN-based doporučovače propagují embeddings po bipartitním user-item grafu; LightGCN zjednodušuje NGCF odstraněním transformací."
+        },
+        {
+          "label": "c",
+          "prompt": "Bayesovský pravděpodobnostní MF (BPMF) typicky aproximuje posterior pomocí:",
+          "kind": "text",
+          "correctAnswer": "gibbs sampling",
+          "explanation": "BPMF používá konjugované priory a MCMC, konkrétně Gibbs sampling, pro inferenci nad latentními faktory."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-13",
+      "prompt": "Regularizace v maticové faktorizaci",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Účel členu $\\lambda(\\sum\\|\\boldsymbol u_i\\|^2 + \\sum\\|\\boldsymbol v_j\\|^2)$ ve ztrátě:",
+          "kind": "choice",
+          "choices": [
+            "Zrychlit konvergenci SGD",
+            "Zabránit overfittingu (penalizace velikosti latentních faktorů)",
+            "Vynutit ortogonalitu $U$ a $V$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$L_2$ regularizace omezuje normu latentních faktorů a brání overfittingu — zvlášť důležité při řídké pozorované sadě $\\Omega$."
+        },
+        {
+          "label": "b",
+          "prompt": "Dimenze $d$ latentního prostoru splňuje:",
+          "kind": "choice",
+          "choices": [
+            "$d \\gg \\max(m, n)$",
+            "$d = m = n$",
+            "$d \\ll \\min(m, n)$"
+          ],
+          "correctIndex": 2,
+          "explanation": "Latentní prostor je nízkodimenzionální ($d \\ll \\min(m,n)$) — to zajišťuje kompresi a generalizaci na nepozorované prvky."
+        }
+      ]
+    }
+  ]
 }

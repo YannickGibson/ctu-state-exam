@@ -3,17 +3,427 @@
   "subjectCode": "UMI",
   "group": "ZI",
   "title": "UMI quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-UMI. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-1",
+      "prompt": "STRIPS akce a aplikace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Akce $a$ je aplikovatelná ve stavu $s$, pokud:",
+          "kind": "choice",
+          "choices": [
+            "$\\mathrm{add}(a) \\subseteq s$",
+            "$\\mathrm{pre}(a) \\subseteq s$",
+            "$\\mathrm{del}(a) \\cap s = \\emptyset$",
+            "$\\mathrm{pre}(a) \\cap s = \\emptyset$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Preconditions musí být splněny ve stavu — tj. $\\mathrm{pre}(a) \\subseteq s$ (closed-world)."
+        },
+        {
+          "label": "b",
+          "prompt": "Výsledný stav $s'$ po aplikaci $a$ (vzorec, použij `\\` pro množinový rozdíl):",
+          "kind": "text",
+          "correctAnswer": "(s \\ del(a)) ∪ add(a)",
+          "explanation": "Nejprve odeber delete list, pak přidej add list: $s' = (s \\setminus \\mathrm{del}(a)) \\cup \\mathrm{add}(a)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Standardizovaný jazyk navazující na STRIPS (zkratka):",
+          "kind": "text",
+          "correctAnswer": "PDDL",
+          "explanation": "Planning Domain Definition Language — domain + problem file."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-1",
+      "prompt": "Plánovací graf a mutex vztahy",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Které vrstvy se v plánovacím grafu střídají?",
+          "kind": "choice",
+          "choices": [
+            "stavové a akční",
+            "pouze stavové",
+            "pouze akční",
+            "decision a propagation"
+          ],
+          "correctIndex": 0,
+          "explanation": "Plánovací graf má střídavé vrstvy $P_0, A_0, P_1, A_1, \\ldots$ — fakta a akce (včetně no-op)."
+        },
+        {
+          "label": "b",
+          "prompt": "Které z následujících NENÍ důvod pro mutex dvou akcí?",
+          "kind": "choice",
+          "choices": [
+            "inconsistent effects",
+            "interference",
+            "competing needs",
+            "shared no-op"
+          ],
+          "correctIndex": 3,
+          "explanation": "Tři důvody mutexu mezi akcemi: inconsistent effects, interference (jedna ničí preconditions druhé), competing needs (preconditions v mutex). Sdílený no-op naopak žádný mutex netvoří."
+        },
+        {
+          "label": "c",
+          "prompt": "Autoři algoritmu GraphPlan (rok 1997, příjmení oddělená čárkou):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "Blum,Furst",
+          "explanation": "Avrim Blum a Merrick Furst, GraphPlan 1997."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-1",
+      "prompt": "Kompilace plánování do SAT (SATPlan)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co se v SATPlan kódování zafixuje předem?",
+          "kind": "choice",
+          "choices": [
+            "počáteční stav",
+            "horizont $T$ kroků",
+            "cílová formule",
+            "počet akcí"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kódování má časovou expanzi do pevného horizontu $T$. Pokud UNSAT, zvyš $T$ a zkus znovu."
+        },
+        {
+          "label": "b",
+          "prompt": "Axiomy zajišťující, že fakt nezmění hodnotu bez příslušné akce, se nazývají:",
+          "kind": "text",
+          "correctAnswer": "frame axioms",
+          "explanation": "Frame axioms (rámové axiomy) vyjadřují perzistenci faktů mezi $t$ a $t+1$, pokud žádná akce nezmění jejich hodnotu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-1",
+      "prompt": "Heuristiky a varianty plánování",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Heuristika $h^+$ ignoruje:",
+          "kind": "choice",
+          "choices": [
+            "preconditions",
+            "add list",
+            "delete list",
+            "cíl"
+          ],
+          "correctIndex": 2,
+          "explanation": "Delete relaxation: $h^+$ ignoruje delete list — relaxovaný problém je řešitelný v polynomiálním čase, $h^+$ je admisibilní."
+        },
+        {
+          "label": "b",
+          "prompt": "Plán partial-order planneru (POP) je strukturou:",
+          "kind": "choice",
+          "choices": [
+            "lineární posloupnost",
+            "úplný strom",
+            "částečně uspořádaný DAG akcí",
+            "cyklický graf"
+          ],
+          "correctIndex": 2,
+          "explanation": "POP udržuje DAG s ordering a causal links — méně závazků, větší flexibilita."
+        },
+        {
+          "label": "c",
+          "prompt": "Rozšíření klasického plánování o hierarchickou dekomposici úloh (zkratka):",
+          "kind": "text",
+          "correctAnswer": "HTN",
+          "explanation": "Hierarchical Task Network — task networks s dekomposicí compound úloh na primitivní akce."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-2",
+      "prompt": "Definice CSP a arc consistency",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "CSP $\\mathcal P = (X, D, C)$ má domény:",
+          "kind": "choice",
+          "choices": [
+            "spojité",
+            "konečné",
+            "nekonečné spočetné",
+            "jen booleovské"
+          ],
+          "correctIndex": 1,
+          "explanation": "V klasickém CSP jsou domény konečné. Booleovský případ je SAT, spojité řeší jiné formalismy."
+        },
+        {
+          "label": "b",
+          "prompt": "Omezení $(x_i, x_j)$ je arc-consistent, pokud pro každé $v \\in D_i$ existuje $w \\in D_j$ takové, že $(v,w)$ je dovoleno:",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "Přesná definice arc consistency — každá hodnota v $D_i$ má podporu v $D_j$."
+        },
+        {
+          "label": "c",
+          "prompt": "Asymptotická složitost AC-3 ($e$ = počet binárních omezení, $d$ = max doména):",
+          "kind": "text",
+          "correctAnswer": "O(ed^3)",
+          "explanation": "AC-3 běží v $O(ed^3)$; AC-4 a AC-2001 mají lepší worst-case bound."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-2",
+      "prompt": "Heuristiky pro výběr proměnné a hodnoty",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Heuristika MRV (Minimum Remaining Values) vybírá proměnnou s:",
+          "kind": "choice",
+          "choices": [
+            "největší doménou",
+            "nejmenší doménou",
+            "nejvíce omezeními",
+            "náhodně"
+          ],
+          "correctIndex": 1,
+          "explanation": "MRV / fail-first: čím menší doména, tím dříve detekujeme konflikt — řezání stromu."
+        },
+        {
+          "label": "b",
+          "prompt": "Degree heuristic se typicky používá jako:",
+          "kind": "choice",
+          "choices": [
+            "hlavní variable ordering",
+            "tie-breaker při shodě MRV",
+            "value ordering",
+            "consistency check"
+          ],
+          "correctIndex": 1,
+          "explanation": "Při remízách MRV vybíráme proměnnou s největším počtem omezení na zbývající nepřiřazené."
+        },
+        {
+          "label": "c",
+          "prompt": "Heuristika LCV (zkratka rozepsaná, anglicky, lowercase):",
+          "kind": "text",
+          "correctAnswer": "least constraining value",
+          "explanation": "Least Constraining Value — succeed-first; vybírá hodnotu, která eliminuje nejméně možností u sousedů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-2",
+      "prompt": "Pokročilé prohledávání: backjumping a no-good",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Conflict-directed backjumping skáče zpět na:",
+          "kind": "choice",
+          "choices": [
+            "vždy předchozí proměnnou",
+            "proměnnou způsobující konflikt",
+            "kořen stromu",
+            "náhodnou úroveň"
+          ],
+          "correctIndex": 1,
+          "explanation": "Místo chronologického backtracku se skáče přímo na nejmladší proměnnou v conflict setu — efektivnější ořez."
+        },
+        {
+          "label": "b",
+          "prompt": "Záznam kombinace přiřazení vedoucí ke sporu se nazývá:",
+          "kind": "text",
+          "correctAnswer": "no-good",
+          "explanation": "No-good recording: po každém konfliktu zaznamenat sporné částečné přiřazení jako nové omezení (analogie CDCL learned clause v SAT)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-2",
+      "prompt": "Speciální struktury a lokální prohledávání",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stromové CSP (constraint graf je strom) lze řešit v:",
+          "kind": "choice",
+          "choices": [
+            "$O(n d^2)$",
+            "$O(n^2 d)$",
+            "$O(2^n)$",
+            "$O(d^n)$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Stromové CSP: DAC (directional arc consistency) + zpětná instanciace v $O(n d^2)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Lokální prohledávací heuristika začínající z náhodného úplného přiřazení a minimalizující počet porušených omezení:",
+          "kind": "text",
+          "correctAnswer": "min-conflicts",
+          "explanation": "Min-conflicts: v každém kroku změnit konfliktní proměnnou na hodnotu s nejmenším počtem porušení. Řeší miliony queens v jednotkách sekund."
+        },
+        {
+          "label": "c",
+          "prompt": "Technika redukce symetrií v CSP (anglicky, dvě slova, lowercase):",
+          "kind": "text",
+          "correctAnswer": "symmetry breaking",
+          "explanation": "Symmetry breaking — typicky lex-leader constraints, které vynutí kanonickou reprezentaci a oříznou symetrické větve."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-3",
+      "prompt": "DPLL — propagace a pure literal",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Unit propagation (BCP) se uplatní, když klauzule má:",
+          "kind": "choice",
+          "choices": [
+            "všechny literály nepřiřazené",
+            "jeden nepřiřazený literál a ostatní false",
+            "jeden literál true",
+            "žádné literály"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pokud zbývá jediný nepřiřazený literál a všechny ostatní jsou false, ten literál musí být true, aby klauzule platila."
+        },
+        {
+          "label": "b",
+          "prompt": "Pure literal: proměnná vyskytující se vždy v jedné polaritě se ohodnotí tak, aby:",
+          "kind": "choice",
+          "choices": [
+            "byla false",
+            "splnila všechny své klauzule",
+            "vznikl konflikt",
+            "byla undefined"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pure literal elimination: protože se literál vyskytuje jen v jedné polaritě, můžeme ho bez ztráty obecnosti ohodnotit tak, aby všechny klauzule, kde je, byly splněny."
+        },
+        {
+          "label": "c",
+          "prompt": "Rok publikace algoritmu DPLL (Davis-Putnam-Logemann-Loveland):",
+          "kind": "text",
+          "correctAnswer": "1962",
+          "explanation": "DPLL 1962 — backtracking + propagace, základ moderních SAT řešičů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-3",
+      "prompt": "CDCL — learning a backjumping",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Z čeho CDCL při konfliktu odvozuje learned clause?",
+          "kind": "choice",
+          "choices": [
+            "decision tree",
+            "implication graph",
+            "DPLL stack",
+            "Karnaughova mapa"
+          ],
+          "correctIndex": 1,
+          "explanation": "Analýza implication graphu, hledá se 1-UIP (Unique Implication Point), a vytváří se no-good blokující stejný konflikt."
+        },
+        {
+          "label": "b",
+          "prompt": "Bod, na kterém se v implication graphu řeže klauzule (zkratka, 4 znaky):",
+          "kind": "text",
+          "correctAnswer": "1-UIP",
+          "explanation": "1-UIP — first Unique Implication Point; nejlepší kompromis mezi krátkostí klauzule a asertivním backjumpem."
+        },
+        {
+          "label": "c",
+          "prompt": "Backjumping v CDCL je:",
+          "kind": "choice",
+          "choices": [
+            "chronologický",
+            "non-chronologický",
+            "vždy o jednu úroveň",
+            "do kořene"
+          ],
+          "correctIndex": 1,
+          "explanation": "CDCL skáče na úroveň, ze které lze pokračovat s novou learned clause jako asertivní jednotkou — často mnohem výše než předchozí decision."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-3",
+      "prompt": "Heuristiky a optimalizace CDCL",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Skóre VSIDS se aktualizuje:",
+          "kind": "choice",
+          "choices": [
+            "jen na začátku",
+            "při každé decision",
+            "při konfliktu (bump) + periodický decay",
+            "náhodně"
+          ],
+          "correctIndex": 2,
+          "explanation": "Variable State Independent Decaying Sum: bump proměnných v konfliktní klauzuli, všechna skóre periodicky decay — preferuje proměnné nedávno zapojené do konfliktů."
+        },
+        {
+          "label": "b",
+          "prompt": "Kolik literálů sleduje optimalizace watched literals na klauzuli?",
+          "kind": "text",
+          "correctAnswer": "2",
+          "explanation": "Dva watched literály — klauzule se zkoumá jen, když jeden z nich je false; výrazně urychluje BCP."
+        },
+        {
+          "label": "c",
+          "prompt": "Metrika pro mazání learned klauzulí (zkratka, 3 znaky):",
+          "kind": "text",
+          "correctAnswer": "LBD",
+          "explanation": "Literal Block Distance — počet různých decision levels v klauzuli. Klauzule s nízkým LBD se zachovávají (Glucose)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-3",
+      "prompt": "WalkSAT a srovnání s CDCL",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "WalkSAT s pravděpodobností $p$ provede:",
+          "kind": "choice",
+          "choices": [
+            "greedy flip",
+            "náhodný flip z porušené klauzule",
+            "restart",
+            "backtrack"
+          ],
+          "correctIndex": 1,
+          "explanation": "S pravděpodobností $p$ flipne náhodnou proměnnou z náhodné porušené klauzule (random walk), jinak greedy flip — kombinace uniká z lokálních optim."
+        },
+        {
+          "label": "b",
+          "prompt": "Dokáže WalkSAT prokázat UNSAT?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "Lokální metody hledají jen splňující přiřazení; nedokáží certifikovat UNSAT. Pouze systematické řešiče (DPLL/CDCL) to umějí."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro jakou třídu instancí je WalkSAT typicky výhodnější než CDCL?",
+          "kind": "choice",
+          "choices": [
+            "industriální hardware verifikace",
+            "strukturované planning",
+            "random 3-SAT poblíž phase transition",
+            "důkaz UNSAT"
+          ],
+          "correctIndex": 2,
+          "explanation": "Lokální prohledávání exceluje na random 3-SAT poblíž $m/n \\approx 4.27$; CDCL exceluje na strukturovaných industriálních instancích."
+        }
+      ]
+    }
+  ]
 }

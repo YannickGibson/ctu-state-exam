@@ -3,17 +3,437 @@
   "subjectCode": "SCR",
   "group": "ZI",
   "title": "SCR quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-SCR. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-20",
+      "prompt": "Slabá vs striktní stacionarita",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Slabá (kovarianční) stacionarita požaduje:",
+          "kind": "choice",
+          "choices": [
+            "shodu sdružených distribucí po libovolném posunu",
+            "konstantní střední hodnotu a autokovarianci závislou jen na rozdílu $\\tau$",
+            "nezávislost $X_t$ a $X_{t+\\tau}$ pro všechna $\\tau \\ne 0$",
+            "konstantní rozptyl, ale libovolný trend ve střední hodnotě"
+          ],
+          "correctIndex": 1,
+          "explanation": "Slabá stacionarita = stacionarita momentů 1. a 2. řádu: $E[X_t]=\\mu$ konstantní a $\\mathrm{cov}(X_t, X_{t+\\tau}) = \\gamma(\\tau)$ závisí jen na rozdílu."
+        },
+        {
+          "label": "b",
+          "prompt": "Implikuje striktní stacionarita (s konečnými druhými momenty) slabou?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "Pokud existují momenty 2. řádu, striktní ⇒ slabá. Bez existence momentů (např. Cauchyho rozdělení) implikace neplatí."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-20",
+      "prompt": "Bílý šum a jeho autokovariance",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hodnota autokovariance $\\gamma(\\tau)$ bílého šumu pro $\\tau \\ne 0$:",
+          "kind": "text",
+          "correctAnswer": "0",
+          "explanation": "Definice bílého šumu: $\\gamma(\\tau)=0$ pro $\\tau\\ne 0$ a $\\gamma(0)=\\sigma^2$."
+        },
+        {
+          "label": "b",
+          "prompt": "Je bílý šum slabě stacionární?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "$E[X_t]=0$, $\\mathrm{var}(X_t)=\\sigma^2$ konstantní, $\\gamma(\\tau)$ závisí jen na $\\tau$ ⇒ slabě stacionární."
+        },
+        {
+          "label": "c",
+          "prompt": "Šířka intervalu spolehlivosti pro test $\\hat\\rho(\\tau)=0$ při délce řady $n$ (Bartlett):",
+          "kind": "choice",
+          "choices": [
+            "$\\pm 1.96/\\sqrt{n}$",
+            "$\\pm 1.96/n$",
+            "$\\pm 1.96 \\cdot \\sqrt{n}$",
+            "$\\pm 1.96 \\sigma$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Pod hypotézou bílého šumu má $\\hat\\rho(\\tau)$ asymptoticky $\\mathcal N(0, 1/n)$ ⇒ pásmo $\\pm 1.96/\\sqrt{n}$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-20",
+      "prompt": "Náhodná procházka $X_t = X_{t-1} + Z_t$, $X_0=0$, $Z_t$ bílý šum s rozptylem $\\sigma^2$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Rozptyl $\\mathrm{var}(X_t)$ je roven:",
+          "kind": "text",
+          "correctAnswer": "t*sigma^2",
+          "explanation": "$X_t=\\sum_{i=1}^t Z_i$ a $Z_i$ jsou nekorelované ⇒ $\\mathrm{var}(X_t)=t\\sigma^2$. Rozptyl roste s časem, proto řada není stacionární."
+        },
+        {
+          "label": "b",
+          "prompt": "Je samotná náhodná procházka slabě stacionární?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "Rozptyl $t\\sigma^2$ závisí na $t$ ⇒ podmínka konstantního druhého momentu je porušena."
+        },
+        {
+          "label": "c",
+          "prompt": "Co je $\\Delta X_t$ u náhodné procházky?",
+          "kind": "choice",
+          "choices": [
+            "bílý šum $Z_t$",
+            "další náhodná procházka",
+            "deterministický trend",
+            "sezónní složka"
+          ],
+          "correctIndex": 0,
+          "explanation": "$\\Delta X_t = X_t - X_{t-1} = Z_t$ — první diference je stacionární bílý šum, řada je tedy I(1)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-20",
+      "prompt": "Dekompozice časové řady",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Klasický aditivní model dekompozice má tvar:",
+          "kind": "choice",
+          "choices": [
+            "$X_t = T_t \\cdot S_t \\cdot R_t$",
+            "$X_t = T_t + S_t + R_t$",
+            "$X_t = T_t + S_t \\cdot R_t$",
+            "$X_t = \\phi_1 X_{t-1} + \\varepsilon_t$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Aditivní dekompozice rozkládá řadu na trend $T_t$, sezónní složku $S_t$ a residual $R_t$ jako součet."
+        },
+        {
+          "label": "b",
+          "prompt": "Kdy je vhodnější multiplikativní dekompozice (než aditivní)?",
+          "kind": "choice",
+          "choices": [
+            "když variabilita roste s úrovní řady",
+            "když je řada striktně stacionární",
+            "když chybí sezónnost",
+            "když má řada nulovou střední hodnotu"
+          ],
+          "correctIndex": 0,
+          "explanation": "Multiplikativní model je vhodný pro rostoucí variabilitu s úrovní; logaritmování ho převede na aditivní."
+        },
+        {
+          "label": "c",
+          "prompt": "Trend-stacionární řada (vs difference-stacionární) se zbaví trendu pomocí:",
+          "kind": "choice",
+          "choices": [
+            "diferencování $\\Delta X_t$",
+            "odečtení deterministické funkce $f(t)$",
+            "Box-Coxovy transformace",
+            "Ljung-Boxova testu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Trend-stacionární řada $X_t = f(t) + \\tilde X_t$ se stacionarizuje odečtením deterministického trendu; difference-stacionární vyžaduje $\\Delta X_t$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-21",
+      "prompt": "Identifikace AR/MA podle ACF a PACF",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro proces AR(p) typicky platí:",
+          "kind": "choice",
+          "choices": [
+            "ACF se uřízne v $p$, PACF klesá geometricky",
+            "ACF klesá geometricky, PACF se uřízne v $p$",
+            "obě ACF i PACF se uříznou v $p$",
+            "obě ACF i PACF jsou nulové"
+          ],
+          "correctIndex": 1,
+          "explanation": "AR(p): ACF klesá geometricky/oscilačně, PACF se uřízne za zpožděním $p$ ($\\phi_{kk}=0$ pro $k>p$)."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro proces MA(q) se ACF:",
+          "kind": "choice",
+          "choices": [
+            "uřízne za zpožděním $q$",
+            "klesá geometricky",
+            "je konstantní",
+            "diverguje"
+          ],
+          "correctIndex": 0,
+          "explanation": "MA(q) má ACF nulovou pro $\\tau > q$ (useknutí); PACF naopak klesá geometricky/oscilačně."
+        },
+        {
+          "label": "c",
+          "prompt": "Jak se chovají ACF i PACF u smíšeného ARMA(p,q)?",
+          "kind": "choice",
+          "choices": [
+            "obě se uříznou",
+            "obě klesají postupně bez useknutí",
+            "ACF se uřízne v $p$, PACF v $q$",
+            "obě jsou nulové"
+          ],
+          "correctIndex": 1,
+          "explanation": "U ARMA(p,q) klesají obě funkce postupně, takže identifikace samotnými ACF/PACF je obtížnější — pomáhají AIC/BIC."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-21",
+      "prompt": "Stacionarita AR(1): $X_t = \\phi_1 X_{t-1} + \\varepsilon_t$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro jaké hodnoty $\\phi_1$ je AR(1) (slabě) stacionární?",
+          "kind": "choice",
+          "choices": [
+            "$|\\phi_1| < 1$",
+            "$|\\phi_1| > 1$",
+            "$\\phi_1 = 1$",
+            "$\\phi_1 \\ge 0$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kořen polynomu $1 - \\phi_1 z = 0$ je $z = 1/\\phi_1$; vně jednotkového kruhu ($|z|>1$) ⇔ $|\\phi_1|<1$."
+        },
+        {
+          "label": "b",
+          "prompt": "Jak vypadá ACF stacionárního AR(1) na zpoždění $\\tau$?",
+          "kind": "text",
+          "correctAnswer": "phi_1^tau",
+          "explanation": "ACF AR(1) klesá geometricky: $\\rho(\\tau) = \\phi_1^\\tau$."
+        },
+        {
+          "label": "c",
+          "prompt": "Jaký proces dostaneme pro $\\phi_1 = 1$?",
+          "kind": "choice",
+          "choices": [
+            "bílý šum",
+            "náhodnou procházku",
+            "MA(1)",
+            "stacionární AR(1)"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pro $\\phi_1=1$ je $X_t = X_{t-1} + \\varepsilon_t$ — náhodná procházka (jednotkový kořen, I(1))."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-21",
+      "prompt": "MA(q) — vlastnosti a invertibilita",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Je proces MA(q) s konečným $q$ vždy slabě stacionární?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "MA(q) je konečná lineární kombinace stacionárního šumu, takže je vždy stacionární — bez ohledu na parametry $\\theta_i$."
+        },
+        {
+          "label": "b",
+          "prompt": "MA(q) je invertibilní, pokud kořeny polynomu $\\theta(z)$ leží:",
+          "kind": "choice",
+          "choices": [
+            "uvnitř jednotkového kruhu",
+            "vně jednotkového kruhu",
+            "přesně na jednotkovém kruhu",
+            "v reálné ose"
+          ],
+          "correctIndex": 1,
+          "explanation": "Invertibilita MA(q) ⇔ všechny kořeny $\\theta(z)$ vně jednotkového kruhu; pak $\\varepsilon_t$ lze vyjádřit jako nekonečný AR proces."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-21",
+      "prompt": "Box-Jenkinsova metodologie a diagnostika",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Které kroky patří do Box-Jenkinsovy metodologie? (oddělené čárkou: identifikace, odhad, validace, predikce)",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "identifikace,odhad,validace,predikce",
+          "explanation": "Box-Jenkins: 1) identifikace $(p,q)$ z ACF/PACF, 2) odhad parametrů (MLE/Yule-Walker), 3) validace (residua bílý šum), 4) predikce."
+        },
+        {
+          "label": "b",
+          "prompt": "Ljung-Boxův test slouží k:",
+          "kind": "choice",
+          "choices": [
+            "určení řádu integrace",
+            "testování bílého šumu reziduí",
+            "odhadu parametrů MA",
+            "výpočtu PACF"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ljung-Boxův test ověřuje nezávislost reziduí (zda jsou bílým šumem) — klíčový krok validace ARMA modelu."
+        },
+        {
+          "label": "c",
+          "prompt": "Které informační kritérium silněji penalizuje počet parametrů?",
+          "kind": "choice",
+          "choices": ["AIC", "BIC"],
+          "correctIndex": 1,
+          "explanation": "BIC $= -2\\log L + k\\log n$ penalizuje silněji než AIC $= -2\\log L + 2k$ pro $n \\ge 8$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-22",
+      "prompt": "Operátor zpoždění $B$ a diference",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Operátor $\\Delta$ první diference je roven:",
+          "kind": "choice",
+          "choices": ["$1+B$", "$1-B$", "$B^{-1}$", "$B^2$"],
+          "correctIndex": 1,
+          "explanation": "$\\Delta X_t = X_t - X_{t-1} = (1-B)X_t$, takže $\\Delta = 1 - B$."
+        },
+        {
+          "label": "b",
+          "prompt": "Vyjádření $\\Delta^2 X_t$ pomocí $X_t, X_{t-1}, X_{t-2}$:",
+          "kind": "choice",
+          "choices": [
+            "$X_t - X_{t-2}$",
+            "$X_t - 2X_{t-1} + X_{t-2}$",
+            "$X_t + 2X_{t-1} + X_{t-2}$",
+            "$2X_t - X_{t-1}$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$(1-B)^2 = 1 - 2B + B^2$ ⇒ $\\Delta^2 X_t = X_t - 2X_{t-1} + X_{t-2}$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-22",
+      "prompt": "Integrovaný řád $I(d)$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Řada je $I(d)$, pokud:",
+          "kind": "choice",
+          "choices": [
+            "její $d$-tá diference je stacionární a $(d{-}1)$-tá ne",
+            "má $d$ sezónních složek",
+            "obsahuje $d$ AR parametrů",
+            "její ACF se uřízne v $d$"
+          ],
+          "correctIndex": 0,
+          "explanation": "$I(d)$: nejnižší řád diference, který činí řadu stacionární; náhodná procházka je $I(1)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Jaký je řád integrace náhodné procházky?",
+          "kind": "text",
+          "correctAnswer": "1",
+          "explanation": "Náhodná procházka $X_t = X_{t-1} + Z_t$: $\\Delta X_t = Z_t$ je stacionární ⇒ $I(1)$."
+        },
+        {
+          "label": "c",
+          "prompt": "Který test slouží k volbě $d$ (jednotkový kořen)?",
+          "kind": "choice",
+          "choices": ["Ljung-Box", "ADF (Augmented Dickey-Fuller)", "Chí-kvadrát", "Bartlett"],
+          "correctIndex": 1,
+          "explanation": "ADF (i KPSS, PP) testuje přítomnost jednotkového kořene a používá se pro volbu řádu diferencování $d$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-22",
+      "prompt": "Reprezentace ARIMA(p,d,q)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Obecný tvar ARIMA(p,d,q) v operátorové formě:",
+          "kind": "choice",
+          "choices": [
+            "$\\phi(B)(1-B)^d X_t = c + \\theta(B)\\varepsilon_t$",
+            "$\\phi(B) X_t = c + \\theta(B)\\varepsilon_t$",
+            "$(1-B)^d X_t = c + \\varepsilon_t$",
+            "$X_t = \\theta(B)\\varepsilon_t$"
+          ],
+          "correctIndex": 0,
+          "explanation": "ARIMA(p,d,q) je ARMA(p,q) aplikovaná na $d$-krát diferencovanou řadu: $\\phi(B)(1-B)^d X_t = c + \\theta(B)\\varepsilon_t$."
+        },
+        {
+          "label": "b",
+          "prompt": "Význam parametru $d$ v ARIMA:",
+          "kind": "choice",
+          "choices": [
+            "počet AR členů",
+            "počet MA členů",
+            "počet potřebných diferencí pro stacionaritu",
+            "rozptyl šumu"
+          ],
+          "correctIndex": 2,
+          "explanation": "$d$ je řád integrace — kolikrát řadu diferencovat, aby byla stacionární. $p$ = AR řád, $q$ = MA řád."
+        },
+        {
+          "label": "c",
+          "prompt": "Pokud $\\phi(B)$ a $\\theta(B)$ sdílejí kořen, model je:",
+          "kind": "choice",
+          "choices": [
+            "neidentifikovatelný — redundantní",
+            "automaticky stacionární",
+            "vždy invertibilní",
+            "ekvivalentní bílému šumu"
+          ],
+          "correctIndex": 0,
+          "explanation": "Společný kořen lze vykrátit ⇒ model je redundantní, parametry nejsou jednoznačně identifikovatelné a roste variance odhadů."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-22",
+      "prompt": "Speciální případy ARIMA",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "ARIMA(0,1,0) odpovídá:",
+          "kind": "choice",
+          "choices": [
+            "bílému šumu",
+            "náhodné procházce",
+            "AR(1)",
+            "MA(1)"
+          ],
+          "correctIndex": 1,
+          "explanation": "ARIMA(0,1,0): $(1-B)X_t = \\varepsilon_t$, tedy $X_t = X_{t-1} + \\varepsilon_t$ — náhodná procházka."
+        },
+        {
+          "label": "b",
+          "prompt": "Hodnoty $(p,d,q)$ pro AR(1) zapsané jako ARIMA (formát p,d,q):",
+          "kind": "text",
+          "correctAnswer": "1,0,0",
+          "explanation": "AR(1) = ARIMA(1,0,0): $\\phi(B)X_t = c + \\varepsilon_t$ bez diferencování a bez MA části."
+        },
+        {
+          "label": "c",
+          "prompt": "Co přidává sezónní část SARIMA$(p,d,q)(P,D,Q)_s$ navíc?",
+          "kind": "choice",
+          "choices": [
+            "polynomy v $B^s$ a sezónní diference $(1-B^s)^D$",
+            "Box-Coxovu transformaci",
+            "rozšíření na nelineární modely",
+            "stavovou reprezentaci"
+          ],
+          "correctIndex": 0,
+          "explanation": "SARIMA přidává sezónní AR/MA polynomy v $B^s$ a sezónní diferencování $(1-B^s)^D$ s periodou $s$ (např. $s=12$ pro měsíční data)."
+        }
+      ]
+    }
+  ]
 }

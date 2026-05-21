@@ -103,6 +103,585 @@
           "explanation": "Každý netriviální prvek má řád 2 ($3^2 = 5^2 = 7^2 = 1$), žádný negeneruje celou grupu ⇒ není cyklická."
         }
       ]
+    },
+    {
+      "questionId": "NI-SPOL-2",
+      "prompt": "Definice okruhu $R = (M, +, \\cdot)$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která struktura musí být $(M, +)$ v okruhu?",
+          "kind": "choice",
+          "choices": ["pologrupa", "monoid", "abelovská grupa", "těleso"],
+          "correctIndex": 2,
+          "explanation": "Def. 31.1: aditivní část okruhu je vždy abelovská grupa."
+        },
+        {
+          "label": "b",
+          "prompt": "Která struktura musí být $(M, \\cdot)$ v okruhu (dle Def. 31.1)?",
+          "kind": "choice",
+          "choices": ["grupoid", "pologrupa", "monoid", "abelovská grupa"],
+          "correctIndex": 2,
+          "explanation": "Def. 31.1: multiplikativní část je monoid (vyžaduje se i neutrální prvek 1)."
+        },
+        {
+          "label": "c",
+          "prompt": "Je $(\\mathbb{N}, +, \\cdot)$ okruh?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "$(\\mathbb{N}, +)$ není grupa (chybí inverzní prvky), proto $(\\mathbb{N}, +, \\cdot)$ není okruh."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-2",
+      "prompt": "Obor integrity a těleso",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Obor integrity je komutativní okruh, ve kterém ___ dělitelé nuly:",
+          "kind": "choice",
+          "choices": ["existují", "neexistují", "jsou jen invertibilní"],
+          "correctIndex": 1,
+          "explanation": "Def. 31.2: obor integrity = komutativní okruh bez dělitelů nuly."
+        },
+        {
+          "label": "b",
+          "prompt": "Těleso $T = (M, +, \\cdot)$ je okruh, ve kterém $(M \\setminus \\{0\\}, \\cdot)$ tvoří:",
+          "kind": "choice",
+          "choices": ["pologrupu", "monoid", "abelovskou grupu", "okruh"],
+          "correctIndex": 2,
+          "explanation": "Def. 31.3: nenulové prvky tělesa tvoří abelovskou (multiplikativní) grupu."
+        },
+        {
+          "label": "c",
+          "prompt": "Je $(\\mathbb{Z}, +, \\cdot)$ těleso?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "$(\\mathbb{Z}\\setminus\\{0\\}, \\cdot)$ není grupa — chybí multiplikativní inverze (např. k $2$)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-2",
+      "prompt": "Okruh polynomů $R[x]$ a ireducibilní polynom",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stupeň součinu nenulových polynomů $f, g$ nad tělesem $T$:",
+          "kind": "text",
+          "correctAnswer": "deg(f)+deg(g)",
+          "explanation": "Lemma 32.3: $\\deg(f \\cdot g) = \\deg(f) + \\deg(g)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Polynom $P(x)$ stupně $\\ge 1$ je ireducibilní nad $K$, pokud z $A(x)B(x) = P(x)$ plyne:",
+          "kind": "choice",
+          "choices": [
+            "$\\deg(A) = \\deg(B)$",
+            "$\\deg(A) = 0$ nebo $\\deg(B) = 0$",
+            "$A = B$",
+            "$A(x), B(x) \\in K$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 32.7: aspoň jeden z činitelů musí mít stupeň 0 (být konstantní)."
+        },
+        {
+          "label": "c",
+          "prompt": "Je $x^2 - 1$ ireducibilní nad $\\mathbb{Q}$?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "$x^2 - 1 = (x+1)(x-1)$ je netriviální rozklad nad $\\mathbb{Q}$ ⇒ není ireducibilní."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-2",
+      "prompt": "Konečná tělesa a $GF(p^n)$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Řád konečného tělesa musí být tvaru (kde $p$ prvočíslo, $n \\ge 1$):",
+          "kind": "text",
+          "correctAnswer": "p^n",
+          "explanation": "Věta 33.3: řád konečného tělesa je vždy mocnina prvočísla $p^n$."
+        },
+        {
+          "label": "b",
+          "prompt": "Existuje konečné těleso s 12 prvky?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 1,
+          "explanation": "Důsledek věty 33.3: $12$ není mocnina prvočísla, proto těleso řádu 12 neexistuje."
+        },
+        {
+          "label": "c",
+          "prompt": "Charakteristika tělesa $GF(p^n)$ je:",
+          "kind": "text",
+          "correctAnswer": "p",
+          "explanation": "Def. 33.4: charakteristika $GF(p^n)$ je prvočíslo $p$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-3",
+      "prompt": "Gradient a stacionární body",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Gradient $\\nabla f(\\mathbf{b})$ funkce $f: \\mathbb{R}^n \\to \\mathbb{R}$ je tvořen:",
+          "kind": "choice",
+          "choices": [
+            "druhými parciálními derivacemi",
+            "prvními parciálními derivacemi",
+            "směrovými derivacemi ve všech směrech",
+            "Hessovou maticí"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 2.2: $\\nabla f(\\mathbf{b}) = (\\partial f/\\partial x_1, \\dots, \\partial f/\\partial x_n)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Nutná podmínka lokálního extrému ve vnitřním bodě (Věta 3.1):",
+          "kind": "text",
+          "correctAnswer": "\\nabla f(b)=0",
+          "explanation": "Věta 3.1: má-li $f$ v $\\mathbf{b}$ lokální extrém a gradient existuje, pak $\\nabla f(\\mathbf{b}) = \\mathbf{0}$."
+        },
+        {
+          "label": "c",
+          "prompt": "Bod s nulovým gradientem se nazývá:",
+          "kind": "choice",
+          "choices": ["regulární", "stacionární", "singulární", "inflexní"],
+          "correctIndex": 1,
+          "explanation": "Body $\\mathbf{b}$ s $\\nabla f(\\mathbf{b}) = \\mathbf{0}$ se nazývají stacionární."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-3",
+      "prompt": "Hessova matice a definitnost",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hessova matice $\\nabla^2 f(\\mathbf{b})$ obsahuje:",
+          "kind": "choice",
+          "choices": [
+            "první parciální derivace",
+            "druhé parciální derivace",
+            "vlastní čísla $f$",
+            "směrové derivace"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 4.1: Hessián tvoří všechny druhé parciální derivace $\\partial^2 f / (\\partial x_i \\partial x_j)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Symetrická matice $A$ je pozitivně definitní právě tehdy, když všechna její vlastní čísla jsou:",
+          "kind": "choice",
+          "choices": ["nezáporná", "kladná", "nekladná", "záporná"],
+          "correctIndex": 1,
+          "explanation": "Věta 4.6: symetrická matice je pozitivně definitní ⇔ všechna vlastní čísla jsou kladná."
+        },
+        {
+          "label": "c",
+          "prompt": "Má-li symetrická matice na diagonále jeden kladný a jeden záporný prvek, je:",
+          "kind": "choice",
+          "choices": [
+            "pozitivně definitní",
+            "negativně definitní",
+            "indefinitní",
+            "semidefinitní"
+          ],
+          "correctIndex": 2,
+          "explanation": "Věta 4.8: dva diagonální prvky opačných znamének ⇒ matice je indefinitní."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-3",
+      "prompt": "Postačující podmínka extrému (Věta 4.9)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Stacionární bod s pozitivně definitním Hessiánem je:",
+          "kind": "choice",
+          "choices": [
+            "ostré lokální minimum",
+            "ostré lokální maximum",
+            "sedlový bod",
+            "nelze rozhodnout"
+          ],
+          "correctIndex": 0,
+          "explanation": "Věta 4.9: $\\nabla^2 f(\\mathbf{b})$ pozitivně definitní ⇒ ostré lokální minimum."
+        },
+        {
+          "label": "b",
+          "prompt": "Stacionární bod s indefinitním Hessiánem je:",
+          "kind": "choice",
+          "choices": [
+            "ostré lokální minimum",
+            "ostré lokální maximum",
+            "sedlový bod",
+            "nelze rozhodnout"
+          ],
+          "correctIndex": 2,
+          "explanation": "Věta 4.9: $\\nabla^2 f(\\mathbf{b})$ indefinitní ⇒ sedlový bod."
+        },
+        {
+          "label": "c",
+          "prompt": "Stacionární bod s negativně definitním Hessiánem je:",
+          "kind": "choice",
+          "choices": [
+            "ostré lokální minimum",
+            "ostré lokální maximum",
+            "sedlový bod",
+            "nelze rozhodnout"
+          ],
+          "correctIndex": 1,
+          "explanation": "Věta 4.9: $\\nabla^2 f(\\mathbf{b})$ negativně definitní ⇒ ostré lokální maximum."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-3",
+      "prompt": "Lagrangeova funkce a rovnostní vazby (Def. 7.3, Věta 7.4)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Lagrangeova funkce pro $m$ rovnostních vazeb $g_j(\\mathbf{x}) = 0$ je:",
+          "kind": "choice",
+          "choices": [
+            "$L = f - \\sum_j \\lambda_j g_j$",
+            "$L = f + \\sum_j \\lambda_j g_j$",
+            "$L = f \\cdot \\prod_j g_j$",
+            "$L = \\sum_j \\lambda_j g_j$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 7.3: $L(\\mathbf{x}; \\boldsymbol{\\lambda}) = f(\\mathbf{x}) + \\sum_{j=1}^m \\lambda_j g_j(\\mathbf{x})$."
+        },
+        {
+          "label": "b",
+          "prompt": "Koeficienty $\\lambda_j$ v Lagrangeově funkci se nazývají:",
+          "kind": "text",
+          "correctAnswer": "Lagrangeovy multiplikátory",
+          "explanation": "Def. 7.3: $\\lambda = (\\lambda_1, \\dots, \\lambda_m)$ jsou Lagrangeovy multiplikátory."
+        },
+        {
+          "label": "c",
+          "prompt": "Postačující podmínka 2. řádu pro ostré lokální minimum vyžaduje, aby $v^T \\nabla^2_x L(x^*; \\lambda^*) v$ pro nenulové $v$ splňující $\\nabla g_j(x^*)\\cdot v = 0$ bylo:",
+          "kind": "choice",
+          "choices": [
+            "$= 0$",
+            "$> 0$",
+            "$< 0$",
+            "libovolného znaménka"
+          ],
+          "correctIndex": 1,
+          "explanation": "Věta 7.4 (2): $v^T \\nabla^2_x L\\, v > 0$ pro každý nenulový tečný vektor ke všem vazbám."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-4",
+      "prompt": "Rozdělení intervalu a Darbouxovy součty (1D, Def. 8.1, 8.3)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Norma $\\nu(\\sigma)$ rozdělení intervalu $[a,b]$ je:",
+          "kind": "choice",
+          "choices": [
+            "počet dělících bodů",
+            "$\\max_k (x_k - x_{k-1})$",
+            "$\\min_k (x_k - x_{k-1})$",
+            "$b - a$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 8.1: $\\nu(\\sigma) = \\max\\{\\Delta_k\\}$ — největší šířka dílku."
+        },
+        {
+          "label": "b",
+          "prompt": "Horní Darbouxův součet $S_f(\\sigma)$ používá na každém dílku hodnotu:",
+          "kind": "choice",
+          "choices": [
+            "$\\inf f$",
+            "$\\sup f$",
+            "$f$ v krajním bodě",
+            "průměr $f$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 8.3: $S_f(\\sigma) = \\sum M_i \\Delta_i$, kde $M_i = \\sup_{[x_{i-1}, x_i]} f$."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro každé rozdělení $\\sigma$ a libovolnou omezenou $f$ platí $s_f(\\sigma) \\,?\\, S_f(\\sigma)$:",
+          "kind": "choice",
+          "choices": ["$<$", "$\\le$", "$=$", "$\\ge$"],
+          "correctIndex": 1,
+          "explanation": "Vždy $m_i \\le M_i$ na každém dílku, proto dolní součet $\\le$ horní součet."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-4",
+      "prompt": "Darbouxův integrál v 1D",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Horní Darbouxův integrál $D_f$ je:",
+          "kind": "choice",
+          "choices": [
+            "$\\sup S_f(\\sigma)$",
+            "$\\inf S_f(\\sigma)$",
+            "$\\sup s_f(\\sigma)$",
+            "$\\inf s_f(\\sigma)$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Horní integrál je infimum všech horních součtů přes rozdělení $\\sigma$."
+        },
+        {
+          "label": "b",
+          "prompt": "Dolní Darbouxův integrál $d_f$ je:",
+          "kind": "choice",
+          "choices": [
+            "$\\sup s_f(\\sigma)$",
+            "$\\inf s_f(\\sigma)$",
+            "$\\sup S_f(\\sigma)$",
+            "$\\inf S_f(\\sigma)$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Dolní integrál je supremum všech dolních součtů přes rozdělení $\\sigma$."
+        },
+        {
+          "label": "c",
+          "prompt": "$f$ je Darbouxovsky integrabilní, právě když:",
+          "kind": "choice",
+          "choices": [
+            "$D_f > d_f$",
+            "$D_f < d_f$",
+            "$D_f = d_f$",
+            "$D_f = 0$"
+          ],
+          "correctIndex": 2,
+          "explanation": "Definice: integrál existuje, právě když se horní a dolní integrál rovnají."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-4",
+      "prompt": "Dvojný integrál a Fubiniho věta (Věta 9.1)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Rozdělení obdélníku $D = [a,b]\\times[c,d]$ je definováno jako:",
+          "kind": "choice",
+          "choices": [
+            "rozdělení delší strany",
+            "součin rozdělení obou stran $\\sigma_x \\times \\sigma_y$",
+            "množina diagonálních bodů",
+            "trojúhelníková mřížka"
+          ],
+          "correctIndex": 1,
+          "explanation": "Rozdělení obdélníku je kartézský součin rozdělení $\\sigma_x$ a $\\sigma_y$ — mřížka obdélníčků."
+        },
+        {
+          "label": "b",
+          "prompt": "Fubiniho věta umožňuje dvojný integrál spočítat jako:",
+          "kind": "choice",
+          "choices": [
+            "součin dvou integrálů",
+            "dva po sobě jdoucí jednoduché integrály",
+            "limitu Riemannových součtů",
+            "rotaci křivky"
+          ],
+          "correctIndex": 1,
+          "explanation": "Věta 9.1: $\\iint_D f = \\int_a^b\\!\\int_c^d f(x,y)\\,dy\\,dx$ — postupná integrace přes proměnné."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro integrál na obecné omezené $D \\subset \\mathbb{R}^2$ definujeme $\\tilde f$ na obklopujícím obdélníku $\\widetilde D \\supset D$ tak, že mimo $D$ klademe:",
+          "kind": "text",
+          "correctAnswer": "0",
+          "explanation": "Def. 9.2: $\\tilde f(x) = f(x)$ pro $x \\in D$ a $\\tilde f(x) = 0$ jinak."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-4",
+      "prompt": "Množina míry nula a kritérium integrability (Def. 9.3, Věta 9.4)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Množina $Z \\subset \\mathbb{R}^2$ má míru nula, pokud ji lze pokrýt obdélníky s libovolně malým:",
+          "kind": "choice",
+          "choices": [
+            "počtem",
+            "obvodem",
+            "součtem obsahů",
+            "průměrem"
+          ],
+          "correctIndex": 2,
+          "explanation": "Def. 9.3: pro každé $\\varepsilon > 0$ existuje pokrytí obdélníky, jejichž součet obsahů $< \\varepsilon$."
+        },
+        {
+          "label": "b",
+          "prompt": "Omezená $f: D \\to \\mathbb{R}$ je integrabilní, právě když množina jejích bodů nespojitosti:",
+          "kind": "choice",
+          "choices": [
+            "je prázdná",
+            "je konečná",
+            "má míru nula",
+            "je uzavřená"
+          ],
+          "correctIndex": 2,
+          "explanation": "Věta 9.4: integrabilita ⇔ množina nespojitostí má míru nula (tj. $f$ je spojitá skoro všude)."
+        },
+        {
+          "label": "c",
+          "prompt": "Je každá spojitá omezená funkce na omezené množině s hranicí míry nula integrabilní?",
+          "kind": "choice",
+          "choices": ["ano", "ne"],
+          "correctIndex": 0,
+          "explanation": "Důsledek 9.5: spojitá $f$ na omezené $D$ s hranicí míry nula je integrabilní."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-5",
+      "prompt": "Kategorizace chyb v numerice (kap. 10.2)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Chyba způsobená zjednodušením fyzikální reality (zanedbání tření apod.) je chyba:",
+          "kind": "choice",
+          "choices": ["modelu", "dat", "algoritmu", "zaokrouhlovací"],
+          "correctIndex": 0,
+          "explanation": "Chyba modelu = matematický model úlohy je oproti realitě zjednodušený."
+        },
+        {
+          "label": "b",
+          "prompt": "Nepřesnost vstupních měření je chyba:",
+          "kind": "choice",
+          "choices": ["modelu", "dat", "algoritmu", "zaokrouhlovací"],
+          "correctIndex": 1,
+          "explanation": "Chyba dat: měřená vstupní data nejsou absolutně přesná."
+        },
+        {
+          "label": "c",
+          "prompt": "Chyba vzniklá v aritmetické operaci nad strojovými čísly je chyba:",
+          "kind": "choice",
+          "choices": ["modelu", "dat", "algoritmu", "zaokrouhlovací"],
+          "correctIndex": 3,
+          "explanation": "Zaokrouhlovací chyba vzniká při samotných aritmetických operacích v konečné aritmetice."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-5",
+      "prompt": "Reprezentace s pohyblivou řádovou čárkou a IEEE-754",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Vědecký zápis strojového čísla v binární bázi:",
+          "kind": "choice",
+          "choices": [
+            "$x = q \\cdot 10^e$",
+            "$x = \\pm q \\cdot 2^e$",
+            "$x = q + 2e$",
+            "$x = e \\cdot 2^q$"
+          ],
+          "correctIndex": 1,
+          "explanation": "$x = \\pm q \\cdot 2^e$, kde $q$ je signifikant a $e$ exponent."
+        },
+        {
+          "label": "b",
+          "prompt": "Kolik bitů má signifikant $m$ ve formátu binary64 (double)?",
+          "kind": "text",
+          "correctAnswer": "52",
+          "explanation": "IEEE-754 binary64: $|m| = 52$ bitů, $|e| = 11$ bitů, $b = 1023$."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro jednoduchou přesnost (binary32) je zaokrouhlovací jednotka $\\mathbf{u}$ rovna:",
+          "kind": "text",
+          "correctAnswer": "2^{-23}",
+          "explanation": "$\\mathbf{u} = 2^{-23}$ při useknutí; pro signifikant délky 23 bitů (skrytá jednička dává 24 platných cifer)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-5",
+      "prompt": "Absolutní a relativní chyba, Tvrzení 11.4",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro $\\alpha \\in F$ aproximující $a \\ne 0$ je relativní chyba:",
+          "kind": "choice",
+          "choices": [
+            "$|\\alpha - a|$",
+            "$\\frac{|\\alpha - a|}{|a|}$",
+            "$\\frac{|\\alpha - a|}{|\\alpha|}$",
+            "$|\\alpha| - |a|$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Def. 11.2: relativní chyba $= |\\alpha - a| / |a|$ pro $a \\ne 0$."
+        },
+        {
+          "label": "b",
+          "prompt": "Tvrzení 11.4: $\\mathrm{fl}(x \\odot y) = (x \\odot y)(1 + \\delta)$, kde $|\\delta| \\le$:",
+          "kind": "text",
+          "correctAnswer": "u",
+          "explanation": "$|\\delta| \\le \\mathbf{u}$ — zaokrouhlovací jednotka aritmetiky."
+        },
+        {
+          "label": "c",
+          "prompt": "Jev, kdy odečtením dvou blízkých čísel ztratíme mnoho platných cifer, se nazývá:",
+          "kind": "text",
+          "correctAnswer": "krácení",
+          "explanation": "Krácení (cancellation): při odečtu blízkých hodnot se ztrácejí významné cifry výsledku."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-SPOL-5",
+      "prompt": "Podmíněnost úlohy a stabilita algoritmu (kap. 17, 18.3)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Dopředná (forward) chyba je:",
+          "kind": "choice",
+          "choices": [
+            "$V^*(d) - V(d)$",
+            "nejmenší $\\Delta d$ tak, že $V^*(d + \\Delta d) = V(d)$",
+            "$\\|d\\| - \\|V(d)\\|$",
+            "$\\kappa(A)$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Forward error $\\Delta v = V^*(d) - V(d)$ — odchylka spočítaného od přesného řešení."
+        },
+        {
+          "label": "b",
+          "prompt": "Algoritmus je zpětně stabilní, pokud je pro každý vstup ___ relativně malá:",
+          "kind": "choice",
+          "choices": [
+            "dopředná chyba",
+            "zpětná chyba",
+            "podmíněnost",
+            "norma vstupu"
+          ],
+          "correctIndex": 1,
+          "explanation": "Zpětně stabilní algoritmus = backward error je relativně malá pro každý vstup."
+        },
+        {
+          "label": "c",
+          "prompt": "Číslo podmíněnosti matice $A$ pro $Ax = b$ je:",
+          "kind": "text",
+          "correctAnswer": "\\|A\\|\\|A^{-1}\\|",
+          "explanation": "$\\kappa(A) = \\|A\\| \\cdot \\|A^{-1}\\|$ — relativní chyba řešení omezena $\\kappa(A)$-násobkem rel. chyby pravé strany."
+        }
+      ]
     }
   ]
 }

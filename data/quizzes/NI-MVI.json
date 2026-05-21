@@ -3,17 +3,501 @@
   "subjectCode": "MVI",
   "group": "ZI",
   "title": "MVI quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-MVI. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-7",
+      "prompt": "Backpropagation a chain rule",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro výstupní vrstvu s MSE a aktivací $f$ má lokální gradient $\\delta_j^{(L)}$ tvar:",
+          "kind": "choice",
+          "choices": [
+            "$(a_j^{(L)} - t_j)$",
+            "$(a_j^{(L)} - t_j)\\, f'(n_j^{(L)})$",
+            "$\\sum_k w_{jk} \\delta_k$",
+            "$f'(n_j^{(L)})$"
+          ],
+          "correctIndex": 1,
+          "explanation": "Z chain rule: derivace ztráty podle pre-aktivace = (chyba) × (derivace přenosové funkce)."
+        },
+        {
+          "label": "b",
+          "prompt": "Update vah ve vrstvě $\\ell$ (doplňte chybějící výraz, např. `delta`):",
+          "kind": "text",
+          "correctAnswer": "delta",
+          "explanation": "$w_{ij}(t+1) = w_{ij}(t) - \\alpha\\, a_i^{(\\ell-1)}\\, \\delta_j^{(\\ell)}$ — gradient = vstup × lokální delta."
+        },
+        {
+          "label": "c",
+          "prompt": "Jaká věta zaručuje, že MLP s 1 skrytou vrstvou je univerzální aproximátor?",
+          "kind": "text",
+          "correctAnswer": "kolmogorovova",
+          "explanation": "Kolmogorovova (resp. Cybenkova) věta o univerzální aproximaci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-7",
+      "prompt": "Konvoluční vrstva — hyperparametry",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hyperparametry konvoluční vrstvy (vyjmenujte oddělené čárkou):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "filter_size,stride,padding,k",
+          "explanation": "Velikost filtru, krok (stride), výplň (padding) a počet filtrů $K$."
+        },
+        {
+          "label": "b",
+          "prompt": "Vstup 32×32×3, 10 filtrů 5×5, stride 1, padding 0. Šířka výstupní mapy?",
+          "kind": "text",
+          "correctAnswer": "28",
+          "explanation": "$(32 - 5)/1 + 1 = 28$."
+        },
+        {
+          "label": "c",
+          "prompt": "Hlavní účel pooling vrstvy:",
+          "kind": "choice",
+          "choices": [
+            "přidat nelinearitu",
+            "redukce dimenze a invariance vůči malým posunům",
+            "normalizace aktivací",
+            "učení vah filtrů"
+          ],
+          "correctIndex": 1,
+          "explanation": "Max/average pooling zmenšuje feature mapy a dává lokální translation invarianci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-7",
+      "prompt": "Inicializace a normalizace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro vrstvy s aktivací ReLU se používá inicializace:",
+          "kind": "choice",
+          "choices": ["Xavier/Glorot", "He", "konstantní 0", "uniformní (-1,1)"],
+          "correctIndex": 1,
+          "explanation": "He inicializace $\\mathcal N(0, 2/n_\\mathrm{in})$ je odvozena pro ReLU; Xavier je pro sigmoid/tanh."
+        },
+        {
+          "label": "b",
+          "prompt": "Batch normalization normalizuje aktivace přes:",
+          "kind": "choice",
+          "choices": ["jednu vrstvu napříč vzorky mini-batche", "jeden vzorek napříč vrstvami", "všechna data datasetu naráz", "jen výstupní vrstvu"],
+          "correctIndex": 0,
+          "explanation": "BatchNorm spočítá střední hodnotu/varianci aktivace přes mini-batch a normalizuje."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-7",
+      "prompt": "ResNet a hluboké architektury",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hlavní motivace skip (residual) connections v ResNetu:",
+          "kind": "choice",
+          "choices": [
+            "snížit počet parametrů",
+            "umožnit trénink hlubokých sítí (řeší degradaci/vanishing gradient)",
+            "nahradit pooling",
+            "zvětšit receptive field"
+          ],
+          "correctIndex": 1,
+          "explanation": "Identitní zkratky umožňují gradientu téct přes desítky/stovky vrstev; síť se učí reziduum $F(x) + x$."
+        },
+        {
+          "label": "b",
+          "prompt": "V jakém roce a soutěži se průlomově prosadil AlexNet?",
+          "kind": "text",
+          "correctAnswer": "2012",
+          "explanation": "AlexNet vyhrál ImageNet 2012 a odstartoval éru hlubokého učení."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-8",
+      "prompt": "Autoencoder — princip",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Autoenkodér se učí:",
+          "kind": "choice",
+          "choices": ["s učitelem (klasifikace)", "bez učitele, rekonstrukcí vstupu", "reinforcement learning", "kontrastivně"],
+          "correctIndex": 1,
+          "explanation": "AE minimalizuje $\\|x - D(E(x))\\|^2$, žádné labely nepotřebuje."
+        },
+        {
+          "label": "b",
+          "prompt": "Varianta AE, která dostává zašuměný vstup a má rekonstruovat čistý:",
+          "kind": "text",
+          "correctAnswer": "denoising",
+          "explanation": "Denoising AE — robustní reprezentace díky šumu na vstupu."
+        },
+        {
+          "label": "c",
+          "prompt": "Typická aplikace AE detekující odlehlé vzorky podle rekonstrukční chyby:",
+          "kind": "text",
+          "correctAnswer": "anomaly detection",
+          "explanation": "Vysoká rekonstrukční chyba ⇒ vzorek mimo trénovací rozdělení."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-8",
+      "prompt": "Variational Autoencoder (VAE)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "ELBO ztráta VAE se skládá z:",
+          "kind": "choice",
+          "choices": [
+            "rekonstrukční člen + adversarial člen",
+            "rekonstrukční člen + KL-divergence k prioru",
+            "jen KL-divergence",
+            "cross-entropy + L2 regularizace"
+          ],
+          "correctIndex": 1,
+          "explanation": "$\\mathcal L = -E_q[\\log p_\\theta(x\\mid z)] + D_{\\mathrm{KL}}(q_\\phi(z\\mid x)\\,\\|\\,p(z))$."
+        },
+        {
+          "label": "b",
+          "prompt": "Reparameterization trick: $z = \\mu + \\sigma \\odot \\epsilon$. Z jakého rozdělení vzorkujeme $\\epsilon$?",
+          "kind": "choice",
+          "choices": ["$\\mathcal U(0,1)$", "$\\mathcal N(0, I)$", "$\\mathrm{Bernoulli}(0.5)$", "$\\mathrm{Exp}(1)$"],
+          "correctIndex": 1,
+          "explanation": "Standardní normální umožní gradientní propagaci skrz náhodný vzorek."
+        },
+        {
+          "label": "c",
+          "prompt": "Jaký je prior $p(z)$ ve standardním VAE? (např. `N(0,I)`)",
+          "kind": "text",
+          "correctAnswer": "n(0,i)",
+          "explanation": "Standardní vícerozměrné normální rozdělení $\\mathcal N(0, I)$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-8",
+      "prompt": "Generative Adversarial Networks (GAN)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Optimalizační úloha GAN je:",
+          "kind": "choice",
+          "choices": ["$\\min_G \\min_D V$", "$\\max_G \\max_D V$", "$\\min_G \\max_D V$", "$\\max_G \\min_D V$"],
+          "correctIndex": 2,
+          "explanation": "Generator minimalizuje, discriminator maximalizuje hodnotovou funkci."
+        },
+        {
+          "label": "b",
+          "prompt": "V Nashově rovnováze GAN je $D(x) = $",
+          "kind": "text",
+          "correctAnswer": "1/2",
+          "explanation": "$p_G = p_\\mathrm{data}$ ⇒ discriminator nedokáže rozlišit a vrací $1/2$."
+        },
+        {
+          "label": "c",
+          "prompt": "Jak se nazývá patologie, kdy generator produkuje jen úzkou množinu výstupů?",
+          "kind": "text",
+          "correctAnswer": "mode collapse",
+          "explanation": "Mode collapse — generator pokryje jen pár módů datového rozdělení."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-8",
+      "prompt": "Diffusion modely",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Diffusion model generuje vzorky pomocí:",
+          "kind": "choice",
+          "choices": [
+            "jedné dopředné průchodu generátoru",
+            "iterativního odšumování (denoising) z náhodného šumu",
+            "adversariálního souboje dvou sítí",
+            "rekurentní predikce tokenu"
+          ],
+          "correctIndex": 1,
+          "explanation": "DDPM trénuje predikci přidaného šumu; generace = postupné odšumování přes $T$ kroků."
+        },
+        {
+          "label": "b",
+          "prompt": "Jakou hlavní výhodu mají diffusion modely oproti GAN?",
+          "kind": "choice",
+          "choices": [
+            "rychlejší inference",
+            "stabilnější trénink a vyšší kvalita vzorků",
+            "menší modely",
+            "není potřeba trénovat"
+          ],
+          "correctIndex": 1,
+          "explanation": "Diffusion má stabilnější optimalizaci než adversariální trénink a dnes dosahuje SOTA kvality."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-9",
+      "prompt": "Rozdíl FF vs RNN",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hlavní vlastnost RNN, kterou FF nemá:",
+          "kind": "choice",
+          "choices": ["nelineární aktivace", "cyklické spojení / paměť", "sdílené váhy", "softmax výstup"],
+          "correctIndex": 1,
+          "explanation": "RNN obsahuje alespoň jeden cyklus, takže aktivace přetrvávají v čase."
+        },
+        {
+          "label": "b",
+          "prompt": "Algoritmus tréninku RNN se nazývá:",
+          "kind": "text",
+          "correctAnswer": "bptt",
+          "explanation": "Backpropagation Through Time — síť se rozbalí v čase a aplikuje se standardní backprop."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-9",
+      "prompt": "LSTM brány",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Vyjmenujte 3 brány LSTM buňky (oddělené čárkou):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "forget,input,output",
+          "explanation": "Forget gate, input gate, output gate; plus kandidátní stav $\\tilde c_t$."
+        },
+        {
+          "label": "b",
+          "prompt": "Jaký problém BPTT mají brány LSTM řešit?",
+          "kind": "choice",
+          "choices": [
+            "overfitting",
+            "vanishing/exploding gradients při dlouhých sekvencích",
+            "vysoká paměťová náročnost",
+            "neexistence nelinearit"
+          ],
+          "correctIndex": 1,
+          "explanation": "Gradient teče přes paměťovou stěnu $c_t$ s minimální distorcí."
+        },
+        {
+          "label": "c",
+          "prompt": "Zjednodušená varianta LSTM se 2 branami (update, reset):",
+          "kind": "text",
+          "correctAnswer": "gru",
+          "explanation": "Gated Recurrent Unit — Cho et al. 2014."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-9",
+      "prompt": "Seq2seq a Hopfield",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Jaký problém encoder-decoder RNN řeší Bahdanauův attention?",
+          "kind": "choice",
+          "choices": [
+            "rychlost tréninku",
+            "úzké hrdlo fixního kontextového vektoru",
+            "počet parametrů",
+            "regularizaci"
+          ],
+          "correctIndex": 1,
+          "explanation": "Dec se v každém kroku dívá na vážený součet všech hidden states enc — bez fixní bottleneck."
+        },
+        {
+          "label": "b",
+          "prompt": "Energetická funkce Hopfieldovy sítě se v průběhu dynamiky:",
+          "kind": "choice",
+          "choices": ["zvyšuje", "nemění", "klesá (konverguje k lokálnímu minimu)", "osciluje"],
+          "correctIndex": 2,
+          "explanation": "$E$ monotónně klesá a síť konverguje k uloženému vzoru (asociativní paměť)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-9",
+      "prompt": "Neuroevoluce a NEAT",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co NEAT (Stanley & Miikkulainen) evolučně optimalizuje?",
+          "kind": "choice",
+          "choices": [
+            "jen váhy fixní sítě",
+            "jen topologii s pevnými vahami",
+            "váhy i topologii současně",
+            "jen hyperparametry učení"
+          ],
+          "correctIndex": 2,
+          "explanation": "NEAT roste topologii (přidává neurony/spoje) a zároveň optimalizuje váhy."
+        },
+        {
+          "label": "b",
+          "prompt": "Jaký mechanismus v NEAT umožňuje crossover topologicky odlišných sítí?",
+          "kind": "text",
+          "correctAnswer": "innovation numbers",
+          "explanation": "Innovation numbers identifikují historicky odpovídající geny napříč jedinci."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-10",
+      "prompt": "Scaled dot-product attention",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Vzorec attention je $\\mathrm{softmax}(QK^T / \\square)\\, V$. Doplňte čitatel/jmenovatel uvnitř softmaxu:",
+          "kind": "text",
+          "correctAnswer": "sqrt(d_k)",
+          "explanation": "Škálování $\\sqrt{d_k}$ zabraňuje saturaci softmaxu pro velké dimenze."
+        },
+        {
+          "label": "b",
+          "prompt": "Proč se v decoderu používá masked self-attention?",
+          "kind": "choice",
+          "choices": [
+            "kvůli rychlosti tréninku",
+            "aby pozice $t$ neviděla budoucí tokeny (causal/autoregresivní)",
+            "kvůli regularizaci",
+            "aby šetřila paměť"
+          ],
+          "correctIndex": 1,
+          "explanation": "Causal maska nuluje pozice $>t$ ve výpočtu softmaxu — autoregresivní generace."
+        },
+        {
+          "label": "c",
+          "prompt": "Co znamená 'self' v self-attention?",
+          "kind": "choice",
+          "choices": [
+            "$Q$ je trénovatelná, $K, V$ jsou pevné",
+            "$Q, K, V$ vznikají ze stejné vstupní sekvence",
+            "attention bez parametrů",
+            "attention nad výstupem encoderu"
+          ],
+          "correctIndex": 1,
+          "explanation": "$Q, K, V$ se získávají lineárními projekcemi téhož vstupu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-10",
+      "prompt": "Multi-head attention a positional encoding",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Hlavní účel multi-head attention:",
+          "kind": "choice",
+          "choices": [
+            "zrychlit výpočet",
+            "modelovat různé typy vztahů paralelně v různých podprostorech",
+            "nahradit FFN",
+            "redukovat počet parametrů"
+          ],
+          "correctIndex": 1,
+          "explanation": "Každá hlava se učí jinou reprezentaci; výstupy se konkatenují a projektují."
+        },
+        {
+          "label": "b",
+          "prompt": "Proč transformer potřebuje positional encoding?",
+          "kind": "choice",
+          "choices": [
+            "kvůli numerické stabilitě",
+            "self-attention je permutačně invariantní, takže musí dostat informaci o pořadí",
+            "kvůli rychlejší konvergenci",
+            "aby se zmenšily gradienty"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bez PE by transformer nerozlišil pořadí tokenů — používá se sin/cos nebo learned PE."
+        },
+        {
+          "label": "c",
+          "prompt": "Asymptotická složitost standardní self-attention v délce sekvence $n$:",
+          "kind": "text",
+          "correctAnswer": "o(n^2)",
+          "explanation": "Matice $QK^T$ má rozměr $n \\times n$ ⇒ kvadratická složitost."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-10",
+      "prompt": "BERT vs GPT",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "BERT používá jaký díl transformeru a jaký pretrain cíl?",
+          "kind": "choice",
+          "choices": [
+            "decoder, autoregresivní predikce",
+            "encoder, masked language modeling",
+            "encoder-decoder, translation",
+            "decoder, next sentence prediction"
+          ],
+          "correctIndex": 1,
+          "explanation": "BERT = encoder-only, MLM (+ NSP) na velkém korpusu."
+        },
+        {
+          "label": "b",
+          "prompt": "GPT je trénován jakým způsobem?",
+          "kind": "choice",
+          "choices": [
+            "obousměrný masked LM",
+            "autoregresivní predikce dalšího tokenu (causal LM)",
+            "kontrastivní učení",
+            "adversariálně"
+          ],
+          "correctIndex": 1,
+          "explanation": "Decoder-only s causal self-attention, učí $p(x_t \\mid x_{<t})$."
+        },
+        {
+          "label": "c",
+          "prompt": "Adaptace LLM na úlohu z příkladů v promptu (bez updatu vah):",
+          "kind": "text",
+          "correctAnswer": "in-context learning",
+          "explanation": "In-context / few-shot learning — model se 'naučí' z příkladů v promptu."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-10",
+      "prompt": "Transfer a meta learning",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Co hledá MAML (Model-Agnostic Meta-Learning)?",
+          "kind": "choice",
+          "choices": [
+            "architekturu sítě",
+            "inicializaci vah vhodnou pro rychlou adaptaci na novou úlohu",
+            "optimalizér s adaptivním learning rate",
+            "ztrátovou funkci"
+          ],
+          "correctIndex": 1,
+          "explanation": "MAML hledá $\\theta$, ze kterého stačí 1-pár gradientních kroků k dobré adaptaci."
+        },
+        {
+          "label": "b",
+          "prompt": "Metoda fine-tuningu, kdy se přidají malé trénovatelné moduly (zachovají původní váhy):",
+          "kind": "text",
+          "correctAnswer": "lora",
+          "explanation": "LoRA (Low-Rank Adaptation) / adaptery — efektivní transfer s minimem nových parametrů."
+        },
+        {
+          "label": "c",
+          "prompt": "Vision Transformer (ViT) rozdělí obraz na:",
+          "kind": "text",
+          "correctAnswer": "patches",
+          "explanation": "Obraz se rozsekne na patche (např. 16×16), každý je lineárně promítnut na embedding."
+        }
+      ]
+    }
+  ]
 }

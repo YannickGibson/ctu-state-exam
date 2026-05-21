@@ -3,17 +3,346 @@
   "subjectCode": "PON",
   "group": "ZI",
   "title": "PON quiz",
-  "_note": "Placeholder — no real questions yet. When you add real ones, delete this `_note` and the `_template` field below, then populate `questions` following the NI-MPI.json schema (each entry: { questionId, prompt, parts: [{ label, prompt, kind: \"choice\" | \"text\", … }] }).",
-  "_template": {
-    "prompt": "Placeholder question for NI-PON. Replace with real content.",
-    "choices": [
-      "Option A",
-      "Option B",
-      "Option C",
-      "Option D"
-    ],
-    "correctIndex": 0,
-    "explanation": "Explanation for the correct answer goes here."
-  },
-  "questions": []
+  "questions": [
+    {
+      "questionId": "NI-ZI-17",
+      "prompt": "Definice a vlastnosti QR rozkladu",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "V rozkladu $A = QR$ pro $A \\in \\mathbb{R}^{m \\times n}$ ($m \\ge n$) platí o matici $Q$:",
+          "kind": "choice",
+          "choices": ["je horní trojúhelníková", "je ortogonální ($Q^T Q = I$)", "je diagonální", "je symetrická pozitivně definitní"],
+          "correctIndex": 1,
+          "explanation": "$Q$ je ortogonální matice, $R$ je horní trojúhelníková."
+        },
+        {
+          "label": "b",
+          "prompt": "Tvar matice $R$ (jedním slovem, např. `diagonalni`):",
+          "kind": "text",
+          "correctAnswer": "horni trojuhelnikova",
+          "explanation": "$R$ je horní trojúhelníková ($r_{ij} = 0$ pro $i > j$)."
+        },
+        {
+          "label": "c",
+          "prompt": "Při požadavku $R_{ii} > 0$ a lineárně nezávislých sloupcích $A$ je QR rozklad:",
+          "kind": "choice",
+          "choices": ["není jednoznačný", "jednoznačný", "existuje jen pro symetrické $A$"],
+          "correctIndex": 1,
+          "explanation": "Za těchto podmínek je QR rozklad jednoznačný."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-17",
+      "prompt": "Metody výpočtu QR rozkladu",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Která metoda je numericky nejméně stabilní?",
+          "kind": "choice",
+          "choices": ["klasický Gram-Schmidt", "modifikovaný Gram-Schmidt", "Householderova reflexe", "Givensovy rotace"],
+          "correctIndex": 0,
+          "explanation": "Klasický Gram-Schmidt trpí ztrátou ortogonality; modifikovaná verze i Householder jsou stabilnější."
+        },
+        {
+          "label": "b",
+          "prompt": "Householderova reflexní matice má tvar $H = I - 2\\frac{vv^T}{v^T v}$. $H$ je:",
+          "kind": "choice",
+          "choices": ["symetrická a ortogonální", "horní trojúhelníková", "diagonální", "antisymetrická"],
+          "correctIndex": 0,
+          "explanation": "$H = H^T = H^{-1}$, je tedy symetrická i ortogonální."
+        },
+        {
+          "label": "c",
+          "prompt": "Která metoda nuluje vždy jen jeden prvek a je vhodná pro řídké matice?",
+          "kind": "text",
+          "correctAnswer": "givensovy rotace",
+          "explanation": "Givensovy rotace anulují jednotlivé prvky postupně, výhodné u řídkých matic."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-17",
+      "prompt": "QR a nejmenší čtverce (OLS)",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Proč ortogonální transformace nemění Euklidovu normu $\\|Q^T y\\| = \\|y\\|$?",
+          "kind": "choice",
+          "choices": ["protože $Q$ je trojúhelníková", "protože $Q^T Q = I$", "protože $\\det Q = 1$", "protože $Q$ je řídká"],
+          "correctIndex": 1,
+          "explanation": "$\\|Q^T y\\|^2 = y^T Q Q^T y = y^T y$, protože $Q Q^T = I$."
+        },
+        {
+          "label": "b",
+          "prompt": "Po dosazení $X = QR$ do $\\min \\|Xw - Y\\|^2$ se úloha redukuje na řešení soustavy:",
+          "kind": "choice",
+          "choices": ["normálních rovnic $X^T X w = X^T Y$", "trojúhelníkové soustavy $R_S w = c_1$ zpětnou substitucí", "diagonální soustavy $\\Sigma w = c$", "tridiagonální soustavy"],
+          "correctIndex": 1,
+          "explanation": "Po násobení $Q^T$ vychází $R_S \\hat w = c_1$, kterou stačí dořešit zpětnou substitucí."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-17",
+      "prompt": "QR algoritmus pro vlastní čísla",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Iterační krok QR algoritmu pro $A_k$:",
+          "kind": "choice",
+          "choices": ["$A_{k+1} = Q_k R_k$", "$A_{k+1} = R_k Q_k$", "$A_{k+1} = Q_k^T R_k$", "$A_{k+1} = R_k Q_k^T$"],
+          "correctIndex": 1,
+          "explanation": "Spočti $A_k = Q_k R_k$ a polož $A_{k+1} = R_k Q_k = Q_k^T A_k Q_k$ (podobnost zachovává vlastní čísla)."
+        },
+        {
+          "label": "b",
+          "prompt": "Pro symetrickou $A$ posloupnost $A_k$ konverguje k matici, která je:",
+          "kind": "text",
+          "correctAnswer": "diagonalni",
+          "explanation": "Pro symetrické $A$ konverguje $A_k$ k diagonální matici s vlastními čísly na diagonále."
+        },
+        {
+          "label": "c",
+          "prompt": "Jaký řád konvergence dosahuje QR algoritmus s vhodnými shifty (např. Wilkinsonův shift)?",
+          "kind": "choice",
+          "choices": ["lineární", "super-lineární", "kvadratický"],
+          "correctIndex": 2,
+          "explanation": "Vhodný shift dává kvadratickou konvergenci; Hessenbergova redukce navíc snižuje cenu jedné iterace."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-18",
+      "prompt": "Definice SVD",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Pro libovolnou $A \\in \\mathbb{R}^{m \\times n}$ má SVD tvar:",
+          "kind": "choice",
+          "choices": ["$A = Q R$", "$A = U \\Sigma V^T$", "$A = L L^T$", "$A = P D P^{-1}$"],
+          "correctIndex": 1,
+          "explanation": "SVD: $A = U \\Sigma V^T$, kde $U, V$ jsou ortogonální a $\\Sigma$ obsahuje singulární hodnoty."
+        },
+        {
+          "label": "b",
+          "prompt": "Singulární hodnoty $\\sigma_i$ na diagonále $\\Sigma$ jsou seřazeny:",
+          "kind": "choice",
+          "choices": ["náhodně", "vzestupně", "sestupně ($\\sigma_1 \\ge \\sigma_2 \\ge \\ldots \\ge 0$)"],
+          "correctIndex": 2,
+          "explanation": "Konvence: singulární hodnoty jsou nezáporné a sestupně seřazené."
+        },
+        {
+          "label": "c",
+          "prompt": "Počet nenulových singulárních hodnot udává:",
+          "kind": "text",
+          "correctAnswer": "hodnost",
+          "explanation": "$r = \\mathrm{rank}(A)$ je roven počtu nenulových $\\sigma_i$."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-18",
+      "prompt": "Vztah SVD k vlastním číslům",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Sloupce matice $V$ jsou vlastní vektory:",
+          "kind": "choice",
+          "choices": ["$A$", "$A^T A$", "$A A^T$", "$A + A^T$"],
+          "correctIndex": 1,
+          "explanation": "$V$ tvoří ortonormální vlastní vektory $A^T A$ s vlastními čísly $\\sigma_i^2$."
+        },
+        {
+          "label": "b",
+          "prompt": "Vztah mezi singulárními hodnotami $A$ a vlastními čísly $A^T A$:",
+          "kind": "choice",
+          "choices": ["$\\sigma_i = \\lambda_i$", "$\\sigma_i = \\sqrt{\\lambda_i}$", "$\\sigma_i = \\lambda_i^2$", "nesouvisí spolu"],
+          "correctIndex": 1,
+          "explanation": "$\\sigma_i(A) = \\sqrt{\\lambda_i(A^T A)}$ pro $\\lambda_i \\ge 0$."
+        },
+        {
+          "label": "c",
+          "prompt": "Kondiční číslo $\\kappa(A) =$ (vzorec se $\\sigma_{\\max}$, $\\sigma_{\\min}$):",
+          "kind": "text",
+          "correctAnswer": "sigma_max/sigma_min",
+          "explanation": "$\\kappa(A) = \\sigma_{\\max}/\\sigma_{\\min}$ udává citlivost soustavy na perturbace."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-18",
+      "prompt": "Eckart-Youngova věta a low-rank aproximace",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Nejlepší aproximace $A$ matici hodnosti $k$ ve Frobeniově normě je:",
+          "kind": "choice",
+          "choices": ["náhodná projekce na $k$ dimenzí", "$A_k = \\sum_{i=1}^k \\sigma_i u_i v_i^T$", "horních $k$ řádků $A$", "QR rozklad zkrácený na $k$ sloupců"],
+          "correctIndex": 1,
+          "explanation": "Eckart-Young: optimální rank-$k$ aproximace je součet prvních $k$ singulárních trojic."
+        },
+        {
+          "label": "b",
+          "prompt": "Chyba aproximace $\\|A - A_k\\|_F$ se rovná:",
+          "kind": "choice",
+          "choices": ["$\\sigma_{k+1}$", "$\\sqrt{\\sum_{i > k} \\sigma_i^2}$", "$\\sum_{i > k} \\sigma_i$", "$0$"],
+          "correctIndex": 1,
+          "explanation": "Frobeniova chyba je $\\sqrt{\\sum_{i>k} \\sigma_i^2}$ (ve 2-normě je to $\\sigma_{k+1}$)."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-18",
+      "prompt": "Aplikace SVD ve strojovém učení",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Moore-Penroseova pseudoinverze přes SVD je:",
+          "kind": "choice",
+          "choices": ["$A^+ = V \\Sigma^+ U^T$", "$A^+ = U \\Sigma^+ V^T$", "$A^+ = U^T \\Sigma V$", "$A^+ = \\Sigma^{-1}$"],
+          "correctIndex": 0,
+          "explanation": "$A^+ = V \\Sigma^+ U^T$, kde $\\Sigma^+$ má $1/\\sigma_i$ pro nenulová $\\sigma_i$."
+        },
+        {
+          "label": "b",
+          "prompt": "PCA je ekvivalentní SVD aplikované na:",
+          "kind": "choice",
+          "choices": ["libovolnou matici dat", "centrovanou (mean-subtracted) datovou matici", "kovarianční matici", "korelační matici"],
+          "correctIndex": 1,
+          "explanation": "Centrované $X = U \\Sigma V^T$ — hlavní komponenty jsou sloupce $V$, projekce $U \\Sigma$."
+        },
+        {
+          "label": "c",
+          "prompt": "Vyjmenuj alespoň dvě další ML aplikace SVD (čárkou oddělené, např. `lsa, pca`):",
+          "kind": "text",
+          "compare": "list",
+          "correctAnswer": "lsa,low-rank aproximace,recommender systems,word embeddings,spectral clustering,regularizace",
+          "explanation": "Mezi typické aplikace patří LSA, doporučovací systémy, word embeddings, spectral clustering, regularizace, low-rank aproximace."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-19",
+      "prompt": "Optimální podmínky bez omezení",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Nutná podmínka 1. řádu pro lokální minimum hladké $f$:",
+          "kind": "choice",
+          "choices": ["$\\nabla f(x^*) > 0$", "$\\nabla f(x^*) = 0$", "$\\nabla^2 f(x^*) = 0$", "$f(x^*) = 0$"],
+          "correctIndex": 1,
+          "explanation": "Stacionarita: $\\nabla f(x^*) = 0$."
+        },
+        {
+          "label": "b",
+          "prompt": "Postačující podmínka 2. řádu navíc vyžaduje, aby Hessian $\\nabla^2 f(x^*)$ byl:",
+          "kind": "text",
+          "correctAnswer": "pozitivne definitni",
+          "explanation": "$\\nabla^2 f(x^*) \\succ 0$ zaručuje, že stacionární bod je lokálním minimem."
+        },
+        {
+          "label": "c",
+          "prompt": "Pro konvexní $f$ je každý stacionární bod:",
+          "kind": "choice",
+          "choices": ["sedlovým bodem", "lokálním maximem", "globálním minimem"],
+          "correctIndex": 2,
+          "explanation": "Konvexita zaručuje, že lokální minimum je globální."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-19",
+      "prompt": "Volba směru $p_k$",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Směr v metodě nejprudšího spádu:",
+          "kind": "choice",
+          "choices": ["$p_k = \\nabla f(x_k)$", "$p_k = -\\nabla f(x_k)$", "$p_k = -[\\nabla^2 f]^{-1} \\nabla f$", "$p_k = 0$"],
+          "correctIndex": 1,
+          "explanation": "Steepest descent jde proti gradientu: $p_k = -\\nabla f(x_k)$."
+        },
+        {
+          "label": "b",
+          "prompt": "Newtonův směr $p_k =$ (vzorec, např. `-H^{-1} g`):",
+          "kind": "text",
+          "correctAnswer": "-h^{-1} g",
+          "explanation": "$p_k = -[\\nabla^2 f(x_k)]^{-1} \\nabla f(x_k)$ — optimum kvadratického modelu."
+        },
+        {
+          "label": "c",
+          "prompt": "Jaká je řád konvergence Newtonovy metody v okolí silně konvexního minima?",
+          "kind": "choice",
+          "choices": ["lineární", "super-lineární", "kvadratická"],
+          "correctIndex": 2,
+          "explanation": "Newton má lokálně kvadratickou konvergenci; steepest descent jen lineární, BFGS super-lineární."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-19",
+      "prompt": "Volba kroku — Armijo a Wolfeho podmínky",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Armijova podmínka (sufficient decrease) zní:",
+          "kind": "choice",
+          "choices": [
+            "$f(x_k + \\alpha p_k) \\le f(x_k) + c_1 \\alpha \\nabla f(x_k)^T p_k$",
+            "$f(x_k + \\alpha p_k) \\ge f(x_k) + c_1 \\alpha \\nabla f(x_k)^T p_k$",
+            "$f(x_k + \\alpha p_k) = f(x_k)$",
+            "$\\nabla f(x_k + \\alpha p_k)^T p_k \\ge c_2 \\nabla f(x_k)^T p_k$"
+          ],
+          "correctIndex": 0,
+          "explanation": "Armijo požaduje dostatečné snížení; typicky $c_1 \\in (0, 1/2)$, např. $10^{-4}$."
+        },
+        {
+          "label": "b",
+          "prompt": "Algoritmus, kterým se hledá $\\alpha$ splňující Armija (jedno slovo):",
+          "kind": "text",
+          "correctAnswer": "backtracking",
+          "explanation": "Backtracking: začni $\\alpha = 1$ a opakovaně $\\alpha \\leftarrow c \\alpha$, dokud Armijo neplatí."
+        },
+        {
+          "label": "c",
+          "prompt": "Druhá (curvature) Wolfeho podmínka zajišťuje:",
+          "kind": "choice",
+          "choices": ["dostatečné snížení $f$", "dostatečnou změnu sklonu — nutné pro BFGS", "monotonii posloupnosti $\\alpha_k$"],
+          "correctIndex": 1,
+          "explanation": "Curvature condition garantuje pozitivní definitnost BFGS aktualizace."
+        }
+      ]
+    },
+    {
+      "questionId": "NI-ZI-19",
+      "prompt": "Adaptivní gradientní metody",
+      "parts": [
+        {
+          "label": "a",
+          "prompt": "Adam kombinuje:",
+          "kind": "choice",
+          "choices": ["Newtonovu metodu a trust region", "momentum a RMSProp s bias correction", "BFGS a conjugate gradient", "AdaGrad a Newton"],
+          "correctIndex": 1,
+          "explanation": "Adam = momentum ($\\hat m$) + RMSProp ($\\hat v$) + bias correction $\\hat m / (\\sqrt{\\hat v} + \\epsilon)$."
+        },
+        {
+          "label": "b",
+          "prompt": "AdaGrad oproti RMSProp:",
+          "kind": "choice",
+          "choices": ["používá exponenciální průměr a nemizí", "akumuluje všechny čtverce gradientů a $\\alpha_k$ klesá příliš agresivně", "ignoruje gradient úplně"],
+          "correctIndex": 1,
+          "explanation": "AdaGrad sčítá $\\sum g_i^2$ od počátku — krok rychle klesá; RMSProp zavádí exponenciální průměr."
+        },
+        {
+          "label": "c",
+          "prompt": "Která prvořádová metoda dosahuje optimální rychlosti $O(1/k^2)$ pro konvexní $f$?",
+          "kind": "text",
+          "correctAnswer": "nesterov",
+          "explanation": "Nesterov accelerated gradient descent dosahuje $O(1/k^2)$ — optimální mezi prvořádovými metodami."
+        }
+      ]
+    }
+  ]
 }
