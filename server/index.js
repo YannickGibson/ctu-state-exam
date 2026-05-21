@@ -22,8 +22,25 @@ const app = require('./app');
 
 const PORT = process.env.PORT || 3001;
 
-app.use('/pdfs', express.static(path.join(root, 'sources')));
-app.use('/answer-imgs', express.static(path.join(root, 'data', 'answers', 'imgs')));
+/*
+ * Gate the static mounts behind the same Supabase JWT check as /api/*.
+ * Browser-initiated <img>/<embed> loads can't set Authorization, so the SPA
+ * mirrors its access token into the `sb_access_token` httpOnly cookie via
+ * POST /api/auth/session — requireAuth reads either source.
+ *
+ * NOTE: in production on Vercel these mounts are NOT hit. `scripts/copy-static.js`
+ * copies `sources/` and `data/answers/imgs/` into `client/dist/` so Vercel's
+ * static layer serves them directly, bypassing Express. Gating PDFs in prod
+ * would require serving them via an API route (and resolving the 300 MB
+ * function size limit for sources/) or moving them to Supabase Storage with
+ * signed URLs.
+ */
+app.use('/pdfs', app.requireAuth, express.static(path.join(root, 'sources')));
+app.use(
+  '/answer-imgs',
+  app.requireAuth,
+  express.static(path.join(root, 'data', 'answers', 'imgs'))
+);
 
 const dist = path.join(root, 'client', 'dist');
 if (fs.existsSync(dist)) {

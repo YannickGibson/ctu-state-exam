@@ -33,11 +33,14 @@ const loadQuestions = () => readJSON(path.join(dataDir, 'questions.json'), []);
 const app = express();
 app.use(express.json());
 
-app.get('/api/questions', (req, res) => {
+// Content routes — gated by requireAuth (declared below `supabaseAdmin`).
+// Defined as plain handlers here; the middleware is wired further down the file
+// so the helpers it depends on are already in scope at request time.
+const handleListQuestions = (req, res) => {
   res.json(loadQuestions());
-});
+};
 
-app.get('/api/questions/:id', (req, res) => {
+const handleGetQuestion = (req, res) => {
   const q = loadQuestions().find((x) => x.id === req.params.id);
   if (!q) return res.status(404).json({ error: 'question not found' });
   let answer = null;
@@ -47,9 +50,9 @@ app.get('/api/questions/:id', (req, res) => {
     answer = null;
   }
   res.json({ ...q, answer });
-});
+};
 
-app.get('/api/quizzes', (req, res) => {
+const handleListQuizzes = (req, res) => {
   const list = [];
   const seen = new Set();
   for (const q of loadQuestions()) {
@@ -65,13 +68,13 @@ app.get('/api/quizzes', (req, res) => {
     });
   }
   res.json(list);
-});
+};
 
-app.get('/api/quizzes/:subject', (req, res) => {
+const handleGetQuiz = (req, res) => {
   const quiz = readJSON(path.join(quizzesDir, req.params.subject + '.json'), null);
   if (!quiz) return res.status(404).json({ error: 'quiz not found' });
   res.json(quiz);
-});
+};
 
 /*
  * FIT ČVUT OAuth 2.0 sign-in.
@@ -115,6 +118,87 @@ function completeRedirect(res, params) {
   const qs = new URLSearchParams(params).toString();
   return res.redirect('/auth/fit/complete?' + qs);
 }
+
+/*
+ * Auth gate.
+ *
+ * Accepts the Supabase access token from either:
+ *   - `Authorization: Bearer <jwt>` — used by the SPA's fetch() calls
+ *   - `sb_access_token` cookie       — used by browser-initiated loads (<img>,
+ *                                      <embed>) that cannot set headers
+ *
+ * Verification goes through Supabase so revoked / expired tokens are rejected.
+ */
+const SESSION_COOKIE = 'sb_access_token';
+
+function extractToken(req) {
+  const header = req.headers.authorization || '';
+  const m = header.match(/^Bearer\s+(.+)$/i);
+  if (m) return m[1];
+  return readCookie(req, SESSION_COOKIE);
+}
+
+async function requireAuth(req, res, next) {
+  const token = extractToken(req);
+  if (!token) return res.status(401).json({ error: 'unauthenticated' });
+  try {
+    const { data, error } = await supabaseAdmin().auth.getUser(token);
+    if (error || !data?.user) {
+      return res.status(401).json({ error: 'invalid_token' });
+    }
+    req.user = data.user;
+    next();
+  } catch (err) {
+    console.error('requireAuth error:', err);
+    return res.status(401).json({ error: 'auth_failed' });
+  }
+}
+
+// Exposed so server/index.js can reuse the same gate for the static mounts
+// (/pdfs, /answer-imgs) without duplicating verification logic.
+app.requireAuth = requireAuth;
+
+app.get('/api/questions', requireAuth, handleListQuestions);
+app.get('/api/questions/:id', requireAuth, handleGetQuestion);
+app.get('/api/quizzes', requireAuth, handleListQuizzes);
+app.get('/api/quizzes/:subject', requireAuth, handleGetQuiz);
+
+/*
+ * Session cookie sync.
+ *
+ * The SPA holds the Supabase access token in memory / localStorage, but
+ * <img>/<embed> loads can't send Authorization headers. So whenever the SPA's
+ * Supabase session changes, it POSTs the token here to mirror it into an
+ * httpOnly cookie that browser-initiated loads pick up automatically.
+ */
+app.post('/api/auth/session', async (req, res) => {
+  const token = req.body && req.body.access_token;
+  if (typeof token !== 'string' || !token) {
+    return res.status(400).json({ error: 'missing_access_token' });
+  }
+  try {
+    const { data, error } = await supabaseAdmin().auth.getUser(token);
+    if (error || !data?.user) {
+      return res.status(401).json({ error: 'invalid_token' });
+    }
+  } catch (err) {
+    console.error('session verify failed:', err);
+    return res.status(401).json({ error: 'auth_failed' });
+  }
+  res.cookie(SESSION_COOKIE, token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 1000,
+    path: '/',
+  });
+  res.json({ ok: true });
+});
+
+app.delete('/api/auth/session', (req, res) => {
+  res.clearCookie(SESSION_COOKIE, { path: '/' });
+  res.json({ ok: true });
+});
 
 app.get('/api/auth/fit/start', (req, res) => {
   if (!process.env.FIT_OAUTH_CLIENT_ID || !process.env.FIT_OAUTH_REDIRECT_URI) {

@@ -19,6 +19,21 @@ export function AuthProvider({ children }) {
     return () => sub.subscription.unsubscribe();
   }, []);
 
+  // Mirror the Supabase access token into the server-side httpOnly cookie so
+  // gated static loads (/pdfs, /answer-imgs) work. Re-fires on token refresh.
+  useEffect(() => {
+    const token = session?.access_token;
+    if (token) {
+      fetch('/api/auth/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_token: token }),
+      }).catch((err) => console.error('session cookie sync failed:', err));
+    } else if (ready) {
+      fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
+    }
+  }, [session?.access_token, ready]);
+
   useEffect(() => {
     if (!session) {
       setProfile(null);

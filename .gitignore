@@ -10,3 +10,5 @@ data/progress.json
 .DS_Store
 CLAUDE.md
 .vscode/
+.vercel
+.env*.local

@@ -3,8 +3,12 @@
 
 import { supabase } from './supabaseClient.js';
 
-async function request(url, options) {
-  const res = await fetch(url, options);
+async function request(url, options = {}) {
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  const headers = { ...(options.headers || {}) };
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const res = await fetch(url, { ...options, headers });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.error || `${res.status} ${res.statusText}`);
