@@ -92,7 +92,7 @@ export default function SignupPage() {
     </div>
     <a
       className="auth-oss"
-      href="https://github.com/YannickGibson/ctu-state-exams"
+      href="https://github.com/YannickGibson/ctu-state-exam"
       target="_blank"
       rel="noopener noreferrer"
     >

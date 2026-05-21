@@ -35,7 +35,7 @@ function Header() {
         <div className="header-user">
           <a
             className="header-oss"
-            href="https://github.com/YannickGibson/ctu-state-exams"
+            href="https://github.com/YannickGibson/ctu-state-exam"
             target="_blank"
             rel="noopener noreferrer"
             title="Open source on GitHub"
