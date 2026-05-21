@@ -1,6 +1,6 @@
 # Supabase setup
 
-The app uses Supabase for auth (username + password) and per-user study progress. Anonymous viewing is **not** supported — the client throws if the env vars are missing.
+The app uses Supabase as its user/progress store. Sign-in is currently driven by **FIT ČVUT OAuth** (see the "Sign in with FIT" section in the main [README](../README.md)) — a server-side route mints a Supabase magic-link token for the FIT user. The username/password flow described below is still wired but hidden in the UI (toggle `SHOW_PASSWORD_LOGIN` / `SHOW_PASSWORD_SIGNUP` in `client/src/pages/LoginPage.jsx` and `SignupPage.jsx` to bring it back). Anonymous viewing is **not** supported — the client throws if the env vars are missing.
 
 ## 1. Create a Supabase project
 
@@ -125,9 +125,9 @@ To bootstrap yourself as admin after signing up:
 update public.profiles set show_leaderboard = true where username = 'your-username';
 ```
 
-## 6. Sign up + verify
+## 6. Sign in + verify
 
 1. Start the app (`npm run dev` locally, or open the Vercel URL).
-2. Create an account at `/signup`.
-3. Confirm a `profiles` row appeared in the Supabase Table Editor.
+2. Click **Sign in with FIT ČVUT** on `/login`. (If you've re-enabled password sign-up, `/signup` still works.)
+3. Confirm a `profiles` row appeared in the Supabase Table Editor for your FIT username.
 4. Practice a question — confirm a `question_progress` row gets inserted/updated.

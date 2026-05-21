@@ -8,7 +8,8 @@ Self-hostable study webapp for Czech Technical University (ČVUT) state exam que
 
 - **Frontend**: Vite + React, KaTeX for LaTeX rendering
 - **Backend**: Express (locally) / Vercel serverless function (in production) — serves the question/answer/quiz APIs and the static PDFs
-- **Auth + sync**: Supabase (username/password, per-user progress, optional leaderboard)
+- **Auth**: FIT ČVUT OAuth 2.0 (Sign in with FIT) bridged into Supabase via a server-issued magic link — the user never sees a Supabase URL. Password sign-up is wired but currently hidden in the UI to avoid username collisions with FIT accounts.
+- **Sync**: Supabase (per-user progress, optional leaderboard)
 - **Deployment target**: Vercel Hobby tier
 
 ## Local development
@@ -21,6 +22,8 @@ git clone --recurse-submodules https://github.com/YannickGibson/ctu-state-exam.g
 npm run setup     # installs root + client deps, generates data/questions.json
 cp client/.env.local.example client/.env.local
 # fill in VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY — see docs/supabase-setup.md
+cp .env.example .env
+# fill in FIT OAuth + Supabase service-role key — see "Sign in with FIT" below
 npm run dev       # API on :3001, Vite on :5173 with HMR
 ```
 
@@ -30,12 +33,36 @@ For a production-mode local build (Express also serves the built frontend at :30
 npm start
 ```
 
+## Sign in with FIT
+
+The deployed app uses **FIT ČVUT OAuth** as its primary (and currently only) sign-in. Any FIT account (student, teacher, employee) works. The server exchanges the FIT authorization code for a one-time Supabase magic-link token; the browser stays on this app's domain throughout, and no Supabase URL is ever shown to the user.
+
+Forking? You need your own OAuth client. Go to https://auth.fit.cvut.cz/manager/, log in with FIT credentials, then:
+
+1. Create a project, then a **Web Application** inside it.
+2. Set the redirect URI to your deployed URL: `https://<your-domain>/api/auth/fit/callback`. For local dev, create a **second** Web Application with redirect `http://localhost:5173/api/auth/fit/callback` (FIT's manager allows only one redirect URI per app).
+3. In the **Services** tab enable scope `urn:ctu:oauth:umapi.read` (self-serve, no admin approval needed — it only grants read access to the public CTU people directory).
+4. Copy the `client_id` and `client_secret`.
+
+These go into the server-side env vars below.
+
 ## Deploying to Vercel
 
 1. Set up a Supabase project — see [`docs/supabase-setup.md`](./docs/supabase-setup.md).
-2. Push this repo to GitHub and import it on https://vercel.com.
-3. In Vercel **Project Settings → Environment Variables**, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (Production + Preview).
-4. Deploy. The bundled `vercel.json` wires the Express app as a serverless function (`/api/*`) and serves the SPA + PDFs + answer screenshots as static assets.
+2. Register a FIT OAuth Web Application — see "Sign in with FIT" above.
+3. Push this repo to GitHub and import it on https://vercel.com.
+4. In Vercel **Project Settings → Environment Variables**, add (Production + Preview):
+
+   | Var | Value |
+   | --- | --- |
+   | `VITE_SUPABASE_URL` | Supabase project URL |
+   | `VITE_SUPABASE_ANON_KEY` | Supabase anon key |
+   | `SUPABASE_URL` | same as `VITE_SUPABASE_URL` (server-side read) |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service-role key (server-only, never exposed to the browser) |
+   | `FIT_OAUTH_CLIENT_ID` | from AppsManager |
+   | `FIT_OAUTH_CLIENT_SECRET` | from AppsManager |
+   | `FIT_OAUTH_REDIRECT_URI` | `https://<your-domain>/api/auth/fit/callback` |
+5. Deploy. The bundled `vercel.json` wires the Express app as a serverless function (`/api/*`) and serves the SPA + PDFs + answer screenshots as static assets.
 
 In your Supabase project, go to **Authentication → URL Configuration** and add your Vercel domain to the allowlist.
 

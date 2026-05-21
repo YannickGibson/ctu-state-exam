@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import FitCompletePage from './pages/FitCompletePage.jsx';
 import RequireAuth from './components/RequireAuth.jsx';
+import RedirectIfAuthed from './components/RedirectIfAuthed.jsx';
 import GitHubMark from './components/GitHubMark.jsx';
 import { useAuth } from './auth/AuthContext.jsx';
 
@@ -67,8 +68,22 @@ export default function App() {
       <Header />
       <main className="app-main">
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/login"
+            element={
+              <RedirectIfAuthed>
+                <LoginPage />
+              </RedirectIfAuthed>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <RedirectIfAuthed>
+                <SignupPage />
+              </RedirectIfAuthed>
+            }
+          />
           <Route path="/auth/fit/complete" element={<FitCompletePage />} />
           <Route path="/" element={<Navigate to="/questions" replace />} />
           <Route
