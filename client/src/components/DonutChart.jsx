@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { daysUntilExam, formatExamDate } from '../config/exam.js';
 
 export const DONUT_COLORS = {
   practiced: '#36974a',
@@ -205,7 +206,21 @@ export default function DonutChart({
             <i style={{ background: DONUT_COLORS.none }} /> Not started ({data.none})
           </li>
           {showHint && (
-            <li className="donut-hint muted">Tip: click a slice to jump to a question.</li>
+            <li className="donut-hint muted">
+              {(() => {
+                const date = formatExamDate();
+                const days = daysUntilExam();
+                const remaining = data.total - data.practiced;
+                if (days < 0) return `Exam date (${date}) has passed.`;
+                if (days === 0)
+                  return remaining > 0
+                    ? `Exam today (${date}) · ${remaining} left`
+                    : `Exam today (${date})`;
+                if (remaining === 0) return `${days} days left until ${date} · all practiced`;
+                const perDay = (Math.ceil((remaining / days) * 100) / 100).toFixed(2);
+                return `${days} days left until ${date} · ${perDay} / day`;
+              })()}
+            </li>
           )}
         </ul>
       )}
