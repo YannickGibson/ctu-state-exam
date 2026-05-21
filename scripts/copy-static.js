@@ -18,9 +18,17 @@ if (!fs.existsSync(dist)) {
   process.exit(1);
 }
 
-function copyDir(src, dest) {
-  if (!fs.existsSync(src)) {
-    console.warn(`copy-static: source ${src} missing — skipping.`);
+function copyDir(src, dest, { required = false } = {}) {
+  const missing = !fs.existsSync(src);
+  const empty = !missing && fs.readdirSync(src).filter((n) => n !== '.git' && n !== 'README.md').length === 0;
+  if (missing || empty) {
+    const reason = missing ? 'missing' : 'empty';
+    if (required) {
+      console.error(`copy-static: source ${src} is ${reason} — refusing to ship an incomplete build. ` +
+        `On Vercel this usually means the private submodule wasn't fetched; check the git-clone section of the build log.`);
+      process.exit(1);
+    }
+    console.warn(`copy-static: source ${src} is ${reason} — skipping.`);
     return;
   }
   fs.mkdirSync(dest, { recursive: true });
@@ -28,5 +36,6 @@ function copyDir(src, dest) {
   console.log(`copy-static: ${path.relative(root, src)} -> ${path.relative(root, dest)}`);
 }
 
-copyDir(path.join(root, 'sources'), path.join(dist, 'pdfs'));
+const REQUIRE_PDFS = process.env.REQUIRE_PDFS !== '0';
+copyDir(path.join(root, 'sources'), path.join(dist, 'pdfs'), { required: REQUIRE_PDFS });
 copyDir(path.join(root, 'data', 'answers', 'imgs'), path.join(dist, 'answer-imgs'));

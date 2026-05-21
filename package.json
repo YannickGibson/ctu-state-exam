@@ -16,7 +16,7 @@
     "build": "npm --prefix client run build",
     "start": "npm run build && npm run server",
     "setup": "npm install && npm --prefix client install && npm run generate",
-    "vercel-build": "npm --prefix client install && npm --prefix client run build && node scripts/copy-static.js"
+    "vercel-build": "bash scripts/vercel-build.sh"
   },
   "dependencies": {
     "express": "^4.19.2"
