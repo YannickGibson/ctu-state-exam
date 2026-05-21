@@ -13,7 +13,11 @@ Self-hostable study webapp for Czech Technical University (ČVUT) state exam que
 
 ## Local development
 
+The lecture PDFs under `sources/` live in a separate **private** submodule (because they're copyrighted by their instructors and can't be redistributed via this public repo). If you have access, clone with submodules; otherwise the app still runs — the `/pdfs/...` deep links from answers will just 404.
+
 ```sh
+git clone --recurse-submodules https://github.com/YannickGibson/ctu-state-exams.git
+# or, in an existing clone: git submodule update --init
 npm run setup     # installs root + client deps, generates data/questions.json
 cp client/.env.local.example client/.env.local
 # fill in VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY — see docs/supabase-setup.md
@@ -61,7 +65,7 @@ After editing question lists, run `npm run generate` to refresh `data/questions.
 
 ## Content licensing note
 
-The code is MIT-licensed (see [`LICENSE`](./LICENSE)). The lecture PDFs bundled under `sources/` belong to their respective CTU instructors and are included only for personal/educational study by other CTU students. If you fork this for a different program, replace them with materials you have the right to redistribute (or gitignore `sources/` and have users supply their own locally).
+The code is MIT-licensed (see [`LICENSE`](./LICENSE)). The lecture PDFs the deployed app serves at `/pdfs/...` belong to their respective CTU instructors and are **not** redistributed by this public repo — they live in a private submodule at `sources/` that the Vercel build clones during deploy. If you fork this for a different program, point the submodule at your own private content repo (or remove the submodule and supply PDFs locally) and make sure you have the right to use whatever you bundle.
 
 ## License
 
