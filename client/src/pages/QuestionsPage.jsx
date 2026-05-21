@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getProgress, getQuestions } from '../api.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import ProgressDonut from '../components/ProgressDonut.jsx';
@@ -7,6 +7,7 @@ import ProgressDonut from '../components/ProgressDonut.jsx';
 const ZERO = { practicedCount: 0, readPassively: false };
 
 export default function QuestionsPage() {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [progress, setProgress] = useState({});
   const [error, setError] = useState(null);
@@ -31,15 +32,35 @@ export default function QuestionsPage() {
   );
 
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
+    const q = search.trim().toLowerCase().replace(/\s+/g, ' ');
+    const subjectLock = q
+      ? merged.find(
+          (item) =>
+            q === item.subject.toLowerCase() ||
+            q === item.subjectCode.toLowerCase()
+        )?.subject ?? null
+      : null;
+    const groupLock =
+      q && !subjectLock
+        ? merged.find((item) => q === item.group.toLowerCase())?.group ?? null
+        : null;
     return merged.filter((item) => {
       if (group !== 'ALL' && item.group !== group) return false;
       if (!q) return true;
-      return (
-        item.text.toLowerCase().includes(q) ||
-        item.subject.toLowerCase().includes(q) ||
-        item.id.toLowerCase().includes(q)
-      );
+      if (subjectLock) return item.subject === subjectLock;
+      if (groupLock) return item.group === groupLock;
+      const haystack = [
+        item.text,
+        item.subject,
+        item.subjectCode,
+        item.id,
+        `${item.subject} ${item.subjectIndex}`,
+        `${item.subjectCode} ${item.subjectIndex}`,
+        `${item.group} ${item.number}`,
+      ]
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(q);
     });
   }, [merged, group, search]);
 
@@ -84,7 +105,11 @@ export default function QuestionsPage() {
         </thead>
         <tbody>
           {filtered.map((q) => (
-            <tr key={q.id}>
+            <tr
+              key={q.id}
+              className="q-row"
+              onClick={() => navigate(`/questions/${q.id}`)}
+            >
               <td className="col-status">
                 <StatusBadge progress={q.progress} />
               </td>
