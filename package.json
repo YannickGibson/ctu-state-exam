@@ -1,5 +1,5 @@
 {
-  "name": "ctu-state-exams",
+  "name": "ctu-state-exam",
   "version": "1.0.0",
   "private": true,
   "description": "Self-hostable study webapp for Czech Technical University (ČVUT) state exam questions. Currently bundled with NI (FIT) AI master's program 2026 content — SPOL (shared) + ZI (Znalostní Inženýrství specialization).",
@@ -7,7 +7,7 @@
   "author": "Yannick Gibson",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YannickGibson/ctu-state-exams"
+    "url": "https://github.com/YannickGibson/ctu-state-exam"
   },
   "scripts": {
     "generate": "node scripts/generate-data.js",

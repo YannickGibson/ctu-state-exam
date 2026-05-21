@@ -1,4 +1,4 @@
-# ctu-state-exams
+# ctu-state-exam
 
 Self-hostable study webapp for Czech Technical University (ČVUT) state exam questions. Browse the question list, read tightly-cropped answers extracted from lecture PDFs (with deep links back to the source page for verification), and run subject-level quizzes.
 
@@ -16,7 +16,7 @@ Self-hostable study webapp for Czech Technical University (ČVUT) state exam que
 The lecture PDFs under `sources/` live in a separate **private** submodule (because they're copyrighted by their instructors and can't be redistributed via this public repo). If you have access, clone with submodules; otherwise the app still runs — the `/pdfs/...` deep links from answers will just 404.
 
 ```sh
-git clone --recurse-submodules https://github.com/YannickGibson/ctu-state-exams.git
+git clone --recurse-submodules https://github.com/YannickGibson/ctu-state-exam.git
 # or, in an existing clone: git submodule update --init
 npm run setup     # installs root + client deps, generates data/questions.json
 cp client/.env.local.example client/.env.local
