@@ -7,6 +7,7 @@ import QuizRunnerPage from './pages/QuizRunnerPage.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
+import FitCompletePage from './pages/FitCompletePage.jsx';
 import RequireAuth from './components/RequireAuth.jsx';
 import GitHubMark from './components/GitHubMark.jsx';
 import { useAuth } from './auth/AuthContext.jsx';
@@ -68,6 +69,7 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/auth/fit/complete" element={<FitCompletePage />} />
           <Route path="/" element={<Navigate to="/questions" replace />} />
           <Route
             path="/questions"

@@ -19,7 +19,9 @@
     "vercel-build": "bash scripts/vercel-build.sh"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "@supabase/supabase-js": "^2.106.1",
+    "express": "^4.19.2",
+    "ws": "^8.20.1"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"

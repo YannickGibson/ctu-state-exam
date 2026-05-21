@@ -3,6 +3,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.jsx';
 import GitHubMark from '../components/GitHubMark.jsx';
 
+// Password login is hidden for now to avoid username collisions with FIT
+// accounts. Flip to true to bring the form back.
+const SHOW_PASSWORD_LOGIN = false;
+
 export default function LoginPage() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
@@ -32,45 +36,53 @@ export default function LoginPage() {
       <h2 className="auth-tagline">State Exam Practice and Organization</h2>
       <div className="auth-card">
         <h1>Log in</h1>
-      <form onSubmit={submit} className="auth-form">
-        <label>
-          Username
-          <input
-            type="text"
-            autoComplete="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {error && <p className="error">{error}</p>}
-        <button type="submit" disabled={busy}>
-          {busy ? 'Logging in…' : 'Log in'}
-        </button>
-      </form>
-      <p className="muted">
-        New here? <Link to="/signup">Create an account</Link>
-      </p>
-    </div>
-    <a
-      className="auth-oss"
-      href="https://github.com/YannickGibson/ctu-state-exam"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <GitHubMark size={18} />
-      <span>Open source on GitHub</span>
-    </a>
+        <a className="auth-sso" href="/api/auth/fit/start">
+          Sign in with FIT ČVUT
+        </a>
+        {SHOW_PASSWORD_LOGIN && (
+          <>
+            <div className="auth-divider"><span>or</span></div>
+            <form onSubmit={submit} className="auth-form">
+              <label>
+                Username
+                <input
+                  type="text"
+                  autoComplete="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Password
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+              {error && <p className="error">{error}</p>}
+              <button type="submit" disabled={busy}>
+                {busy ? 'Logging in…' : 'Log in'}
+              </button>
+            </form>
+            <p className="muted">
+              New here? <Link to="/signup">Create an account</Link>
+            </p>
+          </>
+        )}
+      </div>
+      <a
+        className="auth-oss"
+        href="https://github.com/YannickGibson/ctu-state-exam"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <GitHubMark size={18} />
+        <span>Open source on GitHub</span>
+      </a>
     </>
   );
 }

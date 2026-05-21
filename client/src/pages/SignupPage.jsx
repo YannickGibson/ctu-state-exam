@@ -4,6 +4,10 @@ import { useAuth } from '../auth/AuthContext.jsx';
 import { validatePassword, validateUsername } from '../auth/validators.js';
 import GitHubMark from '../components/GitHubMark.jsx';
 
+// Password signup is hidden for now to avoid username collisions with FIT
+// accounts. Flip to true to bring the form back.
+const SHOW_PASSWORD_SIGNUP = false;
+
 export default function SignupPage() {
   const { signUp, signIn } = useAuth();
   const navigate = useNavigate();
@@ -29,12 +33,9 @@ export default function SignupPage() {
     setBusy(true);
     try {
       await signUp(cleanUsername, password);
-      // If email confirmation is disabled in Supabase, signUp returns a session.
-      // If not, we still try to sign in so the user lands on /questions when possible.
       try {
         await signIn(cleanUsername, password);
       } catch {
-        // Likely "email not confirmed" — leave the user on login with a hint.
         navigate('/login', { replace: true });
         return;
       }
@@ -56,49 +57,57 @@ export default function SignupPage() {
       <h2 className="auth-tagline">State Exam Practice and Organization</h2>
       <div className="auth-card">
         <h1>Create account</h1>
-      <form onSubmit={submit} className="auth-form">
-        <label>
-          Username
-          <input
-            type="text"
-            autoComplete="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <small className="muted">
-            3-32 chars, starts with a letter, lowercase a-z, digits, or underscore.
-          </small>
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            autoComplete="new-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <small className="muted">At least 8 chars, must include a letter and a digit.</small>
-        </label>
-        {error && <p className="error">{error}</p>}
-        <button type="submit" disabled={busy}>
-          {busy ? 'Creating…' : 'Sign up'}
-        </button>
-      </form>
-      <p className="muted">
-        Already have an account? <Link to="/login">Log in</Link>
-      </p>
-    </div>
-    <a
-      className="auth-oss"
-      href="https://github.com/YannickGibson/ctu-state-exam"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <GitHubMark size={18} />
-      <span>Open source on GitHub</span>
-    </a>
+        <a className="auth-sso" href="/api/auth/fit/start">
+          Sign in with FIT ČVUT
+        </a>
+        {SHOW_PASSWORD_SIGNUP && (
+          <>
+            <div className="auth-divider"><span>or</span></div>
+            <form onSubmit={submit} className="auth-form">
+              <label>
+                Username
+                <input
+                  type="text"
+                  autoComplete="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <small className="muted">
+                  3-32 chars, starts with a letter, lowercase a-z, digits, or underscore.
+                </small>
+              </label>
+              <label>
+                Password
+                <input
+                  type="password"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <small className="muted">At least 8 chars, must include a letter and a digit.</small>
+              </label>
+              {error && <p className="error">{error}</p>}
+              <button type="submit" disabled={busy}>
+                {busy ? 'Creating…' : 'Sign up'}
+              </button>
+            </form>
+            <p className="muted">
+              Already have an account? <Link to="/login">Log in</Link>
+            </p>
+          </>
+        )}
+      </div>
+      <a
+        className="auth-oss"
+        href="https://github.com/YannickGibson/ctu-state-exam"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <GitHubMark size={18} />
+        <span>Open source on GitHub</span>
+      </a>
     </>
   );
 }

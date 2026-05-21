@@ -111,6 +111,33 @@ a { color: var(--accent); }
   font: inherit;
 }
 .auth-form small { font-weight: 400; }
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.auth-sso {
+  display: block;
+  text-align: center;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2, transparent);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-sso:hover { background: var(--surface-accent, var(--surface-2)); }
 .auth-oss {
   display: flex;
   align-items: center;

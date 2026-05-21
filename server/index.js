@@ -6,9 +6,20 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const app = require('./app');
 
 const root = path.join(__dirname, '..');
+
+// Load .env (if present) before requiring app, so route handlers see the vars.
+// Vercel sets env vars via its UI, so this only runs in local dev.
+try {
+  for (const line of fs.readFileSync(path.join(root, '.env'), 'utf8').split('\n')) {
+    const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+  }
+} catch {}
+
+const app = require('./app');
+
 const PORT = process.env.PORT || 3001;
 
 app.use('/pdfs', express.static(path.join(root, 'sources')));
