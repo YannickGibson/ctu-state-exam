@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.jsx';
 import { validatePassword, validateUsername } from '../auth/validators.js';
+import GitHubMark from '../components/GitHubMark.jsx';
 
 export default function SignupPage() {
   const { signUp, signIn } = useAuth();
@@ -89,6 +90,15 @@ export default function SignupPage() {
         Already have an account? <Link to="/login">Log in</Link>
       </p>
     </div>
+    <a
+      className="auth-oss"
+      href="https://github.com/YannickGibson/ctu-state-exams"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <GitHubMark size={18} />
+      <span>Open source on GitHub</span>
+    </a>
     </>
   );
 }

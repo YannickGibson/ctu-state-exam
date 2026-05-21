@@ -8,6 +8,7 @@ import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import RequireAuth from './components/RequireAuth.jsx';
+import GitHubMark from './components/GitHubMark.jsx';
 import { useAuth } from './auth/AuthContext.jsx';
 
 function Header() {
@@ -32,6 +33,16 @@ function Header() {
       <div className="header-spacer" />
       {session && (
         <div className="header-user">
+          <a
+            className="header-oss"
+            href="https://github.com/YannickGibson/ctu-state-exams"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open source on GitHub"
+            aria-label="Open source on GitHub"
+          >
+            <GitHubMark size={18} />
+          </a>
           <span className="muted">{profile?.username || '…'}</span>
           <button className="ghost" onClick={handleSignOut}>
             Sign out

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.jsx';
+import GitHubMark from '../components/GitHubMark.jsx';
 
 export default function LoginPage() {
   const { signIn } = useAuth();
@@ -61,6 +62,15 @@ export default function LoginPage() {
         New here? <Link to="/signup">Create an account</Link>
       </p>
     </div>
+    <a
+      className="auth-oss"
+      href="https://github.com/YannickGibson/ctu-state-exams"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <GitHubMark size={18} />
+      <span>Open source on GitHub</span>
+    </a>
     </>
   );
 }

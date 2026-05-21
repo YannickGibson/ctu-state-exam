@@ -74,6 +74,16 @@ a { color: var(--accent); }
 .header-spacer { flex: 1; }
 .header-user { display: flex; align-items: center; gap: 10px; }
 .header-user button { padding: 5px 10px; font-size: 13px; }
+.header-oss {
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px;
+  border-radius: 6px;
+  line-height: 0;
+}
+.header-oss:hover { color: var(--text); background: var(--surface-2); }
 
 /* ---- auth pages ---- */
 .auth-tagline {
@@ -101,6 +111,21 @@ a { color: var(--accent); }
   font: inherit;
 }
 .auth-form small { font-weight: 400; }
+.auth-oss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 360px;
+  margin: 16px auto 24px;
+  padding: 8px 12px;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+.auth-oss:hover { color: var(--text); background: var(--surface-2); }
+.auth-oss svg { flex: 0 0 auto; }
 
 .app-main { max-width: 1000px; margin: 0 auto; padding: 24px; }
 
