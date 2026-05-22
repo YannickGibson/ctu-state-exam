@@ -258,10 +258,15 @@ table.questions {
 .col-status { width: 132px; }
 .questions .col-status { text-align: center; }
 .col-num { width: 96px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.col-subject { width: 78px; }
+.col-subject { width: 78px; white-space: nowrap; }
 .questions td.col-num { font-weight: 700; }
 .questions td.col-subject { color: var(--muted); }
 .col-actions { width: 96px; }
+/* center the badges and action buttons against tall (multi-line) rows */
+.questions td.col-status,
+.questions td.col-num,
+.questions td.col-subject,
+.questions td.col-actions { vertical-align: middle; }
 .q-text { color: var(--text); }
 .questions td.col-actions { text-align: right; }
 
