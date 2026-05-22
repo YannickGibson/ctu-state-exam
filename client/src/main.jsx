@@ -4,13 +4,16 @@ import { BrowserRouter } from 'react-router-dom';
 import 'katex/dist/katex.min.css';
 import App from './App.jsx';
 import { AuthProvider } from './auth/AuthContext.jsx';
+import { ProgressProvider } from './ProgressContext.jsx';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <ProgressProvider>
+          <App />
+        </ProgressProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

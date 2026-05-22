@@ -1,0 +1,49 @@
+# Otázka ZI-10 — Transformery, mechanismy pozornosti, transfer a meta learning
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Mechanismus pozornosti pracuje se třemi vektory, které Vaswani zavedl v práci Attention is All You Need.
+Pro každý token spočítáme dotaz, klíč a hodnotu.
+> Pro každý token spočítáme **dotaz** $q$, **klíč** $k$ a **hodnotu** $v$.
+Výstup pozornosti je vážený součet hodnot, kde váhy vyjadřují podobnost dotazu a jednotlivých klíčů.
+
+O sebepozornost jde tehdy, když dotazy, klíče i hodnoty vznikají lineární transformací jedné a téže vstupní sekvence.
+> O **sebepozornost** jde tehdy, když $Q$, $K$ i $V$ vznikají lineární transformací stejné vstupní sekvence.
+Každý token tak může čerpat informaci od libovolného jiného tokenu téže věty.
+
+Konkrétní výpočet se nazývá škálovaná skalární pozornost.
+> Konkrétní výpočet se nazývá **škálovaná skalární pozornost**.
+Spočítáme skalární součiny dotazů a klíčů, vydělíme je odmocninou z dimenze klíče, protáhneme funkcí softmax a výsledkem vážíme hodnoty.
+> Spočítáme $\mathrm{softmax}(QK^T / \sqrt{d_k})\,V$, tedy skalární součiny dotazů a klíčů škálujeme a vážíme jimi hodnoty.
+Dělení odmocninou z dimenze brání saturaci softmaxu při velkých dimenzích, a volitelná maska potlačí výplň nebo zajistí kauzální pozornost u dekodéru.
+
+Místo jediné pozornosti se používá vícehlavá pozornost, typicky s osmi paralelními hlavami.
+> Místo jediné pozornosti se používá **vícehlavá pozornost**, typicky s osmi paralelními hlavami.
+Každá hlava má vlastní projekční matice a modeluje jiný reprezentační podprostor, tedy jiný typ vztahů mezi tokeny.
+Výstupy všech hlav se nakonec spojí a společně projektují do výsledku.
+
+Transformer skládá na sebe několik enkodérů a dekodérů, obvykle šest vrstev každého druhu.
+> **Transformer** skládá na sebe několik enkodérů a dekodérů, obvykle šest vrstev každého druhu.
+Každá vrstva enkodéru obsahuje sebepozornost a dopřednou síť, obě s reziduálním spojem a vrstvovou normalizací.
+Dekodér má navíc maskovanou sebepozornost a křížovou pozornost na výstupy enkodéru.
+Protože pozornost sama o sobě neví nic o pořadí, přidává se poziční kódování pomocí funkcí sinus a kosinus.
+> Protože pozornost neví nic o pořadí, přidává se **poziční kódování** pomocí funkcí sinus a kosinus.
+
+Klíčem úspěchu transformerů je předtrénování na obrovském korpusu bez učitele a následné doladění na cílovou úlohu s malým označeným datasetem.
+> Klíčem úspěchu je **předtrénování** na obrovském korpusu a následné **doladění** na cílovou úlohu.
+Tomuto přenosu naučených reprezentací na jinou úlohu se říká transferové učení.
+> Tomuto přenosu naučených reprezentací na jinou úlohu se říká **transferové učení**.
+Lze buď zmrazit váhy a naučit jen poslední vrstvu, doladit všechny váhy malým krokem učení, nebo přidat malé trénovatelné moduly, takzvané adaptéry či metodu lóra.
+
+Model B E R T používá jen enkodér a předtrénuje se dvěma úlohami.
+> Model **BERT** používá jen enkodér a předtrénuje se dvěma úlohami.
+Maskovaný jazykový model zakryje patnáct procent tokenů a model je dopovídá, a predikce následující věty učí vztahy mezi větami.
+
+Model G P T naopak používá jen dekodér s kauzální pozorností, kde každý token vidí jen tokeny předchozí.
+> Model **GPT** používá jen dekodér s kauzální pozorností, kde každý token vidí jen tokeny předchozí.
+Předtrénuje se autoregresivní predikcí dalšího tokenu, a u velkých modelů se objevuje učení v kontextu, kdy se model adaptuje na úlohu z příkladů v promptu bez jakékoli změny vah.
+
+Příbuzná oblast je metaučení, tedy učení se učit, kdy se model naučí rychle se adaptovat na novou úlohu z mála příkladů.
+> Příbuzná oblast je **metaučení**, kdy se model naučí rychle se adaptovat na novou úlohu z mála příkladů.
+Metoda M A M L hledá takovou inicializaci vah, ze které stačí jeden či několik gradientních kroků k naučení nové úlohy, a učení v kontextu u jazykových modelů je vlastně metaučení bez aktualizace vah.

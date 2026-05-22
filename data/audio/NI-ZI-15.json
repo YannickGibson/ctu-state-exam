@@ -1,0 +1,164 @@
+{
+  "id": "NI-ZI-15",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 222.086,
+  "sentences": [
+    {
+      "text": "**Stavový model** popisuje dynamický systém, který má skrytý, tedy nepozorovatelný stav, a pozorování.",
+      "para": 0,
+      "start": 0,
+      "end": 8.153
+    },
+    {
+      "text": "Přechodová rovnice říká, jak se stav vyvíjí v čase z předchozího stavu a procesního šumu.",
+      "para": 0,
+      "start": 8.153,
+      "end": 14.982
+    },
+    {
+      "text": "Pozorovací rovnice říká, jak ze stavu vzniká měření, zatížené šumem pozorování.",
+      "para": 0,
+      "start": 14.982,
+      "end": 21.974
+    },
+    {
+      "text": "Stav tedy pozorujeme jen nepřímo, skrze měření.",
+      "para": 0,
+      "start": 21.974,
+      "end": 26.005
+    },
+    {
+      "text": "Důležitým speciálním případem je lineární gaussovský stavový model, kde obě rovnice jsou lineární a oba šumy mají normální rozdělení.",
+      "para": 0,
+      "start": 26.005,
+      "end": 36.167
+    },
+    {
+      "text": "Tento model je zároveň skrytým markovským modelem a uplatní se při sledování polohy, v ekonomickém modelování nebo u časových řad.",
+      "para": 0,
+      "start": 36.167,
+      "end": 46.107
+    },
+    {
+      "text": "Cílem **sekvenčního bayesovského odhadu** je udržovat filtrovanou hustotu stavu podmíněnou všemi dosavadními pozorováními.",
+      "para": 1,
+      "start": 46.107,
+      "end": 54.934
+    },
+    {
+      "text": "Obecný bayesovský rekurzivní filtr běží ve dvou krocích.",
+      "para": 1,
+      "start": 54.934,
+      "end": 59.754
+    },
+    {
+      "text": "Krok predikce, tedy časová aktualizace, propaguje hustotu stavu přes přechodový model pomocí Chapmanovy-Kolmogorovovy rovnice.",
+      "para": 1,
+      "start": 59.754,
+      "end": 69.324
+    },
+    {
+      "text": "Krok korekce, tedy datová aktualizace, zapracuje nové pozorování pomocí Bayesovy věty.",
+      "para": 1,
+      "start": 69.324,
+      "end": 76.641
+    },
+    {
+      "text": "Pro lineární gaussovský model má tento obecný filtr uzavřené řešení, kterým je Kalmanův filtr.",
+      "para": 1,
+      "start": 76.641,
+      "end": 84.085
+    },
+    {
+      "text": "**Kalmanův filtr** udržuje odhad stavu a jeho kovarianční matici.",
+      "para": 2,
+      "start": 84.085,
+      "end": 89.208
+    },
+    {
+      "text": "V predikci posune odhad přes přechodovou matici a zvětší kovarianci o procesní šum.",
+      "para": 2,
+      "start": 89.208,
+      "end": 95.631
+    },
+    {
+      "text": "V korekci spočítá Kalmanovo zesílení a opraví predikci podle inovace, což je rozdíl mezi skutečným pozorováním a tím predikovaným.",
+      "para": 2,
+      "start": 95.631,
+      "end": 105.595
+    },
+    {
+      "text": "Čím větší je zesílení, tím větší důraz se klade na nová měření, ale tím hůře se filtruje šum.",
+      "para": 2,
+      "start": 105.595,
+      "end": 113.028
+    },
+    {
+      "text": "Aposteriorní rozdělení je vždy gaussovské, plně popsané střední hodnotou a kovariancí, a odhad je optimální ve smyslu minimální střední kvadratické chyby.",
+      "para": 2,
+      "start": 113.028,
+      "end": 124.35
+    },
+    {
+      "text": "Pokud jsou přechodová nebo pozorovací funkce nelineární, uzavřené řešení už neexistuje a nastupuje **nelineární odhad stavu**.",
+      "para": 3,
+      "start": 124.35,
+      "end": 133.664
+    },
+    {
+      "text": "Rozšířený Kalmanův filtr funkce lokálně linearizuje Taylorovým rozvojem prvního řádu kolem aktuálního odhadu a pak použije běžné rovnice Kalmanova filtru.",
+      "para": 3,
+      "start": 133.664,
+      "end": 146.496
+    },
+    {
+      "text": "Je jen přibližný, může i divergovat, ale za rozumných podmínek funguje dobře a je standardem v G P S navigaci.",
+      "para": 3,
+      "start": 146.496,
+      "end": 154.567
+    },
+    {
+      "text": "Při silnější nelinearitě se používá takzvaný unscented Kalmanův filtr.",
+      "para": 4,
+      "start": 154.567,
+      "end": 159.992
+    },
+    {
+      "text": "Ten místo derivací zvolí deterministicky několik bodů, sigma bodů, kolem odhadu, prožene je nelineární funkcí a z výsledku zrekonstruuje momenty.",
+      "para": 4,
+      "start": 159.992,
+      "end": 170.954
+    },
+    {
+      "text": "Je přesnější než rozšířený filtr a nepotřebuje počítat gradient.",
+      "para": 4,
+      "start": 170.954,
+      "end": 176.1
+    },
+    {
+      "text": "Nejobecnější metodou je **částicový filtr**, který reprezentuje aposteriorní rozdělení sadou vážených vzorků, kterým říkáme částice.",
+      "para": 5,
+      "start": 176.1,
+      "end": 186.203
+    },
+    {
+      "text": "V kroku predikce každou částici prožene přechodovým modelem, v kroku korekce jí upraví váhu podle věrohodnosti pozorování, a váhy normalizuje.",
+      "para": 5,
+      "start": 186.203,
+      "end": 197.131
+    },
+    {
+      "text": "Časem ale většinu váhy převezme jediná částice, tomu se říká degenerace vah, a řeší se převzorkováním, kdy se úspěšné částice replikují a neúspěšné zahodí.",
+      "para": 5,
+      "start": 197.131,
+      "end": 209.278
+    },
+    {
+      "text": "Částicový filtr zvládá libovolnou nelinearitu i ne-gaussovský šum a s rostoucím počtem částic je asymptoticky přesný, jeho slabinou je ale prokletí dimenzionality.",
+      "para": 5,
+      "start": 209.278,
+      "end": 222.086
+    }
+  ]
+}

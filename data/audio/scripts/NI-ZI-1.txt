@@ -1,0 +1,48 @@
+# Otázka ZI-1 — Automatické plánování, plánovací graf, kompilace plánování.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Automatické plánování je úloha hledání posloupnosti akcí, takzvaného plánu, která vede z počátečního stavu do stavu splňujícího cíl.
+> **Automatické plánování** je úloha hledání posloupnosti akcí, takzvaného **plánu**, která vede z počátečního stavu do stavu splňujícího cíl.
+Zadání tvoří počáteční stav, cílová formule a množina akcí.
+> Zadání tvoří **počáteční stav**, **cílová formule** a množina **akcí**.
+Klasické plánování předpokládá prostředí plně pozorovatelné, deterministické, konečné a statické, a plánuje se offline, tedy nejdřív se naplánuje a pak vykoná.
+
+Standardním formalismem je strips, ve kterém je stav množina logických literálů za předpokladu uzavřeného světa.
+> Standardním formalismem je **STRIPS**, ve kterém je stav množina logických literálů za předpokladu uzavřeného světa.
+Každá akce má předpoklad, tedy literály, které musí ve stavu platit, dále přídavný seznam s literály, které se přidají, a mazací seznam s literály, které se odeberou.
+Akci lze provést, jen pokud je její předpoklad podmnožinou aktuálního stavu, a nový stav vznikne odebráním mazacího seznamu a přidáním přídavného seznamu.
+Rozšířením strips je jazyk pé dé dé el, který přidává typy, podmínkové efekty, číselné fluenty a časové akce.
+> Rozšířením STRIPS je jazyk **PDDL**, který přidává typy, podmínkové efekty, číselné fluenty a časové akce.
+
+Klasické algoritmy prohledávají stavový prostor dopředně od počátečního stavu, nebo zpětně regresí od cíle.
+Strom dosažitelných stavů má ale velký větvící faktor, řádově ká na entou uzlů, kde, ká, je počet aplikovatelných akcí na stav.
+> Strom dosažitelných stavů má ale velký větvící faktor, řádově $O(k^d)$ uzlů, kde $k$ je počet aplikovatelných akcí na stav.
+Proto se používá heuristické prohledávání, nebo plánování s částečným uspořádáním akcí.
+
+Plánovací graf je vrstevnatý orientovaný graf, ve kterém se střídají stavové a akční vrstvy.
+> **Plánovací graf** je vrstevnatý orientovaný graf, ve kterém se střídají stavové a akční vrstvy.
+Stavová vrstva obsahuje fakta dosažitelná nejdéle za daný počet kroků, akční vrstva obsahuje aplikovatelné akce a takzvané no operation akce, které přenášejí fakta dál.
+Vzniká relaxací dosažitelnosti, kdy se ignorují negativní efekty akcí, a slouží jako nutná podmínka dosažitelnosti cíle.
+Klíčovým pojmem je vzájemné vyloučení, takzvaný mutex.
+> Klíčovým pojmem je vzájemné vyloučení, takzvaný **mutex**.
+Dvě akce jsou v mutexu, pokud jsou závislé, tedy mají konfliktní efekty nebo jedna ničí předpoklad druhé, nebo pokud jsou jejich předpoklady v mutexu.
+Dva atomy jsou v mutexu, jsou-li všechny dvojice akcí, které je vyrábějí, navzájem v mutexu.
+
+Algoritmus graphplan má dvě fáze, které střídá.
+> Algoritmus **GraphPlan** má dvě fáze, které střídá.
+Nejprve expanduje plánovací graf, dokud poslední vrstva neobsahuje všechny cílové atomy a žádná jejich dvojice není v mutexu.
+Poté se pokusí extrahovat plán prohledáváním grafu od konce, kdy v každé vrstvě hledá bez mutexovou množinu akcí splňující daný cíl.
+Při neúspěchu graf rozšíří o další vrstvu, a pokud se graf stabilizuje bez nalezení řešení, úloha je neřešitelná.
+Plánovací graf se používá buď přímo jako plánovač, nebo jako zdroj přípustné heuristiky pro heuristické prohledávání.
+
+Plánování lze také kompilovat do jiných formalismů.
+Při kompilaci do problému splnitelnosti, takzvaného sat, se zafixuje horizont s pevným počtem kroků a každému faktu i akci v každém čase se přiřadí výroková proměnná.
+> Při kompilaci do problému splnitelnosti, takzvaného **SAT**, se zafixuje horizont s pevným počtem kroků a každému faktu i akci v každém čase se přiřadí výroková proměnná.
+Klauzulemi se zakóduje počáteční stav, cíl, předpoklady a efekty akcí, axiomy rámce a omezení nejvýše jedné akce za krok.
+Pak se zavolá řešič sat, a je-li formule splnitelná, plán se zrekonstruuje, jinak se horizont zvětší.
+> Pak se zavolá řešič SAT, a je-li formule splnitelná, plán se zrekonstruuje, jinak se horizont zvětší.
+
+Analogicky lze plánování kompilovat do problému splňování omezení, kde proměnné jsou stavy a akce, nebo do celočíselného lineárního programování pro úlohy s číselnými zdroji.
+Pokročilá rozšíření zahrnují hierarchické plánování s rozkladem úloh na podúkoly, časové plánování a plánování pro více agentů.

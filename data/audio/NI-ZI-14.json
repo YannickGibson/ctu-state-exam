@@ -1,0 +1,158 @@
+{
+  "id": "NI-ZI-14",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 221.131,
+  "sentences": [
+    {
+      "text": "V bayesovském modelování s odhadovaným parametrem $\\theta$ nakládáme jako s náhodnou veličinou, která má své pravděpodobnostní rozdělení.",
+      "para": 0,
+      "start": 0,
+      "end": 10.057
+    },
+    {
+      "text": "Nehledáme tedy jednu pevnou hodnotu, ale celé rozdělení, které kvantifikuje míru naší neurčitosti o parametru.",
+      "para": 0,
+      "start": 10.057,
+      "end": 18.314
+    },
+    {
+      "text": "Vztah mezi parametrem a daty popisuje Bayesova věta: aposteriorní hustota je úměrná součinu věrohodnosti a apriorní hustoty, dělenému marginální věrohodností.",
+      "para": 0,
+      "start": 18.314,
+      "end": 30.972
+    },
+    {
+      "text": "**Apriorní rozdělení** je počáteční znalost o parametru $\\theta$ před zohledněním dat.",
+      "para": 1,
+      "start": 30.972,
+      "end": 37.743
+    },
+    {
+      "text": "Chová se podobně jako lidské přesvědčení: čím je utaženější, tedy má menší rozptyl, tím neochotněji reaguje na novou informaci z dat.",
+      "para": 1,
+      "start": 37.743,
+      "end": 47.521
+    },
+    {
+      "text": "Věrohodnost je pravděpodobnost pozorovaných dat při daném parametru, théta.",
+      "para": 1,
+      "start": 47.521,
+      "end": 53.097
+    },
+    {
+      "text": "**Aposteriorní rozdělení** je naše znalost o parametru $\\theta$ už po zohlednění dat.",
+      "para": 1,
+      "start": 53.097,
+      "end": 59.578
+    },
+    {
+      "text": "Marginální věrohodnost ve jmenovateli je jen normalizační konstanta, nezávislá na parametru, théta, a často ji proto vynecháme a pracujeme s neznormalizovanou hustotou.",
+      "para": 1,
+      "start": 59.578,
+      "end": 71.713
+    },
+    {
+      "text": "Bayesovský odhad je svou povahou sekvenční: pozorování přidáváme jedno po druhém.",
+      "para": 2,
+      "start": 71.713,
+      "end": 77.892
+    },
+    {
+      "text": "Aposteriorní rozdělení z prvního kroku slouží jako apriorní rozdělení pro krok druhý.",
+      "para": 2,
+      "start": 77.892,
+      "end": 84.489
+    },
+    {
+      "text": "S novými daty se tak naše znalost postupně zpřesňuje, a nemusíme přitom přepočítávat všechna předchozí pozorování.",
+      "para": 2,
+      "start": 84.489,
+      "end": 93.025
+    },
+    {
+      "text": "Pokud jsou pozorování podmíněně nezávislá, je výsledek nezávislý na pořadí, takže sekvenční update po jednom datu dá totéž jako update všemi daty najednou.",
+      "para": 2,
+      "start": 93.025,
+      "end": 104.707
+    },
+    {
+      "text": "Rodinu apriorních rozdělení nazýváme **konjugovanou** k dané věrohodnosti, jestliže aposteriorní rozdělení patří do stejné rodiny jako apriorní.",
+      "para": 3,
+      "start": 104.707,
+      "end": 115.53
+    },
+    {
+      "text": "Výhodou je, že aposteriorní rozdělení má analyticky uzavřený tvar a Bayesův update se ztriviální na přičtení suficientní statistiky k hyperparametrům apriorna.",
+      "para": 3,
+      "start": 115.53,
+      "end": 127.781
+    },
+    {
+      "text": "Hyperparametry jsou parametry apriorního rozdělení, takto je slovně odlišujeme od parametrů modelu.",
+      "para": 3,
+      "start": 127.781,
+      "end": 134.878
+    },
+    {
+      "text": "Klasickým příkladem je dvojice beta a binomické rozdělení.",
+      "para": 4,
+      "start": 134.878,
+      "end": 139.373
+    },
+    {
+      "text": "Pravděpodobnost úspěchu $p$ modelujeme beta rozdělením s hyperparametry $a$ a $b$.",
+      "para": 4,
+      "start": 139.373,
+      "end": 145.669
+    },
+    {
+      "text": "Pozorujeme-li $n$ pokusů a v nich $k$ úspěchů, je aposteriorní rozdělení opět beta, s prvním hyperparametrem $a + k$ a druhým hyperparametrem $b + n - k$.",
+      "para": 4,
+      "start": 145.669,
+      "end": 158.872
+    },
+    {
+      "text": "Hyperparametry se chovají jako počty pseudoúspěchů a pseudoneúspěchů z pomyslného dřívějšího experimentu.",
+      "para": 4,
+      "start": 158.872,
+      "end": 166.618
+    },
+    {
+      "text": "Aposteriorní střední hodnota je váženým průměrem apriorní znalosti a dat.",
+      "para": 4,
+      "start": 166.618,
+      "end": 172.403
+    },
+    {
+      "text": "Další konjugované dvojice jsou gamma rozdělení pro intenzitu Poissonova rozdělení, nebo Dirichletovo rozdělení pro multinomické rozdělení.",
+      "para": 5,
+      "start": 172.403,
+      "end": 182.158
+    },
+    {
+      "text": "Speciálním případem jsou neinformativní apriorna, například ploché rovnoměrné rozdělení, nebo Jeffreysovo apriorno, které je invariantní vůči reparametrizaci.",
+      "para": 5,
+      "start": 182.158,
+      "end": 194.409
+    },
+    {
+      "text": "Pomocí aposteriorního rozdělení také predikujeme nová pozorování.",
+      "para": 6,
+      "start": 194.409,
+      "end": 199.473
+    },
+    {
+      "text": "Posteriorní prediktivní rozdělení vznikne marginalizací přes parametr $\\theta$, takže kombinuje neurčitost o parametru i o samotném pozorování.",
+      "para": 6,
+      "start": 199.473,
+      "end": 210.378
+    },
+    {
+      "text": "Pokud aposteriorní rozdělení není žádná běžná distribuce, sahá se k aproximačním metodám typu Monte Carlo nebo variačním metodám.",
+      "para": 6,
+      "start": 210.378,
+      "end": 221.131
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "NI-SPOL-15",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 181.072,
+  "sentences": [
+    {
+      "text": "**Simulované ochlazování** je lokální heuristika inspirovaná pomalým chladnutím látky do uspořádaného stavu.",
+      "para": 0,
+      "start": 0,
+      "end": 8.037
+    },
+    {
+      "text": "Jeho podstatou je, že na rozdíl od jednoduchých heuristik připouští i akci, která řešení zhorší, a může tak uniknout z lokálního optima.",
+      "para": 0,
+      "start": 8.037,
+      "end": 18.233
+    },
+    {
+      "text": "O přijetí zhoršující akce rozhoduje **Metropolisovo kritérium**.",
+      "para": 1,
+      "start": 18.233,
+      "end": 22.763
+    },
+    {
+      "text": "Zhoršující sousední stav přijmeme s pravděpodobností $p = \\exp(-\\delta/T)$.",
+      "para": 1,
+      "start": 22.763,
+      "end": 30.614
+    },
+    {
+      "text": "Zde $\\delta$ je velikost zhoršení a $T$ je teplota.",
+      "para": 1,
+      "start": 30.614,
+      "end": 34.808
+    },
+    {
+      "text": "Malé zhoršení se přijme často, velké zhoršení jen zřídka.",
+      "para": 1,
+      "start": 34.808,
+      "end": 39.78
+    },
+    {
+      "text": "Když teplota klesá k nule, zhoršující akce se téměř nepřijímají a algoritmus přechází k intenzifikaci.",
+      "para": 1,
+      "start": 39.78,
+      "end": 47.596
+    },
+    {
+      "text": "Při vysoké teplotě se přijímají i velká zhoršení, což odpovídá diverzifikaci.",
+      "para": 1,
+      "start": 47.596,
+      "end": 53.555
+    },
+    {
+      "text": "Hlavní algoritmus má dvě vnořené smyčky.",
+      "para": 2,
+      "start": 53.555,
+      "end": 56.959
+    },
+    {
+      "text": "Vnitřní smyčka zkouší jednotlivé tahy a aktualizuje nejlepší řešení, dokud se nedosáhne rovnováhy, takzvaného ekvilibria.",
+      "para": 2,
+      "start": 56.959,
+      "end": 66.203
+    },
+    {
+      "text": "Vnější smyčka po dosažení ekvilibria sníží teplotu a opakuje se, dokud systém nezamrzne.",
+      "para": 2,
+      "start": 66.203,
+      "end": 72.986
+    },
+    {
+      "text": "Funkce, které tohle určují, dohromady tvoří **rozvrh ochlazování**.",
+      "para": 2,
+      "start": 72.986,
+      "end": 78.074
+    },
+    {
+      "text": "Teoretickou záruku dává **Hajkova věta**.",
+      "para": 3,
+      "start": 78.074,
+      "end": 81.014
+    },
+    {
+      "text": "Pokud teplota v $k$-tém kroku klesá jako $t_k = c / \\log(1+k)$, kde $c$ je největší hloubka lokálního optima, proces po nekonečně mnoha krocích skončí v globálním optimu.",
+      "para": 3,
+      "start": 81.014,
+      "end": 94.902
+    },
+    {
+      "text": "Jde ale jen o asymptotickou konvergenci a hloubku optim obvykle dopředu neznáme, takže v praxi používáme rychlejší rozvrhy.",
+      "para": 3,
+      "start": 94.902,
+      "end": 104.007
+    },
+    {
+      "text": "Nejdůležitějším parametrem je právě rozvrh ochlazování: počáteční teplota a funkce ochlazení, ekvilibria a zamrznutí.",
+      "para": 4,
+      "start": 104.007,
+      "end": 113.39
+    },
+    {
+      "text": "Rozvrh může být buď předem daný, nebo řízený zpětnou vazbou podle průběhu výpočtu.",
+      "para": 4,
+      "start": 113.39,
+      "end": 120.266
+    },
+    {
+      "text": "Funkce ochlazení bývá geometrická, $\\mathrm{cool}(T) = \\alpha T$ s $\\alpha$ mezi zhruba $0{,}8$ a $0{,}999$.",
+      "para": 4,
+      "start": 120.266,
+      "end": 134.758
+    },
+    {
+      "text": "Ekvilibrium se obvykle určí pevným počtem kroků; manipulace s jeho délkou má podobný účinek jako změna koeficientu ochlazování.",
+      "para": 4,
+      "start": 134.758,
+      "end": 144.606
+    },
+    {
+      "text": "Počáteční teplotu volíme tak, aby přijetí zhoršující akce bylo na začátku dostatečně pravděpodobné.",
+      "para": 5,
+      "start": 144.606,
+      "end": 151.981
+    },
+    {
+      "text": "Známe-li hloubku $\\delta$ a chceme-li pravděpodobnost úniku $P$, počáteční teplotu spočítáme jako $T_0 = -\\delta / \\ln P$.",
+      "para": 5,
+      "start": 151.981,
+      "end": 166.148
+    },
+    {
+      "text": "Jinak nasbíráme vzorky zhoršujících akcí a teplotu z nich odvodíme.",
+      "para": 5,
+      "start": 166.148,
+      "end": 171.502
+    },
+    {
+      "text": "Podmínka zastavení, zamrznutí, může být pevná mez teploty, nebo detekce stagnace, kdy četnost změn klesne pod stanovený práh.",
+      "para": 6,
+      "start": 171.502,
+      "end": 181.072
+    }
+  ]
+}

@@ -45,6 +45,54 @@
 
 * { box-sizing: border-box; }
 
+html {
+  /* Reserve the scrollbar's space so it never shifts page content. */
+  scrollbar-gutter: stable;
+}
+
+/* Firefox: a thin, theme-coloured scrollbar. Scoped to Firefox via an @supports
+   test for a -moz- property so that no Chromium browser ever sees these — some
+   Chromium builds (notably Brave) honour scrollbar-color and then ignore the
+   ::-webkit-scrollbar rules below, leaving the auto-hiding default scrollbar. */
+@supports (-moz-appearance: none) {
+  html,
+  .answer-audio-transcript {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+  }
+}
+
+/* Chromium / WebKit on pointer devices: force a classic, always-visible
+   scrollbar — the default one auto-hides. This covers both the page-level
+   scrollbar and nested scroll areas (e.g. the audiobook transcript). Touch
+   screens are left alone so they keep their native transient overlay scrollbar. */
+@media (pointer: fine) {
+  html::-webkit-scrollbar,
+  .answer-audio-transcript::-webkit-scrollbar {
+    width: 12px;
+  }
+  html::-webkit-scrollbar-track,
+  .answer-audio-transcript::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  html::-webkit-scrollbar-thumb,
+  .answer-audio-transcript::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 999px;
+  }
+  /* The slimming border matches each scroller's own background colour. */
+  html::-webkit-scrollbar-thumb {
+    border: 2px solid var(--bg);
+  }
+  .answer-audio-transcript::-webkit-scrollbar-thumb {
+    border: 2px solid var(--panel);
+  }
+  html::-webkit-scrollbar-thumb:hover,
+  .answer-audio-transcript::-webkit-scrollbar-thumb:hover {
+    background: var(--text-strong);
+  }
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -62,6 +110,8 @@ a { color: var(--accent); }
   background: var(--panel);
   border-bottom: 1px solid var(--border);
 }
+.app-brand { display: flex; align-items: center; gap: 10px; }
+.app-logo { width: 28px; height: 28px; display: block; }
 .app-title { font-weight: 700; }
 .app-header nav { display: flex; gap: 16px; }
 .app-header nav a {
@@ -237,7 +287,6 @@ table.questions {
   cursor: pointer;
   font: inherit;
   line-height: 1;
-  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.12s;
 }
 .q-action-btn:hover:not(:disabled) {
   border-color: var(--accent);
@@ -315,7 +364,7 @@ table.questions {
 }
 
 /* ---- question detail ---- */
-.detail { max-width: 760px; margin: 0 auto; }
+.detail { max-width: 874px; margin: 0 auto; }
 .detail-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
 .detail-question { font-size: 20px; line-height: 1.4; }
 .detail-label {
@@ -772,21 +821,20 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   height: 32px;
   padding: 0;
   border-radius: 8px;
-  background: transparent;
+  background: var(--surface-2);
   border: 1px solid var(--border);
-  color: var(--muted);
+  color: var(--text-strong);
   font-size: 20px;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  opacity: 0.6;
-  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .rotate-btn:hover,
 .rotate-btn:focus-visible {
-  opacity: 1;
+  background: var(--surface-accent);
   color: var(--text);
   border-color: var(--accent);
   outline: none;
@@ -1143,6 +1191,15 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   padding: 0;
   border-radius: 999px;
   flex: none;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Drop the click/tap focus box (it renders square on the round button);
+   keyboard focus (:focus-visible) keeps its ring. */
+.answer-audio-playpause:focus:not(:focus-visible) { outline: none; }
+.answer-audio-duration {
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 .answer-audio-hint { font-size: 13px; }
 
@@ -1150,15 +1207,23 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   margin-top: 12px;
   max-height: 40vh;
   overflow-y: auto;
-  line-height: 2.2;
+  /* matches .audio-sentence's negative left margin so a line-starting
+     highlight reaches exactly the edge instead of being clipped */
+  padding-left: 4px;
+  line-height: 2.6;
 }
+
+.audio-paragraph { margin: 0 0 14px; }
+.audio-paragraph:last-child { margin-bottom: 0; }
 
 .audio-sentence {
   display: inline;
-  margin: 0 0.3em 0 0;
-  padding: 2px 5px;
+  /* left padding gives the highlight a bit of lead-in; the matching negative
+     left margin cancels its effect on layout so lines never indent */
+  margin: 0 0.3em 0 -4px;
+  padding: 7px 0 7px 4px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   background: transparent;
   color: var(--text);
   font: inherit;
@@ -1167,5 +1232,9 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   cursor: pointer;
   transition: background-color 0.12s ease, color 0.12s ease;
 }
-.audio-sentence:hover { background: var(--surface-accent); color: var(--accent-dark); }
+/* hover only on real pointer devices — avoids the highlight sticking after a
+   tap on touch screens */
+@media (hover: hover) {
+  .audio-sentence:not(.is-active):hover { background: var(--surface-2); }
+}
 .audio-sentence.is-active { background: var(--accent); color: #fff; }

@@ -1,0 +1,43 @@
+# Otázka ZI-13 — Doporučovací algoritmy a faktorizační metody
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Doporučovací úlohu lze chápat jako ratingovou matici, jejíž řádky odpovídají uživatelům a sloupce položkám.
+> Doporučovací úlohu lze chápat jako **ratingovou matici** $R$, jejíž řádky odpovídají uživatelům a sloupce položkám.
+Většina prvků matice je neznámá a cílem je předpovědět chybějící hodnoty, tedy hodnocení, které by uživatel dal dané položce.
+
+Maticová faktorizace vyjadřuje ratingovou matici jako součin dvou matic nízké hodnosti.
+> **Maticová faktorizace** vyjadřuje ratingovou matici jako součin dvou matic nízké hodnosti $R \approx U V^T$.
+Matice, u, přiřazuje každému uživateli vektor latentních faktorů a matice, vé, přiřazuje takový vektor každé položce, přičemž počet faktorů, dé, je mnohem menší než počet uživatelů i počet položek.
+> Matice $U$ přiřazuje každému uživateli vektor latentních faktorů a matice $V$ přiřazuje takový vektor každé položce, počet faktorů $d$ je mnohem menší než počet uživatelů i položek.
+Myšlenka vychází ze singulárního rozkladu a jde vlastně o snížení dimenze projekcí do nižšího prostoru.
+Předpovězené hodnocení uživatele pro položku je pak skalární součin jejich latentních vektorů.
+
+Matice, u, a, vé, hledáme jako řešení optimalizační úlohy.
+Minimalizujeme součet kvadrátů reziduí, ale jen přes známé prvky matice, k tomu přidáme regularizační člen úměrný kvadrátům norem latentních vektorů.
+> Minimalizujeme $\sum_{(i,j)\in\Omega}(r_{i,j} - \boldsymbol u_i^T \boldsymbol v_j)^2 + \lambda(\sum\|\boldsymbol u_i\|^2 + \sum\|\boldsymbol v_j\|^2)$ jen přes známé indexy $\Omega$.
+Suma jen přes pozorované indexy je zásadní, protože většina hodnocení chybí, a regularizace brání přeučení.
+Úlohu řeší stochastický gradientní sestup nebo metoda střídavých nejmenších čtverců.
+
+Vedle faktorizačních metod existují metody založené na paměti, takzvané kolaborativní filtrování.
+> Vedle faktorizačních metod existují metody založené na paměti, takzvané **kolaborativní filtrování**.
+Pro daného uživatele najdeme, ká, nejbližších uživatelů a jejich hodnocení agregujeme jako vážený průměr podle míry podobnosti.
+> Pro daného uživatele najdeme $k$ nejbližších uživatelů a jejich hodnocení agregujeme jako vážený průměr podle míry podobnosti.
+Tento přístup nevyžaduje žádný trénink, jen prochází uložená data.
+
+Klíčem je volba míry podobnosti uživatelů.
+Naivní počet společných položek je zavádějící, protože velmi aktivní uživatelé pak vycházejí podobní téměř každému.
+Jaccardova podobnost tento problém řeší tím, že velikost průniku množin položek vydělí velikostí jejich sjednocení, výsledek leží mezi nulou a jedničkou.
+> **Jaccardova podobnost** dělí velikost průniku velikostí sjednocení: $J(i,l) = |U_i \cap U_l| / |U_i \cup U_l| \in [0,1]$.
+Kosinová podobnost měří kosinus úhlu mezi vektory hodnocení a na rozdíl od Jaccardovy míry zvládá i explicitní zpětnou vazbu, tedy kladná i záporná hodnocení.
+> **Kosinová podobnost** měří kosinus úhlu mezi vektory hodnocení: $\cos\theta = \langle \boldsymbol a, \boldsymbol b\rangle / (\|\boldsymbol a\|\|\boldsymbol b\|)$.
+
+Faktorizaci lze rozšířit o modelování nejistoty.
+Faktorizace zohledňující jistotu modeluje rozptyl predikce parametry nejistoty pro uživatele i položky, její bayesovská varianta používá konjugované apriorní rozdělení a Gibbsovo vzorkování.
+> **Faktorizace zohledňující jistotu** modeluje rozptyl predikce parametry nejistoty, bayesovská varianta používá konjugované priory a Gibbsovo vzorkování.
+
+Modernější přístupy zahrnují pravděpodobnostní maticovou faktorizaci, která modeluje hodnocení jako Gaussovy veličiny, a její bayesovskou verzi s apriorními rozděleními.
+> Modernější přístupy zahrnují pravděpodobnostní maticovou faktorizaci a její bayesovskou verzi.
+Dále neuronové kolaborativní filtrování, variační autoenkodéry, sekvenční modely s mechanismem pozornosti a grafové neuronové sítě nad bipartitním grafem uživatelů a položek.
+> Dále neuronové kolaborativní filtrování, variační autoenkodéry, sekvenční modely a grafové neuronové sítě nad bipartitním grafem uživatelů a položek.

@@ -1,0 +1,41 @@
+# Otázka SPOL-18 — Programování nad distribuovanou pamětí, MPI
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+M P I je standardizovaný systém zasílání zpráv mezi procesy paralelního programu.
+> **MPI** je standardizovaný systém zasílání zpráv mezi procesy paralelního programu.
+Procesy běží na propojených uzlech s distribuovanou pamětí, nesdílejí žádnou paměť, a komunikovat tedy mohou výhradně posíláním zpráv.
+Procesy mohou být vícevláknové; míru spolupráce s vlákny určuje parametr funkce inicializující prostředí, od varianty, kde M P I volá jen hlavní vlákno, až po variantu, kde je smí volat libovolné vlákno.
+
+Každá komunikační funkce má parametr komunikátor, který určuje množinu procesů, v jejímž rámci komunikace probíhá.
+> Každá komunikační funkce má parametr **komunikátor**, který určuje množinu procesů, v jejímž rámci komunikace probíhá.
+Implicitní komunikátor zahrnuje všechny procesy programu; funkce comm rank vrací pořadové číslo procesu a funkce comm size vrací počet procesů ve skupině.
+
+Komunikační operace dělíme na dvoubodové a kolektivní, a nezávisle na blokující a neblokující.
+> Komunikační operace dělíme na **dvoubodové** a **kolektivní**, a nezávisle na **blokující** a **neblokující**.
+Dvoubodová operace komunikuje mezi dvěma procesy, kolektivní mezi všemi procesy komunikátoru.
+
+Blokující dvoubodovou komunikaci tvoří funkce send a recv.
+Funkce send má parametry ukazatel na data, jejich počet, datový typ, cílový proces, značku zprávy a komunikátor; funkce recv navíc vrací stavový objekt a smí přijmout od libovolného odesílatele nebo s libovolnou značkou.
+Blokující operace se vrátí teprve poté, co je bezpečné znovu použít vstupní vyrovnávací paměť.
+
+Funkce send má čtyři komunikační módy.
+Standardní mód nechává na knihovně, zda se data zkopírují do systémové vyrovnávací paměti, nebo se počká na příjemce.
+Buffered mód kopíruje data do uživatelské vyrovnávací paměti a je lokální, synchronní mód se vrátí až po zahájení příjmu a je nelokální, a ready mód předpokládá, že příjem už byl zahájen.
+
+Neblokující operace, jejichž název začíná na, í, iniciují komunikaci a okamžitě se vrátí.
+> Neblokující operace, jejichž název začíná na `I`, iniciují komunikaci a okamžitě se vrátí.
+Vyrovnávací paměť nelze používat, dokud není dokončení explicitně otestováno funkcí wait nebo test.
+
+Kolektivní operace dělíme na operace jeden mnoha a všichni všem.
+Mezi operace jeden mnoha patří broadcast, scatter a gather, mezi operace všichni všem patří allgather, alltoall a allreduce.
+
+Paralelní násobení husté matice a vektoru používá řádkové blokové mapování: každý proces nejprve operací allgather získá celý vektor a poté spočítá svůj blok skalárních součinů.
+Standardní šachovnicové násobení dvou hustých matic rozdělí matice na bloky a v každém řádku i sloupci provede allgather, je ale paměťově neefektivní kvůli replikaci.
+Cannonův systolický algoritmus submatice nejprve zešikmí počátečním posunem a pak je odmocnina z počtu procesorů krát cyklicky posouvá o jednu pozici, takže je paměťově optimální.
+
+Mocninná metoda je iterativní výpočet největšího vlastního čísla a příslušného vlastního vektoru řídké matice, na němž stojí například PageRank.
+> **Mocninná metoda** je iterativní výpočet největšího vlastního čísla a příslušného vlastního vektoru řídké matice, na němž stojí například PageRank.
+Opakovaně se vektor vynásobí maticí, výsledek se znormuje a normou vydělí, dokud výpočet nezkonverguje.
+Při paralelizaci drží každý proces svou část nenulových prvků, lokálně spočte svůj příspěvek a globální součet zajistí operace allreduce.

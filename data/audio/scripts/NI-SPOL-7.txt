@@ -1,0 +1,49 @@
+# Otázka SPOL-7 — Teorie informace a kódování, entropie
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Entropie diskrétní náhodné veličiny je záporně vzatý součet pravděpodobností násobených logaritmem pravděpodobnosti.
+> **Entropie** diskrétní náhodné veličiny je $H(X) = -\sum_{x} p(x) \log p(x)$, záporně vzatý součet pravděpodobností násobených logaritmem pravděpodobnosti.
+Volíme-li logaritmus o základu dvě, je jednotkou entropie bit.
+Entropii lze chápat jako střední hodnotu vlastní informace, kde vlastní informace hodnoty je záporný logaritmus její pravděpodobnosti.
+> Entropii lze chápat jako střední hodnotu vlastní informace, kde **vlastní informace** hodnoty je $I(x) = -\log p(x)$, záporný logaritmus její pravděpodobnosti.
+Entropie je tedy očekávaná míra neurčitosti: je nezáporná, jistý jev má neurčitost nulovou, méně pravděpodobné jevy mají neurčitost vyšší a na nezávislých veličinách se sčítá.
+
+Entropie závisí pouze na rozdělení, nikoli na konkrétních hodnotách veličiny.
+Pro férovou minci s pravděpodobností jedna polovina je entropie rovna právě jednomu bitu.
+Obecně je entropie konkávní funkcí rozdělení a svého maxima nabývá pro rovnoměrné rozdělení, které představuje největší neurčitost.
+
+Sdružená entropie dvou veličin se definuje obdobně, ze sdruženého rozdělení.
+> **Sdružená entropie** $H(X,Y)$ dvou veličin se definuje obdobně, ze sdruženého rozdělení.
+Podmíněná entropie je střední hodnota neurčitosti jedné veličiny, známe-li druhou.
+> **Podmíněná entropie** $H(Y \mid X)$ je střední hodnota neurčitosti jedné veličiny, známe-li druhou.
+Platí řetězové pravidlo: sdružená entropie je součet entropie první veličiny a podmíněné entropie druhé veličiny za první.
+> Platí **řetězové pravidlo**: $H(X,Y) = H(X) + H(Y \mid X)$, sdružená entropie je součet entropie první veličiny a podmíněné entropie druhé veličiny za první.
+
+Kullbackova Leiblerova vzdálenost měří odlišnost dvou rozdělení.
+> **Kullbackova-Leiblerova vzdálenost** $D(p \| q)$ měří odlišnost dvou rozdělení.
+Je nezáporná a nulová právě tehdy, když jsou obě rozdělení stejná, ale není to metrika, protože není symetrická a neplatí trojúhelníková nerovnost.
+Vzájemná informace dvou veličin je relativní entropie mezi jejich sdruženým rozdělením a součinem marginál; je symetrická a platí, že je rovna entropii první veličiny mínus podmíněná entropie za druhou.
+> **Vzájemná informace** $I(X;Y)$ dvou veličin je relativní entropie mezi jejich sdruženým rozdělením a součinem marginál; je symetrická a platí $I(X;Y) = H(X) - H(X \mid Y)$.
+
+Kód přiřazuje každému znaku zprávy kódové slovo z nějaké dé árné abecedy.
+> **Kód** přiřazuje každému znaku zprávy kódové slovo z nějaké $D$-ární abecedy.
+Střední délka kódu je střední hodnota délky kódového slova a je kritériem optimality.
+> **Střední délka** kódu $L(C)$ je střední hodnota délky kódového slova a je kritériem optimality.
+Kódy tvoří hierarchii: instantní kódy jsou podmnožinou jednoznačně dekódovatelných, ty jsou podmnožinou nesingulárních a ty podmnožinou všech kódů.
+Instantní neboli prefixový kód je takový, ve kterém žádné kódové slovo není začátkem jiného, díky čemuž lze zprávu dekódovat průběžně.
+> **Instantní** neboli prefixový kód je takový, ve kterém žádné kódové slovo není začátkem jiného, díky čemuž lze zprávu dekódovat průběžně.
+
+Pro každý instantní kód platí Kraftova nerovnost: součet hodnot dé na mínus délku slova přes všechna slova je nejvýše jedna.
+> Pro každý instantní kód platí **Kraftova nerovnost**: $\sum_i D^{-\ell_i} \le 1$.
+Naopak ke každé sadě délek splňující tuto nerovnost instantní kód existuje.
+McMillanova věta říká, že stejná nerovnost platí i pro jednoznačně dekódovatelné kódy, takže omezením se na instantní kódy o nic nepřicházíme.
+
+Shannonova věta o zdrojovém kódování dává dolní mez: střední délka každého instantního kódu je nejméně rovna entropii.
+> **Shannonova věta** o zdrojovém kódování dává dolní mez: střední délka každého instantního kódu je nejméně rovna entropii, $L(C) \ge H_D(X)$.
+Shannonův kód volí délky jako horní celou část logaritmu převrácené pravděpodobnosti, čímž splňuje Kraftovu nerovnost.
+Existuje tedy instantní kód, jehož střední délka leží mezi entropií a entropií zvětšenou o jedna.
+Optimální kód získáme Huffmanovým algoritmem: opakovaně spojíme dvě nejméně pravděpodobné hodnoty do jedné a kódová slova přiřazujeme zpětným chodem.
+> Optimální kód získáme **Huffmanovým algoritmem**: opakovaně spojíme dvě nejméně pravděpodobné hodnoty do jedné a kódová slova přiřazujeme zpětným chodem.
+Huffmanův kód má ze všech instantních kódů nejmenší střední délku.

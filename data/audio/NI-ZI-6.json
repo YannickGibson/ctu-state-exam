@@ -1,0 +1,182 @@
+{
+  "id": "NI-ZI-6",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 241.459,
+  "sentences": [
+    {
+      "text": "Redukce dimenze hledá transformaci, která promítne data z $n$-rozměrného prostoru do prostoru s mnohem menším počtem rozměrů $k$, a přitom zachová podstatnou informaci.",
+      "para": 0,
+      "start": 0,
+      "end": 12.959
+    },
+    {
+      "text": "Výhodou je, že odstraní redundantní korelace mezi atributy; nevýhodou je, že nové atributy jsou obtížně interpretovatelné.",
+      "para": 0,
+      "start": 12.959,
+      "end": 22.413
+    },
+    {
+      "text": "Metody dělíme na lineární, kam patří náhodná projekce, P C A, I C A a L D A, a na nelineární.",
+      "para": 0,
+      "start": 22.413,
+      "end": 30.449
+    },
+    {
+      "text": "**Náhodná projekce** násobí data náhodnou maticí s jednotkovými sloupci.",
+      "para": 1,
+      "start": 30.449,
+      "end": 35.967
+    },
+    {
+      "text": "Podle Johnsonova-Lindenstraussova lemmatu jsou při dostatečném počtu rozměrů vzdálenosti mezi body přibližně zachovány.",
+      "para": 1,
+      "start": 35.967,
+      "end": 44.758
+    },
+    {
+      "text": "Je velmi rychlá, ale přísně vzato nejde o ortogonální projekci, protože náhodná matice obecně ortogonální není.",
+      "para": 1,
+      "start": 44.758,
+      "end": 53.131
+    },
+    {
+      "text": "**Analýza hlavních komponent**, P C A, redukuje dimenzi tak, aby se zachovala maximální variabilita v datech.",
+      "para": 2,
+      "start": 53.131,
+      "end": 61.226
+    },
+    {
+      "text": "To je ekvivalentní minimalizaci rekonstrukční chyby, tedy rozdílu mezi původním a zpětně zrekonstruovaným bodem.",
+      "para": 2,
+      "start": 61.226,
+      "end": 69.135
+    },
+    {
+      "text": "Nejlepší podprostor je vystředěný průměrem a jeho směry jsou vlastní vektory kovarianční matice dat.",
+      "para": 2,
+      "start": 69.135,
+      "end": 76.754
+    },
+    {
+      "text": "Hlavní komponenty jsou ty vlastní vektory, které odpovídají největším vlastním číslům.",
+      "para": 2,
+      "start": 76.754,
+      "end": 83.061
+    },
+    {
+      "text": "Algoritmus má čtyři kroky: data vystředíme, spočítáme kovarianční matici, provedeme její spektrální rozklad a data promítneme na vlastní vektory s největšími vlastními čísly.",
+      "para": 3,
+      "start": 83.061,
+      "end": 96.218
+    },
+    {
+      "text": "Ekvivalentně lze použít singulární rozklad matice dat.",
+      "para": 3,
+      "start": 96.218,
+      "end": 100.539
+    },
+    {
+      "text": "P C A je metoda bez učitele, nezná tedy třídy, a je citlivá na škálování, proto je u různě jednotkovaných příznaků nutná normalizace.",
+      "para": 3,
+      "start": 100.539,
+      "end": 111.13
+    },
+    {
+      "text": "Podíl součtu největších vlastních čísel ku jejich celkovému součtu udává, kolik informace bylo zachováno.",
+      "para": 3,
+      "start": 111.13,
+      "end": 119.097
+    },
+    {
+      "text": "**Lineární diskriminační analýza**, L D A, je naopak metoda s učitelem a hledá projekci, která maximálně oddělí třídy.",
+      "para": 4,
+      "start": 119.097,
+      "end": 128.469
+    },
+    {
+      "text": "Maximalizuje takzvané Fisherovo kritérium, tedy poměr rozptylu mezi třídami k rozptylu uvnitř tříd.",
+      "para": 4,
+      "start": 128.469,
+      "end": 136.123
+    },
+    {
+      "text": "Řešením je zobecněný problém vlastních čísel pro matice rozptylu mezi třídami a uvnitř tříd.",
+      "para": 4,
+      "start": 136.123,
+      "end": 143.474
+    },
+    {
+      "text": "Pro $c$ tříd má L D A nejvýše $c-1$ rozměrů, takže pro dvě třídy jediný rozměr.",
+      "para": 4,
+      "start": 143.474,
+      "end": 150.617
+    },
+    {
+      "text": "Předpokládá, že třídy mají normální rozdělení se stejnou kovariancí, a lze ji použít i jako klasifikátor.",
+      "para": 4,
+      "start": 150.617,
+      "end": 158.967
+    },
+    {
+      "text": "**Analýza nezávislých komponent**, I C A, předpokládá, že signál vznikl lineárním smícháním nezávislých zdrojů.",
+      "para": 5,
+      "start": 158.967,
+      "end": 168.432
+    },
+    {
+      "text": "Jejím cílem je odhadnout matici, která signál zpět rozloží na původní zdroje; typickou aplikací je oddělení hlasů na večírku.",
+      "para": 5,
+      "start": 168.432,
+      "end": 178.431
+    },
+    {
+      "text": "Postup má dva kroky: nejdříve bělení, které odstraní korelace, a poté rotaci maximalizující ne-gaussovskost zdrojů.",
+      "para": 5,
+      "start": 178.431,
+      "end": 187.373
+    },
+    {
+      "text": "Zatímco P C A hledá pouze nekorelované komponenty, I C A hledá komponenty skutečně nezávislé, což je silnější podmínka.",
+      "para": 5,
+      "start": 187.373,
+      "end": 196.559
+    },
+    {
+      "text": "Nelineární metody zachycují strukturu dat, kterou lineární projekce neumí.",
+      "para": 6,
+      "start": 196.559,
+      "end": 202.193
+    },
+    {
+      "text": "**Vícerozměrné škálování** mapuje body tak, aby co nejlépe zachovalo párové vzdálenosti mezi nimi.",
+      "para": 6,
+      "start": 202.193,
+      "end": 209.475
+    },
+    {
+      "text": "Sammonovo mapování je jeho variantou, která chyby u malých vzdáleností váží silněji.",
+      "para": 6,
+      "start": 209.475,
+      "end": 215.747
+    },
+    {
+      "text": "Metoda **t-SNE** modeluje podobnosti bodů jako pravděpodobnosti a je výborná pro vizualizaci shluků, ale špatně zachovává globální vzdálenosti.",
+      "para": 7,
+      "start": 215.747,
+      "end": 227.441
+    },
+    {
+      "text": "Metoda U M A P je rychlejší a globální strukturu zachovává lépe.",
+      "para": 7,
+      "start": 227.441,
+      "end": 232.656
+    },
+    {
+      "text": "Nelineární redukci umožňují i autoenkodéry, tedy neuronové sítě, jejichž latentní prostor tvoří nelineární projekci dat.",
+      "para": 7,
+      "start": 232.656,
+      "end": 241.459
+    }
+  ]
+}

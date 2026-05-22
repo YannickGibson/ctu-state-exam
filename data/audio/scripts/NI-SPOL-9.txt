@@ -1,0 +1,42 @@
+# Otázka SPOL-9 — Markovské řetězce se spojitým časem
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Čítací proces je náhodný proces, jehož trajektorie je nezáporná, celočíselná a neklesající.
+> **Čítací proces** $\{N_t\}$ je náhodný proces, jehož trajektorie je nezáporná, celočíselná a neklesající.
+Poissonův proces je čítací proces, ve kterém jsou časy mezi událostmi nezávislé a mají exponenciální rozdělení.
+> **Poissonův proces** je čítací proces, ve kterém jsou časy mezi událostmi nezávislé a mají exponenciální rozdělení.
+Ekvivalentně jej lze definovat přes přírůstky: počet událostí v intervalu má Poissonovo rozdělení a přírůstky na disjunktních intervalech jsou nezávislé.
+Poissonův proces je spojitým protějškem binomického procesu; klíčem je bezpaměťovost exponenciálního rozdělení.
+
+Bezpaměťovost znamená, že pravděpodobnost dalšího čekání nezávisí na tom, jak dlouho jsme již čekali.
+Exponenciální rozdělení je jediné spojité rozdělení s touto vlastností, a právě proto je základem markovských řetězců se spojitým časem.
+
+Markovský řetězec se spojitým časem má spočetnou množinu stavů, spojitý čas a splňuje markovskou podmínku.
+> **Markovský řetězec se spojitým časem** má spočetnou množinu stavů, spojitý čas a splňuje markovskou podmínku.
+Je homogenní, pokud matice přechodu závisí jen na délce časového intervalu, a platí pro něj Chapmanova Kolmogorovova rovnice.
+Poissonův proces je příkladem homogenního markovského řetězce se spojitým časem.
+
+Klíčovým objektem je matice skokových intenzit, definovaná jako derivace matice přechodu v nule.
+> Klíčovým objektem je **matice skokových intenzit** $\mathbf Q$, definovaná jako derivace matice přechodu v nule.
+Pro malé časové kroky popisuje intenzitu skoku z jednoho stavu do druhého.
+Její mimodiagonální prvky jsou nezáporné, diagonální prvky nekladné a každý řádkový součet je roven nule.
+
+Mezi řetězci se spojitým a diskrétním časem existuje přímá souvislost.
+Vezmeme-li diskrétní řetězec s maticí přechodu, dé, a načasujeme jeho kroky Poissonovým procesem s intenzitou, lambda, dostaneme řetězec se spojitým časem, jehož matice skokových intenzit je, lambda, krát rozdíl matice, dé, a jednotkové matice.
+> Vezmeme-li diskrétní řetězec s maticí přechodu $\mathbf D$ a načasujeme jeho kroky Poissonovým procesem s intenzitou $\lambda$, dostaneme řetězec se spojitým časem, jehož matice skokových intenzit je $\mathbf Q = \lambda(\mathbf D - \mathbf I)$.
+Tuto konstrukci lze obrátit: ze skokových intenzit zvolíme dostatečně velkou, lambda, sestrojíme stochastickou matici, dé, a trajektorii řetězce simulujeme jako diskrétní řetězec časovaný Poissonovým procesem.
+
+Vývoj rozdělení v čase popisují Kolmogorovy rovnice.
+Dopředná rovnice říká, že derivace matice přechodu je matice přechodu krát matice intenzit; zpětná rovnice má činitele v opačném pořadí.
+> **Kolmogorovy rovnice**: dopředná $\mathbf P'(t) = \mathbf P(t) \mathbf Q$ a zpětná $\mathbf P'(t) = \mathbf Q \mathbf P(t)$.
+Řešením je maticová exponenciála matice intenzit násobené časem.
+> Řešením je maticová exponenciála $\mathbf P(t) = e^{\mathbf Q t}$.
+
+Stacionární rozdělení je rozdělení, které se v čase nemění; je jím vektor, pro který je součin s maticí intenzit roven nule.
+> **Stacionární rozdělení** je rozdělení, které se v čase nemění; je jím vektor $\boldsymbol\pi$, pro který platí $\boldsymbol\pi \mathbf Q = \mathbf 0$.
+Pro nerozložitelný řetězec platí: existuje-li stacionární rozdělení, je jediné a matice přechodu k němu v čase konverguje; jinak konvergují pravděpodobnosti k nule.
+Pro konečnou množinu stavů stacionární rozdělení vždy existuje.
+Často pomáhá podmínka detailní rovnováhy, podle které je tok mezi dvěma stavy oběma směry stejný; je-li splněna, je dané rozdělení stacionární.
+> Často pomáhá **podmínka detailní rovnováhy** $\pi_j Q_{ji} = \pi_i Q_{ij}$, podle které je tok mezi dvěma stavy oběma směry stejný; je-li splněna, je dané rozdělení stacionární.

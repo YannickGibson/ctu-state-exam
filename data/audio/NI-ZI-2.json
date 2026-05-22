@@ -1,0 +1,164 @@
+{
+  "id": "NI-ZI-2",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 236.389,
+  "sentences": [
+    {
+      "text": "**Problém splňování omezení** je trojice $(X, D, C)$ tvořená množinou proměnných, množinou jejich konečných domén a množinou omezení.",
+      "para": 0,
+      "start": 0,
+      "end": 8.768
+    },
+    {
+      "text": "Proměnné určují, co můžeme rozhodnout, domény dávají možnosti a omezení svazují hodnoty podmnožin proměnných.",
+      "para": 0,
+      "start": 8.768,
+      "end": 16.956
+    },
+    {
+      "text": "Řešením je úplné přiřazení hodnot z domén proměnným tak, aby byla splněna všechna omezení současně.",
+      "para": 0,
+      "start": 16.956,
+      "end": 24.923
+    },
+    {
+      "text": "Typickými příklady jsou problém osmi dam, barvení grafu, sudoku nebo rozvrhování.",
+      "para": 0,
+      "start": 24.923,
+      "end": 31.288
+    },
+    {
+      "text": "Omezení lze reprezentovat extenzionálně tabulkou povolených kombinací, nebo intenzionálně jako predikát či aritmetický výraz.",
+      "para": 1,
+      "start": 31.288,
+      "end": 41.461
+    },
+    {
+      "text": "Zvláštní roli mají globální omezení, například $\\mathrm{AllDifferent}$, které vynucuje, že všechny proměnné nabývají navzájem různých hodnot, a má efektivní filtrační algoritmus.",
+      "para": 1,
+      "start": 41.461,
+      "end": 54.734
+    },
+    {
+      "text": "Základním řešicím postupem je **backtracking**, tedy prohledávání do hloubky ve stromě přiřazení.",
+      "para": 2,
+      "start": 54.734,
+      "end": 61.331
+    },
+    {
+      "text": "V každém uzlu rozšíříme částečné přiřazení o jednu proměnnou, a narazíme-li na porušené omezení, zrušíme poslední rozhodnutí a zkusíme jinou hodnotu.",
+      "para": 2,
+      "start": 61.331,
+      "end": 72.932
+    },
+    {
+      "text": "Naivní backtracking je ale neefektivní, protože využívá omezení příliš pasivně a zapomíná již odvedenou práci.",
+      "para": 2,
+      "start": 72.932,
+      "end": 81.166
+    },
+    {
+      "text": "**Dopředná kontrola** po každém přiřazení odebere z domén nepřiřazených sousedů hodnoty neslučitelné s tímto přiřazením.",
+      "para": 3,
+      "start": 81.166,
+      "end": 90.038
+    },
+    {
+      "text": "Pokud se některá doména vyprázdní, můžeme se vrátit ihned, aniž bychom čekali na ohodnocení dalších proměnných.",
+      "para": 3,
+      "start": 90.038,
+      "end": 98.365
+    },
+    {
+      "text": "Silnější je **hranová konzistence**, kdy je dvojice proměnných konzistentní, pokud pro každou hodnotu první proměnné existuje slučitelná podpora v doméně druhé.",
+      "para": 3,
+      "start": 98.365,
+      "end": 109.908
+    },
+    {
+      "text": "Algoritmus **AC-3** opakovaně odstraňuje hodnoty bez podpory, dokud se domény mění, a pracuje v čase $O(\\mathrm{ed}^3)$.",
+      "para": 3,
+      "start": 109.908,
+      "end": 121.602
+    },
+    {
+      "text": "Když hranovou konzistenci udržujeme po každém přiřazení, dostáváme metodu **maintaining arc consistency**, jeden z nejpoužívanějších přístupů.",
+      "para": 3,
+      "start": 121.602,
+      "end": 132.321
+    },
+    {
+      "text": "Účinnost prohledávání zvyšují heuristiky pořadí, které jsou doménově nezávislé.",
+      "para": 4,
+      "start": 132.321,
+      "end": 138.825
+    },
+    {
+      "text": "Při výběru proměnné volíme heuristikou nejvíce omezené proměnné tu s nejmenší doménou, protože těžká rozhodnutí se vyplatí neodkládat.",
+      "para": 4,
+      "start": 138.825,
+      "end": 148.719
+    },
+    {
+      "text": "Při výběru hodnoty volíme heuristikou nejméně omezující hodnoty tu, která sousedním proměnným ponechá co největší volnost.",
+      "para": 4,
+      "start": 148.719,
+      "end": 157.197
+    },
+    {
+      "text": "Pokročilé prohledávání zlepšuje zpracování konfliktů.",
+      "para": 5,
+      "start": 157.197,
+      "end": 161.623
+    },
+    {
+      "text": "**Backjumping** místo chronologického návratu skočí přímo k proměnné, která konflikt způsobila, na základě takzvané konfliktní množiny.",
+      "para": 5,
+      "start": 161.623,
+      "end": 171.39
+    },
+    {
+      "text": "Učení zaznamenává kombinace přiřazení vedoucí ke sporu jako nové omezení, takzvaný **nogood**, čímž ořezává budoucí strom.",
+      "para": 5,
+      "start": 171.39,
+      "end": 181.331
+    },
+    {
+      "text": "Nogood je logickým důsledkem omezení a specifické nogoody lze skládat zobecněným rezolučním pravidlem do obecnějších.",
+      "para": 5,
+      "start": 181.331,
+      "end": 190.331
+    },
+    {
+      "text": "Alternativou k systematickému prohledávání je lokální prohledávání.",
+      "para": 6,
+      "start": 190.331,
+      "end": 195.454
+    },
+    {
+      "text": "Metoda **min-conflicts** začne z náhodného úplného přiřazení a v každém kroku přehodnotí konfliktní proměnnou na hodnotu, která minimalizuje počet porušených omezení.",
+      "para": 6,
+      "start": 195.454,
+      "end": 208.506
+    },
+    {
+      "text": "Je velmi efektivní pro rozsáhlé problémy, ale na rozdíl od systematických metod nedokáže prokázat neřešitelnost.",
+      "para": 6,
+      "start": 208.506,
+      "end": 217.472
+    },
+    {
+      "text": "Strukturu úlohy lze využít: má-li graf omezení tvar stromu, řešíme ho v čase $O(nd^2)$ pomocí směrové hranové konzistence.",
+      "para": 7,
+      "start": 217.472,
+      "end": 227.412
+    },
+    {
+      "text": "Obecně je ale rozhodnutí o existenci řešení NP-těžký problém, takže v nejhorším případě řešíme exponenciálně dlouho.",
+      "para": 7,
+      "start": 227.412,
+      "end": 236.389
+    }
+  ]
+}

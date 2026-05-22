@@ -1,0 +1,146 @@
+{
+  "id": "NI-SPOL-19",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 224.818,
+  "sentences": [
+    {
+      "text": "Propojovací síť paralelního počítače se popisuje jako graf, jehož uzly jsou procesory a hrany komunikační linky.",
+      "para": 0,
+      "start": 0,
+      "end": 8.408
+    },
+    {
+      "text": "Klíčové parametry jsou stupeň uzlu, průměr grafu jako největší vzdálenost mezi dvěma uzly, souvislost a bisekční šířka, tedy velikost nejmenšího hranového řezu dělícího graf na dvě poloviny.",
+      "para": 0,
+      "start": 8.408,
+      "end": 23.457
+    },
+    {
+      "text": "Návrh sítě musí vyvážit dva protichůdné požadavky: konstantní stupeň uzlu a malý průměr.",
+      "para": 1,
+      "start": 23.457,
+      "end": 30.519
+    },
+    {
+      "text": "Pro řídkou síť s, en, uzly je průměr alespoň logaritmus z, en, takže logaritmický průměr je u řídké topologie optimální.",
+      "para": 1,
+      "start": 30.519,
+      "end": 40.193
+    },
+    {
+      "text": "Přímé propojovací sítě dělíme na ortogonální, mezi něž patří hyperkrychle, mřížky a toroidy, a na hyperkubické, kam patří motýlek.",
+      "para": 1,
+      "start": 40.193,
+      "end": 50.191
+    },
+    {
+      "text": "Binární **hyperkrychle** dimenze $n$ má za uzly všechny binární řetězce délky $n$ a hranou jsou spojeny uzly lišící se v jediném bitu.",
+      "para": 2,
+      "start": 50.191,
+      "end": 59.784
+    },
+    {
+      "text": "Má dvě na entou uzlů, stupeň, en, a průměr, en, který je roven Hammingově vzdálenosti nejvzdálenějších uzlů.",
+      "para": 2,
+      "start": 59.784,
+      "end": 68.03
+    },
+    {
+      "text": "Hyperkrychle je hierarchicky rekurzivní, má optimální souvislost, je hamiltonovská přes Grayův kód a je vyváženě bipartitní.",
+      "para": 2,
+      "start": 68.03,
+      "end": 77.285
+    },
+    {
+      "text": "Její bisekční šířka je polovina počtu uzlů, což je nejvíc možné, takže je ideální pro algoritmy typu rozděl a panuj.",
+      "para": 2,
+      "start": 77.285,
+      "end": 86.205
+    },
+    {
+      "text": "**Mřížka** dimenze $n$ má uzly uspořádané do $n$-rozměrné mřížky a vzdálenost se měří manhattansky.",
+      "para": 3,
+      "start": 86.205,
+      "end": 93.963
+    },
+    {
+      "text": "Mřížka není uzlově symetrická, protože krajní a vnitřní uzly mají různý stupeň, je vždy bipartitní a hamiltonovská.",
+      "para": 3,
+      "start": 93.963,
+      "end": 103.393
+    },
+    {
+      "text": "**Toroid** je mřížka zavinutá do tvaru toru, takže každá dimenze tvoří kružnici.",
+      "para": 4,
+      "start": 103.393,
+      "end": 109.2
+    },
+    {
+      "text": "Díky zacyklení je uzlově symetrický a jeho průměr je zhruba poloviční oproti stejně velké mřížce; bipartitní je, právě když jsou všechny strany sudé.",
+      "para": 4,
+      "start": 109.2,
+      "end": 120.453
+    },
+    {
+      "text": "Toroid je komerčně významný, používají ho například superpočítače BlueGene a Fujitsu.",
+      "para": 4,
+      "start": 120.453,
+      "end": 126.771
+    },
+    {
+      "text": "Řídké hyperkubické sítě vznikají rozvinutím každého uzlu hyperkrychle do více uzlů.",
+      "para": 5,
+      "start": 126.771,
+      "end": 133.276
+    },
+    {
+      "text": "Mají konstantní stupeň, logaritmický průměr a bisekční šířku řádu počet uzlů dělený logaritmem, a jsou přirozenou topologií pro rychlou Fourierovu transformaci.",
+      "para": 5,
+      "start": 133.276,
+      "end": 145.48
+    },
+    {
+      "text": "Hlavním zástupcem je zabalený **motýlek**, jehož uzly tvoří dvojice úrovně a binárního řetězce, má konstantní stupeň čtyři a je uzlově symetrický.",
+      "para": 5,
+      "start": 145.48,
+      "end": 156.71
+    },
+    {
+      "text": "**Vnoření** jednoho grafu do druhého je dvojice zobrazení: jedno přiřazuje uzlům zdrojového grafu uzly hostitelského a druhé hranám přiřazuje cesty.",
+      "para": 6,
+      "start": 156.71,
+      "end": 167.719
+    },
+    {
+      "text": "Kvalitu vnoření měří load jako nejvyšší zatížení hostitelského uzlu, expanze jako poměr počtu uzlů, dilatace jako největší délka obrazu hrany a zahlcení jako počet zdrojových hran sdílejících jednu hostitelskou hranu.",
+      "para": 6,
+      "start": 167.719,
+      "end": 185.612
+    },
+    {
+      "text": "Dvě sítě jsou kvaziizometrické, pokud mezi nimi existují vzájemná vnoření s konstantními parametry kvality.",
+      "para": 6,
+      "start": 185.612,
+      "end": 193.904
+    },
+    {
+      "text": "Spodní mez dilatace dává průměrový argument: při stejném počtu uzlů a zatížení jedna je dilatace alespoň poměr průměrů hostitelského a zdrojového grafu.",
+      "para": 7,
+      "start": 193.904,
+      "end": 206.074
+    },
+    {
+      "text": "Stejnorozměrné mřížky a toroidy jsou kvaziizometrické díky kartézské dekompozici, s vnořením o zatížení jedna a dilataci dva.",
+      "para": 7,
+      "start": 206.074,
+      "end": 215.818
+    },
+    {
+      "text": "Hyperkrychli sudé dimenze lze vnořit do čtvercové mřížky se zatížením jedna pomocí Mortonovy, takzvané, zet, křivky.",
+      "para": 7,
+      "start": 215.818,
+      "end": 224.818
+    }
+  ]
+}

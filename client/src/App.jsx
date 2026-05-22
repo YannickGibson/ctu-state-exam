@@ -24,7 +24,10 @@ function Header() {
 
   return (
     <header className="app-header">
-      <span className="app-title">State Exams</span>
+      <div className="app-brand">
+        <img className="app-logo" src="/icon-512.png" alt="" width="28" height="28" />
+        <span className="app-title">State Exams</span>
+      </div>
       <nav>
         <NavLink to="/questions" end>Questions</NavLink>
         <NavLink to="/quizzes" end>Quizzes</NavLink>

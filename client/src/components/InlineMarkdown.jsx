@@ -1,9 +1,10 @@
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { glueMathPunctuation } from '../audioSync.js';
 
 // Renders one line of markdown with inline LaTeX ($...$) and no block-level
-// <p> wrapper, so it is safe to nest inside a <button> or other inline flow.
+// <p> wrapper, so it is safe to nest inside inline flow.
 const COMPONENTS = { p: ({ children }) => <>{children}</> };
 
 export default function InlineMarkdown({ children }) {
@@ -13,7 +14,7 @@ export default function InlineMarkdown({ children }) {
       rehypePlugins={[rehypeKatex]}
       components={COMPONENTS}
     >
-      {children}
+      {glueMathPunctuation(children)}
     </ReactMarkdown>
   );
 }

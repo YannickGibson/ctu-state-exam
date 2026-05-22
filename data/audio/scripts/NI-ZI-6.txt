@@ -1,0 +1,49 @@
+# Otázka ZI-6 — Lineární projekce dat: PCA, LDA a nelineární redukce dimenze
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Redukce dimenze hledá transformaci, která promítne data z, en, rozměrného prostoru do prostoru s mnohem menším počtem rozměrů, ká, a přitom zachová podstatnou informaci.
+> Redukce dimenze hledá transformaci, která promítne data z $n$-rozměrného prostoru do prostoru s mnohem menším počtem rozměrů $k$, a přitom zachová podstatnou informaci.
+Výhodou je, že odstraní redundantní korelace mezi atributy; nevýhodou je, že nové atributy jsou obtížně interpretovatelné.
+Metody dělíme na lineární, kam patří náhodná projekce, P C A, I C A a L D A, a na nelineární.
+
+Náhodná projekce násobí data náhodnou maticí s jednotkovými sloupci.
+> **Náhodná projekce** násobí data náhodnou maticí s jednotkovými sloupci.
+Podle Johnsonova-Lindenstraussova lemmatu jsou při dostatečném počtu rozměrů vzdálenosti mezi body přibližně zachovány.
+Je velmi rychlá, ale přísně vzato nejde o ortogonální projekci, protože náhodná matice obecně ortogonální není.
+
+Analýza hlavních komponent, P C A, redukuje dimenzi tak, aby se zachovala maximální variabilita v datech.
+> **Analýza hlavních komponent**, P C A, redukuje dimenzi tak, aby se zachovala maximální variabilita v datech.
+To je ekvivalentní minimalizaci rekonstrukční chyby, tedy rozdílu mezi původním a zpětně zrekonstruovaným bodem.
+Nejlepší podprostor je vystředěný průměrem a jeho směry jsou vlastní vektory kovarianční matice dat.
+Hlavní komponenty jsou ty vlastní vektory, které odpovídají největším vlastním číslům.
+
+Algoritmus má čtyři kroky: data vystředíme, spočítáme kovarianční matici, provedeme její spektrální rozklad a data promítneme na vlastní vektory s největšími vlastními čísly.
+Ekvivalentně lze použít singulární rozklad matice dat.
+P C A je metoda bez učitele, nezná tedy třídy, a je citlivá na škálování, proto je u různě jednotkovaných příznaků nutná normalizace.
+Podíl součtu největších vlastních čísel ku jejich celkovému součtu udává, kolik informace bylo zachováno.
+
+Lineární diskriminační analýza, L D A, je naopak metoda s učitelem a hledá projekci, která maximálně oddělí třídy.
+> **Lineární diskriminační analýza**, L D A, je naopak metoda s učitelem a hledá projekci, která maximálně oddělí třídy.
+Maximalizuje takzvané Fisherovo kritérium, tedy poměr rozptylu mezi třídami k rozptylu uvnitř tříd.
+Řešením je zobecněný problém vlastních čísel pro matice rozptylu mezi třídami a uvnitř tříd.
+Pro, cé, tříd má L D A nejvýše, cé, bez jedné rozměrů, takže pro dvě třídy jediný rozměr.
+> Pro $c$ tříd má L D A nejvýše $c-1$ rozměrů, takže pro dvě třídy jediný rozměr.
+Předpokládá, že třídy mají normální rozdělení se stejnou kovariancí, a lze ji použít i jako klasifikátor.
+
+Analýza nezávislých komponent, I C A, předpokládá, že signál vznikl lineárním smícháním nezávislých zdrojů.
+> **Analýza nezávislých komponent**, I C A, předpokládá, že signál vznikl lineárním smícháním nezávislých zdrojů.
+Jejím cílem je odhadnout matici, která signál zpět rozloží na původní zdroje; typickou aplikací je oddělení hlasů na večírku.
+Postup má dva kroky: nejdříve bělení, které odstraní korelace, a poté rotaci maximalizující ne-gaussovskost zdrojů.
+Zatímco P C A hledá pouze nekorelované komponenty, I C A hledá komponenty skutečně nezávislé, což je silnější podmínka.
+
+Nelineární metody zachycují strukturu dat, kterou lineární projekce neumí.
+Vícerozměrné škálování mapuje body tak, aby co nejlépe zachovalo párové vzdálenosti mezi nimi.
+> **Vícerozměrné škálování** mapuje body tak, aby co nejlépe zachovalo párové vzdálenosti mezi nimi.
+Sammonovo mapování je jeho variantou, která chyby u malých vzdáleností váží silněji.
+
+Metoda té es en é modeluje podobnosti bodů jako pravděpodobnosti a je výborná pro vizualizaci shluků, ale špatně zachovává globální vzdálenosti.
+> Metoda **t-SNE** modeluje podobnosti bodů jako pravděpodobnosti a je výborná pro vizualizaci shluků, ale špatně zachovává globální vzdálenosti.
+Metoda U M A P je rychlejší a globální strukturu zachovává lépe.
+Nelineární redukci umožňují i autoenkodéry, tedy neuronové sítě, jejichž latentní prostor tvoří nelineární projekci dat.

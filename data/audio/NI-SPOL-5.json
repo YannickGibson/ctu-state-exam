@@ -1,0 +1,158 @@
+{
+  "id": "NI-SPOL-5",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 187.776,
+  "sentences": [
+    {
+      "text": "Při numerických výpočtech vzniká několik druhů chyb podle jejich původu.",
+      "para": 0,
+      "start": 0,
+      "end": 5.413
+    },
+    {
+      "text": "Chyba modelu vzniká zjednodušením matematického modelu skutečnosti, například zanedbáním tření.",
+      "para": 0,
+      "start": 5.413,
+      "end": 12.532
+    },
+    {
+      "text": "Chyba dat plyne z nepřesnosti vstupních hodnot, které obvykle pocházejí z měření.",
+      "para": 0,
+      "start": 12.532,
+      "end": 18.282
+    },
+    {
+      "text": "Chyba algoritmu nastává, když algoritmus nenajde přesné řešení v konečném počtu kroků.",
+      "para": 0,
+      "start": 18.282,
+      "end": 25.007
+    },
+    {
+      "text": "A konečně zaokrouhlovací chyba vzniká během samotného výpočtu při aritmetických operacích.",
+      "para": 0,
+      "start": 25.007,
+      "end": 31.917
+    },
+    {
+      "text": "K uložení necelých čísel se používá **vědecký zápis**: číslo je dáno znaménkem, signifikantem a exponentem, přičemž signifikant se násobí mocninou dvojky danou exponentem.",
+      "para": 1,
+      "start": 31.917,
+      "end": 44.436
+    },
+    {
+      "text": "Signifikantu, kterému se říká též mantisa, i exponentu je vyhrazen pevný počet bitů.",
+      "para": 1,
+      "start": 44.436,
+      "end": 51.195
+    },
+    {
+      "text": "Formát s pohyblivou řádovou čárkou popisuje standard **IEEE-754**.",
+      "para": 2,
+      "start": 51.195,
+      "end": 57.85
+    },
+    {
+      "text": "Definuje přesnosti od poloviční přes jednoduchou a dvojitou až po čtyřnásobnou, které se liší počtem bitů signifikantu a exponentu.",
+      "para": 2,
+      "start": 57.85,
+      "end": 67.42
+    },
+    {
+      "text": "Reálná čísla, která lze v daném formátu přesně reprezentovat, nazýváme **strojová čísla**; tvoří konečnou podmnožinu racionálních čísel.",
+      "para": 2,
+      "start": 67.42,
+      "end": 78.719
+    },
+    {
+      "text": "Zobrazení, které reálnému číslu přiřadí nejbližší strojové číslo, vnáší chybu.",
+      "para": 3,
+      "start": 78.719,
+      "end": 84.921
+    },
+    {
+      "text": "**Absolutní chyba** je velikost rozdílu mezi přesnou hodnotou a její strojovou reprezentací.",
+      "para": 3,
+      "start": 84.921,
+      "end": 91.565
+    },
+    {
+      "text": "**Relativní chyba** je tato absolutní chyba podělená velikostí přesné hodnoty.",
+      "para": 3,
+      "start": 91.565,
+      "end": 97.07
+    },
+    {
+      "text": "Horní mez relativní chyby reprezentace se nazývá **zaokrouhlovací jednotka**.",
+      "para": 3,
+      "start": 97.07,
+      "end": 102.518
+    },
+    {
+      "text": "Také výsledek aritmetické operace se dvěma strojovými čísly obecně není strojové číslo a musí se zaokrouhlit.",
+      "para": 4,
+      "start": 102.518,
+      "end": 110.822
+    },
+    {
+      "text": "Spočtený výsledek je proto roven přesnému výsledku vynásobenému činitelem jedna plus delta, kde velikost delty je shora omezena zaokrouhlovací jednotkou.",
+      "para": 4,
+      "start": 110.822,
+      "end": 122.121
+    },
+    {
+      "text": "U numerického algoritmu rozlišujeme dvě chyby.",
+      "para": 5,
+      "start": 122.121,
+      "end": 125.583
+    },
+    {
+      "text": "**Dopředná**, neboli přímá, chyba je odchylka spočteného výsledku od přesného výsledku.",
+      "para": 5,
+      "start": 125.583,
+      "end": 131.902
+    },
+    {
+      "text": "**Zpětná chyba** je nejmenší změna vstupních dat taková, že přesný algoritmus by na takto pozměněném vstupu vrátil náš spočtený výsledek.",
+      "para": 5,
+      "start": 131.902,
+      "end": 142.249
+    },
+    {
+      "text": "Je-li zpětná chyba pro všechny vstupy malá, nazýváme algoritmus **zpětně stabilní**.",
+      "para": 5,
+      "start": 142.249,
+      "end": 148.347
+    },
+    {
+      "text": "**Podmíněnost** je vlastnost samotné úlohy, nikoli algoritmu; vyjadřuje, jak citlivě reaguje výstup na malou změnu vstupních dat.",
+      "para": 6,
+      "start": 148.347,
+      "end": 157.777
+    },
+    {
+      "text": "**Relativní číslo podmíněnosti** je supremum poměru relativní změny výstupu ku relativní změně vstupu.",
+      "para": 6,
+      "start": 157.777,
+      "end": 165.082
+    },
+    {
+      "text": "Je-li blízké jedné, je úloha dobře podmíněná; je-li velké, je úloha špatně podmíněná.",
+      "para": 6,
+      "start": 165.082,
+      "end": 171.447
+    },
+    {
+      "text": "U soustavy lineárních rovnic je **číslo podmíněnosti matice** součinem normy matice a normy její inverze.",
+      "para": 7,
+      "start": 171.447,
+      "end": 179.135
+    },
+    {
+      "text": "Relativní chyba řešení je nejvýše tolikrát větší než relativní chyba pravé strany, kolik činí toto číslo podmíněnosti.",
+      "para": 7,
+      "start": 179.135,
+      "end": 187.776
+    }
+  ]
+}

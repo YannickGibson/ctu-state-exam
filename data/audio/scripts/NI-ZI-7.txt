@@ -1,0 +1,41 @@
+# Otázka ZI-7 — Učení dopředných neuronových sítí, konvoluční neuronové sítě
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Perceptron spočítá vážený součet vstupů, odečte práh a výsledek protáhne přenosovou funkcí, například skokovou nebo sigmoidou.
+> **Perceptron** spočítá vážený součet vstupů $\xi = \sum_i w_i x_i - \theta$, výstup je $Z = S(\xi)$ s přenosovou funkcí $S$.
+Klasický perceptronový algoritmus váhy postupně otáčí směrem ke špatně zařazeným vzorům a konverguje, ale jen tehdy, jsou-li data lineárně separabilní.
+
+Aby síť zvládla i data, která lineárně oddělit nelze, učíme ji gradientně.
+Zavedeme chybovou funkci jako součet čtverců odchylek mezi cílovým a skutečným výstupem.
+> Zavedeme chybovou funkci $E = \tfrac12 \sum_i (t^{(i)} - o^{(i)})^2$ jako součet čtverců odchylek.
+Váhu pak posuneme proti směru gradientu chyby, což je takzvané delta pravidlo.
+> Váhu posuneme proti směru gradientu chyby, $\Delta w_j = -\eta\,\partial E / \partial w_j$, což je **delta pravidlo**.
+
+Vícevrstvý perceptron skládá několik plně propojených vrstev s nelineárními aktivacemi, jako je sigmoida, hyperbolický tangens nebo relu.
+> **Vícevrstvý perceptron** skládá několik plně propojených vrstev s nelineárními aktivacemi (sigmoid, tanh, ReLU).
+Učí se s učitelem a podle Kolmogorovovy věty dokáže síť už s jednou skrytou vrstvou aproximovat libovolnou spojitou funkci.
+
+Vícevrstvou síť učíme algoritmem zpětného šíření chyby.
+> Vícevrstvou síť učíme algoritmem **zpětného šíření chyby**, anglicky backpropagation.
+Při dopředném průchodu spočítáme aktivace všech vrstev, na výstupu změříme chybu a tu pak pomocí řetízkového pravidla šíříme zpět vrstvu po vrstvě.
+Pro každý neuron tak získáme jeho podíl na chybě, a podle něj upravíme příslušné váhy proti směru gradientu.
+
+Konvoluční neuronové sítě, zkráceně C N N, vznikly z prací Jana LeCuna a z Fukušimova neokognitronu.
+> **Konvoluční neuronové sítě** (C N N) vznikly z prací Jana LeCuna a z Fukušimova neokognitronu.
+Jejich síla je ve sdílených filtrech, takže stejný vzor síť rozpozná kdekoli v obraze, a v poolingových vrstvách, které zmenšují rozměr.
+
+Konvoluční vrstva posouvá malé filtry přes vstupní obraz a počítá z každé výřezu jednu hodnotu výstupní příznakové mapy.
+> **Konvoluční vrstva** posouvá filtry přes vstupní obraz a počítá výstupní příznakové mapy.
+Hyperparametry jsou velikost filtru, krok posunu, doplnění okrajů a počet filtrů.
+Pooling vrstva pak po blocích, typicky dva krát dva, bere maximum nebo průměr, čímž redukuje počet parametrů a dává invarianci vůči malým posunům.
+
+Mezi klasické architektury patří LeNet, první úspěšná konvoluční síť, a AlexNet, který v roce dva tisíce dvanáct odstartoval éru hlubokého učení.
+Síť V G G používá jednotné filtry tři krát tři, GoogLeNet zavádí paralelní moduly a ResNet díky reziduálním spojům umožňuje stovky vrstev.
+> Síť VGG používá jednotné filtry $3\times3$, GoogLeNet zavádí paralelní moduly a **ResNet** díky reziduálním spojům umožňuje stovky vrstev.
+
+Hluboké sítě v praxi optimalizujeme stochastickým gradientním sestupem s mini dávkami, často s momentem nebo metodou Adam s adaptivním krokem učení.
+Proti přeučení pomáhá el dvě regularizace, dropout, který náhodně nuluje aktivace, a rozšiřování dat.
+> Proti přeučení pomáhá $L_2$ regularizace, **dropout**, který náhodně nuluje aktivace, a rozšiřování dat.
+Dávková normalizace stabilizuje trénink tím, že normalizuje aktivace uvnitř mini dávky, a vhodná inicializace vah, Xavierova nebo Heho, brání útlumu signálu.

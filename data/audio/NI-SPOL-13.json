@@ -1,0 +1,140 @@
+{
+  "id": "NI-SPOL-13",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 166.58,
+  "sentences": [
+    {
+      "text": "**Lokální heuristika** prochází stavový prostor iterativně, krok po kroku.",
+      "para": 0,
+      "start": 0,
+      "end": 5.181
+    },
+    {
+      "text": "Z aktuálního stavu vybere souseda v jeho okolí a vyhodnotí ho.",
+      "para": 0,
+      "start": 5.181,
+      "end": 9.955
+    },
+    {
+      "text": "Pokud je soused lepší, přejde do něj a uloží si ho jako dosud nejlepší nalezené řešení.",
+      "para": 0,
+      "start": 9.955,
+      "end": 16.25
+    },
+    {
+      "text": "Tento postup opakuje, dokud nenarazí na podmínku zastavení; vrací nejlepší stav, který během prohledávání viděl.",
+      "para": 0,
+      "start": 16.25,
+      "end": 25.007
+    },
+    {
+      "text": "Klíčové je, že heuristika vidí jen blízké okolí aktuálního stavu, nikoli celý stavový prostor, a rozhoduje se tedy jen podle lokální informace.",
+      "para": 0,
+      "start": 25.007,
+      "end": 36.422
+    },
+    {
+      "text": "**Globální minimum** je stav s nejmenší možnou hodnotou optimalizačního kritéria v celém stavovém prostoru.",
+      "para": 1,
+      "start": 36.422,
+      "end": 44.18
+    },
+    {
+      "text": "Stav je **lokálním minimem**, jestliže z něj na hladině jeho hodnoty kritéria nelze dosáhnout žádného lepšího stavu.",
+      "para": 1,
+      "start": 44.18,
+      "end": 52.751
+    },
+    {
+      "text": "Jinak řečeno, všichni sousedé jsou stejně dobří nebo horší, takže jednoduchá heuristika se v takovém stavu zasekne.",
+      "para": 1,
+      "start": 52.751,
+      "end": 60.753
+    },
+    {
+      "text": "**Hloubka lokálního minima** je nejmenší nárůst kritéria, který musíme dovolit, abychom se dostali do lepšího stavu.",
+      "para": 2,
+      "start": 60.753,
+      "end": 70.194
+    },
+    {
+      "text": "Pro globální minimum je hloubka nekonečná, protože už žádný lepší stav neexistuje.",
+      "para": 2,
+      "start": 70.194,
+      "end": 76.432
+    },
+    {
+      "text": "Hluboká lokální minima jsou nebezpečná, neboť únik z nich vyžaduje připustit velké zhoršení a uniká se z nich nejhůř.",
+      "para": 2,
+      "start": 76.432,
+      "end": 85.374
+    },
+    {
+      "text": "Hlavním problémem jednoduchých lokálních heuristik je právě uváznutí v lokálním optimu.",
+      "para": 3,
+      "start": 85.374,
+      "end": 91.855
+    },
+    {
+      "text": "Heuristika, která přijímá jen zlepšující kroky, se zastaví v prvním lokálním optimu, na které narazí.",
+      "para": 3,
+      "start": 91.855,
+      "end": 99.508
+    },
+    {
+      "text": "Důsledkem je, že kvalita výsledného řešení silně závisí na kvalitě počátečního řešení.",
+      "para": 3,
+      "start": 99.508,
+      "end": 106.164
+    },
+    {
+      "text": "Z různých startů tak skončíme v různě kvalitních optimech, a heuristika sama o sobě nemá jak rozpoznat, že lepší řešení existuje jinde.",
+      "para": 3,
+      "start": 106.164,
+      "end": 115.884
+    },
+    {
+      "text": "Obranou proti uváznutí je připustit i akci, která řešení dočasně zhorší.",
+      "para": 4,
+      "start": 115.884,
+      "end": 121.552
+    },
+    {
+      "text": "To je princip **diverzifikace**, tedy rovnoměrného průzkumu stavového prostoru.",
+      "para": 4,
+      "start": 121.552,
+      "end": 127.186
+    },
+    {
+      "text": "Diverzifikace musí být v rovnováze s **intenzifikací**, což je konvergence k finálnímu řešení.",
+      "para": 4,
+      "start": 127.186,
+      "end": 134.201
+    },
+    {
+      "text": "Příliš mnoho diverzifikace brání dokončení, příliš mnoho intenzifikace vede zpět k uváznutí, proto je nutné poměr mezi nimi řídit.",
+      "para": 4,
+      "start": 134.201,
+      "end": 144.281
+    },
+    {
+      "text": "Konkrétních způsobů diverzifikace je více.",
+      "para": 5,
+      "start": 144.281,
+      "end": 147.743
+    },
+    {
+      "text": "Můžeme zvětšit prohledávané okolí, například pomocí $k$-okolí nebo Kernighan-Linovy heuristiky.",
+      "para": 5,
+      "start": 147.743,
+      "end": 156.151
+    },
+    {
+      "text": "Dál můžeme přímo připustit zhoršující akce, pracovat současně s více konfiguracemi, nebo si stavový prostor mapovat a modelovat.",
+      "para": 5,
+      "start": 156.151,
+      "end": 166.58
+    }
+  ]
+}

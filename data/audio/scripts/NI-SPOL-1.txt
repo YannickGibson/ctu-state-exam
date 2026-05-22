@@ -1,0 +1,52 @@
+# Otázka SPOL-1 — Teorie grup
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+Grupoid je libovolná neprázdná množina spolu s binární operací na ní.
+> **Grupoid** je libovolná neprázdná množina spolu s binární operací na ní.
+Binární operace znamená, že výsledek aplikace operace na dva prvky množiny opět patří do téže množiny; říkáme, že množina je vůči operaci uzavřená.
+Postupným přidáváním požadavků na operaci dostáváme bohatší struktury.
+
+Pologrupa je grupoid, jehož operace je navíc asociativní.
+> **Pologrupa** je grupoid, jehož operace je navíc asociativní.
+Monoid je pologrupa, ve které existuje neutrální prvek, tedy prvek, který po složení s libovolným prvkem nic nezmění.
+> **Monoid** je pologrupa, ve které existuje neutrální prvek, tedy prvek, který po složení s libovolným prvkem nic nezmění.
+Grupa je monoid, ve kterém má každý prvek inverzní prvek, takže po jejich složení dostaneme neutrální prvek.
+> **Grupa** je monoid, ve kterém má každý prvek inverzní prvek, takže po jejich složení dostaneme neutrální prvek.
+Je-li navíc operace komutativní, mluvíme o abelovské, neboli komutativní, grupě.
+> Je-li navíc operace komutativní, mluvíme o **abelovské**, neboli komutativní, grupě.
+Příkladem grupy jsou celá čísla se sčítáním, kde neutrálním prvkem je nula a inverzním prvkem opačné číslo.
+
+Podgrupa grupy je dvojice tvořená podmnožinou nosné množiny a touž operací, která sama opět tvoří grupu.
+> **Podgrupa** grupy je dvojice tvořená podmnožinou nosné množiny a touž operací, která sama opět tvoří grupu.
+Operace v podgrupě je tedy zúžením původní operace na menší množinu.
+V každé grupě s aspoň dvěma prvky existují dvě triviální podgrupy: podgrupa tvořená jen neutrálním prvkem a celá grupa sama.
+Ostatním podgrupám říkáme vlastní podgrupy.
+Průnik libovolného počtu podgrup je opět podgrupa téže grupy.
+
+Při ověřování, zda je podmnožina podgrupou, nemusíme kontrolovat všechny podmínky definice.
+Stačí ověřit jediné kritérium: pro každé dva prvky, a, bé, z podmnožiny musí do podmnožiny patřit také prvek, a, složený s inverzí prvku, bé.
+> Stačí ověřit jediné kritérium: pro každé dva prvky $a, b$ z podmnožiny musí do podmnožiny patřit také prvek $a \circ b^{-1}$.
+
+Mějme grupu a v ní neprázdnou množinu prvků, en.
+> Mějme grupu a v ní neprázdnou množinu prvků $N$.
+Podgrupa generovaná množinou, en, je průnik všech podgrup, které množinu, en, obsahují; je to tedy nejmenší podgrupa obsahující, en.
+> **Podgrupa generovaná množinou** $N$ je průnik všech podgrup, které množinu $N$ obsahují; je to tedy nejmenší podgrupa obsahující $N$.
+Množině, en, pak říkáme generující množina této podgrupy.
+> Množině $N$ pak říkáme **generující množina** této podgrupy.
+Skládá-li se množina jen z jediného prvku, nazýváme tento prvek generátorem.
+> Skládá-li se množina jen z jediného prvku, nazýváme tento prvek **generátorem**.
+Všechny prvky generované podgrupy lze získat jako konečné součiny prvků generující množiny a jejich inverzí.
+
+Grupa se nazývá cyklická, pokud má jednoprvkovou generující množinu, tedy jediný generátor.
+> Grupa se nazývá **cyklická**, pokud má jednoprvkovou generující množinu, tedy jediný generátor.
+Cyklická grupa je tak tvořena právě všemi mocninami svého generátoru.
+Příkladem jsou celá čísla se sčítáním, která mají dva generátory, jedničku a mínus jedničku, nebo zbytkové třídy modulo, en.
+> Příkladem jsou celá čísla se sčítáním, která mají dva generátory, jedničku a mínus jedničku, nebo zbytkové třídy modulo $n$.
+
+Řád prvku, gé, je nejmenší kladné celé číslo, em, takové, že prvek, gé, umocněný na, em, dá neutrální prvek.
+> **Řád prvku** $g$ je nejmenší kladné celé číslo $m$ takové, že $g^m = e$.
+Pokud takové číslo neexistuje, je řád prvku nekonečný.
+Řád prvku se rovná řádu cyklické podgrupy tímto prvkem generované, tedy počtu jejích prvků.

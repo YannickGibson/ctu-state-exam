@@ -193,22 +193,21 @@ describe('GET /api/questions/:id — narration timing (#audio)', () => {
     auth.getUser.mockResolvedValue(VALID);
   });
 
-  it('bundles the narration timing map when one exists', async () => {
+  it('bundles the narration timing map into the question detail', async () => {
     const res = await request(app)
       .get('/api/questions/NI-SPOL-2')
       .set('Authorization', 'Bearer good-token');
     expect(res.status).toBe(200);
     expect(res.body.audio).toBeTruthy();
     expect(Array.isArray(res.body.audio.sentences)).toBe(true);
+    const sentence = res.body.audio.sentences[0];
+    expect(typeof sentence.text).toBe('string');
+    expect(typeof sentence.start).toBe('number');
+    expect(typeof sentence.end).toBe('number');
   });
 
-  it('returns audio: null for a question with no narration', async () => {
-    const res = await request(app)
-      .get('/api/questions/NI-SPOL-1')
-      .set('Authorization', 'Bearer good-token');
-    expect(res.status).toBe(200);
-    expect(res.body.audio).toBeNull();
-  });
+  // `audio: null` (no timing file) stays handled in handleGetQuestion, but is
+  // no longer exercisable here now that every question ships a narration.
 
   it('404s for an unknown question id', async () => {
     const res = await request(app)

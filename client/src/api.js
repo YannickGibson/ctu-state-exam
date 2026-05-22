@@ -16,10 +16,33 @@ async function request(url, options = {}) {
   return res.json();
 }
 
-export const getQuestions = () => request('/api/questions');
-export const getQuestion = (id) => request(`/api/questions/${encodeURIComponent(id)}`);
-export const getQuizzes = () => request('/api/quizzes');
-export const getQuiz = (subject) => request(`/api/quizzes/${encodeURIComponent(subject)}`);
+// Questions, answers and quizzes are static for the lifetime of a session, so
+// memoize each GET by URL. The promise itself is cached, so concurrent callers
+// (and React StrictMode's double effect) share a single request. A rejected
+// request is evicted so a later call can retry instead of replaying the error.
+const contentCache = new Map();
+
+function cachedRequest(url) {
+  const hit = contentCache.get(url);
+  if (hit) return hit;
+  const promise = request(url).catch((err) => {
+    contentCache.delete(url);
+    throw err;
+  });
+  contentCache.set(url, promise);
+  return promise;
+}
+
+// Drop every cached content response — used on sign-out so the next user
+// starts from a clean slate.
+export function clearContentCache() {
+  contentCache.clear();
+}
+
+export const getQuestions = () => cachedRequest('/api/questions');
+export const getQuestion = (id) => cachedRequest(`/api/questions/${encodeURIComponent(id)}`);
+export const getQuizzes = () => cachedRequest('/api/quizzes');
+export const getQuiz = (subject) => cachedRequest(`/api/quizzes/${encodeURIComponent(subject)}`);
 
 const ZERO = { practicedCount: 0, readPassively: false };
 

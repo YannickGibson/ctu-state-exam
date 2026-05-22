@@ -1,0 +1,42 @@
+# Otázka ZI-22 — ARIMA modely: integrace, diferencování a reprezentace parametrů
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Pro kompaktní zápis modelů časových řad používáme operátor zpoždění, bé.
+> Pro kompaktní zápis modelů časových řad používáme **operátor zpoždění** $B$.
+Aplikací operátoru, bé, na hodnotu řady získáme hodnotu o jeden krok zpět, opakovanou aplikací posun o příslušný počet kroků.
+> Aplikací operátoru $B$ na hodnotu řady získáme hodnotu o jeden krok zpět, $B X_t = X_{t-1}$, opakovanou aplikací posun o příslušný počet kroků.
+Z něj odvodíme operátor diference, který od hodnoty odečte hodnotu předchozí, tedy jedna mínus, bé.
+> Z něj odvodíme **operátor diference** $\Delta = 1 - B$, který od hodnoty odečte hodnotu předchozí, $\Delta X_t = X_t - X_{t-1}$.
+Vyšší diference vznikají opakovaným diferencováním, tedy umocněním tohoto operátoru.
+
+Diferencováním se snažíme z řady odstranit trend nebo náhodnou procházku a převést ji na stacionární.
+Řekneme, že řada je integrovaná řádu, dé, pokud její, dé, tá diference je stacionární, zatímco nižší ještě ne.
+> Řekneme, že řada je **integrovaná** řádu $d$, neboli $I(d)$, pokud její $d$-tá diference je stacionární, zatímco nižší ještě ne.
+Stacionární řada je integrovaná řádu nula, typickým případem řádu jedna je náhodná procházka, jejíž první diference dává bílý šum.
+Vhodný řád diferencování volíme podle pomalého poklesu autokorelační funkce nebo pomocí testů jednotkového kořene, jako je test A D F nebo K P S S.
+Většinou stačí řád nejvýše dva; přílišné diferencování zvyšuje variabilitu a ničí informaci v datech.
+
+Model arima s parametry, pé, dé a kvé, je autoregresní model s klouzavými průměry aplikovaný na, dé, krát diferencovanou řadu.
+> Model **ARIMA** s parametry $p$, $d$ a $q$ je model ARMA aplikovaný na $d$-krát diferencovanou řadu.
+> $\phi(B)(1-B)^d X_t = c + \theta(B)\varepsilon_t$
+Parametr, pé, je řád autoregresní části a zachycuje paměť, tedy autokorelaci ve stacionární řadě.
+Parametr, dé, je počet diferencí potřebných k dosažení stacionarity.
+Parametr, kvé, je řád klouzavých průměrů a zachycuje vliv minulých náhodných šoků.
+Spojíme-li autoregresní polynom s činitelem diference, dostaneme jediný polynom, který má, dé, jednotkových kořenů; právě ty činí původní řadu nestacionární.
+
+Některé volby parametrů dávají známé modely.
+Model arima se samými nulami popisuje bílý šum, model s jedničkou na prostřední pozici popisuje náhodnou procházku, a tentýž model s konstantou navíc náhodnou procházku s driftem.
+> Model $\mathrm{ARIMA}(0,0,0)$ popisuje bílý šum, model $\mathrm{ARIMA}(0,1,0)$ popisuje náhodnou procházku, a tentýž model s konstantou navíc náhodnou procházku s driftem.
+Pozor na redundanci parametrů: mají-li autoregresní polynom a polynom klouzavých průměrů společný kořen, lze ho vykrátit a model je zbytečně složitý.
+> Pozor na **redundanci parametrů**: mají-li autoregresní polynom a polynom klouzavých průměrů společný kořen, lze ho vykrátit a model je zbytečně složitý.
+Nadbytečné parametry totiž zvyšují rozptyl odhadů, proto preferujeme jednodušší modely.
+
+Při výběru modelu hledáme nejmenší informační kritérium A I C nebo B I C a ověřujeme přesnost mimo trénovací data křížovou validací s posuvným oknem.
+Celý postup automatizuje algoritmus auto arima, který nejprve testem jednotkového kořene určí, dé, a poté vybírá řády, pé a kvé, podle informačního kritéria.
+> Celý postup automatizuje algoritmus **auto ARIMA**, který nejprve testem jednotkového kořene určí $d$, a poté vybírá řády $p$ a $q$ podle informačního kritéria.
+
+Pro řady se sezónností slouží rozšíření sarima, které přidává sezónní autoregresní, diferenční a klouzavé členy operující na násobcích periody.
+> Pro řady se sezónností slouží rozšíření **SARIMA**, které přidává sezónní autoregresní, diferenční a klouzavé členy operující na násobcích periody.
+Klasickým příkladem je takzvaný letecký model pro měsíční letecká data s roční sezónní periodou.

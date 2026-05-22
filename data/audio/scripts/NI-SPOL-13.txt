@@ -1,0 +1,39 @@
+# Otázka SPOL-13 — Princip lokálních heuristik, globální a lokální minimum, obrana proti uváznutí.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Lokální heuristika prochází stavový prostor iterativně, krok po kroku.
+> **Lokální heuristika** prochází stavový prostor iterativně, krok po kroku.
+Z aktuálního stavu vybere souseda v jeho okolí a vyhodnotí ho.
+Pokud je soused lepší, přejde do něj a uloží si ho jako dosud nejlepší nalezené řešení.
+Tento postup opakuje, dokud nenarazí na podmínku zastavení; vrací nejlepší stav, který během prohledávání viděl.
+Klíčové je, že heuristika vidí jen blízké okolí aktuálního stavu, nikoli celý stavový prostor, a rozhoduje se tedy jen podle lokální informace.
+
+Globální minimum je stav s nejmenší možnou hodnotou optimalizačního kritéria v celém stavovém prostoru.
+> **Globální minimum** je stav s nejmenší možnou hodnotou optimalizačního kritéria v celém stavovém prostoru.
+Stav je lokálním minimem, jestliže z něj na hladině jeho hodnoty kritéria nelze dosáhnout žádného lepšího stavu.
+> Stav je **lokálním minimem**, jestliže z něj na hladině jeho hodnoty kritéria nelze dosáhnout žádného lepšího stavu.
+Jinak řečeno, všichni sousedé jsou stejně dobří nebo horší, takže jednoduchá heuristika se v takovém stavu zasekne.
+
+Hloubku lokálního minima definujeme jako nejmenší nárůst kritéria, který musíme dovolit, abychom se z minima dostali do lepšího stavu.
+> **Hloubka lokálního minima** je nejmenší nárůst kritéria, který musíme dovolit, abychom se dostali do lepšího stavu.
+Pro globální minimum je hloubka nekonečná, protože už žádný lepší stav neexistuje.
+Hluboká lokální minima jsou nebezpečná, neboť únik z nich vyžaduje připustit velké zhoršení a uniká se z nich nejhůř.
+
+Hlavním problémem jednoduchých lokálních heuristik je právě uváznutí v lokálním optimu.
+Heuristika, která přijímá jen zlepšující kroky, se zastaví v prvním lokálním optimu, na které narazí.
+Důsledkem je, že kvalita výsledného řešení silně závisí na kvalitě počátečního řešení.
+Z různých startů tak skončíme v různě kvalitních optimech, a heuristika sama o sobě nemá jak rozpoznat, že lepší řešení existuje jinde.
+
+Obranou proti uváznutí je připustit i akci, která řešení dočasně zhorší.
+To je princip diverzifikace, tedy rovnoměrného průzkumu stavového prostoru.
+> To je princip **diverzifikace**, tedy rovnoměrného průzkumu stavového prostoru.
+Diverzifikace musí být v rovnováze s intenzifikací, což je konvergence k finálnímu řešení.
+> Diverzifikace musí být v rovnováze s **intenzifikací**, což je konvergence k finálnímu řešení.
+Příliš mnoho diverzifikace brání dokončení, příliš mnoho intenzifikace vede zpět k uváznutí, proto je nutné poměr mezi nimi řídit.
+
+Konkrétních způsobů diverzifikace je více.
+Můžeme zvětšit prohledávané okolí, například pomocí takzvaného, ká, okolí nebo Kernighan-Linovy heuristiky.
+> Můžeme zvětšit prohledávané okolí, například pomocí $k$-okolí nebo Kernighan-Linovy heuristiky.
+Dál můžeme přímo připustit zhoršující akce, pracovat současně s více konfiguracemi, nebo si stavový prostor mapovat a modelovat.

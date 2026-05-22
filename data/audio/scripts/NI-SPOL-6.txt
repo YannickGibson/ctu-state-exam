@@ -1,0 +1,50 @@
+# Otázka SPOL-6 — Testování statistických hypotéz
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Hypotéza je tvrzení o neznámém rozdělení náhodného vektoru, iks.
+Testování hypotéz je rozhodovací proces, který na základě napozorovaných dat hypotézu buď zamítne, nebo nezamítne.
+Vždy pracujeme se dvěma hypotézami: nulovou hypotézou, o které chceme rozhodnout, a alternativní hypotézou, která je opačné tvrzení.
+> Vždy pracujeme se dvěma hypotézami: **nulovou hypotézou** $H_0$, o které chceme rozhodnout, a **alternativní hypotézou** $H_A$, která je opačné tvrzení.
+Zamítnutí nulové hypotézy ve prospěch alternativy je silný výsledek, proto tu hypotézu, kterou chceme prokázat, volíme jako alternativní.
+
+Při testování můžeme udělat dvě chyby.
+Chyba prvního druhu znamená, že zamítneme nulovou hypotézu, ačkoli platí.
+Chyba druhého druhu znamená, že nezamítneme nulovou hypotézu, ačkoli ve skutečnosti platí alternativa.
+Obě chyby nelze kontrolovat zároveň, proto požadujeme, aby pravděpodobnost chyby prvního druhu byla nejvýše rovna zvolené hodnotě, kterou nazýváme hladina významnosti.
+> Obě chyby nelze kontrolovat zároveň, proto požadujeme, aby pravděpodobnost chyby prvního druhu byla nejvýše rovna zvolené hodnotě $\alpha$, kterou nazýváme **hladina významnosti**.
+Test, který za dané hladiny minimalizuje chybu druhého druhu, nazýváme nejsilnější.
+
+Kritický obor je množina těch realizací dat, pro které nulovou hypotézu zamítneme.
+> **Kritický obor** $W_\alpha$ je množina těch realizací dat, pro které nulovou hypotézu zamítneme.
+Pé hodnota je nejmenší hladina významnosti, na které ještě lze nulovou hypotézu zamítnout.
+> **p-hodnota** $\hat p$ je nejmenší hladina významnosti, na které ještě lze nulovou hypotézu zamítnout.
+Je-li pé hodnota menší než požadovaná hladina, hypotézu zamítáme; za platnosti nulové hypotézy má pé hodnota rovnoměrné rozdělení na intervalu nula až jedna.
+
+Hypotézy dělíme na parametrické, které tvrdí něco o hodnotě parametru, a neparametrické, které tvrdí něco o vlastnosti rozdělení, třeba o nezávislosti nebo o tvaru.
+Dále rozlišujeme hypotézy jednoduché, obsahující jediné rozdělení, a složené, obsahující více rozdělení.
+
+Téčko testy slouží k testování hypotézy o střední hodnotě normálního rozdělení.
+> **T-testy** slouží k testování hypotézy o střední hodnotě normálního rozdělení.
+Je-li rozptyl znám, má testová statistika standardní normální rozdělení.
+Je-li rozptyl neznámý, použijeme jednovýběrový téčko test: testová statistika je rozdíl výběrového průměru a testované hodnoty, dělený výběrovou směrodatnou odchylkou a násobený odmocninou z rozsahu výběru.
+> Je-li rozptyl neznámý, použijeme **jednovýběrový t-test**: testová statistika $T = \frac{\bar X_n - \mu_0}{s_n/\sqrt n}$ je rozdíl výběrového průměru a testované hodnoty, dělený výběrovou směrodatnou odchylkou a násobený odmocninou z rozsahu výběru.
+Tato statistika má za platnosti nulové hypotézy Studentovo rozdělení s, en mínus jedna, stupni volnosti.
+> Tato statistika má za platnosti nulové hypotézy Studentovo rozdělení $t_{n-1}$ s $n-1$ stupni volnosti.
+
+Párový téčko test porovnává dvě měření na týchž jednotkách: testujeme rozdíly dvojic a ptáme se, zda je jejich střední hodnota nulová.
+Dvouvýběrový téčko test porovnává střední hodnoty dvou nezávislých výběrů.
+
+Testy dobré shody ověřují, zda data pocházejí z předpokládaného rozdělení.
+Používáme Pearsonovu chí kvadrát statistiku, která sčítá přes všechny třídy čtverce rozdílů napozorovaných a teoretických četností, dělené teoretickou četností.
+> Používáme **Pearsonovu chí kvadrát statistiku** $\chi^2 = \sum_i \frac{(N_i - np_i)^2}{np_i}$, která sčítá přes všechny třídy čtverce rozdílů napozorovaných a teoretických četností, dělené teoretickou četností.
+Při známých parametrech má tato statistika asymptoticky chí kvadrát rozdělení s, ká mínus jedna, stupni volnosti.
+> Při známých parametrech má tato statistika asymptoticky rozdělení $\chi^2_{k-1}$ s $k-1$ stupni volnosti.
+Jsou-li parametry neznámé, odhadneme je metodou minimálního chí kvadrátu a počet stupňů volnosti snížíme o počet odhadovaných parametrů.
+
+Test nezávislosti zkoumá, zda jsou dvě veličiny v kontingenční tabulce nezávislé.
+> **Test nezávislosti** zkoumá, zda jsou dvě veličiny v kontingenční tabulce nezávislé.
+Nulová hypotéza tvrdí, že sdružené pravděpodobnosti jsou součinem marginálních pravděpodobností.
+Použijeme opět chí kvadrát statistiku, která má asymptoticky chí kvadrát rozdělení; počet stupňů volnosti je součin počtu řádků bez jedné a počtu sloupců bez jedné.
+> Použijeme opět chí kvadrát statistiku, která má asymptoticky rozdělení $\chi^2_{(r-1)(c-1)}$; počet stupňů volnosti je součin počtu řádků bez jedné a počtu sloupců bez jedné.

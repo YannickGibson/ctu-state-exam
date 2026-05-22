@@ -1,0 +1,39 @@
+# Otázka SPOL-16 — Výkonnostní měřítka, PRAM, APRAM, škálovatelnost
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Model P R A M je idealizovaný paralelní počítač s, pé, procesory, které synchronně přistupují do společné sdílené paměti.
+> Model **PRAM** je idealizovaný paralelní počítač s $p$ procesory, které synchronně přistupují do společné sdílené paměti.
+Každý procesor má vlastní lokální paměť a zná svůj index, a všechny procesory provádějí ve stejném taktu tři typy instrukcí: čtení ze sdílené buňky, lokální operaci a zápis do sdílené buňky.
+V jednotkovém modelu trvá každá operace jeden takt, v globálním modelu trvá čtení i zápis konstantní čas větší než jedna.
+
+Konflikty při souběžném přístupu do téže buňky se řeší podle čtyř variant.
+Model E R E W zakazuje souběžné čtení i zápis, model C R E W povoluje souběžné čtení, ale zápis smí jen jeden procesor.
+> Model **EREW** zakazuje souběžné čtení i zápis, model **CREW** povoluje souběžné čtení, ale zápis smí jen jeden procesor.
+Model C R C W povoluje i souběžný zápis, a to ve variantě prioritní, kde uspěje procesor s nejvyšší prioritou, náhodné, kde uspěje libovolný, a společné, kde musí být všechny zapisované hodnoty stejné.
+> Model **CRCW** povoluje i souběžný zápis, a to ve variantě prioritní, kde uspěje procesor s nejvyšší prioritou, náhodné, kde uspěje libovolný, a společné, kde musí být všechny zapisované hodnoty stejné.
+
+Asynchronní model, A P R A M, předpokládá procesory bez centrálních hodin, které pracují nezávisle.
+> Asynchronní model, **APRAM**, předpokládá procesory bez centrálních hodin, které pracují nezávisle.
+Výpočet je posloupnost globálních fází oddělených bariérovou synchronizací, neboť přístup do sdílené paměti zde není jednotkový.
+Globální čtení nebo zápis trvá, dé, taktů, k po sobě jdoucích operací trvá, dé, plus, k, mínus jedna, a bariéra trvá, bé, závisející na počtu procesorů.
+
+Paralelní zrychlení je podíl času nejlepšího sekvenčního algoritmu a času paralelního algoritmu, a nemůže být asymptoticky větší než počet procesorů.
+> **Paralelní zrychlení** je podíl času nejlepšího sekvenčního algoritmu a času paralelního algoritmu, a nemůže být asymptoticky větší než počet procesorů.
+Lineární zrychlení znamená, že zrychlení roste úměrně počtu procesorů, a je to hlavní cíl paralelizace: když počet procesorů stoupne ká krát, chceme, aby čas klesl ká krát.
+
+Paralelní efektivnost je podíl sekvenčního času a ceny, tedy zrychlení připadající na jedno jádro, a kvůli komunikační a synchronizační režii je vždy menší než jedna.
+> **Paralelní efektivnost** je podíl sekvenčního času a ceny, tedy zrychlení připadající na jedno jádro, a kvůli komunikační a synchronizační režii je vždy menší než jedna.
+Algoritmus je paralelně optimální, právě když má lineární zrychlení, je cenově optimální a má konstantní efektivnost.
+
+Škálovatelnost je schopnost algoritmu udržet paralelní optimalitu, když počet procesorů i velikost úlohy společně rostou nebo klesají.
+> **Škálovatelnost** je schopnost algoritmu udržet paralelní optimalitu, když počet procesorů i velikost úlohy společně rostou nebo klesají.
+
+Amdahlův zákon platí pro pevnou velikost úlohy: má-li algoritmus sekvenční podíl, zrychlení nikdy nepřekročí převrácenou hodnotu tohoto podílu.
+> **Amdahlův zákon** platí pro pevnou velikost úlohy: má-li algoritmus sekvenční podíl, zrychlení nikdy nepřekročí převrácenou hodnotu tohoto podílu.
+Je-li sekvenční podíl deset procent, zrychlení nepřekročí deset, ať použijeme libovolně mnoho procesorů; paralelizace se tedy nasytí.
+
+Gustafsonův zákon naopak předpokládá, že s rostoucím počtem procesorů úměrně roste i velikost úlohy.
+> **Gustafsonův zákon** naopak předpokládá, že s rostoucím počtem procesorů úměrně roste i velikost úlohy.
+Pak sekvenční část trvá konstantní čas a paralelní část škáluje lineárně, takže zrychlení v limitě roste až k počtu procesorů a větší úlohy lze řešit za stejný čas.

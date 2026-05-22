@@ -6,19 +6,23 @@
 //
 // Each non-blank, non-comment line is one sentence's SPOKEN text (fed to the
 // TTS engine). A line starting with ">" overrides the DISPLAYED text of the
-// sentence above it (shown in the web transcript, may contain LaTeX). When no
+// sentence above it (web transcript; may contain LaTeX and **bold**). When no
 // ">" line is given, the displayed text equals the spoken text.
 //
-//   Polynom nad okruhem, er, je formální výraz.
-//   > Polynom nad okruhem $R$ je formální výraz.
-//
-// Blank lines and lines starting with "#" are ignored. Returns an array of
-// { say, show }.
+// A blank line starts a new paragraph: `para` is a 0-based index that the
+// player uses to group sentences into spaced blocks. Lines starting with "#"
+// are comments. Returns an array of { say, show, para }.
 function parseScript(text) {
   const records = [];
+  let para = 0;
+  let blankSeen = false;
   for (const raw of String(text == null ? '' : text).split('\n')) {
     const line = raw.trim();
-    if (!line || line.startsWith('#')) continue;
+    if (!line) {
+      if (records.length > 0) blankSeen = true;
+      continue;
+    }
+    if (line.startsWith('#')) continue;
     if (line.startsWith('>')) {
       const show = line.slice(1).trim();
       if (show && records.length > 0) {
@@ -26,7 +30,11 @@ function parseScript(text) {
       }
       continue;
     }
-    records.push({ say: line, show: line });
+    if (blankSeen) {
+      para += 1;
+      blankSeen = false;
+    }
+    records.push({ say: line, show: line, para });
   }
   return records;
 }

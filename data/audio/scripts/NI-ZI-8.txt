@@ -1,0 +1,37 @@
+# Otázka ZI-8 — Autoenkodéry a generativní neuronové sítě
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Autoenkodér je dopředná síť učená bez učitele, jejímž úkolem je co nejvěrněji zrekonstruovat svůj vlastní vstup.
+> **Autoenkodér** je dopředná síť učená bez učitele, která rekonstruuje svůj vstup, $\hat x = D(E(x))$.
+Skládá se z enkodéru, který stlačí vstup do latentního prostoru menší dimenze, a z dekodéru, který z této reprezentace vstup obnoví.
+> Skládá se z **enkodéru** $E$, který stlačí vstup do **latentního prostoru**, a z **dekodéru** $D$, který vstup obnoví.
+Síť minimalizuje rekonstrukční chybu, takže latentní reprezentace musí zachytit nejdůležitější rysy dat.
+
+Existuje řada variant: šum potlačující autoenkodér dostává na vstup zašuměná data a má vrátit čistá, řídký autoenkodér penalizuje příliš aktivní neurony.
+Konvoluční autoenkodér používá konvoluční vrstvy pro obrazy, a síť tvaru ú přidává přeskakující spoje a hodí se pro segmentaci.
+Autoenkodéry slouží k redukci dimenze, odšumování, předtrénování i k detekci anomálií podle velikosti rekonstrukční chyby.
+
+Variační autoenkodér je pravděpodobnostní rozšíření, ve kterém enkodér nevrací jeden bod, ale parametry rozdělení, tedy střední hodnotu a rozptyl.
+> **Variační autoenkodér** je pravděpodobnostní rozšíření, kde enkodér vrací parametry rozdělení $q_\phi(z\mid x) = \mathcal N(\mu, \sigma^2)$.
+Tím vzniká spojitý a smysluplný latentní prostor, ze kterého lze vzorkovat.
+Síť se učí minimalizací takzvaného důkazního dolního odhadu, který sčítá rekonstrukční ztrátu a kullbackovu leiblerovu divergenci od normálního apriorního rozdělení.
+> Síť se učí minimalizací **dolního odhadu ELBO**, který sčítá rekonstrukční ztrátu a $D_{\mathrm{KL}}$ od normálního prioru.
+Aby šel gradient propagovat přes náhodný vzorek, použije se reparametrizační trik: vzorek se zapíše jako střední hodnota plus rozptyl násobený šumem.
+> Aby šel gradient propagovat přes náhodný vzorek, použije se **reparametrizační trik** $z = \mu + \sigma \odot \epsilon$.
+
+Generativní soupeřící sítě, anglicky G A N, postavil Goodfellow v roce dva tisíce čtrnáct na soutěži dvou sítí.
+> **Generativní soupeřící sítě** (GAN) postavil Goodfellow roku 2014 na soutěži dvou sítí.
+Generátor mapuje náhodný šum na vzorky napodobující reálná data, zatímco diskriminátor se snaží rozlišit, co je pravé a co podvržené.
+> **Generátor** $G(z)$ mapuje šum na vzorky napodobující data, **diskriminátor** $D(x)$ rozlišuje pravé a podvržené.
+Obě sítě hrají minimaxovou hru a v ideální rovnováze generátor reprodukuje rozdělení dat a diskriminátor už hádá s pravděpodobností jedna polovina.
+
+Trénink G A N je notoricky nestabilní a trpí takzvaným kolapsem módů, kdy generátor produkuje jen úzkou množinu výstupů.
+> Trénink GAN je nestabilní a trpí **kolapsem módů**, kdy generátor produkuje jen úzkou množinu výstupů.
+Proto vznikly varianty jako konvoluční D C G A N, wassersteinovský W G A N se stabilnějším tréninkem, podmíněný G A N nebo StyleGAN pro fotorealistické obličeje.
+
+Současným špičkovým přístupem jsou difuzní modely.
+> Současným špičkovým přístupem jsou **difuzní modely**.
+Model se učí předpovídat šum přidaný k obrázku v náhodném časovém kroku, a generování pak probíhá postupným odšumováním od čistého šumu přes mnoho kroků.
+Difuzní modely jsou stabilnější než G A N a dosahují vyšší kvality, jen za cenu pomalejší inference.

@@ -1,0 +1,146 @@
+{
+  "id": "NI-SPOL-14",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 173.386,
+  "sentences": [
+    {
+      "text": "**Genetický algoritmus** je heuristika inspirovaná přírodní evolucí, která pracuje současně s celou populací jedinců.",
+      "para": 0,
+      "start": 0,
+      "end": 8.896
+    },
+    {
+      "text": "Každý jedinec představuje jedno možné řešení a je zakódován do reprezentace, typicky do řetězce nul a jedniček.",
+      "para": 0,
+      "start": 8.896,
+      "end": 17.014
+    },
+    {
+      "text": "Kvalitu jedince měříme jeho **zdatností**, tedy fitness, odvozenou z optimalizačního kritéria.",
+      "para": 0,
+      "start": 17.014,
+      "end": 24.041
+    },
+    {
+      "text": "Algoritmus běží v cyklu generací a opakuje tři kroky.",
+      "para": 1,
+      "start": 24.041,
+      "end": 28.374
+    },
+    {
+      "text": "**Selekce** vybírá jedince úměrně jejich zdatnosti a působí jako intenzifikace.",
+      "para": 1,
+      "start": 28.374,
+      "end": 34.46
+    },
+    {
+      "text": "**Křížení** rekombinuje genetickou informaci dvou rodičů do nových potomků.",
+      "para": 1,
+      "start": 34.46,
+      "end": 39.722
+    },
+    {
+      "text": "**Mutace** náhodně pozmění jedince, vnáší novou genetickou informaci a působí jako diverzifikace.",
+      "para": 1,
+      "start": 39.722,
+      "end": 47.306
+    },
+    {
+      "text": "Z takto vzniklých jedinců se sestaví další generace a cyklus se opakuje.",
+      "para": 1,
+      "start": 47.306,
+      "end": 52.87
+    },
+    {
+      "text": "Nová generace může původní zcela nahradit, nahradit ji s ponecháním několika elitních jedinců, nebo vzniknout soutěží rodičů a potomků.",
+      "para": 1,
+      "start": 52.87,
+      "end": 63.147
+    },
+    {
+      "text": "Cílem selekce je, aby početní zastoupení jedince v populaci odpovídalo jeho zdatnosti.",
+      "para": 2,
+      "start": 63.147,
+      "end": 69.628
+    },
+    {
+      "text": "Selekce tedy převádí informaci obsaženou ve zdatnosti na pravděpodobnost výběru jedince.",
+      "para": 2,
+      "start": 69.628,
+      "end": 76.225
+    },
+    {
+      "text": "Jde o základní nástroj, kterým vyvažujeme diverzifikaci a intenzifikaci.",
+      "para": 2,
+      "start": 76.225,
+      "end": 82.172
+    },
+    {
+      "text": "Sílu tohoto převodu vyjadřuje **selekční tlak**, definovaný jako pravděpodobnost výběru nejlepšího jedince.",
+      "para": 3,
+      "start": 82.172,
+      "end": 89.779
+    },
+    {
+      "text": "Při krajní hodnotě $p = 1$ vybíráme stále nejlepšího jedince a jde o čistou intenzifikaci.",
+      "para": 3,
+      "start": 89.779,
+      "end": 99
+    },
+    {
+      "text": "Při druhém extrému $p = 1/n$ na zdatnosti nezáleží a jde o čistou diverzifikaci.",
+      "para": 3,
+      "start": 99,
+      "end": 108.848
+    },
+    {
+      "text": "Selekční tlak rozhoduje o tom, zda algoritmus vůbec funguje.",
+      "para": 4,
+      "start": 108.848,
+      "end": 113.448
+    },
+    {
+      "text": "Příliš velký selekční tlak vede k degeneraci populace, protože se rychle rozšíří pár nejlepších jedinců a algoritmus uvázne v lokálním optimu.",
+      "para": 4,
+      "start": 113.448,
+      "end": 124.109
+    },
+    {
+      "text": "Příliš malý selekční tlak naopak znamená pomalou konvergenci a širší průzkum, ale šum z mutace může převážit a algoritmus diverguje.",
+      "para": 4,
+      "start": 124.109,
+      "end": 134.096
+    },
+    {
+      "text": "Dobré konvergence dosáhneme jen při správně zvolené střední hodnotě selekčního tlaku.",
+      "para": 4,
+      "start": 134.096,
+      "end": 140.322
+    },
+    {
+      "text": "Charakteristické průběhy průměrné zdatnosti to dobře ukazují: vysoký tlak vede k degeneraci, nízký tlak k divergenci a jen vyvážený tlak ke kvalitní konvergenci.",
+      "para": 4,
+      "start": 140.322,
+      "end": 152.132
+    },
+    {
+      "text": "Selekční tlak proto musíme aktivně řídit.",
+      "para": 5,
+      "start": 152.132,
+      "end": 155.524
+    },
+    {
+      "text": "U ruletového výběru k tomu slouží škálování zdatnosti lineární funkcí, takzvaný **scaling**.",
+      "para": 5,
+      "start": 155.524,
+      "end": 162.714
+    },
+    {
+      "text": "Dále lze místo hodnoty zdatnosti použít jen pořadí jedinců, čemuž se říká **ranking**, nebo zkrácený výběr, anglicky **truncation selection**.",
+      "para": 5,
+      "start": 162.714,
+      "end": 173.386
+    }
+  ]
+}

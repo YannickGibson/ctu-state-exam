@@ -1,0 +1,164 @@
+{
+  "id": "NI-SPOL-1",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 182.473,
+  "sentences": [
+    {
+      "text": "**Grupoid** je libovolná neprázdná množina spolu s binární operací na ní.",
+      "para": 0,
+      "start": 0,
+      "end": 5.39
+    },
+    {
+      "text": "Binární operace znamená, že výsledek aplikace operace na dva prvky množiny opět patří do téže množiny; říkáme, že množina je vůči operaci uzavřená.",
+      "para": 0,
+      "start": 5.39,
+      "end": 16.909
+    },
+    {
+      "text": "Postupným přidáváním požadavků na operaci dostáváme bohatší struktury.",
+      "para": 0,
+      "start": 16.909,
+      "end": 22.566
+    },
+    {
+      "text": "**Pologrupa** je grupoid, jehož operace je navíc asociativní.",
+      "para": 1,
+      "start": 22.566,
+      "end": 26.853
+    },
+    {
+      "text": "**Monoid** je pologrupa, ve které existuje neutrální prvek, tedy prvek, který po složení s libovolným prvkem nic nezmění.",
+      "para": 1,
+      "start": 26.853,
+      "end": 35.598
+    },
+    {
+      "text": "**Grupa** je monoid, ve kterém má každý prvek inverzní prvek, takže po jejich složení dostaneme neutrální prvek.",
+      "para": 1,
+      "start": 35.598,
+      "end": 43.716
+    },
+    {
+      "text": "Je-li navíc operace komutativní, mluvíme o **abelovské**, neboli komutativní, grupě.",
+      "para": 1,
+      "start": 43.716,
+      "end": 50.023
+    },
+    {
+      "text": "Příkladem grupy jsou celá čísla se sčítáním, kde neutrálním prvkem je nula a inverzním prvkem opačné číslo.",
+      "para": 1,
+      "start": 50.023,
+      "end": 58.35
+    },
+    {
+      "text": "**Podgrupa** grupy je dvojice tvořená podmnožinou nosné množiny a touž operací, která sama opět tvoří grupu.",
+      "para": 2,
+      "start": 58.35,
+      "end": 66.56
+    },
+    {
+      "text": "Operace v podgrupě je tedy zúžením původní operace na menší množinu.",
+      "para": 2,
+      "start": 66.56,
+      "end": 71.834
+    },
+    {
+      "text": "V každé grupě s aspoň dvěma prvky existují dvě triviální podgrupy: podgrupa tvořená jen neutrálním prvkem a celá grupa sama.",
+      "para": 2,
+      "start": 71.834,
+      "end": 81.206
+    },
+    {
+      "text": "Ostatním podgrupám říkáme vlastní podgrupy.",
+      "para": 2,
+      "start": 81.206,
+      "end": 84.796
+    },
+    {
+      "text": "Průnik libovolného počtu podgrup je opět podgrupa téže grupy.",
+      "para": 2,
+      "start": 84.796,
+      "end": 89.628
+    },
+    {
+      "text": "Při ověřování, zda je podmnožina podgrupou, nemusíme kontrolovat všechny podmínky definice.",
+      "para": 3,
+      "start": 89.628,
+      "end": 96.411
+    },
+    {
+      "text": "Stačí ověřit jediné kritérium: pro každé dva prvky $a, b$ z podmnožiny musí do podmnožiny patřit také prvek $a \\circ b^{-1}$.",
+      "para": 3,
+      "start": 96.411,
+      "end": 107.443
+    },
+    {
+      "text": "Mějme grupu a v ní neprázdnou množinu prvků $N$.",
+      "para": 4,
+      "start": 107.443,
+      "end": 111.417
+    },
+    {
+      "text": "**Podgrupa generovaná množinou** $N$ je průnik všech podgrup, které množinu $N$ obsahují; je to tedy nejmenší podgrupa obsahující $N$.",
+      "para": 4,
+      "start": 111.417,
+      "end": 120.8
+    },
+    {
+      "text": "Množině $N$ pak říkáme **generující množina** této podgrupy.",
+      "para": 4,
+      "start": 120.8,
+      "end": 125.435
+    },
+    {
+      "text": "Skládá-li se množina jen z jediného prvku, nazýváme tento prvek **generátorem**.",
+      "para": 4,
+      "start": 125.435,
+      "end": 131.637
+    },
+    {
+      "text": "Všechny prvky generované podgrupy lze získat jako konečné součiny prvků generující množiny a jejich inverzí.",
+      "para": 4,
+      "start": 131.637,
+      "end": 139.988
+    },
+    {
+      "text": "Grupa se nazývá **cyklická**, pokud má jednoprvkovou generující množinu, tedy jediný generátor.",
+      "para": 5,
+      "start": 139.988,
+      "end": 147.177
+    },
+    {
+      "text": "Cyklická grupa je tak tvořena právě všemi mocninami svého generátoru.",
+      "para": 5,
+      "start": 147.177,
+      "end": 152.52
+    },
+    {
+      "text": "Příkladem jsou celá čísla se sčítáním, která mají dva generátory, jedničku a mínus jedničku, nebo zbytkové třídy modulo $n$.",
+      "para": 5,
+      "start": 152.52,
+      "end": 162.124
+    },
+    {
+      "text": "**Řád prvku** $g$ je nejmenší kladné celé číslo $m$ takové, že $g^m = e$.",
+      "para": 6,
+      "start": 162.124,
+      "end": 170.776
+    },
+    {
+      "text": "Pokud takové číslo neexistuje, je řád prvku nekonečný.",
+      "para": 6,
+      "start": 170.776,
+      "end": 175.156
+    },
+    {
+      "text": "Řád prvku se rovná řádu cyklické podgrupy tímto prvkem generované, tedy počtu jejích prvků.",
+      "para": 6,
+      "start": 175.156,
+      "end": 182.473
+    }
+  ]
+}

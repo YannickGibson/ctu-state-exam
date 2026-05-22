@@ -1,0 +1,55 @@
+# Otázka ZI-3 — Systematické a lokální splňování v logice: DPLL, CDCL, WalkSAT.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Problém splnitelnosti, takzvaný sat, se ptá, zda existuje pravdivostní ohodnocení proměnných, pro které je daná výroková formule pravdivá.
+> Problém splnitelnosti, takzvaný **SAT**, se ptá, zda existuje pravdivostní ohodnocení proměnných, pro které je daná výroková formule pravdivá.
+Formule je na vstupu v konjunktivním normálním tvaru, tedy jako konjunkce klauzulí, kde klauzule je disjunkce literálů a literál je proměnná nebo její negace.
+Sat je en pé úplný problém podle Cookovy věty, přesto moderní řešiče zvládají instance s miliony proměnných.
+> SAT je NP-úplný problém podle Cookovy věty, přesto moderní řešiče zvládají instance s miliony proměnných.
+
+Systematickým řešením je algoritmus dé pé el el z roku devatenáct set šedesát dva.
+> Systematickým řešením je algoritmus **DPLL** z roku devatenáct set šedesát dva.
+Je to backtracking doplněný o jednotkovou propagaci a eliminaci čistých proměnných.
+Jednotková propagace využívá toho, že obsahuje-li klauzule jediný nepřiřazený literál a všechny ostatní jsou nepravdivé, musí být tento literál pravdivý.
+> **Jednotková propagace** využívá toho, že obsahuje-li klauzule jediný nepřiřazený literál a všechny ostatní jsou nepravdivé, musí být tento literál pravdivý.
+Čistá proměnná se vyskytuje vždy jen v jedné polaritě, takže ji lze rovnou ohodnotit tak, aby byly její klauzule splněné.
+> **Čistá proměnná** se vyskytuje vždy jen v jedné polaritě, takže ji lze rovnou ohodnotit tak, aby byly její klauzule splněné.
+Když algoritmus nemůže pokračovat, vybere rozhodovací literál a větví na obě jeho hodnoty.
+
+Dé pé el el ale zapomíná již objevené konflikty a objevuje je znovu.
+Tento problém řeší rozšíření zvané cé dé cé el, conflict driven clause learning, na němž jsou založeny všechny dnešní praktické řešiče.
+> Tento problém řeší rozšíření zvané **CDCL**, conflict-driven clause learning, na němž jsou založeny všechny dnešní praktické řešiče.
+
+Prvním pilířem cé dé cé el je učení klauzulí.
+Při konfliktu, kdy propagace najde prázdnou klauzuli, se analyzuje implikační graf, najde se takzvaný první unikátní implikační bod, a vytvoří se naučená konfliktní klauzule, která zabrání opakování téhož konfliktu.
+> Při konfliktu se analyzuje **implikační graf**, najde se takzvaný první unikátní implikační bod, a vytvoří se **naučená konfliktní klauzule**, která zabrání opakování téhož konfliktu.
+Konfliktní klauzule je logickým důsledkem formule a získá se rezolučním pravidlem, takže implikační graf ani nemusíme konstruovat explicitně.
+
+Druhým pilířem je nechronologický návrat.
+Místo skoku na poslední rozhodnutí se algoritmus vrátí na druhou nejvyšší rozhodovací úroveň z konfliktní klauzule, čímž zůstane klauzule vynucující a okamžitě spustí jednotkovou propagaci.
+
+Třetím pilířem jsou heuristiky výběru proměnné, především vé es i dé es.
+> Třetím pilířem jsou heuristiky výběru proměnné, především **VSIDS**.
+Variable state independent decaying sum udržuje skóre proměnných, při každém konfliktu zvýší skóre proměnných v konfliktní klauzuli a všechna skóre periodicky tlumí.
+Volí se proměnná s nejvyšším skóre, čímž řešič preferuje nedávné konflikty.
+
+Dalšími technikami jsou restarty, dvojice sledovaných literálů, která zrychluje jednotkovou propagaci, a mazání nepotřebných naučených klauzulí.
+> Dalšími technikami jsou **restarty**, dvojice **sledovaných literálů**, která zrychluje jednotkovou propagaci, a mazání nepotřebných naučených klauzulí.
+
+Alternativou k systematickému řešení je lokální prohledávání, které pracuje s úplnými ohodnoceními a iterativně je upravuje.
+Algoritmus gé sat začne z náhodného úplného ohodnocení a v každém kroku překlopí proměnnou, jež maximalizuje počet splněných klauzulí.
+> Algoritmus **GSAT** začne z náhodného úplného ohodnocení a v každém kroku překlopí proměnnou, jež maximalizuje počet splněných klauzulí.
+Jde o hladové stoupání, které ale uvázne v lokálním maximu.
+
+Algoritmus walksat tento problém řeší tím, že kombinuje hladový krok s náhodnou procházkou.
+> Algoritmus **WalkSAT** tento problém řeší tím, že kombinuje hladový krok s náhodnou procházkou.
+V každém kroku vybere náhodnou nesplněnou klauzuli a s pravděpodobností, pé, překlopí náhodný literál z této klauzule, jinak provede hladový krok.
+> V každém kroku vybere náhodnou nesplněnou klauzuli a s pravděpodobností $p$ překlopí náhodný literál z této klauzule, jinak provede hladový krok.
+Náhodný krok umožňuje opustit lokální maximum, takže walksat je pravděpodobnostně úplný.
+
+Systematické a lokální metody se hodí na různé instance.
+Cé dé cé el je úplný, dokáže prokázat nesplnitelnost a vyniká na strukturovaných a průmyslových instancích, například při formální verifikaci.
+Walksat naopak nesplnitelnost prokázat neumí, ale je velmi efektivní na náhodných třísatových formulích poblíž fázového přechodu, kde poměr klauzulí k proměnným je zhruba čtyři celé dvacet sedm.
+> WalkSAT naopak nesplnitelnost prokázat neumí, ale je velmi efektivní na náhodných 3-SAT formulích poblíž fázového přechodu, kde poměr klauzulí k proměnným je zhruba $4{,}27$.

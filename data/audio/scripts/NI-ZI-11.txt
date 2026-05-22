@@ -1,0 +1,43 @@
+# Otázka ZI-11 — Ansámblové metody (Bagging, Boosting) a bias-variance rozklad
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Celkovou chybu predikce libovolného modelu lze rozložit na tři složky: kvadrát zkreslení, rozptyl a neredukovatelný šum.
+> Celkovou chybu predikce libovolného modelu lze rozložit na tři složky: kvadrát **zkreslení**, **rozptyl** a neredukovatelný **šum**.
+Zkreslení říká, jak daleko jsou průměrné predikce od skutečné funkce, a souvisí s nedoučením modelu.
+Rozptyl říká, jak moc se predikce mění napříč různými trénovacími sadami, a souvisí s přeučením.
+Šum je vnitřní náhodnost dat, kterou žádný model zachytit nedokáže.
+
+S rostoucí složitostí modelu zkreslení klesá, ale rozptyl roste.
+Celková chyba má proto tvar písmene U a optimum leží v kompromisním bodě, kde je součet obou složek nejmenší.
+Lineární regrese má vysoké zkreslení a nízký rozptyl, hluboké stromy nebo metoda nejbližších sousedů s malým, ká, mají naopak nízké zkreslení a vysoký rozptyl.
+> Lineární regrese má vysoké zkreslení a nízký rozptyl, hluboké stromy nebo metoda nejbližších sousedů s malým $k$ mají naopak nízké zkreslení a vysoký rozptyl.
+Ansámblové metody nabízejí příznivý kompromis, protože udržují obě složky na střední až nízké úrovni.
+
+Rozklad odvodíme tak, že do výrazu pro střední kvadratickou chybu přičteme a odečteme střední hodnotu odhadu.
+Po roznásobení smíšený člen vypadne, protože šum má nulovou střední hodnotu, a zbydou právě tři složky: rozptyl šumu, kvadrát zkreslení a rozptyl odhadu.
+> Po roznásobení smíšený člen vypadne a zbyde $E[(Y-\hat f)^2] = \sigma_\epsilon^2 + \mathrm{Bias}^2[\hat f] + \mathrm{Var}[\hat f]$.
+
+Bagging je metoda, která snižuje rozptyl.
+> **Bagging** je metoda, která snižuje rozptyl.
+Natrénujeme, em, modelů, každý na jiném bootstrapovém vzorku trénovací sady, a výslednou predikci spočítáme jako jejich průměr.
+> Natrénujeme $M$ modelů, každý na jiném bootstrapovém vzorku trénovací sady, a výslednou predikci spočítáme jako jejich průměr.
+Kdyby byly modely nezávislé, klesl by rozptyl průměru, em, krát.
+> Kdyby byly modely nezávislé, klesl by rozptyl průměru $M$ krát.
+V praxi jsou ale modely korelované, takže rozptyl průměru je dán součtem členu úměrného průměrné korelaci, ró, a členu, který klesá s rostoucím počtem modelů.
+> V praxi jsou ale modely korelované, takže $\mathrm{Var}[\bar f] = \rho\,\mathrm{Var}[\hat f] + \frac{1-\rho}{M}\mathrm{Var}[\hat f]$.
+Rozptyl se proto sníží, ale jen omezeně: tím více, čím větší je ansámbl a čím menší je korelace mezi modely.
+
+Boosting je naopak metoda, která snižuje zkreslení.
+> **Boosting** je naopak metoda, která snižuje zkreslení.
+Staví aditivní model jako vážený součet, em, slabých modelů.
+> Staví aditivní model jako vážený součet $\bar f = \sum_{i=1}^M \alpha_i \hat f_i$ slabých modelů.
+Modely se přidávají postupně a každý nový se zaměřuje na rezidua, tedy na chyby, které předchozí modely zatím neopravily.
+> Modely se přidávají postupně a každý nový se zaměřuje na **rezidua** $r_i = y - \sum_{j<i}\alpha_j \hat f_j$ předchozích modelů.
+Iterativním zaměřováním na chyby tak boosting postupně snižuje zkreslení slabých modelů, agresivní snižování bez regularizace ale může zvednout rozptyl.
+
+Mezi baggingové metody patří náhodné lesy, které trénují rozhodovací stromy na bootstrapových vzorcích s náhodným výběrem příznaků, a extrémně náhodné stromy.
+> Mezi baggingové metody patří náhodné lesy, které trénují rozhodovací stromy na bootstrapových vzorcích s náhodným výběrem příznaků, a extrémně náhodné stromy.
+Mezi boostingové metody patří AdaBoost, který klade důraz na obtížné vzorky, a gradientní boosting, jehož implementace X G Boost a LightGBM modelují rezidua.
+> Mezi boostingové metody patří AdaBoost, který klade důraz na obtížné vzorky, a gradientní boosting, jehož implementace XGBoost a LightGBM modelují rezidua.

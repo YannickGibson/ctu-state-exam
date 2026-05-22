@@ -1,0 +1,116 @@
+{
+  "id": "NI-ZI-8",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 175.788,
+  "sentences": [
+    {
+      "text": "**Autoenkodér** je dopředná síť učená bez učitele, která rekonstruuje svůj vstup, $\\hat x = D(E(x))$.",
+      "para": 0,
+      "start": 0,
+      "end": 8.35
+    },
+    {
+      "text": "Skládá se z **enkodéru** $E$, který stlačí vstup do **latentního prostoru**, a z **dekodéru** $D$, který vstup obnoví.",
+      "para": 0,
+      "start": 8.35,
+      "end": 18.407
+    },
+    {
+      "text": "Síť minimalizuje rekonstrukční chybu, takže latentní reprezentace musí zachytit nejdůležitější rysy dat.",
+      "para": 0,
+      "start": 18.407,
+      "end": 26.293
+    },
+    {
+      "text": "Existuje řada variant: šum potlačující autoenkodér dostává na vstup zašuměná data a má vrátit čistá, řídký autoenkodér penalizuje příliš aktivní neurony.",
+      "para": 1,
+      "start": 26.293,
+      "end": 38.962
+    },
+    {
+      "text": "Konvoluční autoenkodér používá konvoluční vrstvy pro obrazy, a síť tvaru ú přidává přeskakující spoje a hodí se pro segmentaci.",
+      "para": 1,
+      "start": 38.962,
+      "end": 49.414
+    },
+    {
+      "text": "Autoenkodéry slouží k redukci dimenze, odšumování, předtrénování i k detekci anomálií podle velikosti rekonstrukční chyby.",
+      "para": 1,
+      "start": 49.414,
+      "end": 58.553
+    },
+    {
+      "text": "**Variační autoenkodér** je pravděpodobnostní rozšíření, kde enkodér vrací parametry rozdělení $q_\\phi(z\\mid x) = \\mathcal N(\\mu, \\sigma^2)$.",
+      "para": 2,
+      "start": 58.553,
+      "end": 69.481
+    },
+    {
+      "text": "Tím vzniká spojitý a smysluplný latentní prostor, ze kterého lze vzorkovat.",
+      "para": 2,
+      "start": 69.481,
+      "end": 75.451
+    },
+    {
+      "text": "Síť se učí minimalizací **dolního odhadu ELBO**, který sčítá rekonstrukční ztrátu a $D_{\\mathrm{KL}}$ od normálního prioru.",
+      "para": 2,
+      "start": 75.451,
+      "end": 87.47
+    },
+    {
+      "text": "Aby šel gradient propagovat přes náhodný vzorek, použije se **reparametrizační trik** $z = \\mu + \\sigma \\odot \\epsilon$.",
+      "para": 2,
+      "start": 87.47,
+      "end": 98.653
+    },
+    {
+      "text": "**Generativní soupeřící sítě** (GAN) postavil Goodfellow roku 2014 na soutěži dvou sítí.",
+      "para": 3,
+      "start": 98.653,
+      "end": 107.41
+    },
+    {
+      "text": "**Generátor** $G(z)$ mapuje šum na vzorky napodobující data, **diskriminátor** $D(x)$ rozlišuje pravé a podvržené.",
+      "para": 3,
+      "start": 107.41,
+      "end": 118.151
+    },
+    {
+      "text": "Obě sítě hrají minimaxovou hru a v ideální rovnováze generátor reprodukuje rozdělení dat a diskriminátor už hádá s pravděpodobností jedna polovina.",
+      "para": 3,
+      "start": 118.151,
+      "end": 129.335
+    },
+    {
+      "text": "Trénink GAN je nestabilní a trpí **kolapsem módů**, kdy generátor produkuje jen úzkou množinu výstupů.",
+      "para": 4,
+      "start": 129.335,
+      "end": 139.043
+    },
+    {
+      "text": "Proto vznikly varianty jako konvoluční D C G A N, wassersteinovský W G A N se stabilnějším tréninkem, podmíněný G A N nebo StyleGAN pro fotorealistické obličeje.",
+      "para": 4,
+      "start": 139.043,
+      "end": 152.339
+    },
+    {
+      "text": "Současným špičkovým přístupem jsou **difuzní modely**.",
+      "para": 5,
+      "start": 152.339,
+      "end": 156.405
+    },
+    {
+      "text": "Model se učí předpovídat šum přidaný k obrázku v náhodném časovém kroku, a generování pak probíhá postupným odšumováním od čistého šumu přes mnoho kroků.",
+      "para": 5,
+      "start": 156.405,
+      "end": 168.146
+    },
+    {
+      "text": "Difuzní modely jsou stabilnější než G A N a dosahují vyšší kvality, jen za cenu pomalejší inference.",
+      "para": 5,
+      "start": 168.146,
+      "end": 175.788
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+# Otázka SPOL-17 — Programování nad sdílenou pamětí, OpenMP
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+OpenMP je vysokoúrovňové rozhraní pro programování vícevláknových aplikací nad sdílenou pamětí v jazycích, cé, cé plus plus a Fortran.
+> **OpenMP** je vysokoúrovňové rozhraní pro programování vícevláknových aplikací nad sdílenou pamětí v jazycích C, C++ a Fortran.
+Tvoří ho asi padesát direktiv vkládaných do kódu, kolem dvaceti systémových proměnných a zhruba šedesát knihovních funkcí běhového prostředí.
+Je to inkrementální metoda paralelizace: program bez podpory direktiv se přeloží jako běžný sekvenční kód.
+
+OpenMP používá programovací model fork-join.
+> OpenMP používá programovací model **fork-join**.
+Program začne sekvenčně počátečním vláknem, a ve vyznačených paralelních oblastech se mechanismem fork vytvoří tým souběžně běžících vláken, který se na konci oblasti mechanismem join opět spojí.
+Mimo paralelní oblast běží jen počáteční vlákno.
+
+Vlastnosti proměnných v paralelní oblasti určují klauzule.
+Sdílená proměnná je společná všem vláknům, privátní proměnná má v každém vláknu svou neinicializovanou kopii, a klauzule firstprivate tuto kopii navíc inicializuje původní hodnotou.
+Klauzule reduction zajistí bezpečnou redukci privátních kopií do sdílené proměnné.
+
+Datový, neboli iterační, paralelismus zajišťuje direktiva parallel for.
+> **Datový paralelismus** zajišťuje direktiva `parallel for`.
+Iterace cyklu se rozdělí mezi vlákna podle klauzule schedule: statické přidělení rozdělí bloky předem, dynamické přiděluje bloky za běhu, jakmile vlákno dokončí svou práci, a guided postupně zmenšuje velikost bloků.
+
+Funkční paralelismus zajišťuje direktiva task.
+> **Funkční paralelismus** zajišťuje direktiva `task`.
+Vlákno vygeneruje úlohu a vloží ji do zásobárny úloh; ostatní vlákna úlohy odebírají a vykonávají, jde tedy o model producent-konzument vhodný pro rekurzivní algoritmy.
+
+Pro synchronizaci vláken nabízí OpenMP několik direktiv.
+Direktiva barrier je bod, kam musí dorazit všechna vlákna týmu, blok za direktivou single provede jen jedno libovolné vlákno a blok za direktivou master jen hlavní vlákno.
+Kritická sekce, direktiva critical, je blok, který smí v jednom okamžiku provádět nejvýše jedno vlákno; může být anonymní nebo pojmenovaná, a vzájemné vyloučení pak platí globálně pro všechny její výskyty.
+> **Kritická sekce**, direktiva `critical`, je blok, který smí v jednom okamžiku provádět nejvýše jedno vlákno; může být anonymní nebo pojmenovaná, a vzájemné vyloučení pak platí globálně pro všechny její výskyty.
+Direktiva atomic zajistí nepřerušitelnou operaci nad jednou buňkou paměti, typicky čtení, zápis nebo inkrementaci sdíleného čítače.
+> Direktiva `atomic` zajistí nepřerušitelnou operaci nad jednou buňkou paměti, typicky čtení, zápis nebo inkrementaci sdíleného čítače.
+
+Tyto nástroje se uplatní ve vícevláknových algoritmech.
+Násobení polynomů se rozloží na nezávislé součiny členů a výsledné koeficienty se sčítají paralelním cyklem s redukcí.
+Násobení matice a vektoru je datový paralelismus, kde každé vlákno počítá blok řádků se statickým rozvrhem.
+Řazení se paralelizuje rekurzivně, například MergeSort nebo QuickSort přes direktivu task se synchronizací taskwait.

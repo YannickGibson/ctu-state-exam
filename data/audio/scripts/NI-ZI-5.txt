@@ -1,0 +1,49 @@
+# Otázka ZI-5 — Chybějící hodnoty, odlehlé hodnoty a vyvažování dat
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Reálná data bývají špinavá: obsahují šum, chybějící hodnoty, nekonzistence i nevyvážené třídy.
+Cílem čištění dat je tyto problémy odstranit, protože bez kvalitních dat nezískáme dobrý výsledek.
+
+Chybějící hodnoty se v datech objevují v různých podobách, jako prázdné pole, nula, tečka, číslo devět set devadesát devět nebo zkratka en á.
+> Chybějící hodnoty se v datech objevují v různých podobách, jako prázdné pole, nula, tečka, číslo 999 nebo zkratka NA.
+Důležité je, že prázdnou hodnotu nelze automaticky odlišit od skutečně chybějící: nevíme, zda zákazník omáčku odmítl, nebo ji prodavač jen zapomněl zapsat.
+
+Podle mechanismu rozlišujeme tři typy chybějících hodnot.
+M C A R znamená, že hodnota chybí zcela náhodně, nezávisle na čemkoli.
+> **MCAR** znamená, že hodnota chybí zcela náhodně, nezávisle na čemkoli.
+M A R znamená, že chybění závisí jen na pozorovaných hodnotách.
+> **MAR** znamená, že chybění závisí jen na pozorovaných hodnotách.
+M N A R znamená, že chybění závisí na samotné nepozorované hodnotě.
+> **MNAR** znamená, že chybění závisí na samotné nepozorované hodnotě.
+
+Nejjednodušší metoda je vynechání záznamů s chybějícími hodnotami, ale ztrácíme tím data a je vhodná jen pro zcela náhodné chybění.
+Druhá metoda je doplnění průměrem nebo mediánem sloupce, případně nejčastější hodnotou u kategorických proměnných.
+Sofistikovanější metody hodnotu predikují: regresní doplnění natrénuje model z ostatních sloupců a metoda ká nejbližších sousedů doplní průměr sousedních záznamů.
+> Sofistikovanější metody hodnotu predikují: regresní doplnění natrénuje model z ostatních sloupců a metoda $k$ nejbližších sousedů doplní průměr sousedních záznamů.
+Lze také přidat indikátor, který říká, zda hodnota chyběla, protože i samotné chybění může nést informaci.
+
+Odlehlé hodnoty jsou hodnoty výrazně odlišné od většiny dat; mohou to být chyby měření, nebo skutečné extrémy.
+> **Odlehlé hodnoty** jsou hodnoty výrazně odlišné od většiny dat; mohou to být chyby měření, nebo skutečné extrémy.
+K jejich detekci slouží zé skóre, kdy za odlehlou považujeme hodnotu vzdálenou od průměru více než tři směrodatné odchylky.
+> K jejich detekci slouží **z-skóre**, kdy za odlehlou považujeme hodnotu vzdálenou od průměru více než tři směrodatné odchylky.
+Pravidlo mezikvartilového rozpětí označí hodnoty ležící daleko za prvním nebo třetím kvartilem; to je princip krabicového grafu.
+
+Pokročilejší je faktor lokální odlehlosti, který porovnává hustotu bodu s hustotou jeho sousedů.
+> Pokročilejší je **faktor lokální odlehlosti**, který porovnává hustotu bodu s hustotou jeho sousedů.
+Hodnota kolem jedné znamená běžný bod, hodnota výrazně větší než jedna značí odlehlý bod v řidší oblasti.
+Odlehlé body lze také odhalit shlukovou analýzou jako body mimo všechny shluky.
+Při řešení můžeme odlehlé hodnoty odstranit, ponechat, oříznout na zvolené percentily nebo použít robustní statistiky odolné vůči extrémům.
+
+O nevyvážená data jde, když je jedna třída mnohem častější než ostatní, například u detekce podvodů nebo vzácných nemocí.
+> O **nevyvážená data** jde, když je jedna třída mnohem častější než ostatní, například u detekce podvodů nebo vzácných nemocí.
+Klasifikátor pak má tendenci předpovídat většinovou třídu a může být zdánlivě přesný, ale prakticky bezcenný.
+Proto je přesnost zavádějící metrika a hodnotíme spíše preciznost, úplnost a jejich harmonický průměr.
+
+Vyvažování řešíme na úrovni dat vzorkováním.
+Podvzorkování náhodně odebere body z většinové třídy, nadvzorkování naopak menšinovou třídu rozšíří.
+Metoda S M O T E generuje nové menšinové body interpolací mezi existujícím bodem a jeho nejbližšími sousedy.
+> Metoda **SMOTE** generuje nové menšinové body interpolací mezi existujícím bodem a jeho nejbližšími sousedy.
+Na úrovni algoritmu pomáhají třídní váhy, učení citlivé na náklady nebo posun rozhodovacího prahu.
+Lze také použít stratifikované vzorkování, které zachová zhruba stejný poměr tříd v trénovací i testovací množině.

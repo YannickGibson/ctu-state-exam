@@ -1,0 +1,40 @@
+# Otázka SPOL-8 — Markovské řetězce s diskrétním časem
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Náhodný proces je systém náhodných veličin indexovaný časem.
+Čas může být diskrétní nebo spojitý a množina stavů spočetná nebo nespočetná.
+Markovský řetězec s diskrétním časem je náhodný proces se spočetnou množinou stavů a diskrétním časem, který splňuje markovskou podmínku.
+> **Markovský řetězec s diskrétním časem** je náhodný proces se spočetnou množinou stavů a diskrétním časem, který splňuje **markovskou podmínku**.
+Markovská podmínka říká, že pravděpodobnost příštího stavu závisí jen na stavu současném, nikoli na celé minulosti; proces tedy zapomíná historii.
+
+Vývoj řetězce popisuje matice pravděpodobností přechodu, jejíž prvek udává pravděpodobnost přechodu z jednoho stavu do druhého.
+Pro matice přechodu platí Chapmanova Kolmogorovova rovnice, podle níž přechod mezi vzdálenými časy získáme součinem matic přechodu přes mezilehlý čas.
+> Pro matice přechodu platí **Chapmanova-Kolmogorovova rovnice**, podle níž přechod mezi vzdálenými časy získáme součinem matic přechodu přes mezilehlý čas.
+Řetězec je homogenní, pokud pravděpodobnosti přechodu nezávisí na čase; pak existuje jediná jednokroková matice přechodu a matici přechodu za, en, kroků získáme jako její, en, tou mocninu.
+> Řetězec je **homogenní**, pokud pravděpodobnosti přechodu nezávisí na čase; pak existuje jediná jednokroková matice přechodu $\mathbf P$ a matici přechodu za $n$ kroků získáme jako $\mathbf P^n$.
+Matice přechodu je stochastická: její prvky jsou nezáporné a každý řádkový součet je roven jedné.
+
+Stavy řetězce klasifikujeme.
+Stav je trvalý neboli rekurentní, pokud se do něj řetězec s jistotou někdy vrátí; je přechodný, pokud je tato pravděpodobnost menší než jedna.
+> Stav je **trvalý** neboli rekurentní, pokud se do něj řetězec s jistotou někdy vrátí; je **přechodný**, pokud je tato pravděpodobnost menší než jedna.
+Střední doba návratu je očekávaná doba prvního návratu do stavu.
+Trvalý stav je nenulový, je-li jeho střední doba návratu konečná, a nulový, je-li nekonečná.
+Perioda stavu je největší společný dělitel délek možných návratů; stav s periodou jedna nazýváme aperiodický.
+
+Pro aperiodický stav platí limitní věta: pravděpodobnost setrvání ve stavu po, en, krocích konverguje k převrácené hodnotě střední doby návratu.
+> Pro aperiodický stav platí limitní věta: $\lim_{n\to\infty} P_{ii}(n) = \frac{1}{\mu_i}$, pravděpodobnost setrvání po $n$ krocích konverguje k převrácené hodnotě střední doby návratu.
+Trvalý nenulový aperiodický stav nazýváme ergodický.
+
+Jeden stav je dosažitelný z druhého, pokud do něj lze dojít s nenulovou pravděpodobností.
+Vzájemně dosažitelné stavy tvoří třídy ekvivalence a všechny stavy v jedné třídě jsou stejného typu.
+Množina stavů je uzavřená, pokud z ní řetězec nemůže odejít; uzavřená množina o jediném stavu se nazývá pohlcující.
+Podle věty o jednoznačném rozkladu lze množinu stavů rozložit na přechodné stavy a na nerozložitelné uzavřené třídy stavů trvalých.
+
+Stacionární rozdělení je rozdělení, které se vynásobením maticí přechodu nezmění; pokud z něj řetězec vyjde, zůstane v něm po celou dobu.
+> **Stacionární rozdělení** je vektor $\boldsymbol\pi$, pro který platí $\boldsymbol\pi \mathbf P = \boldsymbol\pi$; pokud z něj řetězec vyjde, zůstane v něm po celou dobu.
+Pro nerozložitelný řetězec platí věta o existenci: jsou-li všechny stavy přechodné nebo trvalé nulové, stacionární rozdělení neexistuje.
+Jsou-li všechny stavy trvalé nenulové, existuje jediné stacionární rozdělení, jehož složky jsou převrácené hodnoty středních dob návratu.
+Je-li řetězec navíc aperiodický, je toto stacionární rozdělení zároveň limitou rozdělení v čase pro libovolné počáteční rozdělení.
+Pro konečnou množinu stavů stacionární rozdělení vždy existuje.

@@ -1,0 +1,43 @@
+# Otázka SPOL-14 — Princip genetických algoritmů, význam selekčního tlaku.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Genetický algoritmus je heuristika inspirovaná přírodní evolucí, která pracuje současně s celou populací jedinců.
+> **Genetický algoritmus** je heuristika inspirovaná přírodní evolucí, která pracuje současně s celou populací jedinců.
+Každý jedinec představuje jedno možné řešení a je zakódován do reprezentace, typicky do řetězce nul a jedniček.
+Kvalitu jedince měříme jeho zdatností, tedy fitness, odvozenou z optimalizačního kritéria.
+> Kvalitu jedince měříme jeho **zdatností**, tedy fitness, odvozenou z optimalizačního kritéria.
+
+Algoritmus běží v cyklu generací a opakuje tři kroky.
+Selekce vybírá jedince úměrně jejich zdatnosti a působí jako intenzifikace.
+> **Selekce** vybírá jedince úměrně jejich zdatnosti a působí jako intenzifikace.
+Křížení rekombinuje genetickou informaci dvou rodičů do nových potomků.
+> **Křížení** rekombinuje genetickou informaci dvou rodičů do nových potomků.
+Mutace náhodně pozmění jedince, vnáší novou genetickou informaci a působí jako diverzifikace.
+> **Mutace** náhodně pozmění jedince, vnáší novou genetickou informaci a působí jako diverzifikace.
+Z takto vzniklých jedinců se sestaví další generace a cyklus se opakuje.
+Nová generace může původní zcela nahradit, nahradit ji s ponecháním několika elitních jedinců, nebo vzniknout soutěží rodičů a potomků.
+
+Cílem selekce je, aby početní zastoupení jedince v populaci odpovídalo jeho zdatnosti.
+Selekce tedy převádí informaci obsaženou ve zdatnosti na pravděpodobnost výběru jedince.
+Jde o základní nástroj, kterým vyvažujeme diverzifikaci a intenzifikaci.
+
+Sílu tohoto převodu vyjadřuje selekční tlak, definovaný jako pravděpodobnost výběru nejlepšího jedince.
+> Sílu tohoto převodu vyjadřuje **selekční tlak**, definovaný jako pravděpodobnost výběru nejlepšího jedince.
+Při krajní hodnotě, kdy je tato pravděpodobnost rovna jedné, vybíráme stále nejlepšího jedince a jde o čistou intenzifikaci.
+> Při krajní hodnotě $p = 1$ vybíráme stále nejlepšího jedince a jde o čistou intenzifikaci.
+Při druhém extrému, kdy je pravděpodobnost rovna jedné lomeno počtem jedinců, na zdatnosti nezáleží a jde o čistou diverzifikaci.
+> Při druhém extrému $p = 1/n$ na zdatnosti nezáleží a jde o čistou diverzifikaci.
+
+Selekční tlak rozhoduje o tom, zda algoritmus vůbec funguje.
+Příliš velký selekční tlak vede k degeneraci populace, protože se rychle rozšíří pár nejlepších jedinců a algoritmus uvázne v lokálním optimu.
+Příliš malý selekční tlak naopak znamená pomalou konvergenci a širší průzkum, ale šum z mutace může převážit a algoritmus diverguje.
+Dobré konvergence dosáhneme jen při správně zvolené střední hodnotě selekčního tlaku.
+Charakteristické průběhy průměrné zdatnosti to dobře ukazují: vysoký tlak vede k degeneraci, nízký tlak k divergenci a jen vyvážený tlak ke kvalitní konvergenci.
+
+Selekční tlak proto musíme aktivně řídit.
+U ruletového výběru k tomu slouží škálování zdatnosti lineární funkcí, takzvaný scaling.
+> U ruletového výběru k tomu slouží škálování zdatnosti lineární funkcí, takzvaný **scaling**.
+Dále lze místo hodnoty zdatnosti použít jen pořadí jedinců, čemuž se říká ranking, nebo zkrácený výběr, anglicky truncation selection.
+> Dále lze místo hodnoty zdatnosti použít jen pořadí jedinců, čemuž se říká **ranking**, nebo zkrácený výběr, anglicky **truncation selection**.

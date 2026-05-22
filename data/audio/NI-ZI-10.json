@@ -1,0 +1,152 @@
+{
+  "id": "NI-ZI-10",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 206.802,
+  "sentences": [
+    {
+      "text": "Mechanismus pozornosti pracuje se třemi vektory, které Vaswani zavedl v práci Attention is All You Need.",
+      "para": 0,
+      "start": 0,
+      "end": 7.839
+    },
+    {
+      "text": "Pro každý token spočítáme **dotaz** $q$, **klíč** $k$ a **hodnotu** $v$.",
+      "para": 0,
+      "start": 7.839,
+      "end": 11.731
+    },
+    {
+      "text": "Výstup pozornosti je vážený součet hodnot, kde váhy vyjadřují podobnost dotazu a jednotlivých klíčů.",
+      "para": 0,
+      "start": 11.731,
+      "end": 19.489
+    },
+    {
+      "text": "O **sebepozornost** jde tehdy, když $Q$, $K$ i $V$ vznikají lineární transformací stejné vstupní sekvence.",
+      "para": 1,
+      "start": 19.489,
+      "end": 28.432
+    },
+    {
+      "text": "Každý token tak může čerpat informaci od libovolného jiného tokenu téže věty.",
+      "para": 1,
+      "start": 28.432,
+      "end": 34.541
+    },
+    {
+      "text": "Konkrétní výpočet se nazývá **škálovaná skalární pozornost**.",
+      "para": 2,
+      "start": 34.541,
+      "end": 39.199
+    },
+    {
+      "text": "Spočítáme $\\mathrm{softmax}(QK^T / \\sqrt{d_k})\\,V$, tedy skalární součiny dotazů a klíčů škálujeme a vážíme jimi hodnoty.",
+      "para": 2,
+      "start": 39.199,
+      "end": 50.475
+    },
+    {
+      "text": "Dělení odmocninou z dimenze brání saturaci softmaxu při velkých dimenzích, a volitelná maska potlačí výplň nebo zajistí kauzální pozornost u dekodéru.",
+      "para": 2,
+      "start": 50.475,
+      "end": 62.262
+    },
+    {
+      "text": "Místo jediné pozornosti se používá **vícehlavá pozornost**, typicky s osmi paralelními hlavami.",
+      "para": 3,
+      "start": 62.262,
+      "end": 69.045
+    },
+    {
+      "text": "Každá hlava má vlastní projekční matice a modeluje jiný reprezentační podprostor, tedy jiný typ vztahů mezi tokeny.",
+      "para": 3,
+      "start": 69.045,
+      "end": 78.08
+    },
+    {
+      "text": "Výstupy všech hlav se nakonec spojí a společně projektují do výsledku.",
+      "para": 3,
+      "start": 78.08,
+      "end": 83.69
+    },
+    {
+      "text": "**Transformer** skládá na sebe několik enkodérů a dekodérů, obvykle šest vrstev každého druhu.",
+      "para": 4,
+      "start": 83.69,
+      "end": 90.764
+    },
+    {
+      "text": "Každá vrstva enkodéru obsahuje sebepozornost a dopřednou síť, obě s reziduálním spojem a vrstvovou normalizací.",
+      "para": 4,
+      "start": 90.764,
+      "end": 99.334
+    },
+    {
+      "text": "Dekodér má navíc maskovanou sebepozornost a křížovou pozornost na výstupy enkodéru.",
+      "para": 4,
+      "start": 99.334,
+      "end": 105.862
+    },
+    {
+      "text": "Protože pozornost neví nic o pořadí, přidává se **poziční kódování** pomocí funkcí sinus a kosinus.",
+      "para": 4,
+      "start": 105.862,
+      "end": 114.595
+    },
+    {
+      "text": "Klíčem úspěchu je **předtrénování** na obrovském korpusu a následné **doladění** na cílovou úlohu.",
+      "para": 5,
+      "start": 114.595,
+      "end": 125.883
+    },
+    {
+      "text": "Tomuto přenosu naučených reprezentací na jinou úlohu se říká **transferové učení**.",
+      "para": 5,
+      "start": 125.883,
+      "end": 131.922
+    },
+    {
+      "text": "Lze buď zmrazit váhy a naučit jen poslední vrstvu, doladit všechny váhy malým krokem učení, nebo přidat malé trénovatelné moduly, takzvané adaptéry či metodu lóra.",
+      "para": 5,
+      "start": 131.922,
+      "end": 144.893
+    },
+    {
+      "text": "Model **BERT** používá jen enkodér a předtrénuje se dvěma úlohami.",
+      "para": 6,
+      "start": 144.893,
+      "end": 150.399
+    },
+    {
+      "text": "Maskovaný jazykový model zakryje patnáct procent tokenů a model je dopovídá, a predikce následující věty učí vztahy mezi větami.",
+      "para": 6,
+      "start": 150.399,
+      "end": 160.572
+    },
+    {
+      "text": "Model **GPT** používá jen dekodér s kauzální pozorností, kde každý token vidí jen tokeny předchozí.",
+      "para": 7,
+      "start": 160.572,
+      "end": 168.829
+    },
+    {
+      "text": "Předtrénuje se autoregresivní predikcí dalšího tokenu, a u velkých modelů se objevuje učení v kontextu, kdy se model adaptuje na úlohu z příkladů v promptu bez jakékoli změny vah.",
+      "para": 7,
+      "start": 168.829,
+      "end": 182.056
+    },
+    {
+      "text": "Příbuzná oblast je **metaučení**, kdy se model naučí rychle se adaptovat na novou úlohu z mála příkladů.",
+      "para": 8,
+      "start": 182.056,
+      "end": 191.857
+    },
+    {
+      "text": "Metoda M A M L hledá takovou inicializaci vah, ze které stačí jeden či několik gradientních kroků k naučení nové úlohy, a učení v kontextu u jazykových modelů je vlastně metaučení bez aktualizace vah.",
+      "para": 8,
+      "start": 191.857,
+      "end": 206.802
+    }
+  ]
+}

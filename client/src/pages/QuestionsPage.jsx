@@ -1,28 +1,24 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getProgress, getQuestions, patchProgress } from '../api.js';
-import { MAX_PRACTICED } from '../config/limits.js';
+import { getQuestions } from '../api.js';
+import { ZERO } from '../progressCache.js';
+import { useProgress } from '../ProgressContext.jsx';
 import ProgressDonut from '../components/ProgressDonut.jsx';
 import QuestionsTable from '../components/QuestionsTable.jsx';
 
-const ZERO = { practicedCount: 0, readPassively: false };
-
 export default function QuestionsPage() {
+  const { progress, loading: progressLoading, markProgress } = useProgress();
   const [questions, setQuestions] = useState([]);
-  const [progress, setProgress] = useState({});
+  const [questionsLoading, setQuestionsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [group, setGroup] = useState('ALL');
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     document.title = 'Questions · State Exams';
-    Promise.all([getQuestions(), getProgress()])
-      .then(([qs, pg]) => {
-        setQuestions(qs);
-        setProgress(pg);
-      })
+    getQuestions()
+      .then(setQuestions)
       .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+      .finally(() => setQuestionsLoading(false));
   }, []);
 
   const merged = useMemo(
@@ -64,34 +60,14 @@ export default function QuestionsPage() {
   }, [merged, group, search]);
 
   async function handleAction(id, action) {
-    const prev = progress[id] || ZERO;
-    let optimistic;
-    if (action === 'practice') {
-      optimistic = {
-        readPassively: false,
-        practicedCount: Math.min(prev.practicedCount + 1, MAX_PRACTICED),
-      };
-    } else if (action === 'readPassively') {
-      optimistic = {
-        readPassively: prev.practicedCount === 0,
-        practicedCount: prev.practicedCount,
-      };
-    } else if (action === 'reset') {
-      optimistic = ZERO;
-    } else {
-      return;
-    }
-    setProgress((p) => ({ ...p, [id]: optimistic }));
     try {
-      const { progress: next } = await patchProgress(id, action);
-      setProgress((p) => ({ ...p, [id]: next }));
+      await markProgress(id, action);
     } catch (e) {
-      setProgress((p) => ({ ...p, [id]: prev }));
       setError(e.message);
     }
   }
 
-  if (loading) return <p className="muted">Loading…</p>;
+  if (questionsLoading || progressLoading) return <p className="muted">Loading…</p>;
   if (error) return <p className="error">Error: {error}</p>;
 
   return (

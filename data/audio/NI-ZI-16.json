@@ -1,0 +1,158 @@
+{
+  "id": "NI-ZI-16",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 210.38,
+  "sentences": [
+    {
+      "text": "V bayesovských úlohách často potřebujeme spočítat integrály, jako je aposteriorní střední hodnota, rozptyl nebo marginální věrohodnost.",
+      "para": 0,
+      "start": 0,
+      "end": 10.219
+    },
+    {
+      "text": "Pokud je aposteriorní rozdělení komplikované, analytické řešení neexistuje a sáhneme po metodách Monte Carlo.",
+      "para": 0,
+      "start": 10.219,
+      "end": 18.245
+    },
+    {
+      "text": "Myšlenka je jednoduchá: pokud máme vzorky z cílového rozdělení, aproximujeme střední hodnotu prostým průměrem hodnot funkce přes tyto vzorky.",
+      "para": 0,
+      "start": 18.245,
+      "end": 28.685
+    },
+    {
+      "text": "Tato aproximace konverguje rychlostí odmocniny z počtu vzorků, nezávisle na dimenzi.",
+      "para": 0,
+      "start": 28.685,
+      "end": 34.933
+    },
+    {
+      "text": "Problém je, jak vůbec z komplikovaného cílového rozdělení vzorkovat.",
+      "para": 0,
+      "start": 34.933,
+      "end": 40.207
+    },
+    {
+      "text": "Jednou z nejjednodušších metod je **rejection sampling**, známý také jako přijímací-zamítací algoritmus.",
+      "para": 1,
+      "start": 40.207,
+      "end": 47.57
+    },
+    {
+      "text": "Potřebujeme proposal rozdělení, tedy nějakou jednodušší distribuci, ze které umíme vzorkovat, a kladnou konstantu $M$.",
+      "para": 1,
+      "start": 47.57,
+      "end": 56.257
+    },
+    {
+      "text": "Konstanta, em, musí být tak velká, aby proposal vynásobený touto konstantou ležel všude nad cílovou hustotou.",
+      "para": 1,
+      "start": 56.257,
+      "end": 64.863
+    },
+    {
+      "text": "Algoritmus navzorkuje bod z proposalu, navzorkuje rovnoměrné číslo mezi nulou a jedničkou, a podle poměru cílové a proposal hustoty bod buď přijme, nebo zamítne.",
+      "para": 1,
+      "start": 64.863,
+      "end": 77.253
+    },
+    {
+      "text": "Přijaté vzorky jsou přesně rozdělené podle cílové hustoty, jde tedy o exaktní metodu bez aproximace.",
+      "para": 2,
+      "start": 77.253,
+      "end": 84.675
+    },
+    {
+      "text": "Pravděpodobnost přijetí je rovna převrácené hodnotě konstanty, em, takže pro velké, em, je metoda neefektivní a hodně vzorků se zahazuje.",
+      "para": 2,
+      "start": 84.675,
+      "end": 94.441
+    },
+    {
+      "text": "Proposal by proto měl mít podobný tvar jako cílové rozdělení a těžší ocasy.",
+      "para": 2,
+      "start": 94.441,
+      "end": 100.539
+    },
+    {
+      "text": "Ve vysoké dimenzi je rejection sampling prakticky nepoužitelný, protože konstanta, em, roste exponenciálně.",
+      "para": 2,
+      "start": 100.539,
+      "end": 108.692
+    },
+    {
+      "text": "**Importance sampling** problém zamítání obchází tím, že žádný vzorek nezahazuje, ale všem přidělí váhu.",
+      "para": 3,
+      "start": 108.692,
+      "end": 116.868
+    },
+    {
+      "text": "Vychází z toho, že střední hodnotu vůči cílovému rozdělení lze přepsat jako střední hodnotu vůči proposalu, kde každý vzorek vynásobíme poměrem cílové a proposal hustoty.",
+      "para": 3,
+      "start": 116.868,
+      "end": 130.988
+    },
+    {
+      "text": "Tomuto poměru se říká importance váha.",
+      "para": 3,
+      "start": 130.988,
+      "end": 134.126
+    },
+    {
+      "text": "Odhad střední hodnoty je pak váženým průměrem hodnot funkce přes vzorky z proposalu.",
+      "para": 3,
+      "start": 134.126,
+      "end": 140.351
+    },
+    {
+      "text": "Pokud cílové rozdělení známe jen do normalizační konstanty, použijeme **samonormalizovaný importance sampling**.",
+      "para": 4,
+      "start": 140.351,
+      "end": 148.655
+    },
+    {
+      "text": "Ten odhad vydělí součtem vah, je sice mírně vychýlený, ale konzistentní.",
+      "para": 4,
+      "start": 148.655,
+      "end": 154.265
+    },
+    {
+      "text": "Kvalitu vážení měříme efektivní velikostí vzorku: je-li nízká, nese skoro veškerou váhu jen pár vzorků a odhad je nestabilní.",
+      "para": 4,
+      "start": 154.265,
+      "end": 164.647
+    },
+    {
+      "text": "I zde platí, že proposal musí mít těžší ocasy než cílové rozdělení, jinak vážení diverguje.",
+      "para": 4,
+      "start": 164.647,
+      "end": 171.871
+    },
+    {
+      "text": "Obecným principem je tedy vážení: nemáme-li vzorky z cílového rozdělení, ale máme je z proposalu, opravíme to přidělením váhy každému vzorku.",
+      "para": 5,
+      "start": 171.871,
+      "end": 182.915
+    },
+    {
+      "text": "Na tomto principu staví importance sampling, samonormalizovaný odhad i stratifikované vzorkování.",
+      "para": 5,
+      "start": 182.915,
+      "end": 190.278
+    },
+    {
+      "text": "Pro stavové modely existuje sekvenční varianta, sekvenční importance sampling, kde se váhy aktualizují krok po kroku.",
+      "para": 5,
+      "start": 190.278,
+      "end": 199.232
+    },
+    {
+      "text": "Časem ale jediná částice převezme skoro celou váhu, tomu se říká degenerace vah, a řeší se převzorkováním, čímž vznikne částicový filtr.",
+      "para": 5,
+      "start": 199.232,
+      "end": 210.38
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": "NI-SPOL-8",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 203.691,
+  "sentences": [
+    {
+      "text": "Náhodný proces je systém náhodných veličin indexovaný časem.",
+      "para": 0,
+      "start": 0,
+      "end": 4.972
+    },
+    {
+      "text": "Čas může být diskrétní nebo spojitý a množina stavů spočetná nebo nespočetná.",
+      "para": 0,
+      "start": 4.972,
+      "end": 11.255
+    },
+    {
+      "text": "**Markovský řetězec s diskrétním časem** je náhodný proces se spočetnou množinou stavů a diskrétním časem, který splňuje **markovskou podmínku**.",
+      "para": 0,
+      "start": 11.255,
+      "end": 21.254
+    },
+    {
+      "text": "Markovská podmínka říká, že pravděpodobnost příštího stavu závisí jen na stavu současném, nikoli na celé minulosti; proces tedy zapomíná historii.",
+      "para": 0,
+      "start": 21.254,
+      "end": 32.89
+    },
+    {
+      "text": "Vývoj řetězce popisuje matice pravděpodobností přechodu, jejíž prvek udává pravděpodobnost přechodu z jednoho stavu do druhého.",
+      "para": 1,
+      "start": 32.89,
+      "end": 42.215
+    },
+    {
+      "text": "Pro matice přechodu platí **Chapmanova-Kolmogorovova rovnice**, podle níž přechod mezi vzdálenými časy získáme součinem matic přechodu přes mezilehlý čas.",
+      "para": 1,
+      "start": 42.215,
+      "end": 53.84
+    },
+    {
+      "text": "Řetězec je **homogenní**, pokud pravděpodobnosti přechodu nezávisí na čase; pak existuje jediná jednokroková matice přechodu $\\mathbf P$ a matici přechodu za $n$ kroků získáme jako $\\mathbf P^n$.",
+      "para": 1,
+      "start": 53.84,
+      "end": 67.786
+    },
+    {
+      "text": "Matice přechodu je stochastická: její prvky jsou nezáporné a každý řádkový součet je roven jedné.",
+      "para": 1,
+      "start": 67.786,
+      "end": 75.73
+    },
+    {
+      "text": "Stavy řetězce klasifikujeme.",
+      "para": 2,
+      "start": 75.73,
+      "end": 78.031
+    },
+    {
+      "text": "Stav je **trvalý** neboli rekurentní, pokud se do něj řetězec s jistotou někdy vrátí; je **přechodný**, pokud je tato pravděpodobnost menší než jedna.",
+      "para": 2,
+      "start": 78.031,
+      "end": 88.39
+    },
+    {
+      "text": "Střední doba návratu je očekávaná doba prvního návratu do stavu.",
+      "para": 2,
+      "start": 88.39,
+      "end": 93.095
+    },
+    {
+      "text": "Trvalý stav je nenulový, je-li jeho střední doba návratu konečná, a nulový, je-li nekonečná.",
+      "para": 2,
+      "start": 93.095,
+      "end": 100.191
+    },
+    {
+      "text": "Perioda stavu je největší společný dělitel délek možných návratů; stav s periodou jedna nazýváme aperiodický.",
+      "para": 2,
+      "start": 100.191,
+      "end": 108.913
+    },
+    {
+      "text": "Pro aperiodický stav platí limitní věta: $\\lim_{n\\to\\infty} P_{ii}(n) = \\frac{1}{\\mu_i}$, pravděpodobnost setrvání po $n$ krocích konverguje k převrácené hodnotě střední doby návratu.",
+      "para": 3,
+      "start": 108.913,
+      "end": 119.712
+    },
+    {
+      "text": "Trvalý nenulový aperiodický stav nazýváme ergodický.",
+      "para": 3,
+      "start": 119.712,
+      "end": 123.988
+    },
+    {
+      "text": "Jeden stav je dosažitelný z druhého, pokud do něj lze dojít s nenulovou pravděpodobností.",
+      "para": 4,
+      "start": 123.988,
+      "end": 130.736
+    },
+    {
+      "text": "Vzájemně dosažitelné stavy tvoří třídy ekvivalence a všechny stavy v jedné třídě jsou stejného typu.",
+      "para": 4,
+      "start": 130.736,
+      "end": 138.006
+    },
+    {
+      "text": "Množina stavů je uzavřená, pokud z ní řetězec nemůže odejít; uzavřená množina o jediném stavu se nazývá pohlcující.",
+      "para": 4,
+      "start": 138.006,
+      "end": 147.123
+    },
+    {
+      "text": "Podle věty o jednoznačném rozkladu lze množinu stavů rozložit na přechodné stavy a na nerozložitelné uzavřené třídy stavů trvalých.",
+      "para": 4,
+      "start": 147.123,
+      "end": 157.667
+    },
+    {
+      "text": "**Stacionární rozdělení** je vektor $\\boldsymbol\\pi$, pro který platí $\\boldsymbol\\pi \\mathbf P = \\boldsymbol\\pi$; pokud z něj řetězec vyjde, zůstane v něm po celou dobu.",
+      "para": 5,
+      "start": 157.667,
+      "end": 168.177
+    },
+    {
+      "text": "Pro nerozložitelný řetězec platí věta o existenci: jsou-li všechny stavy přechodné nebo trvalé nulové, stacionární rozdělení neexistuje.",
+      "para": 5,
+      "start": 168.177,
+      "end": 178.106
+    },
+    {
+      "text": "Jsou-li všechny stavy trvalé nenulové, existuje jediné stacionární rozdělení, jehož složky jsou převrácené hodnoty středních dob návratu.",
+      "para": 5,
+      "start": 178.106,
+      "end": 188.662
+    },
+    {
+      "text": "Je-li řetězec navíc aperiodický, je toto stacionární rozdělení zároveň limitou rozdělení v čase pro libovolné počáteční rozdělení.",
+      "para": 5,
+      "start": 188.662,
+      "end": 198.742
+    },
+    {
+      "text": "Pro konečnou množinu stavů stacionární rozdělení vždy existuje.",
+      "para": 5,
+      "start": 198.742,
+      "end": 203.691
+    }
+  ]
+}
