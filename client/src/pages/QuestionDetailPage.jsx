@@ -6,6 +6,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { getProgressFor, getQuestion, getQuestions, patchProgress } from '../api.js';
 import { MAX_PRACTICED } from '../config/limits.js';
+import { subjectHue } from '../config/subjects.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
 
@@ -107,7 +108,7 @@ function AnswerMarkdown({ children }) {
 }
 
 export default function QuestionDetailPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [question, setQuestion] = useState(null);
   const [progress, setProgress] = useState(ZERO);
   const [questions, setQuestions] = useState([]);
@@ -119,31 +120,43 @@ export default function QuestionDetailPage() {
 
   useEffect(() => {
     setOverrides({});
-  }, [id]);
+  }, [slug]);
 
   useEffect(() => {
-    Promise.all([getQuestion(id), getProgressFor(id)])
-      .then(([q, p]) => {
+    let cancelled = false;
+    // The URL carries the slug; progress is keyed by the question's real id,
+    // so fetch the question first and then its progress.
+    getQuestion(slug)
+      .then((q) => {
+        if (cancelled) return null;
         setQuestion(q);
-        setProgress(p);
+        return getProgressFor(q.id);
       })
-      .catch((e) => setError(e.message));
-  }, [id]);
+      .then((p) => {
+        if (!cancelled && p) setProgress(p);
+      })
+      .catch((e) => {
+        if (!cancelled) setError(e.message);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
 
   useEffect(() => {
     getQuestions().then(setQuestions).catch(() => {});
   }, []);
 
-  const { prevId, nextId } = useMemo(() => {
-    if (questions.length === 0) return { prevId: null, nextId: null };
-    const idx = questions.findIndex((q) => q.id === id);
-    if (idx < 0) return { prevId: null, nextId: null };
+  const { prevSlug, nextSlug } = useMemo(() => {
+    if (questions.length === 0) return { prevSlug: null, nextSlug: null };
+    const idx = questions.findIndex((q) => q.slug === slug || q.id === slug);
+    if (idx < 0) return { prevSlug: null, nextSlug: null };
     const n = questions.length;
     return {
-      prevId: questions[(idx - 1 + n) % n].id,
-      nextId: questions[(idx + 1) % n].id,
+      prevSlug: questions[(idx - 1 + n) % n].slug,
+      nextSlug: questions[(idx + 1) % n].slug,
     };
-  }, [questions, id]);
+  }, [questions, slug]);
 
   useEffect(() => {
     if (question) document.title = `${question.subjectCode} ${question.subjectIndex}`;
@@ -170,7 +183,7 @@ export default function QuestionDetailPage() {
     setProgress(optimistic);
     setBusy(true);
     try {
-      const { progress: next } = await patchProgress(id, action);
+      const { progress: next } = await patchProgress(question.id, action);
       setProgress(next);
     } catch (e) {
       setProgress(prev);
@@ -208,15 +221,19 @@ export default function QuestionDetailPage() {
           «
         </Link>
         <div className="detail-meta">
-          <span className="pill">{question.group}</span>
-          <span className="pill">{question.id}</span>
-          <span className="pill">{question.subject}</span>
+          <span
+            className="subject-pill"
+            style={{ '--subject-hue': subjectHue(question.subjectCode) }}
+            title={question.subject}
+          >
+            {question.subjectCode} {question.subjectIndex}
+          </span>
           <StatusBadge progress={progress} />
         </div>
         <div className="detail-nav">
-          {prevId ? (
+          {prevSlug ? (
             <Link
-              to={`/questions/${prevId}`}
+              to={`/questions/${prevSlug}`}
               className="rotate-btn"
               aria-label="Previous question"
               title="Previous question"
@@ -226,9 +243,9 @@ export default function QuestionDetailPage() {
           ) : (
             <span className="rotate-btn rotate-spacer" aria-hidden />
           )}
-          {nextId ? (
+          {nextSlug ? (
             <Link
-              to={`/questions/${nextId}`}
+              to={`/questions/${nextSlug}`}
               className="rotate-btn"
               aria-label="Next question"
               title="Next question"
@@ -248,8 +265,16 @@ export default function QuestionDetailPage() {
 
       <div className="detail-actions">
         <div className="detail-actions-left">
-          <button onClick={() => setShowAnswer((v) => !v)}>
-            {showAnswer ? 'Hide answer' : 'Show answer'}
+          <button
+            className="answer-toggle"
+            onClick={() => setShowAnswer((v) => !v)}
+          >
+            <span className={`answer-toggle-face${showAnswer ? '' : ' is-on'}`}>
+              Show answer
+            </span>
+            <span className={`answer-toggle-face${showAnswer ? ' is-on' : ''}`}>
+              Hide answer
+            </span>
           </button>
           {showAnswer && sections.length > 0 && (
             <button className="ghost" onClick={() => setAllCollapsed(!collapseAll)}>

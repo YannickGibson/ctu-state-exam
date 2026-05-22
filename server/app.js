@@ -41,7 +41,8 @@ const handleListQuestions = (req, res) => {
 };
 
 const handleGetQuestion = (req, res) => {
-  const q = loadQuestions().find((x) => x.id === req.params.id);
+  const key = req.params.id;
+  const q = loadQuestions().find((x) => x.id === key || x.slug === key);
   if (!q) return res.status(404).json({ error: 'question not found' });
   let answer = null;
   try {

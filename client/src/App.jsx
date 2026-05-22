@@ -97,7 +97,7 @@ export default function App() {
             }
           />
           <Route
-            path="/questions/:id"
+            path="/questions/:slug"
             element={
               <RequireAuth>
                 <QuestionDetailPage />

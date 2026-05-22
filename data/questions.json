@@ -6,6 +6,7 @@
     "subject": "NI-MPI",
     "subjectCode": "MPI",
     "subjectIndex": 1,
+    "slug": "MPI-1",
     "text": "Teorie grup: Grupoidy, pologrupy, monoidy a grupy. Podgrupy, cyklické grupy a jejich generátory."
   },
   {
@@ -15,6 +16,7 @@
     "subject": "NI-MPI",
     "subjectCode": "MPI",
     "subjectIndex": 2,
+    "slug": "MPI-2",
     "text": "Tělesa a okruhy: Základní definice a vlastnosti. Konečná tělesa. Okruhy polynomů, ireducibilní polynom."
   },
   {
@@ -24,6 +26,7 @@
     "subject": "NI-MPI",
     "subjectCode": "MPI",
     "subjectIndex": 3,
+    "slug": "MPI-3",
     "text": "Funkce více proměnných: gradient, Hessián, definitnost matic, extrémy funkcí více proměnných bez omezení a s rovnostními omezeními."
   },
   {
@@ -33,6 +36,7 @@
     "subject": "NI-MPI",
     "subjectCode": "MPI",
     "subjectIndex": 4,
+    "slug": "MPI-4",
     "text": "Integrál funkcí více proměnných (Darbouxova konstrukce)."
   },
   {
@@ -42,6 +46,7 @@
     "subject": "NI-MPI",
     "subjectCode": "MPI",
     "subjectIndex": 5,
+    "slug": "MPI-5",
     "text": "Numerická matematika: reprezentace čísel v počítači, chyby vznikající při výpočtech s pohyblivou řádovou čárkou, podmíněnost úlohy a stabilita numerických algoritmů."
   },
   {
@@ -51,6 +56,7 @@
     "subject": "NI-VSM",
     "subjectCode": "VSM",
     "subjectIndex": 1,
+    "slug": "VSM-1",
     "text": "Testování statistických hypotéz. T-testy, testy nezávislosti, testy dobré shody."
   },
   {
@@ -60,6 +66,7 @@
     "subject": "NI-VSM",
     "subjectCode": "VSM",
     "subjectIndex": 2,
+    "slug": "VSM-2",
     "text": "Základy teorie informace a kódování, entropie."
   },
   {
@@ -69,6 +76,7 @@
     "subject": "NI-VSM",
     "subjectCode": "VSM",
     "subjectIndex": 3,
+    "slug": "VSM-3",
     "text": "Markovské řetězce s diskrétním časem. Jejich limitní vlastnosti."
   },
   {
@@ -78,6 +86,7 @@
     "subject": "NI-VSM",
     "subjectCode": "VSM",
     "subjectIndex": 4,
+    "slug": "VSM-4",
     "text": "Markovské řetězce se spojitým časem. Souvislost s Markovskými řetezci s diskrétním časem a s Poissonovým procesem."
   },
   {
@@ -87,6 +96,7 @@
     "subject": "NI-VSM",
     "subjectCode": "VSM",
     "subjectIndex": 5,
+    "slug": "VSM-5",
     "text": "Systémy hromadné obsluhy a jejich limitní vlastnosti. Souvislost s Markovskými řetězci se spojitým časem."
   },
   {
@@ -96,6 +106,7 @@
     "subject": "NI-KOP",
     "subjectCode": "KOP",
     "subjectIndex": 1,
+    "slug": "KOP-1",
     "text": "Význam tříd NP a NPH pro praktické výpočty."
   },
   {
@@ -105,6 +116,7 @@
     "subject": "NI-KOP",
     "subjectCode": "KOP",
     "subjectIndex": 2,
+    "slug": "KOP-2",
     "text": "Experimentální vyhodnocení algoritmů, zejména randomizovaných."
   },
   {
@@ -114,6 +126,7 @@
     "subject": "NI-KOP",
     "subjectCode": "KOP",
     "subjectIndex": 3,
+    "slug": "KOP-3",
     "text": "Princip lokálních heuristik, pojem globálního a lokálního minima, obrana před uváznutím v lokálním minimu."
   },
   {
@@ -123,6 +136,7 @@
     "subject": "NI-KOP",
     "subjectCode": "KOP",
     "subjectIndex": 4,
+    "slug": "KOP-4",
     "text": "Princip genetických algoritmů, význam selekčního tlaku pro jejich funkci."
   },
   {
@@ -132,6 +146,7 @@
     "subject": "NI-KOP",
     "subjectCode": "KOP",
     "subjectIndex": 5,
+    "slug": "KOP-5",
     "text": "Princip simulovaného ochlazování, význam parametrů a způsoby jejich řízení."
   },
   {
@@ -141,6 +156,7 @@
     "subject": "NI-PDP",
     "subjectCode": "PDP",
     "subjectIndex": 1,
+    "slug": "PDP-1",
     "text": "Výkonnostní měřítka paralelních algoritmů, PRAM model, APRAM model, škálovatelnost."
   },
   {
@@ -150,6 +166,7 @@
     "subject": "NI-PDP",
     "subjectCode": "PDP",
     "subjectIndex": 2,
+    "slug": "PDP-2",
     "text": "Programování nad sdílenou pamětí, programový model OpenMP, datový a funkční paralelismus, synchronizace vláken, vícevláknové algoritmy (násobení polynomů, násobení matic a vektorů, řazení)."
   },
   {
@@ -159,6 +176,7 @@
     "subject": "NI-PDP",
     "subjectCode": "PDP",
     "subjectIndex": 3,
+    "slug": "PDP-3",
     "text": "Programování nad distribuovanou pamětí, programový model MPI (vícevláknové procesy, komunikátory, 2-bodové blokující a neblokující komunikační operace, kolektivní operace), paralelní násobení hustých matic, paralelní mocninná metoda."
   },
   {
@@ -168,6 +186,7 @@
     "subject": "NI-PDP",
     "subjectCode": "PDP",
     "subjectIndex": 4,
+    "slug": "PDP-4",
     "text": "Přímé ortogonální a hyperkubické propojovací sítě paralelních počítačů (definice, vlastnosti, vnořování)."
   },
   {
@@ -177,6 +196,7 @@
     "subject": "NI-PDP",
     "subjectCode": "PDP",
     "subjectIndex": 5,
+    "slug": "PDP-5",
     "text": "Paralelní algoritmy pro redukci, prefixový součet a segmentový prefixový součet na PRAM, v ortogonálních, hyperkubických a obecných topologiích, aplikace."
   },
   {
@@ -186,6 +206,7 @@
     "subject": "NI-UMI",
     "subjectCode": "UMI",
     "subjectIndex": 1,
+    "slug": "UMI-1",
     "text": "Automatické plánování, plánovací graf, kompilace plánování do jiných formalismů."
   },
   {
@@ -195,6 +216,7 @@
     "subject": "NI-UMI",
     "subjectCode": "UMI",
     "subjectIndex": 2,
+    "slug": "UMI-2",
     "text": "Splňování omezení s konečnými doménami (CSP), pokročilé prohledávání."
   },
   {
@@ -204,6 +226,7 @@
     "subject": "NI-UMI",
     "subjectCode": "UMI",
     "subjectIndex": 3,
+    "slug": "UMI-3",
     "text": "Systematické a lokální splňování v logice (DPLL, CDCL, WalkSAT)."
   },
   {
@@ -213,6 +236,7 @@
     "subject": "NI-PDD",
     "subjectCode": "PDD",
     "subjectIndex": 1,
+    "slug": "PDD-1",
     "text": "Metody hodnocení a výběru příznaků: univariátní/multivariátní a filtrační přístupy."
   },
   {
@@ -222,6 +246,7 @@
     "subject": "NI-PDD",
     "subjectCode": "PDD",
     "subjectIndex": 2,
+    "slug": "PDD-2",
     "text": "Algoritmy pro řešení chybějících hodnot, detekci odlehlých hodnot a vyvažování dat."
   },
   {
@@ -231,6 +256,7 @@
     "subject": "NI-PDD",
     "subjectCode": "PDD",
     "subjectIndex": 3,
+    "slug": "PDD-3",
     "text": "Lineární projekce dat: PCA, LDA a nelineární redukce dimenze."
   },
   {
@@ -240,6 +266,7 @@
     "subject": "NI-MVI",
     "subjectCode": "MVI",
     "subjectIndex": 1,
+    "slug": "MVI-1",
     "text": "Učení dopředných neuronových sítí, konvoluční neuronové sítě."
   },
   {
@@ -249,6 +276,7 @@
     "subject": "NI-MVI",
     "subjectCode": "MVI",
     "subjectIndex": 2,
+    "slug": "MVI-2",
     "text": "Autoenkodéry a generativní neuronové sítě."
   },
   {
@@ -258,6 +286,7 @@
     "subject": "NI-MVI",
     "subjectCode": "MVI",
     "subjectIndex": 3,
+    "slug": "MVI-3",
     "text": "Rekurentní neuronové sítě a neuroevoluce."
   },
   {
@@ -267,6 +296,7 @@
     "subject": "NI-MVI",
     "subjectCode": "MVI",
     "subjectIndex": 4,
+    "slug": "MVI-4",
     "text": "Transformery, mechanismy pozornosti, transfer a meta learning."
   },
   {
@@ -276,6 +306,7 @@
     "subject": "NI-ADM",
     "subjectCode": "ADM",
     "subjectIndex": 1,
+    "slug": "ADM-1",
     "text": "Ansámblové metody (Bagging, Boosting) a bias-variance rozklad."
   },
   {
@@ -285,6 +316,7 @@
     "subject": "NI-ADM",
     "subjectCode": "ADM",
     "subjectIndex": 2,
+    "slug": "ADM-2",
     "text": "Jádrové metody, jádrová regrese a Support Vector Machines."
   },
   {
@@ -294,6 +326,7 @@
     "subject": "NI-ADM",
     "subjectCode": "ADM",
     "subjectIndex": 3,
+    "slug": "ADM-3",
     "text": "Doporučovací algoritmy a faktorizační metody."
   },
   {
@@ -303,6 +336,7 @@
     "subject": "NI-BML",
     "subjectCode": "BML",
     "subjectIndex": 1,
+    "slug": "BML-1",
     "text": "Principy bayesovského modelování: apriorní/aposteriorní rozdělení a konjugovaná rozdělení."
   },
   {
@@ -312,6 +346,7 @@
     "subject": "NI-BML",
     "subjectCode": "BML",
     "subjectIndex": 2,
+    "slug": "BML-2",
     "text": "Stavové modely, sekvenční bayesovský odhad a nelineární odhad stavu."
   },
   {
@@ -321,6 +356,7 @@
     "subject": "NI-BML",
     "subjectCode": "BML",
     "subjectIndex": 3,
+    "slug": "BML-3",
     "text": "Rejection a importance sampling a metody vážení."
   },
   {
@@ -330,6 +366,7 @@
     "subject": "NI-PON",
     "subjectCode": "PON",
     "subjectIndex": 1,
+    "slug": "PON-1",
     "text": "QR rozklad: metody výpočtu a aplikace pro vlastní čísla."
   },
   {
@@ -339,6 +376,7 @@
     "subject": "NI-PON",
     "subjectCode": "PON",
     "subjectIndex": 2,
+    "slug": "PON-2",
     "text": "SVD rozklad matice, výpočet a aplikace ve strojovém učení."
   },
   {
@@ -348,6 +386,7 @@
     "subject": "NI-PON",
     "subjectCode": "PON",
     "subjectIndex": 3,
+    "slug": "PON-3",
     "text": "Hladká optimalizace bez omezení, gradientní metody a volba kroku."
   },
   {
@@ -357,6 +396,7 @@
     "subject": "NI-SCR",
     "subjectCode": "SCR",
     "subjectIndex": 1,
+    "slug": "SCR-1",
     "text": "Dekompozice časových řad, typy stacionarity, náhodná procházka a bílý šum."
   },
   {
@@ -366,6 +406,7 @@
     "subject": "NI-SCR",
     "subjectCode": "SCR",
     "subjectIndex": 2,
+    "slug": "SCR-2",
     "text": "Autoregresní a klouzavé průměrové modely s metodami identifikace."
   },
   {
@@ -375,6 +416,7 @@
     "subject": "NI-SCR",
     "subjectCode": "SCR",
     "subjectIndex": 3,
+    "slug": "SCR-3",
     "text": "ARIMA modely: integrace, diferencování a reprezentace parametrů."
   }
 ]

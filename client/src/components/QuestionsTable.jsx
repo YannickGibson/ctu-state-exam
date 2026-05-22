@@ -24,7 +24,7 @@ export default function QuestionsTable({ questions, onAction }) {
           <tr
             key={q.id}
             className="q-row"
-            onClick={() => navigate(`/questions/${q.id}`)}
+            onClick={() => navigate(`/questions/${q.slug}`)}
           >
             <td className="col-status">
               <StatusBadge progress={q.progress} />

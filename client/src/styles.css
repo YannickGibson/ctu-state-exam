@@ -317,14 +317,6 @@ table.questions {
 /* ---- question detail ---- */
 .detail { max-width: 760px; margin: 0 auto; }
 .detail-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
-.pill {
-  background: var(--surface-2);
-  border-radius: 6px;
-  padding: 3px 9px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-strong);
-}
 .detail-question { font-size: 20px; line-height: 1.4; }
 .detail-label {
   display: block;
@@ -343,6 +335,15 @@ table.questions {
 }
 .detail-actions-left,
 .detail-actions-right { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Toggle button keeps a fixed width: both labels are stacked in one grid
+   cell, so the cell always sizes to the wider of the two. */
+.answer-toggle { display: inline-grid; }
+.answer-toggle-face {
+  grid-area: 1 / 1;
+  visibility: hidden;
+}
+.answer-toggle-face.is-on { visibility: visible; }
 
 .answer-section { margin-top: 18px; }
 .answer-section:first-of-type { margin-top: 10px; }
@@ -958,25 +959,6 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
 
   /* Detail page */
   .detail-question { font-size: 17px; }
-  .detail-actions {
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: stretch;
-  }
-  .detail-actions-left,
-  .detail-actions-right {
-    flex: 1 1 100%;
-    gap: 6px;
-    flex-wrap: nowrap;
-  }
-  .detail-actions button {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 7px 6px;
-    font-size: 13px;
-    line-height: 1.15;
-    white-space: normal;
-  }
   .answer-section-toggle { font-size: 15px; }
   .answer { padding: 4px 12px 14px; }
 

@@ -31,13 +31,17 @@ function buildQuestions(raw) {
     const number = parseInt(q.id.split('-').pop(), 10);
     const subjectCode = q.subject.replace(/^NI-/, '');
     subjectCounts[q.subject] = (subjectCounts[q.subject] || 0) + 1;
+    const subjectIndex = subjectCounts[q.subject];
     return {
       id: q.id,
       group: q.group,
       number,
       subject: q.subject,
       subjectCode,
-      subjectIndex: subjectCounts[q.subject],
+      subjectIndex,
+      // URL-facing identifier: subject code + per-subject order (e.g. SCR-3).
+      // Unique, and easier for users to place than the group-based id.
+      slug: `${subjectCode}-${subjectIndex}`,
       text: q.text,
     };
   });
