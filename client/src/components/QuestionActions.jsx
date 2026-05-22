@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, Eye, RotateCcw } from 'lucide-react';
+import { MAX_PRACTICED } from '../config/limits.js';
 
 function practicedTier(count) {
-  if (count >= 4) return 'p3';
+  if (count >= 3) return 'p3';
   if (count >= 2) return 'p2';
   return 'p1';
 }
@@ -35,6 +36,7 @@ export default function QuestionActions({ progress, onAction, compact = false, d
 
   const tierClass = practicedCount > 0 ? ` ${practicedTier(practicedCount)}` : '';
   const compactClass = compact ? ' compact' : '';
+  const atCap = practicedCount >= MAX_PRACTICED;
 
   return (
     <div className={`q-actions${compactClass}`}>
@@ -42,10 +44,22 @@ export default function QuestionActions({ progress, onAction, compact = false, d
         type="button"
         className={`q-action-btn check${tierClass}${practicedCount > 0 ? ' count' : ''}`}
         onClick={(e) => fire(e, 'practice')}
-        disabled={disabled}
+        disabled={disabled || atCap}
         data-just-changed={pulse ? 'true' : 'false'}
-        title={practicedCount > 0 ? `Practiced ${practicedCount}× — click to add one` : 'Mark practiced'}
-        aria-label={practicedCount > 0 ? `Practiced ${practicedCount} times, click to add one` : 'Mark practiced'}
+        title={
+          atCap
+            ? `Practiced ${practicedCount}/${MAX_PRACTICED} — max reached`
+            : practicedCount > 0
+              ? `Practiced ${practicedCount}× — click to add one`
+              : 'Mark practiced'
+        }
+        aria-label={
+          atCap
+            ? `Practiced ${practicedCount} of ${MAX_PRACTICED}, maximum reached`
+            : practicedCount > 0
+              ? `Practiced ${practicedCount} times, click to add one`
+              : 'Mark practiced'
+        }
       >
         {practicedCount > 0 ? (
           <span className="q-action-count">{practicedCount}</span>

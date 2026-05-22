@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { getProgressFor, getQuestion, getQuestions, patchProgress } from '../api.js';
+import { MAX_PRACTICED } from '../config/limits.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
 
@@ -152,7 +153,10 @@ export default function QuestionDetailPage() {
     const prev = progress;
     let optimistic;
     if (action === 'practice') {
-      optimistic = { readPassively: false, practicedCount: prev.practicedCount + 1 };
+      optimistic = {
+        readPassively: false,
+        practicedCount: Math.min(prev.practicedCount + 1, MAX_PRACTICED),
+      };
     } else if (action === 'readPassively') {
       optimistic = {
         readPassively: prev.practicedCount === 0,
@@ -195,36 +199,46 @@ export default function QuestionDetailPage() {
   return (
     <article className="detail">
       <div className="detail-meta-row">
-        {prevId ? (
-          <Link
-            to={`/questions/${prevId}`}
-            className="rotate-btn"
-            aria-label="Previous question"
-            title="Previous question"
-          >
-            ‹
-          </Link>
-        ) : (
-          <span className="rotate-btn rotate-spacer" aria-hidden />
-        )}
+        <Link
+          to="/questions"
+          className="rotate-btn"
+          aria-label="Back to questions"
+          title="Back to questions"
+        >
+          «
+        </Link>
         <div className="detail-meta">
           <span className="pill">{question.group}</span>
           <span className="pill">{question.id}</span>
           <span className="pill">{question.subject}</span>
           <StatusBadge progress={progress} />
         </div>
-        {nextId ? (
-          <Link
-            to={`/questions/${nextId}`}
-            className="rotate-btn"
-            aria-label="Next question"
-            title="Next question"
-          >
-            ›
-          </Link>
-        ) : (
-          <span className="rotate-btn rotate-spacer" aria-hidden />
-        )}
+        <div className="detail-nav">
+          {prevId ? (
+            <Link
+              to={`/questions/${prevId}`}
+              className="rotate-btn"
+              aria-label="Previous question"
+              title="Previous question"
+            >
+              ‹
+            </Link>
+          ) : (
+            <span className="rotate-btn rotate-spacer" aria-hidden />
+          )}
+          {nextId ? (
+            <Link
+              to={`/questions/${nextId}`}
+              className="rotate-btn"
+              aria-label="Next question"
+              title="Next question"
+            >
+              ›
+            </Link>
+          ) : (
+            <span className="rotate-btn rotate-spacer" aria-hidden />
+          )}
+        </div>
       </div>
 
       <h1 className="detail-question">

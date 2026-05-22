@@ -100,7 +100,7 @@ function fitBasicAuth() {
   ).toString('base64');
 }
 
-function supabaseAdmin() {
+function defaultSupabaseAdmin() {
   // Lazy: only construct when route is hit, so missing env vars don't crash boot.
   // `realtime.transport: ws` — Node 20 has no native WebSocket; Supabase's
   // RealtimeClient is initialised eagerly by createClient and needs one.
@@ -113,6 +113,16 @@ function supabaseAdmin() {
     }
   );
 }
+
+// Swappable so tests can inject a fake admin client (vi.mock cannot intercept
+// the require() of @supabase/supabase-js from this CommonJS module).
+let supabaseAdminFactory = defaultSupabaseAdmin;
+function supabaseAdmin() {
+  return supabaseAdminFactory();
+}
+app.setSupabaseAdminFactory = (fn) => {
+  supabaseAdminFactory = fn;
+};
 
 function completeRedirect(res, params) {
   const qs = new URLSearchParams(params).toString();

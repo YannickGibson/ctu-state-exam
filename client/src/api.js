@@ -67,16 +67,25 @@ export async function getProgressFor(questionId) {
   return rowToProgress(data);
 }
 
-// Mirrors the rules from the old server (progressFor invariant):
-//  - practicedCount is an integer >= 0
+// Progress mutation rules:
+//  - practicedCount is an integer in [0, cap] (cap enforced by the RPC)
 //  - readPassively can only be true while practicedCount === 0
+//  - "practice" goes through the bump_practiced RPC for an atomic, capped
+//    increment (no read-modify-write race); "readPassively" and "reset" are
+//    plain absolute writes.
 export async function patchProgress(id, action) {
+  if (action === 'practice') {
+    const { data, error } = await supabase.rpc('bump_practiced', {
+      p_question_ids: [id],
+    });
+    if (error) throw error;
+    return { id, progress: rowToProgress((data || [])[0]) };
+  }
+
   const userId = await currentUserId();
   const current = await getProgressFor(id);
   let next;
-  if (action === 'practice') {
-    next = { readPassively: false, practicedCount: current.practicedCount + 1 };
-  } else if (action === 'readPassively') {
+  if (action === 'readPassively') {
     next = {
       readPassively: current.practicedCount === 0,
       practicedCount: current.practicedCount,
@@ -135,10 +144,10 @@ export async function getLeaderboard() {
     .sort((a, b) => b.score - a.score || a.username.localeCompare(b.username));
 }
 
-// Finishing a quiz: increment practiced_count for the specified question ids.
-// If no ids are passed, falls back to every question of the subject.
+// Finishing a quiz: bump practiced_count for the specified question ids via
+// the atomic, capped bump_practiced RPC. If no ids are passed, falls back to
+// every question of the subject.
 export async function completeQuiz(subject, questionIds) {
-  const userId = await currentUserId();
   let ids = questionIds;
   if (!Array.isArray(ids) || ids.length === 0) {
     const questions = await getQuestions();
@@ -146,25 +155,7 @@ export async function completeQuiz(subject, questionIds) {
   }
   if (ids.length === 0) throw new Error('no questions to mark');
 
-  const { data: existing, error: selErr } = await supabase
-    .from('question_progress')
-    .select('question_id, practiced_count')
-    .eq('user_id', userId)
-    .in('question_id', ids);
-  if (selErr) throw selErr;
-  const byId = new Map((existing || []).map((r) => [r.question_id, r.practiced_count]));
-
-  const now = new Date().toISOString();
-  const rows = ids.map((qid) => ({
-    user_id: userId,
-    question_id: qid,
-    practiced_count: (byId.get(qid) || 0) + 1,
-    read_passively: false,
-    updated_at: now,
-  }));
-  const { error } = await supabase
-    .from('question_progress')
-    .upsert(rows, { onConflict: 'user_id,question_id' });
+  const { error } = await supabase.rpc('bump_practiced', { p_question_ids: ids });
   if (error) throw error;
   return { subject, updated: ids };
 }

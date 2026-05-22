@@ -4,6 +4,13 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { completeQuiz, getQuiz } from '../api.js';
+import {
+  asParts,
+  partIsAnswered,
+  partIsCorrect,
+  partKey,
+  textIsCorrect,
+} from '../quizGrading.js';
 
 function Markdown({ children }) {
   return (
@@ -11,58 +18,6 @@ function Markdown({ children }) {
       {children}
     </ReactMarkdown>
   );
-}
-
-function normalize(value) {
-  return String(value ?? '')
-    .normalize('NFKC')
-    .toLowerCase()
-    .replace(/\s+/g, '');
-}
-
-function normalizeList(value) {
-  return normalize(value)
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .sort()
-    .join(',');
-}
-
-function textIsCorrect(part, input) {
-  if (part.compare === 'list') {
-    return normalizeList(input) === normalizeList(part.correctAnswer);
-  }
-  return normalize(input) === normalize(part.correctAnswer);
-}
-
-// Normalize old single-shape questions into the same multipart form.
-function asParts(q) {
-  if (Array.isArray(q.parts)) return q.parts;
-  return [
-    {
-      label: '',
-      prompt: '',
-      kind: 'choice',
-      choices: q.choices || [],
-      correctIndex: q.correctIndex,
-      explanation: q.explanation,
-    },
-  ];
-}
-
-function partKey(qi, pi) {
-  return `${qi}:${pi}`;
-}
-
-function partIsAnswered(part, value) {
-  if (part.kind === 'text') return typeof value === 'string' && value.trim().length > 0;
-  return Number.isInteger(value);
-}
-
-function partIsCorrect(part, value) {
-  if (part.kind === 'text') return textIsCorrect(part, value);
-  return value === part.correctIndex;
 }
 
 export default function QuizRunnerPage() {

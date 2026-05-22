@@ -66,6 +66,35 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+-- bump_practiced: atomically increment practiced_count for one or more
+-- questions, capped at 3. Replaces the old client-side read-modify-write,
+-- which lost updates when two calls raced. Used by the "practice" action and
+-- by quiz completion. Runs as the caller, so RLS still applies.
+-- NOTE: the cap (3) must match MAX_PRACTICED in client/src/config/limits.js.
+create or replace function public.bump_practiced(p_question_ids text[])
+returns setof public.question_progress
+language sql
+as $$
+  insert into public.question_progress (user_id, question_id, practiced_count, read_passively, updated_at)
+  select auth.uid(), qid, 1, false, now()
+  from (select distinct unnest(p_question_ids) as qid) s
+  on conflict (user_id, question_id) do update
+    set practiced_count = least(question_progress.practiced_count + 1, 3),
+        read_passively  = false,
+        updated_at      = now()
+  returning *;
+$$;
+
+revoke all on function public.bump_practiced(text[]) from anon;
+grant execute on function public.bump_practiced(text[]) to authenticated;
+
+-- Clamp any rows that exceeded the cap before it was introduced.
+update public.question_progress set practiced_count = 3 where practiced_count > 3;
+
+-- Force PostgREST to refresh its schema cache so the RPC is callable right
+-- away (otherwise the app sees "Could not find the function ...").
+notify pgrst, 'reload schema';
 ```
 
 ## 4. Row-level security

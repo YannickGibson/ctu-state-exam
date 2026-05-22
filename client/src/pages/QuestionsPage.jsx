@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProgress, getQuestions, patchProgress } from '../api.js';
+import { MAX_PRACTICED } from '../config/limits.js';
+import { subjectHue } from '../config/subjects.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import ProgressDonut from '../components/ProgressDonut.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
@@ -69,7 +71,10 @@ export default function QuestionsPage() {
     const prev = progress[id] || ZERO;
     let optimistic;
     if (action === 'practice') {
-      optimistic = { readPassively: false, practicedCount: prev.practicedCount + 1 };
+      optimistic = {
+        readPassively: false,
+        practicedCount: Math.min(prev.practicedCount + 1, MAX_PRACTICED),
+      };
     } else if (action === 'readPassively') {
       optimistic = {
         readPassively: prev.practicedCount === 0,
@@ -140,7 +145,13 @@ export default function QuestionsPage() {
                 <StatusBadge progress={q.progress} />
               </td>
               <td className="col-num">
-                {q.subject} {q.subjectIndex}
+                <span
+                  className="subject-pill"
+                  style={{ '--subject-hue': subjectHue(q.subjectCode) }}
+                  title={q.subject}
+                >
+                  {q.subjectCode} {q.subjectIndex}
+                </span>
               </td>
               <td className="col-subject">
                 {q.group} {q.number}
