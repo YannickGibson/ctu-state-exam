@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.jsx';
 import GitHubMark from '../components/GitHubMark.jsx';
@@ -17,6 +17,10 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
 
+  useEffect(() => {
+    document.title = 'Practice and Organization';
+  }, []);
+
   async function submit(e) {
     e.preventDefault();
     setError(null);
@@ -33,7 +37,15 @@ export default function LoginPage() {
 
   return (
     <>
-      <h2 className="auth-tagline">State Exam Practice and Organization</h2>
+      <img
+        className="auth-logo"
+        src="/icon-512.png"
+        alt=""
+        width="64"
+        height="64"
+      />
+      <h2 className="auth-tagline">Practice and Organization</h2>
+      <p className="auth-subtitle">For the CTU State Exam</p>
       <div className="auth-card">
         <h1>Log in</h1>
         <a className="auth-sso" href="/api/auth/fit/start">
@@ -81,7 +93,7 @@ export default function LoginPage() {
         rel="noopener noreferrer"
       >
         <GitHubMark size={18} />
-        <span>Open source on GitHub</span>
+        <span>View on GitHub</span>
       </a>
     </>
   );

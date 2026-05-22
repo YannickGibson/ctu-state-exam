@@ -26,27 +26,17 @@ function Header() {
     <header className="app-header">
       <div className="app-brand">
         <img className="app-logo" src="/icon-512.png" alt="" width="28" height="28" />
-        <span className="app-title">State Exams</span>
+        <span className="app-title">Practice and Organization</span>
       </div>
-      <nav>
-        <NavLink to="/questions" end>Questions</NavLink>
-        <NavLink to="/quizzes" end>Quizzes</NavLink>
-        {profile?.show_leaderboard && (
-          <NavLink to="/leaderboard">Leaderboard</NavLink>
-        )}
-        {session && (
-          <a
-            className="header-oss"
-            href="https://github.com/YannickGibson/ctu-state-exam"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Open source on GitHub"
-            aria-label="Open source on GitHub"
-          >
-            <GitHubMark size={18} />
-          </a>
-        )}
-      </nav>
+      {session && (
+        <nav>
+          <NavLink to="/questions" end>Questions</NavLink>
+          <NavLink to="/quizzes" end>Quizzes</NavLink>
+          {profile?.show_leaderboard && (
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
+          )}
+        </nav>
+      )}
       <div className="header-spacer" />
       {session && (
         <div className="header-user">

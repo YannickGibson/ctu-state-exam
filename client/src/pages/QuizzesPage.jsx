@@ -8,7 +8,7 @@ export default function QuizzesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Quizzes · SZZ Study';
+    document.title = 'Quizzes';
     getQuizzes()
       .then(setQuizzes)
       .catch((e) => setError(e.message))

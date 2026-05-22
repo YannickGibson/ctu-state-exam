@@ -10,7 +10,7 @@ export default function LeaderboardPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    document.title = 'Leaderboard · SZZ Study';
+    document.title = 'Leaderboard';
     Promise.all([getLeaderboard(), getQuestions()])
       .then(([lb, qs]) => {
         setEntries(lb);

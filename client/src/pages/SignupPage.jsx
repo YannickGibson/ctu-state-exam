@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.jsx';
 import { validatePassword, validateUsername } from '../auth/validators.js';
@@ -15,6 +15,10 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Practice and Organization';
+  }, []);
 
   async function submit(e) {
     e.preventDefault();
@@ -54,7 +58,15 @@ export default function SignupPage() {
 
   return (
     <>
-      <h2 className="auth-tagline">State Exam Practice and Organization</h2>
+      <img
+        className="auth-logo"
+        src="/icon-512.png"
+        alt=""
+        width="64"
+        height="64"
+      />
+      <h2 className="auth-tagline">Practice and Organization</h2>
+      <p className="auth-subtitle">For the CTU State Exam</p>
       <div className="auth-card">
         <h1>Create account</h1>
         <a className="auth-sso" href="/api/auth/fit/start">
@@ -106,7 +118,7 @@ export default function SignupPage() {
         rel="noopener noreferrer"
       >
         <GitHubMark size={18} />
-        <span>Open source on GitHub</span>
+        <span>View on GitHub</span>
       </a>
     </>
   );

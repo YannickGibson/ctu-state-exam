@@ -14,7 +14,7 @@ export default function QuestionsPage() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    document.title = 'Questions · State Exams';
+    document.title = 'Questions';
     getQuestions()
       .then(setQuestions)
       .catch((e) => setError(e.message))
