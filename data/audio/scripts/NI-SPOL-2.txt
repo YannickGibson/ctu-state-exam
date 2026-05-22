@@ -1,0 +1,63 @@
+# Otázka SPOL-2 — Tělesa a okruhy
+# One sentence per line. A line is the SPOKEN text; an optional following
+# line starting with ">" is the DISPLAYED text (LaTeX allowed). See AUDIOBOOKS.md.
+
+Otázka číslo dvě ze společné části.
+> Otázka číslo 2 ze společné části.
+Tělesa a okruhy.
+
+# Okruh
+Okruh.
+Okruh je neprázdná množina, em, se dvěma binárními operacemi, sčítáním a násobením.
+> Okruh je neprázdná množina $M$ se dvěma binárními operacemi, sčítáním a násobením.
+Musí platit tři podmínky: množina, em, se sčítáním tvoří abelovskou grupu, množina, em, s násobením tvoří monoid, a platí distributivní zákon, který obě operace propojuje.
+> Musí platit tři podmínky: množina $M$ se sčítáním tvoří abelovskou grupu, množina $M$ s násobením tvoří monoid, a platí distributivní zákon, který obě operace propojuje.
+Neutrálnímu prvku sčítání říkáme nula, neutrálnímu prvku násobení jednička.
+Je-li navíc násobení komutativní, jde o komutativní okruh.
+Příkladem okruhu jsou celá čísla nebo zbytkové třídy modulo, en.
+> Příkladem okruhu jsou celá čísla nebo zbytkové třídy modulo $n$.
+
+# Obor integrity
+Obor integrity.
+Dva nenulové prvky nazýváme dělitelé nuly, pokud je jejich součin roven nule.
+Obor integrity je komutativní okruh, ve kterém žádní dělitelé nuly nejsou, takže součin dvou nenulových prvků je vždy nenulový.
+
+# Těleso
+Těleso.
+Těleso je okruh, ve kterém množina, em, bez nuly tvoří vůči násobení abelovskou grupu.
+> Těleso je okruh, ve kterém množina $M$ bez nuly tvoří vůči násobení abelovskou grupu.
+To znamená, že ke každému nenulovému prvku existuje inverzní prvek, a proto v tělese umíme dělit, neboť dělení je násobení inverzním prvkem.
+Nulu musíme vyjmout, protože násobení nulou dává vždy nulu a inverzní prvek k nule neexistuje.
+Racionální čísla těleso tvoří, celá čísla nikoli.
+Každé těleso je zároveň oborem integrity.
+
+# Okruhy polynomů
+Okruhy polynomů.
+Polynom nad okruhem, er, je formální výraz, součet koeficientů násobených mocninami proměnné, iks.
+> Polynom nad okruhem $R$ je formální výraz $P(x) = \sum_i a_i x^i$, tedy součet koeficientů násobených mocninami proměnné $x$.
+Koeficienty pocházejí z okruhu, er.
+> Koeficienty pocházejí z okruhu $R$.
+Nejvyšší mocnina s nenulovým koeficientem je stupeň polynomu.
+Množina všech polynomů nad okruhem, er, sama opět tvoří okruh, který značíme, er, s hranatou závorkou, iks.
+> Množina všech polynomů nad okruhem $R$ sama opět tvoří okruh, který značíme $R[x]$.
+Nad tělesem navíc platí dělení polynomů se zbytkem, podobně jako u celých čísel.
+
+# Ireducibilní polynom
+Ireducibilní polynom.
+Polynom je ireducibilní nad okruhem, ká, jestliže ho nelze rozložit na součin dvou polynomů nižšího stupně.
+> Polynom je ireducibilní nad okruhem $K$, jestliže ho nelze rozložit na součin dvou polynomů nižšího stupně.
+Ireducibilní polynomy jsou obdobou prvočísel: jsou to základní stavební kameny, které už dál rozložit nelze.
+
+# Konečná tělesa
+Konečná tělesa.
+Konečné těleso je těleso s konečným počtem prvků; tomuto počtu říkáme řád tělesa.
+Zbytkové třídy modulo prvočíslo, pé, tvoří konečné těleso s, pé, prvky.
+> Zbytkové třídy modulo prvočíslo $p$ tvoří konečné těleso s $p$ prvky.
+Tělesa s více prvky se konstruují pomocí ireducibilního polynomu stupně, en, nad menším tělesem; tak vznikne těleso s, pé na entou, prvky.
+> Tělesa s více prvky se konstruují pomocí ireducibilního polynomu stupně $n$ nad menším tělesem; tak vznikne těleso s $p^n$ prvky.
+Platí, že řád každého konečného tělesa je vždy mocnina prvočísla, tedy číslo tvaru, pé na entou, a všechna tělesa téhož řádu jsou navzájem izomorfní.
+> Platí, že řád každého konečného tělesa je vždy mocnina prvočísla, tedy číslo tvaru $p^n$, a všechna tělesa téhož řádu jsou navzájem izomorfní.
+Konečné těleso s, pé na entou, prvky nazýváme Galoisovo těleso a značíme ho, gé, ef, pé na entou.
+> Konečné těleso s $p^n$ prvky nazýváme Galoisovo těleso a značíme ho $\mathrm{GF}(p^n)$.
+Prvočíslo, pé, je jeho charakteristika.
+> Prvočíslo $p$ je jeho charakteristika.

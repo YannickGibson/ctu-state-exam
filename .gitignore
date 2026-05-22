@@ -6,6 +6,9 @@ client/.env*.local
 .env
 .env.local
 data/progress.json
+.tools/
+data/audio/*.wav
+data/audio/*.mp3
 .vercel/
 .DS_Store
 CLAUDE.md

@@ -19,6 +19,7 @@ const root = path.join(__dirname, '..');
 const dataDir = path.join(root, 'data');
 const answersDir = path.join(dataDir, 'answers');
 const quizzesDir = path.join(dataDir, 'quizzes');
+const audioDir = path.join(dataDir, 'audio');
 
 function readJSON(file, fallback) {
   try {
@@ -50,7 +51,16 @@ const handleGetQuestion = (req, res) => {
   } catch {
     answer = null;
   }
-  res.json({ ...q, answer });
+  // The narration timing map (data/audio/<id>.json) is bundled inline when it
+  // exists; the client uses it to drive the "Listen" player. The MP3 itself is
+  // hosted separately on Supabase Storage.
+  let audio = null;
+  try {
+    audio = JSON.parse(fs.readFileSync(path.join(audioDir, q.id + '.json'), 'utf8'));
+  } catch {
+    audio = null;
+  }
+  res.json({ ...q, answer, audio });
 };
 
 const handleListQuizzes = (req, res) => {

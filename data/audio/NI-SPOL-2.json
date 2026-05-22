@@ -1,0 +1,173 @@
+{
+  "id": "NI-SPOL-2",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 187.797,
+  "sentences": [
+    {
+      "text": "Otázka číslo 2 ze společné části.",
+      "start": 0,
+      "end": 3.033
+    },
+    {
+      "text": "Tělesa a okruhy.",
+      "start": 3.033,
+      "end": 4.533
+    },
+    {
+      "text": "Okruh.",
+      "start": 4.533,
+      "end": 5.383
+    },
+    {
+      "text": "Okruh je neprázdná množina $M$ se dvěma binárními operacemi, sčítáním a násobením.",
+      "start": 5.383,
+      "end": 12.305
+    },
+    {
+      "text": "Musí platit tři podmínky: množina $M$ se sčítáním tvoří abelovskou grupu, množina $M$ s násobením tvoří monoid, a platí distributivní zákon, který obě operace propojuje.",
+      "start": 12.305,
+      "end": 25.845
+    },
+    {
+      "text": "Neutrálnímu prvku sčítání říkáme nula, neutrálnímu prvku násobení jednička.",
+      "start": 25.845,
+      "end": 32.651
+    },
+    {
+      "text": "Je-li navíc násobení komutativní, jde o komutativní okruh.",
+      "start": 32.651,
+      "end": 37.263
+    },
+    {
+      "text": "Příkladem okruhu jsou celá čísla nebo zbytkové třídy modulo $n$.",
+      "start": 37.263,
+      "end": 42.525
+    },
+    {
+      "text": "Obor integrity.",
+      "start": 42.525,
+      "end": 44.118
+    },
+    {
+      "text": "Dva nenulové prvky nazýváme dělitelé nuly, pokud je jejich součin roven nule.",
+      "start": 44.118,
+      "end": 50.019
+    },
+    {
+      "text": "Obor integrity je komutativní okruh, ve kterém žádní dělitelé nuly nejsou, takže součin dvou nenulových prvků je vždy nenulový.",
+      "start": 50.019,
+      "end": 59.449
+    },
+    {
+      "text": "Těleso.",
+      "start": 59.449,
+      "end": 60.334
+    },
+    {
+      "text": "Těleso je okruh, ve kterém množina $M$ bez nuly tvoří vůči násobení abelovskou grupu.",
+      "start": 60.334,
+      "end": 66.548
+    },
+    {
+      "text": "To znamená, že ke každému nenulovému prvku existuje inverzní prvek, a proto v tělese umíme dělit, neboť dělení je násobení inverzním prvkem.",
+      "start": 66.548,
+      "end": 77.266
+    },
+    {
+      "text": "Nulu musíme vyjmout, protože násobení nulou dává vždy nulu a inverzní prvek k nule neexistuje.",
+      "start": 77.266,
+      "end": 84.247
+    },
+    {
+      "text": "Racionální čísla těleso tvoří, celá čísla nikoli.",
+      "start": 84.247,
+      "end": 88.58
+    },
+    {
+      "text": "Každé těleso je zároveň oborem integrity.",
+      "start": 88.58,
+      "end": 91.961
+    },
+    {
+      "text": "Okruhy polynomů.",
+      "start": 91.961,
+      "end": 93.612
+    },
+    {
+      "text": "Polynom nad okruhem $R$ je formální výraz $P(x) = \\sum_i a_i x^i$, tedy součet koeficientů násobených mocninami proměnné $x$.",
+      "start": 93.612,
+      "end": 101.161
+    },
+    {
+      "text": "Koeficienty pocházejí z okruhu $R$.",
+      "start": 101.161,
+      "end": 104.043
+    },
+    {
+      "text": "Nejvyšší mocnina s nenulovým koeficientem je stupeň polynomu.",
+      "start": 104.043,
+      "end": 108.678
+    },
+    {
+      "text": "Množina všech polynomů nad okruhem $R$ sama opět tvoří okruh, který značíme $R[x]$.",
+      "start": 108.678,
+      "end": 116.982
+    },
+    {
+      "text": "Nad tělesem navíc platí dělení polynomů se zbytkem, podobně jako u celých čísel.",
+      "start": 116.982,
+      "end": 123.405
+    },
+    {
+      "text": "Ireducibilní polynom.",
+      "start": 123.405,
+      "end": 125.335
+    },
+    {
+      "text": "Polynom je ireducibilní nad okruhem $K$, jestliže ho nelze rozložit na součin dvou polynomů nižšího stupně.",
+      "start": 125.335,
+      "end": 133.209
+    },
+    {
+      "text": "Ireducibilní polynomy jsou obdobou prvočísel: jsou to základní stavební kameny, které už dál rozložit nelze.",
+      "start": 133.209,
+      "end": 141.884
+    },
+    {
+      "text": "Konečná tělesa.",
+      "start": 141.884,
+      "end": 143.373
+    },
+    {
+      "text": "Konečné těleso je těleso s konečným počtem prvků; tomuto počtu říkáme řád tělesa.",
+      "start": 143.373,
+      "end": 149.796
+    },
+    {
+      "text": "Zbytkové třídy modulo prvočíslo $p$ tvoří konečné těleso s $p$ prvky.",
+      "start": 149.796,
+      "end": 155.754
+    },
+    {
+      "text": "Tělesa s více prvky se konstruují pomocí ireducibilního polynomu stupně $n$ nad menším tělesem; tak vznikne těleso s $p^n$ prvky.",
+      "start": 155.754,
+      "end": 165.927
+    },
+    {
+      "text": "Platí, že řád každého konečného tělesa je vždy mocnina prvočísla, tedy číslo tvaru $p^n$, a všechna tělesa téhož řádu jsou navzájem izomorfní.",
+      "start": 165.927,
+      "end": 177.203
+    },
+    {
+      "text": "Konečné těleso s $p^n$ prvky nazýváme Galoisovo těleso a značíme ho $\\mathrm{GF}(p^n)$.",
+      "start": 177.203,
+      "end": 184.636
+    },
+    {
+      "text": "Prvočíslo $p$ je jeho charakteristika.",
+      "start": 184.636,
+      "end": 187.797
+    }
+  ]
+}
