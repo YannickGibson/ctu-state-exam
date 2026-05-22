@@ -1,0 +1,128 @@
+{
+  "id": "NI-ZI-7",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 182.91,
+  "sentences": [
+    {
+      "text": "**Perceptron** spočítá vážený součet vstupů $\\xi = \\sum_i w_i x_i - \\theta$, výstup je $Z = S(\\xi)$ s přenosovou funkcí $S$.",
+      "para": 0,
+      "start": 0,
+      "end": 10.115
+    },
+    {
+      "text": "Klasický perceptronový algoritmus váhy postupně otáčí směrem ke špatně zařazeným vzorům a konverguje, ale jen tehdy, jsou-li data lineárně separabilní.",
+      "para": 0,
+      "start": 10.115,
+      "end": 21.867
+    },
+    {
+      "text": "Aby síť zvládla i data, která lineárně oddělit nelze, učíme ji gradientně.",
+      "para": 1,
+      "start": 21.867,
+      "end": 27.907
+    },
+    {
+      "text": "Zavedeme chybovou funkci $E = \\tfrac12 \\sum_i (t^{(i)} - o^{(i)})^2$ jako součet čtverců odchylek.",
+      "para": 1,
+      "start": 27.907,
+      "end": 35.131
+    },
+    {
+      "text": "Váhu posuneme proti směru gradientu chyby, $\\Delta w_j = -\\eta\\,\\partial E / \\partial w_j$, což je **delta pravidlo**.",
+      "para": 1,
+      "start": 35.131,
+      "end": 40.869
+    },
+    {
+      "text": "**Vícevrstvý perceptron** skládá několik plně propojených vrstev s nelineárními aktivacemi (sigmoid, tanh, ReLU).",
+      "para": 2,
+      "start": 40.869,
+      "end": 50.519
+    },
+    {
+      "text": "Učí se s učitelem a podle Kolmogorovovy věty dokáže síť už s jednou skrytou vrstvou aproximovat libovolnou spojitou funkci.",
+      "para": 2,
+      "start": 50.519,
+      "end": 60.495
+    },
+    {
+      "text": "Vícevrstvou síť učíme algoritmem **zpětného šíření chyby**, anglicky backpropagation.",
+      "para": 3,
+      "start": 60.495,
+      "end": 65.13
+    },
+    {
+      "text": "Při dopředném průchodu spočítáme aktivace všech vrstev, na výstupu změříme chybu a tu pak pomocí řetízkového pravidla šíříme zpět vrstvu po vrstvě.",
+      "para": 3,
+      "start": 65.13,
+      "end": 76.057
+    },
+    {
+      "text": "Pro každý neuron tak získáme jeho podíl na chybě, a podle něj upravíme příslušné váhy proti směru gradientu.",
+      "para": 3,
+      "start": 76.057,
+      "end": 84.303
+    },
+    {
+      "text": "**Konvoluční neuronové sítě** (C N N) vznikly z prací Jana LeCuna a z Fukušimova neokognitronu.",
+      "para": 4,
+      "start": 84.303,
+      "end": 92.119
+    },
+    {
+      "text": "Jejich síla je ve sdílených filtrech, takže stejný vzor síť rozpozná kdekoli v obraze, a v poolingových vrstvách, které zmenšují rozměr.",
+      "para": 4,
+      "start": 92.119,
+      "end": 102.281
+    },
+    {
+      "text": "**Konvoluční vrstva** posouvá filtry přes vstupní obraz a počítá výstupní příznakové mapy.",
+      "para": 5,
+      "start": 102.281,
+      "end": 112.07
+    },
+    {
+      "text": "Hyperparametry jsou velikost filtru, krok posunu, doplnění okrajů a počet filtrů.",
+      "para": 5,
+      "start": 112.07,
+      "end": 118.575
+    },
+    {
+      "text": "Pooling vrstva pak po blocích, typicky dva krát dva, bere maximum nebo průměr, čímž redukuje počet parametrů a dává invarianci vůči malým posunům.",
+      "para": 5,
+      "start": 118.575,
+      "end": 129.897
+    },
+    {
+      "text": "Mezi klasické architektury patří LeNet, první úspěšná konvoluční síť, a AlexNet, který v roce dva tisíce dvanáct odstartoval éru hlubokého učení.",
+      "para": 6,
+      "start": 129.897,
+      "end": 141.405
+    },
+    {
+      "text": "Síť VGG používá jednotné filtry $3\\times3$, GoogLeNet zavádí paralelní moduly a **ResNet** díky reziduálním spojům umožňuje stovky vrstev.",
+      "para": 6,
+      "start": 141.405,
+      "end": 152.135
+    },
+    {
+      "text": "Hluboké sítě v praxi optimalizujeme stochastickým gradientním sestupem s mini dávkami, často s momentem nebo metodou Adam s adaptivním krokem učení.",
+      "para": 7,
+      "start": 152.135,
+      "end": 162.471
+    },
+    {
+      "text": "Proti přeučení pomáhá $L_2$ regularizace, **dropout**, který náhodně nuluje aktivace, a rozšiřování dat.",
+      "para": 7,
+      "start": 162.471,
+      "end": 170.717
+    },
+    {
+      "text": "Dávková normalizace stabilizuje trénink tím, že normalizuje aktivace uvnitř mini dávky, a vhodná inicializace vah, Xavierova nebo Heho, brání útlumu signálu.",
+      "para": 7,
+      "start": 170.717,
+      "end": 182.91
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+# Otázka SPOL-4 — Integrál funkcí více proměnných
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+Integrál slouží k výpočtu obsahu plochy pod grafem funkce, případně objemu pod grafem funkce více proměnných.
+Hlavní myšlenkou Darbouxovy konstrukce je aproximovat tuto plochu obdélníky a jejich obsahy sčítat.
+
+Začněme připomenutím konstrukce v jedné proměnné.
+Rozdělení intervalu je konečná množina dělicích bodů, která interval rozkrájí na menší podintervaly.
+> **Rozdělení intervalu** je konečná množina dělicích bodů, která interval rozkrájí na menší podintervaly.
+Na každém podintervalu vezmeme supremum a infimum hodnot funkce.
+
+Horní Darbouxův součet je součet obsahů obdélníků, jejichž výška je dána supremem funkce na každém podintervalu.
+> **Horní Darbouxův součet** je součet obsahů obdélníků, jejichž výška je dána supremem funkce na každém podintervalu.
+Dolní Darbouxův součet bere místo suprema infimum, takže obdélníky leží pod grafem.
+> **Dolní Darbouxův součet** bere místo suprema infimum, takže obdélníky leží pod grafem.
+Dolní součet je tedy podhodnocení a horní součet nadhodnocení skutečného obsahu.
+
+Horní Darbouxův integrál je infimum horních součtů přes všechna rozdělení.
+> **Horní Darbouxův integrál** je infimum horních součtů přes všechna rozdělení.
+Dolní Darbouxův integrál je supremum dolních součtů.
+> **Dolní Darbouxův integrál** je supremum dolních součtů.
+Pokud se horní a dolní integrál rovnají, nazýváme tuto společnou hodnotu Darbouxovým integrálem funkce a funkci nazýváme darbouxovsky integrabilní.
+> Pokud se horní a dolní integrál rovnají, nazýváme tuto společnou hodnotu **Darbouxovým integrálem** funkce a funkci nazýváme darbouxovsky integrabilní.
+
+Pro funkci dvou proměnných postupujeme obdobně na obdélníkové oblasti, která je součinem dvou intervalů.
+Rozdělení obdélníku je dvojice rozdělení obou intervalů; obdélník se tak rozpadne na síť malých obdélníčků.
+Na každém obdélníčku opět vezmeme supremum a infimum funkce a vynásobíme je jeho obsahem.
+Sečtením přes všechny obdélníčky dostaneme horní a dolní Darbouxovu sumu.
+
+Horní dvojrozměrný Darbouxův integrál je infimum horních sum, dolní integrál je supremum dolních sum.
+Rovnají-li se, nazýváme společnou hodnotu dvojitým Darbouxovým integrálem funkce na dané oblasti.
+> Rovnají-li se, nazýváme společnou hodnotu **dvojitým Darbouxovým integrálem** funkce na dané oblasti.
+
+Výpočet dvojného integrálu usnadňuje Fubiniho věta.
+> Výpočet dvojného integrálu usnadňuje **Fubiniho věta**.
+Ta říká, že dvojný integrál na obdélníku lze spočítat jako dva po sobě jdoucí jednorozměrné integrály: nejprve integrujeme podle jedné proměnné a druhou bereme jako konstantu, poté integrujeme podle druhé proměnné.
+
+Integrál umíme zavést i na obecné, neobdélníkové oblasti.
+Funkci rozšíříme na obklopující obdélník tak, že mimo původní oblast je nově dodefinovaná funkce nulová, a integrál původní funkce definujeme jako integrál tohoto rozšíření.
+Tato definice nezávisí na volbě obklopujícího obdélníku.
+
+Zbývá otázka, kdy je funkce integrabilní.
+Množina má míru nula, pokud ji lze pro libovolně malé kladné číslo pokrýt obdélníky, jejichž celkový obsah je menší než toto číslo.
+> **Množina má míru nula**, pokud ji lze pro libovolně malé kladné číslo pokrýt obdélníky, jejichž celkový obsah je menší než toto číslo.
+Omezená funkce je integrabilní právě tehdy, když množina jejích bodů nespojitosti má míru nula; jinak řečeno, funkce je spojitá skoro všude.

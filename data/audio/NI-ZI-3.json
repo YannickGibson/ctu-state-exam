@@ -1,0 +1,176 @@
+{
+  "id": "NI-ZI-3",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 249.456,
+  "sentences": [
+    {
+      "text": "Problém splnitelnosti, takzvaný **SAT**, se ptá, zda existuje pravdivostní ohodnocení proměnných, pro které je daná výroková formule pravdivá.",
+      "para": 0,
+      "start": 0,
+      "end": 9.964
+    },
+    {
+      "text": "Formule je na vstupu v konjunktivním normálním tvaru, tedy jako konjunkce klauzulí, kde klauzule je disjunkce literálů a literál je proměnná nebo její negace.",
+      "para": 0,
+      "start": 9.964,
+      "end": 21.495
+    },
+    {
+      "text": "SAT je NP-úplný problém podle Cookovy věty, přesto moderní řešiče zvládají instance s miliony proměnných.",
+      "para": 0,
+      "start": 21.495,
+      "end": 30.124
+    },
+    {
+      "text": "Systematickým řešením je algoritmus **DPLL** z roku devatenáct set šedesát dva.",
+      "para": 1,
+      "start": 30.124,
+      "end": 36.303
+    },
+    {
+      "text": "Je to backtracking doplněný o jednotkovou propagaci a eliminaci čistých proměnných.",
+      "para": 1,
+      "start": 36.303,
+      "end": 42.54
+    },
+    {
+      "text": "**Jednotková propagace** využívá toho, že obsahuje-li klauzule jediný nepřiřazený literál a všechny ostatní jsou nepravdivé, musí být tento literál pravdivý.",
+      "para": 1,
+      "start": 42.54,
+      "end": 54.165
+    },
+    {
+      "text": "**Čistá proměnná** se vyskytuje vždy jen v jedné polaritě, takže ji lze rovnou ohodnotit tak, aby byly její klauzule splněné.",
+      "para": 1,
+      "start": 54.165,
+      "end": 63.397
+    },
+    {
+      "text": "Když algoritmus nemůže pokračovat, vybere rozhodovací literál a větví na obě jeho hodnoty.",
+      "para": 1,
+      "start": 63.397,
+      "end": 70.122
+    },
+    {
+      "text": "Dé pé el el ale zapomíná již objevené konflikty a objevuje je znovu.",
+      "para": 2,
+      "start": 70.122,
+      "end": 75.5
+    },
+    {
+      "text": "Tento problém řeší rozšíření zvané **CDCL**, conflict-driven clause learning, na němž jsou založeny všechny dnešní praktické řešiče.",
+      "para": 2,
+      "start": 75.5,
+      "end": 86.126
+    },
+    {
+      "text": "Prvním pilířem cé dé cé el je učení klauzulí.",
+      "para": 3,
+      "start": 86.126,
+      "end": 90.064
+    },
+    {
+      "text": "Při konfliktu se analyzuje **implikační graf**, najde se takzvaný první unikátní implikační bod, a vytvoří se **naučená konfliktní klauzule**, která zabrání opakování téhož konfliktu.",
+      "para": 3,
+      "start": 90.064,
+      "end": 105.508
+    },
+    {
+      "text": "Konfliktní klauzule je logickým důsledkem formule a získá se rezolučním pravidlem, takže implikační graf ani nemusíme konstruovat explicitně.",
+      "para": 3,
+      "start": 105.508,
+      "end": 116.262
+    },
+    {
+      "text": "Druhým pilířem je nechronologický návrat.",
+      "para": 4,
+      "start": 116.262,
+      "end": 119.678
+    },
+    {
+      "text": "Místo skoku na poslední rozhodnutí se algoritmus vrátí na druhou nejvyšší rozhodovací úroveň z konfliktní klauzule, čímž zůstane klauzule vynucující a okamžitě spustí jednotkovou propagaci.",
+      "para": 4,
+      "start": 119.678,
+      "end": 134.111
+    },
+    {
+      "text": "Třetím pilířem jsou heuristiky výběru proměnné, především **VSIDS**.",
+      "para": 5,
+      "start": 134.111,
+      "end": 140.047
+    },
+    {
+      "text": "Variable state independent decaying sum udržuje skóre proměnných, při každém konfliktu zvýší skóre proměnných v konfliktní klauzuli a všechna skóre periodicky tlumí.",
+      "para": 5,
+      "start": 140.047,
+      "end": 152.646
+    },
+    {
+      "text": "Volí se proměnná s nejvyšším skóre, čímž řešič preferuje nedávné konflikty.",
+      "para": 5,
+      "start": 152.646,
+      "end": 158.465
+    },
+    {
+      "text": "Dalšími technikami jsou **restarty**, dvojice **sledovaných literálů**, která zrychluje jednotkovou propagaci, a mazání nepotřebných naučených klauzulí.",
+      "para": 6,
+      "start": 158.465,
+      "end": 169.335
+    },
+    {
+      "text": "Alternativou k systematickému řešení je lokální prohledávání, které pracuje s úplnými ohodnoceními a iterativně je upravuje.",
+      "para": 7,
+      "start": 169.335,
+      "end": 178.579
+    },
+    {
+      "text": "Algoritmus **GSAT** začne z náhodného úplného ohodnocení a v každém kroku překlopí proměnnou, jež maximalizuje počet splněných klauzulí.",
+      "para": 7,
+      "start": 178.579,
+      "end": 189.321
+    },
+    {
+      "text": "Jde o hladové stoupání, které ale uvázne v lokálním maximu.",
+      "para": 7,
+      "start": 189.321,
+      "end": 194.13
+    },
+    {
+      "text": "Algoritmus **WalkSAT** tento problém řeší tím, že kombinuje hladový krok s náhodnou procházkou.",
+      "para": 8,
+      "start": 194.13,
+      "end": 201.076
+    },
+    {
+      "text": "V každém kroku vybere náhodnou nesplněnou klauzuli a s pravděpodobností $p$ překlopí náhodný literál z této klauzule, jinak provede hladový krok.",
+      "para": 8,
+      "start": 201.076,
+      "end": 211.968
+    },
+    {
+      "text": "Náhodný krok umožňuje opustit lokální maximum, takže walksat je pravděpodobnostně úplný.",
+      "para": 8,
+      "start": 211.968,
+      "end": 218.914
+    },
+    {
+      "text": "Systematické a lokální metody se hodí na různé instance.",
+      "para": 9,
+      "start": 218.914,
+      "end": 223.746
+    },
+    {
+      "text": "Cé dé cé el je úplný, dokáže prokázat nesplnitelnost a vyniká na strukturovaných a průmyslových instancích, například při formální verifikaci.",
+      "para": 9,
+      "start": 223.746,
+      "end": 234.627
+    },
+    {
+      "text": "WalkSAT naopak nesplnitelnost prokázat neumí, ale je velmi efektivní na náhodných 3-SAT formulích poblíž fázového přechodu, kde poměr klauzulí k proměnným je zhruba $4{,}27$.",
+      "para": 9,
+      "start": 234.627,
+      "end": 249.456
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "id": "NI-SPOL-17",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 187.87,
+  "sentences": [
+    {
+      "text": "**OpenMP** je vysokoúrovňové rozhraní pro programování vícevláknových aplikací nad sdílenou pamětí v jazycích C, C++ a Fortran.",
+      "para": 0,
+      "start": 0,
+      "end": 10.707
+    },
+    {
+      "text": "Tvoří ho asi padesát direktiv vkládaných do kódu, kolem dvaceti systémových proměnných a zhruba šedesát knihovních funkcí běhového prostředí.",
+      "para": 0,
+      "start": 10.707,
+      "end": 21.368
+    },
+    {
+      "text": "Je to inkrementální metoda paralelizace: program bez podpory direktiv se přeloží jako běžný sekvenční kód.",
+      "para": 0,
+      "start": 21.368,
+      "end": 29.253
+    },
+    {
+      "text": "OpenMP používá programovací model **fork-join**.",
+      "para": 1,
+      "start": 29.253,
+      "end": 33.238
+    },
+    {
+      "text": "Program začne sekvenčně počátečním vláknem, a ve vyznačených paralelních oblastech se mechanismem fork vytvoří tým souběžně běžících vláken, který se na konci oblasti mechanismem join opět spojí.",
+      "para": 1,
+      "start": 33.238,
+      "end": 47.405
+    },
+    {
+      "text": "Mimo paralelní oblast běží jen počáteční vlákno.",
+      "para": 1,
+      "start": 47.405,
+      "end": 51.657
+    },
+    {
+      "text": "Vlastnosti proměnných v paralelní oblasti určují klauzule.",
+      "para": 2,
+      "start": 51.657,
+      "end": 55.99
+    },
+    {
+      "text": "Sdílená proměnná je společná všem vláknům, privátní proměnná má v každém vláknu svou neinicializovanou kopii, a klauzule firstprivate tuto kopii navíc inicializuje původní hodnotou.",
+      "para": 2,
+      "start": 55.99,
+      "end": 69.936
+    },
+    {
+      "text": "Klauzule reduction zajistí bezpečnou redukci privátních kopií do sdílené proměnné.",
+      "para": 2,
+      "start": 69.936,
+      "end": 75.941
+    },
+    {
+      "text": "**Datový paralelismus** zajišťuje direktiva `parallel for`.",
+      "para": 3,
+      "start": 75.941,
+      "end": 81.679
+    },
+    {
+      "text": "Iterace cyklu se rozdělí mezi vlákna podle klauzule schedule: statické přidělení rozdělí bloky předem, dynamické přiděluje bloky za běhu, jakmile vlákno dokončí svou práci, a guided postupně zmenšuje velikost bloků.",
+      "para": 3,
+      "start": 81.679,
+      "end": 98.331
+    },
+    {
+      "text": "**Funkční paralelismus** zajišťuje direktiva `task`.",
+      "para": 4,
+      "start": 98.331,
+      "end": 101.921
+    },
+    {
+      "text": "Vlákno vygeneruje úlohu a vloží ji do zásobárny úloh; ostatní vlákna úlohy odebírají a vykonávají, jde tedy o model producent-konzument vhodný pro rekurzivní algoritmy.",
+      "para": 4,
+      "start": 101.921,
+      "end": 114.334
+    },
+    {
+      "text": "Pro synchronizaci vláken nabízí OpenMP několik direktiv.",
+      "para": 5,
+      "start": 114.334,
+      "end": 119.225
+    },
+    {
+      "text": "Direktiva barrier je bod, kam musí dorazit všechna vlákna týmu, blok za direktivou single provede jen jedno libovolné vlákno a blok za direktivou master jen hlavní vlákno.",
+      "para": 5,
+      "start": 119.225,
+      "end": 132.08
+    },
+    {
+      "text": "**Kritická sekce**, direktiva `critical`, je blok, který smí v jednom okamžiku provádět nejvýše jedno vlákno; může být anonymní nebo pojmenovaná, a vzájemné vyloučení pak platí globálně pro všechny její výskyty.",
+      "para": 5,
+      "start": 132.08,
+      "end": 147.338
+    },
+    {
+      "text": "Direktiva `atomic` zajistí nepřerušitelnou operaci nad jednou buňkou paměti, typicky čtení, zápis nebo inkrementaci sdíleného čítače.",
+      "para": 5,
+      "start": 147.338,
+      "end": 157.441
+    },
+    {
+      "text": "Tyto nástroje se uplatní ve vícevláknových algoritmech.",
+      "para": 6,
+      "start": 157.441,
+      "end": 161.809
+    },
+    {
+      "text": "Násobení polynomů se rozloží na nezávislé součiny členů a výsledné koeficienty se sčítají paralelním cyklem s redukcí.",
+      "para": 6,
+      "start": 161.809,
+      "end": 170.786
+    },
+    {
+      "text": "Násobení matice a vektoru je datový paralelismus, kde každé vlákno počítá blok řádků se statickým rozvrhem.",
+      "para": 6,
+      "start": 170.786,
+      "end": 179.218
+    },
+    {
+      "text": "Řazení se paralelizuje rekurzivně, například MergeSort nebo QuickSort přes direktivu task se synchronizací taskwait.",
+      "para": 6,
+      "start": 179.218,
+      "end": 187.87
+    }
+  ]
+}

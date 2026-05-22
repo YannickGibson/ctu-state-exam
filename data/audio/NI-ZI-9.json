@@ -1,0 +1,140 @@
+{
+  "id": "NI-ZI-9",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 188.581,
+  "sentences": [
+    {
+      "text": "Dopředná síť má spojení jen zleva doprava, žádný cyklus, a tedy žádnou paměť.",
+      "para": 0,
+      "start": 0,
+      "end": 6.527
+    },
+    {
+      "text": "**Rekurentní neuronová síť** má alespoň jeden cyklus, takže aktivace v ní přetrvávají v čase.",
+      "para": 0,
+      "start": 6.527,
+      "end": 14.053
+    },
+    {
+      "text": "Díky této vnitřní paměti se hodí pro zpracování sekvencí a časových řad a dokáže aproximovat libovolný dynamický systém.",
+      "para": 0,
+      "start": 14.053,
+      "end": 23.506
+    },
+    {
+      "text": "**Elmanova síť** je dopředná síť doplněná o **kontextové jednotky**, jedna pro každý skrytý neuron.",
+      "para": 1,
+      "start": 23.506,
+      "end": 30.08
+    },
+    {
+      "text": "Kontextové jednotky uchovávají skrytý stav z předchozího kroku a v dalším kroku ho přivádějí zpět na vstup skryté vrstvy.",
+      "para": 1,
+      "start": 30.08,
+      "end": 38.883
+    },
+    {
+      "text": "Rekurentní síť učíme algoritmem **zpětného šíření v čase**, anglicky backpropagation through time.",
+      "para": 2,
+      "start": 38.883,
+      "end": 43.507
+    },
+    {
+      "text": "Síť se rozbalí přes všechny časové kroky do hluboké dopředné sítě a aplikuje se na ni běžné zpětné šíření, přičemž gradienty pro sdílené váhy se přes kroky sčítají.",
+      "para": 2,
+      "start": 43.507,
+      "end": 55.549
+    },
+    {
+      "text": "Problémem dlouhých sekvencí je mizející nebo explodující gradient, kvůli kterému se síť nedokáže naučit dlouhé závislosti.",
+      "para": 2,
+      "start": 55.549,
+      "end": 64.422
+    },
+    {
+      "text": "Síť s dlouhou krátkodobou pamětí (**LSTM**) řeší mizející gradient pomocí buňky se třemi branami.",
+      "para": 3,
+      "start": 64.422,
+      "end": 72.458
+    },
+    {
+      "text": "Vstupní brána určuje, co se do paměti zapíše, zapomínací brána, co se z ní vymaže, a výstupní brána, co se z paměti přečte.",
+      "para": 3,
+      "start": 72.458,
+      "end": 82.248
+    },
+    {
+      "text": "Klíčová je paměťová buňka, kterou gradient protéká s minimálním zkreslením, a proto si síť udrží i dlouhé závislosti.",
+      "para": 3,
+      "start": 82.248,
+      "end": 91.156
+    },
+    {
+      "text": "Hradlová rekurentní jednotka (**GRU**) je zjednodušená LSTM jen se dvěma branami a bez samostatné paměťové buňky.",
+      "para": 4,
+      "start": 91.156,
+      "end": 102.594
+    },
+    {
+      "text": "Má méně parametrů, ale ve výkonu je srovnatelná.",
+      "para": 4,
+      "start": 102.594,
+      "end": 106.533
+    },
+    {
+      "text": "V architektuře **enkodér dekodér** enkodér stlačí sekvenci do kontextového vektoru a dekodér z něj generuje výstup.",
+      "para": 5,
+      "start": 106.533,
+      "end": 115.475
+    },
+    {
+      "text": "Pevný kontextový vektor je úzké hrdlo, a proto Bahdanau zavedl **mechanismus pozornosti**.",
+      "para": 5,
+      "start": 115.475,
+      "end": 122.316
+    },
+    {
+      "text": "Dekodér v každém kroku spočítá vážený součet všech skrytých stavů enkodéru, kde váhy jsou normalizovaná skóre zarovnání.",
+      "para": 5,
+      "start": 122.316,
+      "end": 131.792
+    },
+    {
+      "text": "**Hopfieldova síť** je plně propojená rekurentní síť s binárními neurony v hodnotách $-1$ a $+1$.",
+      "para": 6,
+      "start": 131.792,
+      "end": 140.595
+    },
+    {
+      "text": "Učí se Hebbovým pravidlem a má energetickou funkci, která při změnách stavu vždy klesá, takže síť konverguje do lokálního minima odpovídajícího uloženému vzoru.",
+      "para": 6,
+      "start": 140.595,
+      "end": 152.498
+    },
+    {
+      "text": "Funguje tak jako asociativní paměť, a její autor John Hopfield za ni získal Nobelovu cenu za fyziku v roce dva tisíce dvacet čtyři.",
+      "para": 6,
+      "start": 152.498,
+      "end": 162.195
+    },
+    {
+      "text": "**Neuroevoluce** optimalizuje neuronové sítě evolučními algoritmy místo gradientního učení.",
+      "para": 7,
+      "start": 162.195,
+      "end": 168.908
+    },
+    {
+      "text": "Metoda **NEAT** postupně přidává neurony a spoje a díky inovačním číslům kříží i topologicky odlišné sítě.",
+      "para": 7,
+      "start": 168.908,
+      "end": 181.484
+    },
+    {
+      "text": "Neuroevoluce se používá pro hledání architektur a pro učení v prostředích bez dostupného gradientu.",
+      "para": 7,
+      "start": 181.484,
+      "end": 188.581
+    }
+  ]
+}

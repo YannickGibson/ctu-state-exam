@@ -1,0 +1,40 @@
+# Otázka SPOL-20 — Redukce, prefixový součet a segmentový prefixový součet
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Paralelní redukce zpracuje pole prvků asociativní, případně komutativní binární operací a vrátí jediný skalár, totiž součin nebo součet všech prvků.
+> Paralelní **redukce** zpracuje pole prvků asociativní, případně komutativní binární operací a vrátí jediný skalár, totiž součin nebo součet všech prvků.
+Je to operace všichni jednomu, její paralelní čas má lineární i logaritmickou složku a spodní mez je logaritmus z, en.
+Redukce je normální hyperkubický algoritmus, takže je optimální na hyperkubických sítích; implementovat ji lze i na binárním stromu, na mřížce nebo na modelu E R E W P R A M.
+
+V M P I redukci provádí funkce reduce, jejíž výsledek skončí v kořenovém procesu.
+> V MPI redukci provádí funkce `MPI_Reduce`, jejíž výsledek skončí v kořenovém procesu.
+Operaci určuje parametr, mohou to být předdefinované operace jako součet, maximum nebo maximum s lokalizací, nebo uživatelská operace.
+Varianta allreduce je redukce všichni všem: výsledek skončí u všech procesů, operace nemá kořen a je uzlově symetrická.
+> Varianta **`MPI_Allreduce`** je redukce všichni všem: výsledek skončí u všech procesů, operace nemá kořen a je uzlově symetrická.
+
+Prefixový součet zpracuje pole asociativní a komutativní operací a vrátí pole, kde, í, tý prvek je součtem všech prvků od začátku až po index, í.
+> **Prefixový součet** zpracuje pole asociativní a komutativní operací a vrátí pole, kde $i$-tý prvek je součtem všech prvků od začátku až po index $i$.
+Klasickou aplikací je řadicí algoritmus CountingSort.
+
+Na modelu E R E W P R A M počítá prefixový součet indukční algoritmus.
+Po, jé, tém kroku obsahuje každá buňka částečný součet okna délky dvě na, jé plus jedna, takže celý výpočet trvá logaritmus z, en, kroků, stejně jako paralelní redukce.
+
+Na nepřímém stromu jsou vstupní data v listech a vnitřní uzly počítají.
+Vzestupné vlny spouštějí sestupné vlny a celkem je potřeba dvojnásobek výšky stromu kroků; pro úplný binární strom nebo motýlek je to logaritmus z, en.
+Na hyperkrychli se uzly linearizují lexikograficky a algoritmus má, er, kroků, přičemž každý procesor udržuje jeden registr s prefixem a druhý kombinující vysílání všichni všem.
+
+Na ortogonálních mřížkách se uzly nejprve linearizují po řádcích a výpočet má vodorovnou, svislou a opět vodorovnou fázi.
+Na libovolné souvislé topologii se sestaví kostra do šířky, uzly se očíslují postorder a výpočet trvá řádově průměr grafu.
+
+Škálovatelný prefixový součet má tři fáze: každý proces nejprve sekvenčně spočítá lokální prefixový součet svého bloku, pak proběhne paralelní globální prefixový součet přes celkové součty bloků, a nakonec každý proces přičte přijatý posun ke svým lokálním hodnotám.
+Jeho čas má lineární i logaritmickou složku, takže má stejnou škálovatelnost jako paralelní redukce.
+Na asynchronním modelu A P R A M se mezi kroky vkládá bariéra, čímž logaritmická složka přejde na druhou mocninu logaritmu.
+
+Segmentový prefixový součet rozdělí vstupní pole na segmenty a počítá prefixové součty izolovaně uvnitř každého segmentu.
+> **Segmentový prefixový součet** rozdělí vstupní pole na segmenty a počítá prefixové součty izolovaně uvnitř každého segmentu.
+Hlavní myšlenkou je, že se provede jediný globální prefixový součet s modifikovanou binární operací, která pracuje se značkou segmentu; je-li původní operace asociativní, je asociativní i ta modifikovaná.
+
+Prefixový součet má řadu aplikací.
+Patří mezi ně zhušťovací problém, paralelní RadixSort, paralelní binární sčítačka s predikcí přenosu, řešení tridiagonální soustavy rovnic a stabilní paralelní QuickSort, který využívá právě segmentovou variantu.

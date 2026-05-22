@@ -4,15 +4,14 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { getProgressFor, getQuestion, getQuestions, patchProgress } from '../api.js';
-import { MAX_PRACTICED } from '../config/limits.js';
+import { getQuestion, getQuestions } from '../api.js';
+import { useProgress } from '../ProgressContext.jsx';
 import { subjectHue } from '../config/subjects.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
 import AnswerAudio from '../components/AnswerAudio.jsx';
-import { Volume2 } from 'lucide-react';
+import { Volume2, ChevronLeft, ChevronRight, ChevronsLeft } from 'lucide-react';
 
-const ZERO = { practicedCount: 0, readPassively: false };
 const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
 
 // A "source-PDF" link is `[text](/pdfs/X)` with no fragment and no leading `!`
@@ -111,8 +110,8 @@ function AnswerMarkdown({ children }) {
 
 export default function QuestionDetailPage() {
   const { slug } = useParams();
+  const { progressFor, markProgress, loading: progressLoading } = useProgress();
   const [question, setQuestion] = useState(null);
-  const [progress, setProgress] = useState(ZERO);
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -128,16 +127,11 @@ export default function QuestionDetailPage() {
 
   useEffect(() => {
     let cancelled = false;
-    // The URL carries the slug; progress is keyed by the question's real id,
-    // so fetch the question first and then its progress.
+    // Question content is memoized in api.js, so revisiting one is instant;
+    // progress is read from the shared cache, not a per-question fetch.
     getQuestion(slug)
       .then((q) => {
-        if (cancelled) return null;
-        setQuestion(q);
-        return getProgressFor(q.id);
-      })
-      .then((p) => {
-        if (!cancelled && p) setProgress(p);
+        if (!cancelled) setQuestion(q);
       })
       .catch((e) => {
         if (!cancelled) setError(e.message);
@@ -162,35 +156,22 @@ export default function QuestionDetailPage() {
     };
   }, [questions, slug]);
 
+  // Warm the content cache for the neighbours so skipping forward/back is
+  // instant even on the first pass through the questions.
+  useEffect(() => {
+    if (prevSlug) getQuestion(prevSlug).catch(() => {});
+    if (nextSlug) getQuestion(nextSlug).catch(() => {});
+  }, [prevSlug, nextSlug]);
+
   useEffect(() => {
     if (question) document.title = `${question.subjectCode} ${question.subjectIndex}`;
   }, [question]);
 
   async function mark(action) {
-    const prev = progress;
-    let optimistic;
-    if (action === 'practice') {
-      optimistic = {
-        readPassively: false,
-        practicedCount: Math.min(prev.practicedCount + 1, MAX_PRACTICED),
-      };
-    } else if (action === 'readPassively') {
-      optimistic = {
-        readPassively: prev.practicedCount === 0,
-        practicedCount: prev.practicedCount,
-      };
-    } else if (action === 'reset') {
-      optimistic = ZERO;
-    } else {
-      return;
-    }
-    setProgress(optimistic);
     setBusy(true);
     try {
-      const { progress: next } = await patchProgress(question.id, action);
-      setProgress(next);
+      await markProgress(question.id, action);
     } catch (e) {
-      setProgress(prev);
       setError(e.message);
     } finally {
       setBusy(false);
@@ -198,8 +179,9 @@ export default function QuestionDetailPage() {
   }
 
   if (error) return <p className="error">Error: {error}</p>;
-  if (!question) return <p className="muted">Loading…</p>;
+  if (!question || progressLoading) return <p className="muted">Loading…</p>;
 
+  const progress = progressFor(question.id);
   const { body, sources } = extractSources(question.answer);
   const { intro, sections } = splitIntoSections(body);
 
@@ -222,7 +204,7 @@ export default function QuestionDetailPage() {
           aria-label="Back to questions"
           title="Back to questions"
         >
-          «
+          <ChevronsLeft size={20} aria-hidden />
         </Link>
         <div className="detail-meta">
           <span
@@ -242,7 +224,7 @@ export default function QuestionDetailPage() {
               aria-label="Previous question"
               title="Previous question"
             >
-              ‹
+              <ChevronLeft size={20} aria-hidden />
             </Link>
           ) : (
             <span className="rotate-btn rotate-spacer" aria-hidden />
@@ -254,7 +236,7 @@ export default function QuestionDetailPage() {
               aria-label="Next question"
               title="Next question"
             >
-              ›
+              <ChevronRight size={20} aria-hidden />
             </Link>
           ) : (
             <span className="rotate-btn rotate-spacer" aria-hidden />

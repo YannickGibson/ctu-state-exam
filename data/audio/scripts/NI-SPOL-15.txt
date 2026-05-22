@@ -1,0 +1,43 @@
+# Otázka SPOL-15 — Princip simulovaného ochlazování, význam parametrů a jejich řízení.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Simulované ochlazování je lokální heuristika inspirovaná pomalým chladnutím látky do uspořádaného stavu.
+> **Simulované ochlazování** je lokální heuristika inspirovaná pomalým chladnutím látky do uspořádaného stavu.
+Jeho podstatou je, že na rozdíl od jednoduchých heuristik připouští i akci, která řešení zhorší, a může tak uniknout z lokálního optima.
+
+O přijetí zhoršující akce rozhoduje Metropolisovo kritérium.
+> O přijetí zhoršující akce rozhoduje **Metropolisovo kritérium**.
+Zhoršující sousední stav přijmeme s pravděpodobností danou exponenciálou ze záporné delty, lomeno, té.
+> Zhoršující sousední stav přijmeme s pravděpodobností $p = \exp(-\delta/T)$.
+Zde, delta, je velikost zhoršení a, té, je teplota.
+> Zde $\delta$ je velikost zhoršení a $T$ je teplota.
+Malé zhoršení se přijme často, velké zhoršení jen zřídka.
+Když teplota klesá k nule, zhoršující akce se téměř nepřijímají a algoritmus přechází k intenzifikaci.
+Při vysoké teplotě se přijímají i velká zhoršení, což odpovídá diverzifikaci.
+
+Hlavní algoritmus má dvě vnořené smyčky.
+Vnitřní smyčka zkouší jednotlivé tahy a aktualizuje nejlepší řešení, dokud se nedosáhne rovnováhy, takzvaného ekvilibria.
+Vnější smyčka po dosažení ekvilibria sníží teplotu a opakuje se, dokud systém nezamrzne.
+Funkce, které tohle určují, dohromady tvoří rozvrh ochlazování.
+> Funkce, které tohle určují, dohromady tvoří **rozvrh ochlazování**.
+
+Teoretickou záruku dává Hajkova věta.
+> Teoretickou záruku dává **Hajkova věta**.
+Pokud teplota v kroku číslo, ká, klesá jako konstanta, cé, dělená logaritmem z jedna plus, ká, kde, cé, je největší hloubka lokálního optima, proces po nekonečně mnoha krocích skončí v globálním optimu.
+> Pokud teplota v $k$-tém kroku klesá jako $t_k = c / \log(1+k)$, kde $c$ je největší hloubka lokálního optima, proces po nekonečně mnoha krocích skončí v globálním optimu.
+Jde ale jen o asymptotickou konvergenci a hloubku optim obvykle dopředu neznáme, takže v praxi používáme rychlejší rozvrhy.
+
+Nejdůležitějším parametrem je právě rozvrh ochlazování: počáteční teplota a funkce ochlazení, ekvilibria a zamrznutí.
+Rozvrh může být buď předem daný, nebo řízený zpětnou vazbou podle průběhu výpočtu.
+Funkce ochlazení bývá geometrická, tedy novou teplotu dostaneme vynásobením staré koeficientem, alfa, jehož hodnota leží zhruba mezi nula celá osm a nula celá devět set devadesát devět.
+> Funkce ochlazení bývá geometrická, $\mathrm{cool}(T) = \alpha T$ s $\alpha$ mezi zhruba $0{,}8$ a $0{,}999$.
+Ekvilibrium se obvykle určí pevným počtem kroků; manipulace s jeho délkou má podobný účinek jako změna koeficientu ochlazování.
+
+Počáteční teplotu volíme tak, aby přijetí zhoršující akce bylo na začátku dostatečně pravděpodobné.
+Známe-li hloubku lokálních optim a chceme-li danou pravděpodobnost úniku, lze počáteční teplotu spočítat jako záporný podíl této hloubky a přirozeného logaritmu pravděpodobnosti úniku.
+> Známe-li hloubku $\delta$ a chceme-li pravděpodobnost úniku $P$, počáteční teplotu spočítáme jako $T_0 = -\delta / \ln P$.
+Jinak nasbíráme vzorky zhoršujících akcí a teplotu z nich odvodíme.
+
+Podmínka zastavení, zamrznutí, může být pevná mez teploty, nebo detekce stagnace, kdy četnost změn klesne pod stanovený práh.

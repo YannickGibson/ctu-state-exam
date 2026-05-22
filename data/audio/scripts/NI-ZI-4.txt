@@ -1,0 +1,43 @@
+# Otázka ZI-4 — Metody hodnocení a výběru příznaků
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Cílem výběru příznaků je vybrat z mnoha proměnných ty nejvíce informativní.
+> Cílem **výběru příznaků** je vybrat z mnoha proměnných ty nejvíce informativní.
+Tím redukujeme dimenzionalitu dat, najdeme optimální podmnožinu příznaků a seřadíme příznaky podle jejich významu.
+Výsledkem jsou lepší, rychlejší a srozumitelnější modely.
+
+Metody se dělí podle dvou hledisek.
+Podle počtu uvažovaných proměnných rozlišujeme přístup univariátní a multivariátní.
+> Podle počtu uvažovaných proměnných rozlišujeme přístup **univariátní** a **multivariátní**.
+Univariátní metoda hodnotí každou proměnnou zvlášť, jednu po druhé.
+Multivariátní metoda hodnotí celé podmnožiny proměnných společně.
+
+Druhé hledisko je vztah ke klasifikátoru a dělí metody na filtrační, obalové a vestavěné.
+> Druhé hledisko je vztah ke klasifikátoru a dělí metody na **filtrační**, **obalové** a **vestavěné**.
+
+Filtrační metoda hodnotí relevanci příznaků nezávisle na klasifikátoru, pomocí statistického kritéria.
+Je robustní vůči přeučení a rychlá, ale nemusí najít skutečně užitečné příznaky.
+
+Obalová metoda používá k vyhodnocení podmnožiny samotný klasifikátor a kvalitu měří křížovou validací.
+Dokáže najít nejužitečnější příznaky, ale je výpočetně náročná a náchylná k přeučení.
+Klasické vyhledávací strategie jsou dopředný výběr, kdy postupně přidáváme nejlepší příznak, a zpětná eliminace, kdy odebíráme nejhorší.
+
+Vestavěná metoda provádí výběr přímo uvnitř trénovacího algoritmu, příkladem je regularizace u lineárních modelů nebo důležitost příznaků v rozhodovacích stromech.
+Je méně náročná než obalová metoda a méně náchylná k přeučení.
+
+Každou metodu lze popsat třemi složkami: kritériem, jak měřit relevanci, vyhledáváním, jak procházet prostor podmnožin, a hodnocením, jak ověřit kvalitu.
+Filtrační, obalové a vestavěné metody jsou jen různé kombinace těchto tří složek.
+
+Univariátní metody měří, jak relevantní je jedna vstupní proměnná pro předpověď výstupní proměnné.
+> Univariátní metody měří, jak relevantní je jedna vstupní proměnná $X_i$ pro předpověď výstupní proměnné $Y$.
+Používají statistické testy, jako té test nebo chí kvadrát test, korelační koeficienty a vzájemnou informaci.
+> Používají statistické testy, jako t-test nebo $\chi^2$ test, korelační koeficienty a vzájemnou informaci.
+Vzájemná informace měří závislost dvou proměnných a na rozdíl od korelace zachytí i nelineární vztahy.
+> **Vzájemná informace** měří závislost dvou proměnných a na rozdíl od korelace zachytí i nelineární vztahy.
+
+Multivariátní metody hodnotí podmnožiny příznaků dohromady, takže zachytí jejich redundanci i vzájemné interakce.
+Metoda M R M R maximalizuje relevanci vůči cíli a zároveň minimalizuje redundanci mezi vybranými příznaky.
+> Metoda **MRMR** maximalizuje relevanci vůči cíli a zároveň minimalizuje redundanci mezi vybranými příznaky.
+Algoritmus Relief hodnotí, jak dobře příznak odlišuje sousední body z různých tříd.

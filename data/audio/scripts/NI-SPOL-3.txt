@@ -1,0 +1,41 @@
+# Otázka SPOL-3 — Funkce více proměnných
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+Parciální derivace funkce podle, i-té, proměnné je derivace v situaci, kdy všechny ostatní proměnné držíme pevně jako konstanty.
+Měří tedy směrnici tečny ke grafu funkce ve směru, i-té, souřadnicové osy.
+
+Gradient funkce v daném bodě je řádkový vektor poskládaný ze všech jejích parciálních derivací v tomto bodě.
+> **Gradient** funkce v daném bodě je řádkový vektor poskládaný ze všech jejích parciálních derivací v tomto bodě.
+Gradient ukazuje směr nejvyššího růstu funkce.
+
+Druhé parciální derivace dostaneme tak, že parciálně derivujeme již jednou zderivovanou funkci podle další proměnné.
+Hessova matice, neboli Hessián, je čtvercová matice složená ze všech druhých parciálních derivací funkce v daném bodě.
+> **Hessova matice**, neboli Hessián, je čtvercová matice složená ze všech druhých parciálních derivací funkce v daném bodě.
+Jsou-li smíšené druhé derivace spojité, nezáleží na pořadí derivování a Hessova matice je symetrická.
+
+U symetrické matice rozlišujeme, jakého znaménka nabývá výraz iks transponované krát matice krát iks.
+> U symetrické matice rozlišujeme, jakého znaménka nabývá výraz $x^\mathrm{T} A x$.
+Matice je pozitivně definitní, pokud je tento výraz kladný pro každý nenulový vektor; negativně definitní, pokud je vždy záporný.
+> **Matice je pozitivně definitní**, pokud je tento výraz kladný pro každý nenulový vektor; negativně definitní, pokud je vždy záporný.
+Je-li výraz pro některé vektory kladný a pro jiné záporný, je matice indefinitní.
+Pro symetrickou matici platí jednoduchá charakterizace pomocí vlastních čísel: matice je pozitivně definitní právě tehdy, když jsou všechna její vlastní čísla kladná, a negativně definitní, když jsou všechna záporná.
+Má-li matice aspoň jedno kladné a aspoň jedno záporné vlastní číslo, je indefinitní.
+
+Hledáme-li lokální extrémy funkce bez omezení, vyjdeme z nutné podmínky.
+Má-li funkce v nějakém bodě lokální extrém, pak je v tomto bodě její gradient nulový.
+Bodům s nulovým gradientem říkáme stacionární body; jsou to jediní kandidáti na extrém mezi body, kde gradient existuje.
+
+O povaze stacionárního bodu rozhodne postačující podmínka pomocí definitnosti Hessovy matice.
+Je-li Hessova matice ve stacionárním bodě pozitivně definitní, jde o ostré lokální minimum; je-li negativně definitní, jde o ostré lokální maximum.
+Je-li Hessova matice indefinitní, není v bodě extrém, ale takzvaný sedlový bod.
+
+Při hledání extrémů s rovnostními omezeními minimalizujeme funkci za podmínek, že vazbové funkce jsou rovny nule.
+Zavádíme Lagrangeovu funkci, která sečte původní funkci a každou vazbu vynásobenou vlastním koeficientem; těmto koeficientům říkáme Lagrangeovy multiplikátory.
+> Zavádíme **Lagrangeovu funkci**, která sečte původní funkci a každou vazbu vynásobenou vlastním koeficientem; těmto koeficientům říkáme **Lagrangeovy multiplikátory**.
+
+Postačující podmínka pro ostré lokální minimum při rovnostních vazbách má dvě části.
+Nejprve musí být gradient Lagrangeovy funkce v daném bodě nulový.
+Dále musí být Hessova matice Lagrangeovy funkce pozitivní pro každý nenulový vektor, který je tečný ke všem vazbám, tedy kolmý na jejich gradienty.

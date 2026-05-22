@@ -1,0 +1,44 @@
+# Otázka SPOL-10 — Systémy hromadné obsluhy
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Systém hromadné obsluhy popisuje zákazníky, kteří přicházejí, jsou obsluhováni a odcházejí.
+> **Systém hromadné obsluhy** popisuje zákazníky, kteří přicházejí, jsou obsluhováni a odcházejí.
+Příchody jsou dány nezávislými časy mezi zákazníky s intenzitou příchodů, časy obsluhy jsou rovněž nezávislé s intenzitou obsluhy a server má jisté množství obslužných míst.
+> Příchody jsou dány nezávislými časy mezi zákazníky s intenzitou příchodů $\lambda$, časy obsluhy jsou rovněž nezávislé s intenzitou obsluhy $\mu$ a server má $c$ obslužných míst.
+Proces hromadné obsluhy zaznamenává počet zákazníků v systému, tedy na serveru i ve frontě.
+
+Klíčovou veličinou je zátěž, podíl intenzity příchodů ku celkové intenzitě obsluhy.
+> Klíčovou veličinou je **zátěž** $\varrho = \lambda/(c\mu)$, podíl intenzity příchodů ku celkové intenzitě obsluhy.
+Je-li zátěž menší než jedna, ustálí se systém na stabilním rovnovážném rozdělení; je-li rovna jedné nebo větší, počet zákazníků roste nade všechny meze.
+
+Systémy popisujeme Kendallovou notací.
+> Systémy popisujeme **Kendallovou notací**.
+Udává rozdělení příchodů, rozdělení obsluhy, počet serverů, kapacitu systému, velikost populace a disciplínu obsluhy.
+Písmeno em značí exponenciální, tedy markovské rozdělení, písmeno dé degenerované a písmeno gé obecné rozdělení.
+
+Systém em em jedna má poissonovské příchody, exponenciální obsluhu a jeden server.
+> Systém **M|M|1** má poissonovské příchody, exponenciální obsluhu a jeden server.
+Jde o proces zrodu a zániku, tedy markovský řetězec se spojitým časem, kde intenzita přechodu nahoru je intenzita příchodů a intenzita přechodu dolů je intenzita obsluhy.
+Pro zátěž menší než jedna má stacionární rozdělení geometrický tvar: pravděpodobnost, en, zákazníků je jedna mínus zátěž, krát zátěž na entou.
+> Pro zátěž menší než jedna má stacionární rozdělení geometrický tvar: $\pi_n = (1-\varrho)\varrho^n$.
+Střední počet zákazníků v systému je zátěž dělená jedna mínus zátěž.
+> Střední počet zákazníků v systému je $EN = \varrho/(1-\varrho)$.
+Doba čekání ve frontě je nulová s pravděpodobností jedna mínus zátěž, a je-li kladná, má exponenciální rozdělení.
+
+Systém em em nekonečno má nekonečně mnoho serverů, takže žádný zákazník nečeká.
+> Systém **M|M|∞** má nekonečně mnoho serverů, takže žádný zákazník nečeká.
+Jeho stacionární rozdělení je Poissonovo a systém je stabilní pro libovolnou intenzitu příchodů.
+
+Systém em em cé má, cé, paralelních serverů a společnou frontu.
+> Systém **M|M|c** má $c$ paralelních serverů a společnou frontu.
+Jeho stacionární rozdělení je po částech: pro malý počet zákazníků má tvar jako u nekonečna serverů, pro větší počet přechází v geometrický pokles a existuje právě tehdy, když je zátěž menší než jedna.
+
+Velmi obecným tvrzením je Littleova věta.
+> Velmi obecným tvrzením je **Littleova věta**.
+Pro každý striktně stacionární systém hromadné obsluhy platí, že střední počet zákazníků v systému je roven intenzitě příchodů krát střední doba strávená v systému.
+> Pro každý striktně stacionární systém hromadné obsluhy platí $EN = \lambda \cdot ET$, střední počet zákazníků v systému je roven intenzitě příchodů krát střední doba strávená v systému.
+Síla věty je v její obecnosti: neklade téměř žádné požadavky na rozdělení příchodů, rozdělení obsluhy ani na disciplínu fronty.
+Pro systém em em jedna z ní dostaneme střední dobu v systému jako převrácenou hodnotu rozdílu intenzity obsluhy a intenzity příchodů, což souhlasí s odvozením přes dobu čekání.
+> Pro systém M|M|1 z ní dostaneme $ET = \frac{1}{\mu - \lambda}$, což souhlasí s odvozením přes dobu čekání.

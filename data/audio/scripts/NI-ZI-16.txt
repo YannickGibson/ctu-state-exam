@@ -1,0 +1,40 @@
+# Otázka ZI-16 — Rejection a importance sampling a metody vážení
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+V bayesovských úlohách často potřebujeme spočítat integrály, jako je aposteriorní střední hodnota, rozptyl nebo marginální věrohodnost.
+Pokud je aposteriorní rozdělení komplikované, analytické řešení neexistuje a sáhneme po metodách Monte Carlo.
+Myšlenka je jednoduchá: pokud máme vzorky z cílového rozdělení, aproximujeme střední hodnotu prostým průměrem hodnot funkce přes tyto vzorky.
+Tato aproximace konverguje rychlostí odmocniny z počtu vzorků, nezávisle na dimenzi.
+Problém je, jak vůbec z komplikovaného cílového rozdělení vzorkovat.
+
+Jednou z nejjednodušších metod je rejection sampling, známý také jako přijímací-zamítací algoritmus.
+> Jednou z nejjednodušších metod je **rejection sampling**, známý také jako přijímací-zamítací algoritmus.
+Potřebujeme proposal rozdělení, tedy nějakou jednodušší distribuci, ze které umíme vzorkovat, a kladnou konstantu, em.
+> Potřebujeme proposal rozdělení, tedy nějakou jednodušší distribuci, ze které umíme vzorkovat, a kladnou konstantu $M$.
+Konstanta, em, musí být tak velká, aby proposal vynásobený touto konstantou ležel všude nad cílovou hustotou.
+Algoritmus navzorkuje bod z proposalu, navzorkuje rovnoměrné číslo mezi nulou a jedničkou, a podle poměru cílové a proposal hustoty bod buď přijme, nebo zamítne.
+
+Přijaté vzorky jsou přesně rozdělené podle cílové hustoty, jde tedy o exaktní metodu bez aproximace.
+Pravděpodobnost přijetí je rovna převrácené hodnotě konstanty, em, takže pro velké, em, je metoda neefektivní a hodně vzorků se zahazuje.
+Proposal by proto měl mít podobný tvar jako cílové rozdělení a těžší ocasy.
+Ve vysoké dimenzi je rejection sampling prakticky nepoužitelný, protože konstanta, em, roste exponenciálně.
+
+Importance sampling problém zamítání obchází tím, že žádný vzorek nezahazuje, ale všem přidělí váhu.
+> **Importance sampling** problém zamítání obchází tím, že žádný vzorek nezahazuje, ale všem přidělí váhu.
+Vychází z toho, že střední hodnotu vůči cílovému rozdělení lze přepsat jako střední hodnotu vůči proposalu, kde každý vzorek vynásobíme poměrem cílové a proposal hustoty.
+Tomuto poměru se říká importance váha.
+Odhad střední hodnoty je pak váženým průměrem hodnot funkce přes vzorky z proposalu.
+
+Pokud cílové rozdělení známe jen do normalizační konstanty, použijeme samonormalizovaný importance sampling.
+> Pokud cílové rozdělení známe jen do normalizační konstanty, použijeme **samonormalizovaný importance sampling**.
+Ten odhad vydělí součtem vah, je sice mírně vychýlený, ale konzistentní.
+Kvalitu vážení měříme efektivní velikostí vzorku: je-li nízká, nese skoro veškerou váhu jen pár vzorků a odhad je nestabilní.
+I zde platí, že proposal musí mít těžší ocasy než cílové rozdělení, jinak vážení diverguje.
+
+Obecným principem je tedy vážení: nemáme-li vzorky z cílového rozdělení, ale máme je z proposalu, opravíme to přidělením váhy každému vzorku.
+Na tomto principu staví importance sampling, samonormalizovaný odhad i stratifikované vzorkování.
+Pro stavové modely existuje sekvenční varianta, sekvenční importance sampling, kde se váhy aktualizují krok po kroku.
+Časem ale jediná částice převezme skoro celou váhu, tomu se říká degenerace vah, a řeší se převzorkováním, čímž vznikne částicový filtr.

@@ -1,0 +1,194 @@
+{
+  "id": "NI-ZI-17",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 236.078,
+  "sentences": [
+    {
+      "text": "**QR rozklad** spočívá v tom, že danou matici $A$ přepíšeme jako součin dvou matic se speciální strukturou.",
+      "para": 0,
+      "start": 0,
+      "end": 9.209
+    },
+    {
+      "text": "Matici $Q$ požadujeme ortogonální, matici $R$ horní trojúhelníkovou, takže pod diagonálou má samé nuly.",
+      "para": 0,
+      "start": 9.209,
+      "end": 17.327
+    },
+    {
+      "text": "Matice je **ortogonální**, jestliže její sloupce jsou navzájem kolmé a mají jednotkovou velikost; pak platí $Q^T Q = I$.",
+      "para": 0,
+      "start": 17.327,
+      "end": 28.905
+    },
+    {
+      "text": "Klíčová vlastnost je, že násobení ortogonální maticí nemění Euklidovu normu vektoru, a proto jsou tyto matice numericky spolehlivé.",
+      "para": 0,
+      "start": 28.905,
+      "end": 38.765
+    },
+    {
+      "text": "Q R rozklad se hojně používá při řešení nejmenších čtverců.",
+      "para": 1,
+      "start": 38.765,
+      "end": 43.551
+    },
+    {
+      "text": "Pro regresní úlohu hledáme váhy, které minimalizují normu rozdílu mezi odhadem a cíli.",
+      "para": 1,
+      "start": 43.551,
+      "end": 50.159
+    },
+    {
+      "text": "Když matici dat rozložíme na, kvé, krát, er, můžeme díky zachování normy úlohu přepsat na minimalizaci normy výrazu, er, krát váhy, mínus, transponovaná, kvé, krát cíle.",
+      "para": 1,
+      "start": 50.159,
+      "end": 63.85
+    },
+    {
+      "text": "Stačí pak vyřešit trojúhelníkovou soustavu zpětnou substitucí, což je numericky stabilnější než řešení normálních rovnic.",
+      "para": 1,
+      "start": 63.85,
+      "end": 73.234
+    },
+    {
+      "text": "První metodou výpočtu je **Gram-Schmidtova ortogonalizace**.",
+      "para": 2,
+      "start": 73.234,
+      "end": 77.346
+    },
+    {
+      "text": "Sloupce matice se postupně ortonormalizují: od každého sloupce odečteme jeho průměty do již hotových směrů a výsledek znormujeme.",
+      "para": 2,
+      "start": 77.346,
+      "end": 86.73
+    },
+    {
+      "text": "Koeficienty těchto průmětů tvoří prvky matice, er.",
+      "para": 2,
+      "start": 86.73,
+      "end": 90.865
+    },
+    {
+      "text": "Klasický Gram-Schmidt je ovšem numericky nestabilní, protože dochází ke ztrátě ortogonality; modifikovaná varianta je stabilnější.",
+      "para": 2,
+      "start": 90.865,
+      "end": 100.864
+    },
+    {
+      "text": "Druhou metodou je **Householderova reflexe**, tedy zrcadlení vektoru.",
+      "para": 3,
+      "start": 100.864,
+      "end": 106.01
+    },
+    {
+      "text": "Sestrojíme ortogonální matici, která zrcadlí daný sloupec na násobek prvního jednotkového vektoru, čímž pod diagonálou vznikne sloupec nul.",
+      "para": 3,
+      "start": 106.01,
+      "end": 116.833
+    },
+    {
+      "text": "Tato reflexní matice je symetrická i ortogonální a počítá se jako jednotková matice mínus dvojnásobek vnějšího součinu normálového vektoru zrcadla.",
+      "para": 3,
+      "start": 116.833,
+      "end": 128.678
+    },
+    {
+      "text": "Postupným zrcadlením sloupců dostaneme matici, er, a součin všech reflexí dává matici, kvé; metoda je numericky stabilní a úsporná.",
+      "para": 3,
+      "start": 128.678,
+      "end": 139.002
+    },
+    {
+      "text": "Třetí metodou jsou **Givensovy rotace**.",
+      "para": 4,
+      "start": 139.002,
+      "end": 141.884
+    },
+    {
+      "text": "Givensova rotace je otočení v rovině dvou souřadnic, které vynuluje vždy jediný prvek pod diagonálou.",
+      "para": 4,
+      "start": 141.884,
+      "end": 149.398
+    },
+    {
+      "text": "Protože mění jen dva řádky, hodí se obzvlášť pro řídké matice.",
+      "para": 4,
+      "start": 149.398,
+      "end": 154.474
+    },
+    {
+      "text": "QR rozklad je základem **QR algoritmu** pro výpočet vlastních čísel.",
+      "para": 5,
+      "start": 154.474,
+      "end": 160.201
+    },
+    {
+      "text": "Začneme s maticí, á; v každém kroku spočítáme její, kvé, er, rozklad a novou matici sestavíme obráceně jako, er, krát, kvé.",
+      "para": 5,
+      "start": 160.201,
+      "end": 170.304
+    },
+    {
+      "text": "Nová matice je podobnostní transformací té předchozí, takže má stejná vlastní čísla.",
+      "para": 5,
+      "start": 170.304,
+      "end": 176.622
+    },
+    {
+      "text": "Pro symetrické matice tato posloupnost konverguje k diagonální matici, na jejíž diagonále jsou přímo vlastní čísla.",
+      "para": 5,
+      "start": 176.622,
+      "end": 185.089
+    },
+    {
+      "text": "Pro obecnou matici konverguje k horní trojúhelníkové, tedy Schurově formě.",
+      "para": 5,
+      "start": 185.089,
+      "end": 190.536
+    },
+    {
+      "text": "Konvergenci výrazně urychlíme dvěma triky.",
+      "para": 6,
+      "start": 190.536,
+      "end": 193.651
+    },
+    {
+      "text": "Nejprve matici předzpracujeme do **Hessenbergovy formy**, takže každá iterace je pak levnější.",
+      "para": 6,
+      "start": 193.651,
+      "end": 200.19
+    },
+    {
+      "text": "Druhým trikem jsou posuny: před rozkladem od matice odečteme vhodný násobek jednotkové matice a po kroku ho zase přičteme, čímž dosáhneme kvadratické konvergence.",
+      "para": 6,
+      "start": 200.19,
+      "end": 212.209
+    },
+    {
+      "text": "Q R rozklad má i další užitečné aplikace.",
+      "para": 7,
+      "start": 212.209,
+      "end": 216.193
+    },
+    {
+      "text": "Je-li, er, na diagonále kladné, je rozklad jednoznačný.",
+      "para": 7,
+      "start": 216.193,
+      "end": 220.561
+    },
+    {
+      "text": "Umožňuje řešit lineární soustavy, počítat inverzi i determinant matice.",
+      "para": 7,
+      "start": 220.561,
+      "end": 226.404
+    },
+    {
+      "text": "Ve strojovém učení slouží k numericky stabilní regresi a k výpočtu vlastních čísel například pro metodu hlavních komponent.",
+      "para": 7,
+      "start": 226.404,
+      "end": 236.078
+    }
+  ]
+}

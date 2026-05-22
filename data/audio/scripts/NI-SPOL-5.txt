@@ -1,0 +1,50 @@
+# Otázka SPOL-5 — Numerická matematika
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+Při numerických výpočtech vzniká několik druhů chyb podle jejich původu.
+Chyba modelu vzniká zjednodušením matematického modelu skutečnosti, například zanedbáním tření.
+Chyba dat plyne z nepřesnosti vstupních hodnot, které obvykle pocházejí z měření.
+Chyba algoritmu nastává, když algoritmus nenajde přesné řešení v konečném počtu kroků.
+A konečně zaokrouhlovací chyba vzniká během samotného výpočtu při aritmetických operacích.
+
+K uložení necelých čísel se používá vědecký zápis: číslo je dáno znaménkem, signifikantem a exponentem, přičemž signifikant se násobí mocninou dvojky danou exponentem.
+> K uložení necelých čísel se používá **vědecký zápis**: číslo je dáno znaménkem, signifikantem a exponentem, přičemž signifikant se násobí mocninou dvojky danou exponentem.
+Signifikantu, kterému se říká též mantisa, i exponentu je vyhrazen pevný počet bitů.
+
+Formát s pohyblivou řádovou čárkou popisuje standard, I E E E sedm set padesát čtyři.
+> Formát s pohyblivou řádovou čárkou popisuje standard **IEEE-754**.
+Definuje přesnosti od poloviční přes jednoduchou a dvojitou až po čtyřnásobnou, které se liší počtem bitů signifikantu a exponentu.
+Reálná čísla, která lze v daném formátu přesně reprezentovat, nazýváme strojová čísla; tvoří konečnou podmnožinu racionálních čísel.
+> Reálná čísla, která lze v daném formátu přesně reprezentovat, nazýváme **strojová čísla**; tvoří konečnou podmnožinu racionálních čísel.
+
+Zobrazení, které reálnému číslu přiřadí nejbližší strojové číslo, vnáší chybu.
+Absolutní chyba je velikost rozdílu mezi přesnou hodnotou a její strojovou reprezentací.
+> **Absolutní chyba** je velikost rozdílu mezi přesnou hodnotou a její strojovou reprezentací.
+Relativní chyba je tato absolutní chyba podělená velikostí přesné hodnoty.
+> **Relativní chyba** je tato absolutní chyba podělená velikostí přesné hodnoty.
+Horní mez relativní chyby reprezentace se nazývá zaokrouhlovací jednotka.
+> Horní mez relativní chyby reprezentace se nazývá **zaokrouhlovací jednotka**.
+
+Také výsledek aritmetické operace se dvěma strojovými čísly obecně není strojové číslo a musí se zaokrouhlit.
+Spočtený výsledek je proto roven přesnému výsledku vynásobenému činitelem jedna plus delta, kde velikost delty je shora omezena zaokrouhlovací jednotkou.
+
+U numerického algoritmu rozlišujeme dvě chyby.
+Dopředná, neboli přímá, chyba je odchylka spočteného výsledku od přesného výsledku.
+> **Dopředná**, neboli přímá, chyba je odchylka spočteného výsledku od přesného výsledku.
+Zpětná chyba je nejmenší změna vstupních dat taková, že přesný algoritmus by na takto pozměněném vstupu vrátil náš spočtený výsledek.
+> **Zpětná chyba** je nejmenší změna vstupních dat taková, že přesný algoritmus by na takto pozměněném vstupu vrátil náš spočtený výsledek.
+Je-li zpětná chyba pro všechny vstupy malá, nazýváme algoritmus zpětně stabilní.
+> Je-li zpětná chyba pro všechny vstupy malá, nazýváme algoritmus **zpětně stabilní**.
+
+Podmíněnost je vlastnost samotné úlohy, nikoli algoritmu; vyjadřuje, jak citlivě reaguje výstup na malou změnu vstupních dat.
+> **Podmíněnost** je vlastnost samotné úlohy, nikoli algoritmu; vyjadřuje, jak citlivě reaguje výstup na malou změnu vstupních dat.
+Relativní číslo podmíněnosti je supremum poměru relativní změny výstupu ku relativní změně vstupu.
+> **Relativní číslo podmíněnosti** je supremum poměru relativní změny výstupu ku relativní změně vstupu.
+Je-li blízké jedné, je úloha dobře podmíněná; je-li velké, je úloha špatně podmíněná.
+
+U soustavy lineárních rovnic je číslo podmíněnosti matice součinem normy matice a normy její inverze.
+> U soustavy lineárních rovnic je **číslo podmíněnosti matice** součinem normy matice a normy její inverze.
+Relativní chyba řešení je nejvýše tolikrát větší než relativní chyba pravé strany, kolik činí toto číslo podmíněnosti.

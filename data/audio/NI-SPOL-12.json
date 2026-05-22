@@ -1,0 +1,140 @@
+{
+  "id": "NI-SPOL-12",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 177.505,
+  "sentences": [
+    {
+      "text": "Při **experimentálním vyhodnocení** algoritmu nás zajímá závislost výstupní metriky na zadané vstupní metrice.",
+      "para": 0,
+      "start": 0,
+      "end": 8.524
+    },
+    {
+      "text": "Vstupem může být například velikost instance, výstupní metrikou pak doba běhu, počet kroků nebo dosažená kvalita řešení.",
+      "para": 0,
+      "start": 8.524,
+      "end": 18.407
+    },
+    {
+      "text": "Protože vstup i výstup bývají složité, popíšeme je jednoduššími čísly, tedy metrikami.",
+      "para": 0,
+      "start": 18.407,
+      "end": 25.085
+    },
+    {
+      "text": "Obecné schéma experimentální algoritmiky má tři kroky.",
+      "para": 1,
+      "start": 25.085,
+      "end": 29.419
+    },
+    {
+      "text": "Nejdřív **generátor instancí** vytvoří vstupy se zadanou hodnotou vstupní metriky, přičemž potlačuje varianci mezi instancemi.",
+      "para": 1,
+      "start": 29.419,
+      "end": 38.616
+    },
+    {
+      "text": "Pak na nich spustíme algoritmus a nakonec naměřená data zpracujeme statisticky a interpretujeme.",
+      "para": 1,
+      "start": 38.616,
+      "end": 45.33
+    },
+    {
+      "text": "Pro jednu hodnotu zadané metriky dostaneme z mnoha instancí celou sadu naměřených hodnot.",
+      "para": 2,
+      "start": 45.33,
+      "end": 51.648
+    },
+    {
+      "text": "Nejjednodušší je popsat je průměrem nebo mediánem.",
+      "para": 2,
+      "start": 51.648,
+      "end": 55.447
+    },
+    {
+      "text": "Poctivější je ale zkontrolovat statistické rozložení dat, protože nemusí být ani rovnoměrné, ani normální.",
+      "para": 2,
+      "start": 55.447,
+      "end": 63.762
+    },
+    {
+      "text": "Rozložení pak popíšeme jeho parametry, například střední hodnotou a směrodatnou odchylkou, což je vlastně komprese naměřených dat.",
+      "para": 2,
+      "start": 63.762,
+      "end": 73.506
+    },
+    {
+      "text": "U **randomizovaného algoritmu** přibývá druhý zdroj variance, samotná náhodnost uvnitř algoritmu.",
+      "para": 3,
+      "start": 73.506,
+      "end": 80.811
+    },
+    {
+      "text": "I na jediné instanci proto musíme algoritmus spustit mnohokrát a z opakovaných běhů udělat statistiku.",
+      "para": 3,
+      "start": 80.811,
+      "end": 88.709
+    },
+    {
+      "text": "Počet kroků algoritmu se tak stává náhodnou veličinou a srovnáváme histogramy úspěšných běhů.",
+      "para": 3,
+      "start": 88.709,
+      "end": 96.13
+    },
+    {
+      "text": "Užitečným nástrojem je odhadnutá distribuční funkce, anglicky **ECDF**.",
+      "para": 4,
+      "start": 96.13,
+      "end": 102.309
+    },
+    {
+      "text": "Pro každý krok udává pravděpodobnost, že algoritmus úspěšně skončil nejpozději v tomto kroku.",
+      "para": 4,
+      "start": 102.309,
+      "end": 109.069
+    },
+    {
+      "text": "Distribuční funkce dvou variant algoritmu se dají vykreslit do jednoho grafu, a pokud se neprotínají, jedna varianta druhou dominuje a je lepší.",
+      "para": 4,
+      "start": 109.069,
+      "end": 119.358
+    },
+    {
+      "text": "Pokud se protnou, žádná varianta striktně nedominuje; při krátkém časovém limitu může být lepší jedna, při dlouhém druhá, a je potřeba hlubší analýza.",
+      "para": 4,
+      "start": 119.358,
+      "end": 130.703
+    },
+    {
+      "text": "Vyhodnocení randomizovaného algoritmu na celé sadě instancí má dvě úrovně zpracování, protože existují dva zdroje variance.",
+      "para": 5,
+      "start": 130.703,
+      "end": 140.679
+    },
+    {
+      "text": "Nejdřív přes hodnoty generátoru náhodných čísel uděláme statistiku pro každou instanci zvlášť, dokud nemáme spolehlivá data.",
+      "para": 5,
+      "start": 140.679,
+      "end": 150.19
+    },
+    {
+      "text": "Pak přes instance uděláme statistiku ze statistik, podobně jako u algoritmu bez randomizace.",
+      "para": 5,
+      "start": 150.19,
+      "end": 156.869
+    },
+    {
+      "text": "Obě úrovně je nutné posuzovat odděleně, neboť metoda potlačení variance se na nich může lišit a spolehlivost výsledku je třeba posoudit zvlášť.",
+      "para": 5,
+      "start": 156.869,
+      "end": 167.703
+    },
+    {
+      "text": "Závěry o tom, který algoritmus je lepší, je proto vhodné opřít o testování statistických hypotéz, ne jen o pouhé srovnání průměrů.",
+      "para": 5,
+      "start": 167.703,
+      "end": 177.505
+    }
+  ]
+}

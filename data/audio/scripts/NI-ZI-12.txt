@@ -1,0 +1,50 @@
+# Otázka ZI-12 — Jádrové metody, jádrová regrese a Support Vector Machines
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Lineární regrese modeluje cílovou proměnnou jako skalární součin vektoru vah a vektoru příznaků plus náhodný šum s nulovou střední hodnotou.
+> Lineární regrese modeluje cílovou proměnnou jako $Y = \boldsymbol w^T \boldsymbol x + \varepsilon$ s $E\varepsilon = 0$.
+Metoda nejmenších čtverců hledá váhy, které minimalizují součet kvadrátů reziduí, a jejich řešení dávají normální rovnice.
+> Metoda nejmenších čtverců minimalizuje $\|\boldsymbol Y - \mathbf X \boldsymbol w\|^2$ a řešením je $\hat{\boldsymbol w} = (\mathbf X^T \mathbf X)^{-1} \mathbf X^T \boldsymbol Y$.
+Hřebenová regrese přidá k chybě regularizační člen úměrný kvadrátu normy vah, takže matice, kterou je třeba invertovat, je vždy regulární.
+> Hřebenová regrese přidá regularizaci a minimalizuje $\|\boldsymbol Y - \mathbf X \boldsymbol w\|^2 + \lambda \|\boldsymbol w\|^2$.
+
+K nelineárnímu modelu se dostaneme nahrazením původních příznaků bázovými funkcemi.
+> K nelineárnímu modelu se dostaneme nahrazením původních příznaků **bázovými funkcemi**.
+Bázové funkce jsou nelineární transformace, například mocniny nebo indikátory, a převedou data do nového, em, rozměrného prostoru příznaků.
+> Bázové funkce jsou nelineární transformace, například mocniny nebo indikátory, a převedou data do nového $M$ rozměrného prostoru příznaků.
+Model zůstává lineární v parametrech, jen už v tomto novém prostoru.
+
+Mnoho lineárních modelů lze přepsat do duální reprezentace.
+> Mnoho lineárních modelů lze přepsat do **duální reprezentace**.
+Vektor vah omezíme na lineární kombinaci transformovaných trénovacích bodů, takže místo, em, parametrů optimalizujeme jen, en, koeficientů, kde, en, je počet trénovacích vzorků.
+> Vektor vah omezíme na $\boldsymbol w = \boldsymbol\Phi^T \boldsymbol\alpha$, takže místo $M$ parametrů optimalizujeme jen $N$ koeficientů.
+V duální podobě vystupují vstupy už jen prostřednictvím skalárních součinů transformovaných bodů.
+Tyto součiny shromažďuje Gramova matice, jejíž prvky jsou hodnoty jádrové funkce na dvojicích bodů.
+> Tyto součiny shromažďuje **Gramova matice** $\mathbf G = \boldsymbol\Phi \boldsymbol\Phi^T$, jejíž prvky jsou $G_{ij} = k(\boldsymbol x_i, \boldsymbol x_j)$.
+
+Klíčové pozorování je jádrový trik.
+> Klíčové pozorování je **jádrový trik**.
+Protože vstupy vystupují jen jako skalární součiny, nahradíme tyto součiny přímo jádrovou funkcí a vůbec přitom nemusíme bázové funkce počítat.
+> Protože vstupy vystupují jen jako skalární součiny, nahradíme je přímo jádrovou funkcí $k(\boldsymbol x, \boldsymbol y)$.
+Tím implicitně pracujeme ve vysoce, případně i nekonečně rozměrném prostoru, aniž bychom v něm cokoli explicitně reprezentovali.
+
+Aby jádro odpovídalo nějaké bázové reprezentaci, musí být pozitivně semidefinitní, takové jádro se také nazývá Mercerovo.
+> Aby jádro odpovídalo nějaké bázové reprezentaci, musí být **pozitivně semidefinitní**, takové jádro se nazývá Mercerovo.
+Podmínka znamená, že Gramova matice je pozitivně semidefinitní pro libovolnou volbu bodů.
+Příkladem je lineární jádro, polynomiální jádro a Gaussovo neboli radiální bázové jádro, které závisí jen na vzdálenosti dvou bodů.
+> Příkladem je lineární jádro, polynomiální jádro $k(x,y) = (x^T y + c)^d$ a Gaussovo neboli **R B F** jádro $k(x,y) = \exp(-\|x-y\|^2 / 2l^2)$.
+Ke každému pozitivně semidefinitnímu jádru existuje reprodukující jádrový Hilbertův prostor funkcí s reprodukční vlastností, podle které skalární součin jádra s funkcí vrací její hodnotu v daném bodě.
+> Ke každému jádru existuje **reprodukující jádrový Hilbertův prostor** s reprodukční vlastností $\langle k(\cdot, \boldsymbol x), f \rangle = f(\boldsymbol x)$.
+
+Stejný princip využívá metoda podpůrných vektorů, zkráceně S V M.
+> Stejný princip využívá metoda podpůrných vektorů, zkráceně **SVM**.
+Je to binární klasifikátor, jehož rozhodovací nadrovina je volena tak, aby maximalizovala odstup od nejbližších trénovacích bodů.
+> Je to binární klasifikátor, jehož rozhodovací nadrovina je volena tak, aby maximalizovala **odstup** od nejbližších trénovacích bodů.
+Optimalizujeme minimum poloviny kvadrátu normy vah za podmínek, že každý bod je správně klasifikován s odstupem alespoň jedna.
+> Optimalizujeme $\min_{\boldsymbol w, b} \tfrac12\|\boldsymbol w\|^2$ za podmínek $y_i(\boldsymbol w^T \boldsymbol x_i + b) \ge 1$.
+Lagrangeova duální forma vede k optimalizaci jen přes skalární součiny vstupů, takže i zde lze použít jádrový trik a klasifikovat podle znaménka jádrového rozhodovacího pravidla.
+> Lagrangeova duální forma vede k $f(\boldsymbol x) = \sum_i \alpha_i y_i k(\boldsymbol x_i, \boldsymbol x) + b$ a rozhoduje znaménko $f(\boldsymbol x)$.
+Varianta s měkkým odstupem připouští chyby a používá pantovou ztrátu, tedy maximum z nuly a jedné mínus odstup daného bodu.
+> Varianta s **měkkým odstupem** používá pantovou ztrátu $L_i = \max(0, 1 - y_i f(\boldsymbol x_i))$.

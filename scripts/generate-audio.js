@@ -79,7 +79,12 @@ function main() {
         { input: rec.say }
       );
       const dur = ffprobeDuration(wav);
-      timing.push({ text: rec.show, start: round(cursor), end: round(cursor + dur) });
+      timing.push({
+        text: rec.show,
+        para: rec.para,
+        start: round(cursor),
+        end: round(cursor + dur),
+      });
       cursor += dur;
       concatList.push(`file '${wav.replace(/'/g, "'\\''")}'`);
     });

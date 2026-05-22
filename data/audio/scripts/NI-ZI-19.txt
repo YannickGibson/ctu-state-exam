@@ -1,0 +1,55 @@
+# Otázka ZI-19 — Hladká optimalizace bez omezení, gradientní metody a volba kroku
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Hladká optimalizace předpokládá, že účelová funkce má spojité první, případně i druhé parciální derivace, tedy je spojitě diferencovatelná.
+> **Hladká optimalizace** předpokládá, že účelová funkce má spojité první, případně i druhé parciální derivace, tedy je spojitě diferencovatelná.
+Optimalizace bez omezení, nazývaná též volná optimalizace, hledá minimum funkce přes celý prostor, bez jakýchkoli omezujících podmínek.
+> **Optimalizace bez omezení**, nazývaná též volná optimalizace, hledá minimum funkce přes celý prostor, bez jakýchkoli omezujících podmínek.
+
+Pro lokální minimum platí dvě podmínky optimality.
+Nutná podmínka prvního řádu říká, že gradient v daném bodě je nulový; takovému bodu říkáme stacionární.
+Postačující podmínka druhého řádu navíc požaduje, aby Hessova matice byla pozitivně definitní.
+Pro konvexní funkci je každý stacionární bod rovnou globálním minimem.
+
+Úlohu řešíme iteračně: novou aproximaci získáme z té staré posunem ve zvoleném směru o určitou délku kroku.
+> Úlohu řešíme iteračně podle schématu $x_{k+1} = x_k + \alpha_k p_k$, kde $p_k$ je směr a $\alpha_k$ délka kroku.
+Existují dvě hlavní strategie.
+Strategie line search nejprve zvolí směr a pak hledá vhodnou délku kroku; strategie trust region nejprve zvolí poloměr důvěryhodné oblasti a v ní hledá krok.
+
+Nejjednodušší volbou směru je metoda největšího spádu, kde směr je záporný gradient.
+> Nejjednodušší volbou směru je **metoda největšího spádu**, kde směr je záporný gradient.
+Konverguje jen lineárně a v úzkých protáhlých údolích cikcakuje; rychlost závisí na kondičním čísle Hessovy matice.
+
+Newtonova metoda volí směr pomocí inverze Hessovy matice násobené gradientem.
+> **Newtonova metoda** volí směr jako $p_k = -[\nabla^2 f(x_k)]^{-1} \nabla f(x_k)$.
+Plyne z kvadratického Taylorova modelu funkce a v okolí minima konverguje kvadraticky.
+Vyžaduje ale výpočet Hessovy matice, a ta musí být pozitivně definitní, jinak směr nemusí být ani spádový.
+
+Kvazinewtonovské metody, jako jsou B F G S a L B F G S, Hessovu matici jen aproximují přírůstkově z gradientů.
+> **Kvazi-Newtonovy metody**, jako jsou BFGS a L-BFGS, Hessovu matici jen aproximují přírůstkově z gradientů.
+Konvergují superlineárně bez výpočtu druhých derivací; L B F G S si pamatuje jen několik posledních vektorů, takže je paměťově úsporná pro velké rozměry.
+
+Pro velmi velké datové sady se používá stochastický gradientní sestup, který gradient počítá jen z malé dávky dat.
+Jeho adaptivními rozšířeními jsou momentum, R M S Prop a Adam.
+
+Druhou částí kroku je volba délky kroku.
+Přesný line search hledá délku kroku, která účelovou funkci podél směru minimalizuje, to je ale výpočetně drahé.
+Proto se používá nepřesný line search s Armijovou podmínkou dostatečného poklesu.
+> Proto se používá nepřesný line search s **Armijovou podmínkou** dostatečného poklesu.
+Armijova podmínka žádá, aby funkční hodnota klesla aspoň o jistý násobek očekávaného poklesu.
+Praktický algoritmus je backtracking: začneme s krokem rovným jedné a opakovaně ho zmenšujeme na polovinu, dokud Armijova podmínka neplatí.
+
+Samotná Armijova podmínka ale připouští příliš malé kroky, proto se přidává podmínka zakřivení.
+Obě dohromady tvoří Wolfeho podmínky, které zaručují dostatečný pokles i dostatečnou změnu sklonu.
+> Obě dohromady tvoří **Wolfeho podmínky**, které zaručují dostatečný pokles i dostatečnou změnu sklonu.
+Silná varianta navíc omezuje absolutní hodnotu sklonu; Wolfeho podmínky jsou důležité pro kvazinewtonovské metody, aby aktualizace zachovala pozitivní definitnost.
+Pro spojitě diferencovatelnou a zdola omezenou funkci vždy existuje délka kroku, která je splňuje.
+
+K dispozici je řada konvergenčních výsledků.
+Gradientní sestup s krokem převrácené Lipschitzovy konstanty má pro konvexní funkce rychlost řádu jedna ku, ká; pro silně konvexní konverguje lineárně.
+Newtonova metoda konverguje kvadraticky, kvazinewtonovské superlineárně, a Nesterovem urychlený gradient dosahuje rychlosti řádu jedna ku, ká na druhou, což je optimum mezi prvořádovými metodami.
+
+V hlubokém učení se kromě adaptivních metod řeší i rozvrh délky kroku v čase.
+Používá se konstantní krok, postupný útlum, kosinové žíhání, krátký počáteční warmup nebo cyklické rozvrhy délky kroku.

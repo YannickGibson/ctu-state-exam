@@ -1,0 +1,44 @@
+# Otázka ZI-9 — Rekurentní neuronové sítě a neuroevoluce
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Dopředná síť má spojení jen zleva doprava, žádný cyklus, a tedy žádnou paměť.
+Rekurentní neuronová síť má naopak alespoň jeden cyklus, takže aktivace v ní přetrvávají v čase.
+> **Rekurentní neuronová síť** má alespoň jeden cyklus, takže aktivace v ní přetrvávají v čase.
+Díky této vnitřní paměti se hodí pro zpracování sekvencí a časových řad a dokáže aproximovat libovolný dynamický systém.
+
+Elmanova síť je dopředná síť doplněná o kontextové jednotky, jedna pro každý skrytý neuron.
+> **Elmanova síť** je dopředná síť doplněná o **kontextové jednotky**, jedna pro každý skrytý neuron.
+Kontextové jednotky uchovávají skrytý stav z předchozího kroku a v dalším kroku ho přivádějí zpět na vstup skryté vrstvy.
+
+Rekurentní síť učíme algoritmem zpětného šíření v čase.
+> Rekurentní síť učíme algoritmem **zpětného šíření v čase**, anglicky backpropagation through time.
+Síť se rozbalí přes všechny časové kroky do hluboké dopředné sítě a aplikuje se na ni běžné zpětné šíření, přičemž gradienty pro sdílené váhy se přes kroky sčítají.
+Problémem dlouhých sekvencí je mizející nebo explodující gradient, kvůli kterému se síť nedokáže naučit dlouhé závislosti.
+
+Síť s dlouhou krátkodobou pamětí, zkráceně L S T M, tento problém řeší pomocí buňky se třemi branami.
+> Síť s dlouhou krátkodobou pamětí (**LSTM**) řeší mizející gradient pomocí buňky se třemi branami.
+Vstupní brána určuje, co se do paměti zapíše, zapomínací brána, co se z ní vymaže, a výstupní brána, co se z paměti přečte.
+Klíčová je paměťová buňka, kterou gradient protéká s minimálním zkreslením, a proto si síť udrží i dlouhé závislosti.
+
+Hradlová rekurentní jednotka, zkráceně G R U, je zjednodušená L S T M jen se dvěma branami, aktualizační a resetovací, a bez samostatné paměťové buňky.
+> Hradlová rekurentní jednotka (**GRU**) je zjednodušená LSTM jen se dvěma branami a bez samostatné paměťové buňky.
+Má méně parametrů, ale ve výkonu je srovnatelná.
+
+V architektuře enkodér dekodér enkodér zpracuje sekvenci do jednoho kontextového vektoru a dekodér z něj generuje výstupní sekvenci.
+> V architektuře **enkodér dekodér** enkodér stlačí sekvenci do kontextového vektoru a dekodér z něj generuje výstup.
+Pevný kontextový vektor je ale úzké hrdlo, a proto Bahdanau zavedl mechanismus pozornosti.
+> Pevný kontextový vektor je úzké hrdlo, a proto Bahdanau zavedl **mechanismus pozornosti**.
+Dekodér v každém kroku spočítá vážený součet všech skrytých stavů enkodéru, kde váhy jsou normalizovaná skóre zarovnání.
+
+Hopfieldova síť je plně propojená rekurentní síť s binárními neurony nabývajícími hodnot mínus jedna a plus jedna.
+> **Hopfieldova síť** je plně propojená rekurentní síť s binárními neurony v hodnotách $-1$ a $+1$.
+Učí se Hebbovým pravidlem a má energetickou funkci, která při změnách stavu vždy klesá, takže síť konverguje do lokálního minima odpovídajícího uloženému vzoru.
+Funguje tak jako asociativní paměť, a její autor John Hopfield za ni získal Nobelovu cenu za fyziku v roce dva tisíce dvacet čtyři.
+
+Neuroevoluce optimalizuje neuronové sítě evolučními algoritmy místo gradientního učení.
+> **Neuroevoluce** optimalizuje neuronové sítě evolučními algoritmy místo gradientního učení.
+Metoda N E A T postupně přidává neurony a spoje, a díky inovačním číslům umí křížit i topologicky odlišné sítě, přičemž speciace udržuje rozmanitost populace.
+> Metoda **NEAT** postupně přidává neurony a spoje a díky inovačním číslům kříží i topologicky odlišné sítě.
+Neuroevoluce se používá pro hledání architektur a pro učení v prostředích bez dostupného gradientu.

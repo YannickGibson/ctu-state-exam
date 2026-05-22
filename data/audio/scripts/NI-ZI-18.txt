@@ -1,0 +1,44 @@
+# Otázka ZI-18 — SVD rozklad matice, výpočet a aplikace ve strojovém učení
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+S V D rozklad, neboli singulární rozklad, zapisuje libovolnou matici, á, jako součin tří matic.
+> **SVD rozklad**, neboli singulární rozklad, zapisuje libovolnou matici $A$ jako součin tří matic $A = U \Sigma V^T$.
+Matice, u, a matice, vé, jsou ortogonální, prostřední matice, sigma, je diagonální.
+> Matice $U$ a matice $V$ jsou ortogonální, prostřední matice $\Sigma$ je diagonální.
+Na její diagonále stojí nezáporná čísla seřazená sestupně, kterým říkáme singulární hodnoty.
+> Na její diagonále stojí nezáporná čísla seřazená sestupně, kterým říkáme **singulární hodnoty** $\sigma_1 \ge \sigma_2 \ge \ldots \ge 0$.
+Sloupce matice, u, jsou levé singulární vektory, sloupce matice, vé, jsou pravé singulární vektory.
+
+Singulární hodnoty a vektory těsně souvisejí s vlastními čísly.
+Pravé singulární vektory jsou vlastní vektory součinu transponovaná, á, krát, á; levé singulární vektory jsou vlastní vektory součinu, á, krát transponovaná, á.
+Obě tyto matice mají stejná kladná vlastní čísla a singulární hodnota je odmocninou příslušného vlastního čísla.
+Matici lze také zapsat jako součet vnějších součinů singulárních vektorů vážených singulárními hodnotami, což je výhodné pro aproximace nízkou hodností.
+
+Numericky stabilní výpočet S V D probíhá ve dvou fázích.
+Nejprve matici Householderovými reflexemi převedeme na bidiagonální tvar; tomuto kroku se říká Golubova–Kahanova bidiagonalizace.
+Poté na bidiagonální matici aplikujeme iterativní Q R algoritmus s posuny, který ji dovede k diagonální matici singulárních hodnot.
+Pro malé matice se používají Jacobiho rotace, pro velmi velké a řídké matice takzvaný uťatý rozklad přes Lanczosovu metodu, který spočítá jen několik největších singulárních trojic.
+
+Ve strojovém učení má S V D široké uplatnění.
+První aplikací je Mooreova–Penroseova pseudoinverze, kterou získáme převrácením nenulových singulárních hodnot.
+> První aplikací je Mooreova–Penroseova **pseudoinverze**, kterou získáme převrácením nenulových singulárních hodnot.
+Pseudoinverze řeší úlohu nejmenších čtverců i pro singulární nebo obdélníkové matice.
+
+Druhou aplikací je aproximace maticí nízké hodnosti.
+> Druhou aplikací je **aproximace maticí nízké hodnosti**.
+Podle Eckartovy–Youngovy věty je nejlepší aproximací matice hodnosti, ká, ve Frobeniově i spektrální normě právě součet, ká, největších singulárních trojic.
+Chyba aproximace je odmocnina ze součtu čtverců vynechaných singulárních hodnot.
+Na tom stojí komprese obrazu, latentní sémantická analýza textů i doporučovací systémy postavené na maticové faktorizaci.
+
+Třetí aplikací je metoda hlavních komponent.
+S V D centrovaných dat dává přímo hlavní komponenty jako sloupce matice, vé, aniž bychom museli počítat kovarianční matici, což je numericky stabilnější.
+
+S V D dále umožňuje robustně určit numerickou hodnost matice jako počet singulárních hodnot nad zvolenou tolerancí.
+Podíl největší a nejmenší singulární hodnoty udává kondiční číslo, tedy citlivost soustavy na chyby.
+Uťatý rozklad slouží také k regularizaci špatně podmíněných úloh, podobně jako hřebenová regrese.
+
+Q R rozklad je zhruba dvakrát rychlejší než S V D, ale neposkytuje singulární hodnoty.
+S V D je nejobecnější rozklad, funguje pro libovolnou matici a dává úplnou informaci o její struktuře.
+Pro řešení nejmenších čtverců stačí, kvé, er, rozklad; pro odhad hodnosti, regularizaci a aproximaci nízkou hodností potřebujeme, es, vé, dé.

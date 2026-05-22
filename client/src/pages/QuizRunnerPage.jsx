@@ -3,7 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { completeQuiz, getQuiz } from '../api.js';
+import { getQuiz } from '../api.js';
+import { useProgress } from '../ProgressContext.jsx';
 import {
   asParts,
   partIsAnswered,
@@ -22,6 +23,7 @@ function Markdown({ children }) {
 
 export default function QuizRunnerPage() {
   const { subject, scope } = useParams();
+  const { completeQuizCached } = useProgress();
   const [quiz, setQuiz] = useState(null);
   const [error, setError] = useState(null);
   const [answers, setAnswers] = useState({}); // key "qi:pi" -> string | number
@@ -73,7 +75,7 @@ export default function QuizRunnerPage() {
       const ids = Array.from(
         new Set(questions.map((q) => q.questionId).filter(Boolean))
       );
-      await completeQuiz(subject, ids.length > 0 ? ids : undefined);
+      await completeQuizCached(subject, ids.length > 0 ? ids : undefined);
     } catch (e) {
       setCompleteError(e.message);
     }

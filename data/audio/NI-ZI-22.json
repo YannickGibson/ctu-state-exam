@@ -1,0 +1,140 @@
+{
+  "id": "NI-ZI-22",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 193.77,
+  "sentences": [
+    {
+      "text": "Pro kompaktní zápis modelů časových řad používáme **operátor zpoždění** $B$.",
+      "para": 0,
+      "start": 0,
+      "end": 6.005
+    },
+    {
+      "text": "Aplikací operátoru $B$ na hodnotu řady získáme hodnotu o jeden krok zpět, $B X_t = X_{t-1}$, opakovanou aplikací posun o příslušný počet kroků.",
+      "para": 0,
+      "start": 6.005,
+      "end": 15.632
+    },
+    {
+      "text": "Z něj odvodíme **operátor diference** $\\Delta = 1 - B$, který od hodnoty odečte hodnotu předchozí, $\\Delta X_t = X_t - X_{t-1}$.",
+      "para": 0,
+      "start": 15.632,
+      "end": 23.112
+    },
+    {
+      "text": "Vyšší diference vznikají opakovaným diferencováním, tedy umocněním tohoto operátoru.",
+      "para": 0,
+      "start": 23.112,
+      "end": 29.779
+    },
+    {
+      "text": "Diferencováním se snažíme z řady odstranit trend nebo náhodnou procházku a převést ji na stacionární.",
+      "para": 1,
+      "start": 29.779,
+      "end": 37.792
+    },
+    {
+      "text": "Řekneme, že řada je **integrovaná** řádu $d$, neboli $I(d)$, pokud její $d$-tá diference je stacionární, zatímco nižší ještě ne.",
+      "para": 1,
+      "start": 37.792,
+      "end": 46.305
+    },
+    {
+      "text": "Stacionární řada je integrovaná řádu nula, typickým případem řádu jedna je náhodná procházka, jejíž první diference dává bílý šum.",
+      "para": 1,
+      "start": 46.305,
+      "end": 56.536
+    },
+    {
+      "text": "Vhodný řád diferencování volíme podle pomalého poklesu autokorelační funkce nebo pomocí testů jednotkového kořene, jako je test A D F nebo K P S S.",
+      "para": 1,
+      "start": 56.536,
+      "end": 67.417
+    },
+    {
+      "text": "Většinou stačí řád nejvýše dva; přílišné diferencování zvyšuje variabilitu a ničí informaci v datech.",
+      "para": 1,
+      "start": 67.417,
+      "end": 75.163
+    },
+    {
+      "text": "$\\phi(B)(1-B)^d X_t = c + \\theta(B)\\varepsilon_t$",
+      "para": 2,
+      "start": 75.163,
+      "end": 84.559
+    },
+    {
+      "text": "Parametr, pé, je řád autoregresní části a zachycuje paměť, tedy autokorelaci ve stacionární řadě.",
+      "para": 2,
+      "start": 84.559,
+      "end": 92.375
+    },
+    {
+      "text": "Parametr, dé, je počet diferencí potřebných k dosažení stacionarity.",
+      "para": 2,
+      "start": 92.375,
+      "end": 97.915
+    },
+    {
+      "text": "Parametr, kvé, je řád klouzavých průměrů a zachycuje vliv minulých náhodných šoků.",
+      "para": 2,
+      "start": 97.915,
+      "end": 104.269
+    },
+    {
+      "text": "Spojíme-li autoregresní polynom s činitelem diference, dostaneme jediný polynom, který má, dé, jednotkových kořenů; právě ty činí původní řadu nestacionární.",
+      "para": 2,
+      "start": 104.269,
+      "end": 116.427
+    },
+    {
+      "text": "Některé volby parametrů dávají známé modely.",
+      "para": 3,
+      "start": 116.427,
+      "end": 120.063
+    },
+    {
+      "text": "Model $\\mathrm{ARIMA}(0,0,0)$ popisuje bílý šum, model $\\mathrm{ARIMA}(0,1,0)$ popisuje náhodnou procházku, a tentýž model s konstantou navíc náhodnou procházku s driftem.",
+      "para": 3,
+      "start": 120.063,
+      "end": 133.766
+    },
+    {
+      "text": "Pozor na **redundanci parametrů**: mají-li autoregresní polynom a polynom klouzavých průměrů společný kořen, lze ho vykrátit a model je zbytečně složitý.",
+      "para": 3,
+      "start": 133.766,
+      "end": 144.949
+    },
+    {
+      "text": "Nadbytečné parametry totiž zvyšují rozptyl odhadů, proto preferujeme jednodušší modely.",
+      "para": 3,
+      "start": 144.949,
+      "end": 151.221
+    },
+    {
+      "text": "Při výběru modelu hledáme nejmenší informační kritérium A I C nebo B I C a ověřujeme přesnost mimo trénovací data křížovou validací s posuvným oknem.",
+      "para": 4,
+      "start": 151.221,
+      "end": 163.228
+    },
+    {
+      "text": "Celý postup automatizuje algoritmus **auto ARIMA**, který nejprve testem jednotkového kořene určí $d$, a poté vybírá řády $p$ a $q$ podle informačního kritéria.",
+      "para": 4,
+      "start": 163.228,
+      "end": 175.305
+    },
+    {
+      "text": "Pro řady se sezónností slouží rozšíření **SARIMA**, které přidává sezónní autoregresní, diferenční a klouzavé členy operující na násobcích periody.",
+      "para": 5,
+      "start": 175.305,
+      "end": 186.094
+    },
+    {
+      "text": "Klasickým příkladem je takzvaný letecký model pro měsíční letecká data s roční sezónní periodou.",
+      "para": 5,
+      "start": 186.094,
+      "end": 193.77
+    }
+  ]
+}

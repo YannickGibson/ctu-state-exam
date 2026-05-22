@@ -1,0 +1,170 @@
+{
+  "id": "NI-ZI-18",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 220.997,
+  "sentences": [
+    {
+      "text": "**SVD rozklad**, neboli singulární rozklad, zapisuje libovolnou matici $A$ jako součin tří matic $A = U \\Sigma V^T$.",
+      "para": 0,
+      "start": 0,
+      "end": 8.014
+    },
+    {
+      "text": "Matice $U$ a matice $V$ jsou ortogonální, prostřední matice $\\Sigma$ je diagonální.",
+      "para": 0,
+      "start": 8.014,
+      "end": 14.924
+    },
+    {
+      "text": "Na její diagonále stojí nezáporná čísla seřazená sestupně, kterým říkáme **singulární hodnoty** $\\sigma_1 \\ge \\sigma_2 \\ge \\ldots \\ge 0$.",
+      "para": 0,
+      "start": 14.924,
+      "end": 21.997
+    },
+    {
+      "text": "Sloupce matice, u, jsou levé singulární vektory, sloupce matice, vé, jsou pravé singulární vektory.",
+      "para": 0,
+      "start": 21.997,
+      "end": 30.243
+    },
+    {
+      "text": "Singulární hodnoty a vektory těsně souvisejí s vlastními čísly.",
+      "para": 1,
+      "start": 30.243,
+      "end": 34.982
+    },
+    {
+      "text": "Pravé singulární vektory jsou vlastní vektory součinu transponovaná, á, krát, á; levé singulární vektory jsou vlastní vektory součinu, á, krát transponovaná, á.",
+      "para": 1,
+      "start": 34.982,
+      "end": 49.741
+    },
+    {
+      "text": "Obě tyto matice mají stejná kladná vlastní čísla a singulární hodnota je odmocninou příslušného vlastního čísla.",
+      "para": 1,
+      "start": 49.741,
+      "end": 58.231
+    },
+    {
+      "text": "Matici lze také zapsat jako součet vnějších součinů singulárních vektorů vážených singulárními hodnotami, což je výhodné pro aproximace nízkou hodností.",
+      "para": 1,
+      "start": 58.231,
+      "end": 70.076
+    },
+    {
+      "text": "Numericky stabilní výpočet S V D probíhá ve dvou fázích.",
+      "para": 2,
+      "start": 70.076,
+      "end": 74.664
+    },
+    {
+      "text": "Nejprve matici Householderovými reflexemi převedeme na bidiagonální tvar; tomuto kroku se říká Golubova–Kahanova bidiagonalizace.",
+      "para": 2,
+      "start": 74.664,
+      "end": 84.129
+    },
+    {
+      "text": "Poté na bidiagonální matici aplikujeme iterativní Q R algoritmus s posuny, který ji dovede k diagonální matici singulárních hodnot.",
+      "para": 2,
+      "start": 84.129,
+      "end": 93.489
+    },
+    {
+      "text": "Pro malé matice se používají Jacobiho rotace, pro velmi velké a řídké matice takzvaný uťatý rozklad přes Lanczosovu metodu, který spočítá jen několik největších singulárních trojic.",
+      "para": 2,
+      "start": 93.489,
+      "end": 107.18
+    },
+    {
+      "text": "Ve strojovém učení má S V D široké uplatnění.",
+      "para": 3,
+      "start": 107.18,
+      "end": 110.84
+    },
+    {
+      "text": "První aplikací je Mooreova–Penroseova **pseudoinverze**, kterou získáme převrácením nenulových singulárních hodnot.",
+      "para": 3,
+      "start": 110.84,
+      "end": 119.062
+    },
+    {
+      "text": "Pseudoinverze řeší úlohu nejmenších čtverců i pro singulární nebo obdélníkové matice.",
+      "para": 3,
+      "start": 119.062,
+      "end": 125.485
+    },
+    {
+      "text": "Druhou aplikací je **aproximace maticí nízké hodnosti**.",
+      "para": 4,
+      "start": 125.485,
+      "end": 129.876
+    },
+    {
+      "text": "Podle Eckartovy–Youngovy věty je nejlepší aproximací matice hodnosti, ká, ve Frobeniově i spektrální normě právě součet, ká, největších singulárních trojic.",
+      "para": 4,
+      "start": 129.876,
+      "end": 141.582
+    },
+    {
+      "text": "Chyba aproximace je odmocnina ze součtu čtverců vynechaných singulárních hodnot.",
+      "para": 4,
+      "start": 141.582,
+      "end": 147.587
+    },
+    {
+      "text": "Na tom stojí komprese obrazu, latentní sémantická analýza textů i doporučovací systémy postavené na maticové faktorizaci.",
+      "para": 4,
+      "start": 147.587,
+      "end": 157.145
+    },
+    {
+      "text": "Třetí aplikací je metoda hlavních komponent.",
+      "para": 5,
+      "start": 157.145,
+      "end": 160.642
+    },
+    {
+      "text": "S V D centrovaných dat dává přímo hlavní komponenty jako sloupce matice, vé, aniž bychom museli počítat kovarianční matici, což je numericky stabilnější.",
+      "para": 5,
+      "start": 160.642,
+      "end": 172.452
+    },
+    {
+      "text": "S V D dále umožňuje robustně určit numerickou hodnost matice jako počet singulárních hodnot nad zvolenou tolerancí.",
+      "para": 6,
+      "start": 172.452,
+      "end": 181.232
+    },
+    {
+      "text": "Podíl největší a nejmenší singulární hodnoty udává kondiční číslo, tedy citlivost soustavy na chyby.",
+      "para": 6,
+      "start": 181.232,
+      "end": 188.804
+    },
+    {
+      "text": "Uťatý rozklad slouží také k regularizaci špatně podmíněných úloh, podobně jako hřebenová regrese.",
+      "para": 6,
+      "start": 188.804,
+      "end": 196.098
+    },
+    {
+      "text": "Q R rozklad je zhruba dvakrát rychlejší než S V D, ale neposkytuje singulární hodnoty.",
+      "para": 7,
+      "start": 196.098,
+      "end": 202.846
+    },
+    {
+      "text": "S V D je nejobecnější rozklad, funguje pro libovolnou matici a dává úplnou informaci o její struktuře.",
+      "para": 7,
+      "start": 202.846,
+      "end": 210.36
+    },
+    {
+      "text": "Pro řešení nejmenších čtverců stačí, kvé, er, rozklad; pro odhad hodnosti, regularizaci a aproximaci nízkou hodností potřebujeme, es, vé, dé.",
+      "para": 7,
+      "start": 210.36,
+      "end": 220.997
+    }
+  ]
+}

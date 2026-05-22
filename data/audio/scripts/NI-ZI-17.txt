@@ -1,0 +1,51 @@
+# Otázka ZI-17 — QR rozklad: metody výpočtu a aplikace pro vlastní čísla
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Q R rozklad spočívá v tom, že danou matici, á, přepíšeme jako součin dvou matic se speciální strukturou.
+> **QR rozklad** spočívá v tom, že danou matici $A$ přepíšeme jako součin dvou matic se speciální strukturou.
+Matici, kvé, požadujeme ortogonální, matici, er, horní trojúhelníkovou, takže pod diagonálou má samé nuly.
+> Matici $Q$ požadujeme ortogonální, matici $R$ horní trojúhelníkovou, takže pod diagonálou má samé nuly.
+Matice je ortogonální, jestliže její sloupce jsou navzájem kolmé a mají jednotkovou velikost; pak platí, že transponovaná, kvé, krát, kvé, je jednotková matice.
+> Matice je **ortogonální**, jestliže její sloupce jsou navzájem kolmé a mají jednotkovou velikost; pak platí $Q^T Q = I$.
+Klíčová vlastnost je, že násobení ortogonální maticí nemění Euklidovu normu vektoru, a proto jsou tyto matice numericky spolehlivé.
+
+Q R rozklad se hojně používá při řešení nejmenších čtverců.
+Pro regresní úlohu hledáme váhy, které minimalizují normu rozdílu mezi odhadem a cíli.
+Když matici dat rozložíme na, kvé, krát, er, můžeme díky zachování normy úlohu přepsat na minimalizaci normy výrazu, er, krát váhy, mínus, transponovaná, kvé, krát cíle.
+Stačí pak vyřešit trojúhelníkovou soustavu zpětnou substitucí, což je numericky stabilnější než řešení normálních rovnic.
+
+První metodou výpočtu je Gram-Schmidtova ortogonalizace.
+> První metodou výpočtu je **Gram-Schmidtova ortogonalizace**.
+Sloupce matice se postupně ortonormalizují: od každého sloupce odečteme jeho průměty do již hotových směrů a výsledek znormujeme.
+Koeficienty těchto průmětů tvoří prvky matice, er.
+Klasický Gram-Schmidt je ovšem numericky nestabilní, protože dochází ke ztrátě ortogonality; modifikovaná varianta je stabilnější.
+
+Druhou metodou je Householderova reflexe, tedy zrcadlení vektoru.
+> Druhou metodou je **Householderova reflexe**, tedy zrcadlení vektoru.
+Sestrojíme ortogonální matici, která zrcadlí daný sloupec na násobek prvního jednotkového vektoru, čímž pod diagonálou vznikne sloupec nul.
+Tato reflexní matice je symetrická i ortogonální a počítá se jako jednotková matice mínus dvojnásobek vnějšího součinu normálového vektoru zrcadla.
+Postupným zrcadlením sloupců dostaneme matici, er, a součin všech reflexí dává matici, kvé; metoda je numericky stabilní a úsporná.
+
+Třetí metodou jsou Givensovy rotace.
+> Třetí metodou jsou **Givensovy rotace**.
+Givensova rotace je otočení v rovině dvou souřadnic, které vynuluje vždy jediný prvek pod diagonálou.
+Protože mění jen dva řádky, hodí se obzvlášť pro řídké matice.
+
+Q R rozklad je základem Q R algoritmu pro výpočet vlastních čísel.
+> QR rozklad je základem **QR algoritmu** pro výpočet vlastních čísel.
+Začneme s maticí, á; v každém kroku spočítáme její, kvé, er, rozklad a novou matici sestavíme obráceně jako, er, krát, kvé.
+Nová matice je podobnostní transformací té předchozí, takže má stejná vlastní čísla.
+Pro symetrické matice tato posloupnost konverguje k diagonální matici, na jejíž diagonále jsou přímo vlastní čísla.
+Pro obecnou matici konverguje k horní trojúhelníkové, tedy Schurově formě.
+
+Konvergenci výrazně urychlíme dvěma triky.
+Nejprve matici předzpracujeme do Hessenbergovy formy, takže každá iterace je pak levnější.
+> Nejprve matici předzpracujeme do **Hessenbergovy formy**, takže každá iterace je pak levnější.
+Druhým trikem jsou posuny: před rozkladem od matice odečteme vhodný násobek jednotkové matice a po kroku ho zase přičteme, čímž dosáhneme kvadratické konvergence.
+
+Q R rozklad má i další užitečné aplikace.
+Je-li, er, na diagonále kladné, je rozklad jednoznačný.
+Umožňuje řešit lineární soustavy, počítat inverzi i determinant matice.
+Ve strojovém učení slouží k numericky stabilní regresi a k výpočtu vlastních čísel například pro metodu hlavních komponent.

@@ -1,0 +1,134 @@
+{
+  "id": "NI-ZI-11",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 177.223,
+  "sentences": [
+    {
+      "text": "Celkovou chybu predikce libovolného modelu lze rozložit na tři složky: kvadrát **zkreslení**, **rozptyl** a neredukovatelný **šum**.",
+      "para": 0,
+      "start": 0,
+      "end": 9.488
+    },
+    {
+      "text": "Zkreslení říká, jak daleko jsou průměrné predikce od skutečné funkce, a souvisí s nedoučením modelu.",
+      "para": 0,
+      "start": 9.488,
+      "end": 17.188
+    },
+    {
+      "text": "Rozptyl říká, jak moc se predikce mění napříč různými trénovacími sadami, a souvisí s přeučením.",
+      "para": 0,
+      "start": 17.188,
+      "end": 24.981
+    },
+    {
+      "text": "Šum je vnitřní náhodnost dat, kterou žádný model zachytit nedokáže.",
+      "para": 0,
+      "start": 24.981,
+      "end": 30.347
+    },
+    {
+      "text": "S rostoucí složitostí modelu zkreslení klesá, ale rozptyl roste.",
+      "para": 1,
+      "start": 30.347,
+      "end": 35.54
+    },
+    {
+      "text": "Celková chyba má proto tvar písmene U a optimum leží v kompromisním bodě, kde je součet obou složek nejmenší.",
+      "para": 1,
+      "start": 35.54,
+      "end": 43.809
+    },
+    {
+      "text": "Lineární regrese má vysoké zkreslení a nízký rozptyl, hluboké stromy nebo metoda nejbližších sousedů s malým $k$ mají naopak nízké zkreslení a vysoký rozptyl.",
+      "para": 1,
+      "start": 43.809,
+      "end": 55.955
+    },
+    {
+      "text": "Ansámblové metody nabízejí příznivý kompromis, protože udržují obě složky na střední až nízké úrovni.",
+      "para": 1,
+      "start": 55.955,
+      "end": 64.48
+    },
+    {
+      "text": "Rozklad odvodíme tak, že do výrazu pro střední kvadratickou chybu přičteme a odečteme střední hodnotu odhadu.",
+      "para": 2,
+      "start": 64.48,
+      "end": 72.331
+    },
+    {
+      "text": "Po roznásobení smíšený člen vypadne a zbyde $E[(Y-\\hat f)^2] = \\sigma_\\epsilon^2 + \\mathrm{Bias}^2[\\hat f] + \\mathrm{Var}[\\hat f]$.",
+      "para": 2,
+      "start": 72.331,
+      "end": 85.069
+    },
+    {
+      "text": "**Bagging** je metoda, která snižuje rozptyl.",
+      "para": 3,
+      "start": 85.069,
+      "end": 88.416
+    },
+    {
+      "text": "Natrénujeme $M$ modelů, každý na jiném bootstrapovém vzorku trénovací sady, a výslednou predikci spočítáme jako jejich průměr.",
+      "para": 3,
+      "start": 88.416,
+      "end": 98.217
+    },
+    {
+      "text": "Kdyby byly modely nezávislé, klesl by rozptyl průměru $M$ krát.",
+      "para": 3,
+      "start": 98.217,
+      "end": 103.409
+    },
+    {
+      "text": "V praxi jsou ale modely korelované, takže $\\mathrm{Var}[\\bar f] = \\rho\\,\\mathrm{Var}[\\hat f] + \\frac{1-\\rho}{M}\\mathrm{Var}[\\hat f]$.",
+      "para": 3,
+      "start": 103.409,
+      "end": 115.382
+    },
+    {
+      "text": "Rozptyl se proto sníží, ale jen omezeně: tím více, čím větší je ansámbl a čím menší je korelace mezi modely.",
+      "para": 3,
+      "start": 115.382,
+      "end": 124.429
+    },
+    {
+      "text": "**Boosting** je naopak metoda, která snižuje zkreslení.",
+      "para": 4,
+      "start": 124.429,
+      "end": 128.321
+    },
+    {
+      "text": "Staví aditivní model jako vážený součet $\\bar f = \\sum_{i=1}^M \\alpha_i \\hat f_i$ slabých modelů.",
+      "para": 4,
+      "start": 128.321,
+      "end": 133.246
+    },
+    {
+      "text": "Modely se přidávají postupně a každý nový se zaměřuje na **rezidua** $r_i = y - \\sum_{j<i}\\alpha_j \\hat f_j$ předchozích modelů.",
+      "para": 4,
+      "start": 133.246,
+      "end": 142.467
+    },
+    {
+      "text": "Iterativním zaměřováním na chyby tak boosting postupně snižuje zkreslení slabých modelů, agresivní snižování bez regularizace ale může zvednout rozptyl.",
+      "para": 4,
+      "start": 142.467,
+      "end": 154.242
+    },
+    {
+      "text": "Mezi baggingové metody patří náhodné lesy, které trénují rozhodovací stromy na bootstrapových vzorcích s náhodným výběrem příznaků, a extrémně náhodné stromy.",
+      "para": 5,
+      "start": 154.242,
+      "end": 165.704
+    },
+    {
+      "text": "Mezi boostingové metody patří AdaBoost, který klade důraz na obtížné vzorky, a gradientní boosting, jehož implementace XGBoost a LightGBM modelují rezidua.",
+      "para": 5,
+      "start": 165.704,
+      "end": 177.223
+    }
+  ]
+}

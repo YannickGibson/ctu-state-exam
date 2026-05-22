@@ -1,0 +1,116 @@
+{
+  "id": "NI-SPOL-11",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 156.805,
+  "sentences": [
+    {
+      "text": "Třída **P** obsahuje rozhodovací problémy, které umíme vyřešit algoritmem v polynomiálním čase.",
+      "para": 0,
+      "start": 0,
+      "end": 7.108
+    },
+    {
+      "text": "Třída **NP** obsahuje problémy, u kterých sice nemusíme umět rychle najít řešení, ale máme-li předložené řešení, takzvaného svědka, umíme ho v polynomiálním čase ověřit.",
+      "para": 0,
+      "start": 7.108,
+      "end": 20.659
+    },
+    {
+      "text": "Každý problém ze třídy P leží i ve třídě NP, protože když umíme řešení rovnou spočítat, umíme ho i ověřit.",
+      "para": 0,
+      "start": 20.659,
+      "end": 29.52
+    },
+    {
+      "text": "Otevřenou otázkou zůstává, zda se obě třídy rovnají; všeobecně se ale věří, že $P \\neq NP$.",
+      "para": 0,
+      "start": 29.52,
+      "end": 37.673
+    },
+    {
+      "text": "Klíčovým nástrojem je polynomiální převod jednoho problému na druhý.",
+      "para": 1,
+      "start": 37.673,
+      "end": 42.854
+    },
+    {
+      "text": "Problém je **NP-těžký**, jestliže se na něj dají efektivně převést všechny problémy ze třídy NP.",
+      "para": 1,
+      "start": 42.854,
+      "end": 50.31
+    },
+    {
+      "text": "Problém je **NP-úplný**, jestliže je NP-těžký a zároveň sám patří do třídy NP.",
+      "para": 1,
+      "start": 50.31,
+      "end": 57.267
+    },
+    {
+      "text": "N P úplné problémy jsou tedy ty nejtěžší ve třídě N P.",
+      "para": 1,
+      "start": 57.267,
+      "end": 61.798
+    },
+    {
+      "text": "**Cookova věta** dokazuje, že problém splnitelnosti logické formule, takzvaný SAT, je NP-úplný.",
+      "para": 2,
+      "start": 61.798,
+      "end": 69.254
+    },
+    {
+      "text": "Tím je zaručeno, že třída N P úplných problémů není prázdná, a otevírá se cesta k důkazům N P úplnosti převodem na již známý problém.",
+      "para": 2,
+      "start": 69.254,
+      "end": 80.391
+    },
+    {
+      "text": "Všechny N P úplné problémy tvoří třídu ekvivalence: jsou navzájem polynomiálně převoditelné.",
+      "para": 2,
+      "start": 80.391,
+      "end": 87.684
+    },
+    {
+      "text": "Praktický důsledek je zásadní: kdyby existoval polynomiální algoritmus na jediný N P úplný problém, díky převodům by řešil polynomiálně všechny problémy ze třídy N P.",
+      "para": 2,
+      "start": 87.684,
+      "end": 101.201
+    },
+    {
+      "text": "Pro praktické výpočty z toho plynou dobré i špatné zprávy.",
+      "para": 3,
+      "start": 101.201,
+      "end": 105.731
+    },
+    {
+      "text": "Dobrá zpráva: je-li problém v N P, není horší než N P a předložené řešení vždy umíme efektivně zkontrolovat.",
+      "para": 3,
+      "start": 105.731,
+      "end": 114.86
+    },
+    {
+      "text": "Další dobrá zpráva: i u N P úplného problému není vyloučen praktický převod na známé problémy s dobrými řešiči, například na S A T.",
+      "para": 3,
+      "start": 114.86,
+      "end": 125.973
+    },
+    {
+      "text": "Špatná zpráva: u N P úplného problému může být hledání přesného řešení v nejhorším případě časově neúnosné.",
+      "para": 3,
+      "start": 125.973,
+      "end": 134.996
+    },
+    {
+      "text": "Takový převod přitom nemusí být prakticky výhodný, takže v praxi často sáhneme po aproximaci nebo heuristice.",
+      "para": 3,
+      "start": 134.996,
+      "end": 143.3
+    },
+    {
+      "text": "Zařazení problému do tříd N P a N P těžkých nám tedy předem říká, zda má smysl hledat přesný rychlý algoritmus, nebo zda se rovnou zaměřit na přibližné řešení.",
+      "para": 3,
+      "start": 143.3,
+      "end": 156.805
+    }
+  ]
+}

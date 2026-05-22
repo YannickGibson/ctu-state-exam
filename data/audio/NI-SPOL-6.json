@@ -1,0 +1,170 @@
+{
+  "id": "NI-SPOL-6",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 226.152,
+  "sentences": [
+    {
+      "text": "Hypotéza je tvrzení o neznámém rozdělení náhodného vektoru, iks.",
+      "para": 0,
+      "start": 0,
+      "end": 5.227
+    },
+    {
+      "text": "Testování hypotéz je rozhodovací proces, který na základě napozorovaných dat hypotézu buď zamítne, nebo nezamítne.",
+      "para": 0,
+      "start": 5.227,
+      "end": 13.542
+    },
+    {
+      "text": "Vždy pracujeme se dvěma hypotézami: **nulovou hypotézou** $H_0$, o které chceme rozhodnout, a **alternativní hypotézou** $H_A$, která je opačné tvrzení.",
+      "para": 0,
+      "start": 13.542,
+      "end": 23.437
+    },
+    {
+      "text": "Zamítnutí nulové hypotézy ve prospěch alternativy je silný výsledek, proto tu hypotézu, kterou chceme prokázat, volíme jako alternativní.",
+      "para": 0,
+      "start": 23.437,
+      "end": 33.668
+    },
+    {
+      "text": "Při testování můžeme udělat dvě chyby.",
+      "para": 1,
+      "start": 33.668,
+      "end": 36.724
+    },
+    {
+      "text": "Chyba prvního druhu znamená, že zamítneme nulovou hypotézu, ačkoli platí.",
+      "para": 1,
+      "start": 36.724,
+      "end": 42.485
+    },
+    {
+      "text": "Chyba druhého druhu znamená, že nezamítneme nulovou hypotézu, ačkoli ve skutečnosti platí alternativa.",
+      "para": 1,
+      "start": 42.485,
+      "end": 50.174
+    },
+    {
+      "text": "Obě chyby nelze kontrolovat zároveň, proto požadujeme, aby pravděpodobnost chyby prvního druhu byla nejvýše rovna zvolené hodnotě $\\alpha$, kterou nazýváme **hladina významnosti**.",
+      "para": 1,
+      "start": 50.174,
+      "end": 62.518
+    },
+    {
+      "text": "Test, který za dané hladiny minimalizuje chybu druhého druhu, nazýváme nejsilnější.",
+      "para": 1,
+      "start": 62.518,
+      "end": 68.604
+    },
+    {
+      "text": "**Kritický obor** $W_\\alpha$ je množina těch realizací dat, pro které nulovou hypotézu zamítneme.",
+      "para": 2,
+      "start": 68.604,
+      "end": 74.922
+    },
+    {
+      "text": "**p-hodnota** $\\hat p$ je nejmenší hladina významnosti, na které ještě lze nulovou hypotézu zamítnout.",
+      "para": 2,
+      "start": 74.922,
+      "end": 81.438
+    },
+    {
+      "text": "Je-li pé hodnota menší než požadovaná hladina, hypotézu zamítáme; za platnosti nulové hypotézy má pé hodnota rovnoměrné rozdělení na intervalu nula až jedna.",
+      "para": 2,
+      "start": 81.438,
+      "end": 92.923
+    },
+    {
+      "text": "Hypotézy dělíme na parametrické, které tvrdí něco o hodnotě parametru, a neparametrické, které tvrdí něco o vlastnosti rozdělení, třeba o nezávislosti nebo o tvaru.",
+      "para": 3,
+      "start": 92.923,
+      "end": 104.57
+    },
+    {
+      "text": "Dále rozlišujeme hypotézy jednoduché, obsahující jediné rozdělení, a složené, obsahující více rozdělení.",
+      "para": 3,
+      "start": 104.57,
+      "end": 113.014
+    },
+    {
+      "text": "**T-testy** slouží k testování hypotézy o střední hodnotě normálního rozdělení.",
+      "para": 4,
+      "start": 113.014,
+      "end": 118.902
+    },
+    {
+      "text": "Je-li rozptyl znám, má testová statistika standardní normální rozdělení.",
+      "para": 4,
+      "start": 118.902,
+      "end": 124.582
+    },
+    {
+      "text": "Je-li rozptyl neznámý, použijeme **jednovýběrový t-test**: testová statistika $T = \\frac{\\bar X_n - \\mu_0}{s_n/\\sqrt n}$ je rozdíl výběrového průměru a testované hodnoty, dělený výběrovou směrodatnou odchylkou a násobený odmocninou z rozsahu výběru.",
+      "para": 4,
+      "start": 124.582,
+      "end": 140.525
+    },
+    {
+      "text": "Tato statistika má za platnosti nulové hypotézy Studentovo rozdělení $t_{n-1}$ s $n-1$ stupni volnosti.",
+      "para": 4,
+      "start": 140.525,
+      "end": 148.376
+    },
+    {
+      "text": "Párový téčko test porovnává dvě měření na týchž jednotkách: testujeme rozdíly dvojic a ptáme se, zda je jejich střední hodnota nulová.",
+      "para": 5,
+      "start": 148.376,
+      "end": 158.607
+    },
+    {
+      "text": "Dvouvýběrový téčko test porovnává střední hodnoty dvou nezávislých výběrů.",
+      "para": 5,
+      "start": 158.607,
+      "end": 164.287
+    },
+    {
+      "text": "Testy dobré shody ověřují, zda data pocházejí z předpokládaného rozdělení.",
+      "para": 6,
+      "start": 164.287,
+      "end": 170.316
+    },
+    {
+      "text": "Používáme **Pearsonovu chí kvadrát statistiku** $\\chi^2 = \\sum_i \\frac{(N_i - np_i)^2}{np_i}$, která sčítá přes všechny třídy čtverce rozdílů napozorovaných a teoretických četností, dělené teoretickou četností.",
+      "para": 6,
+      "start": 170.316,
+      "end": 182.091
+    },
+    {
+      "text": "Při známých parametrech má tato statistika asymptoticky rozdělení $\\chi^2_{k-1}$ s $k-1$ stupni volnosti.",
+      "para": 6,
+      "start": 182.091,
+      "end": 190.371
+    },
+    {
+      "text": "Jsou-li parametry neznámé, odhadneme je metodou minimálního chí kvadrátu a počet stupňů volnosti snížíme o počet odhadovaných parametrů.",
+      "para": 6,
+      "start": 190.371,
+      "end": 200.718
+    },
+    {
+      "text": "**Test nezávislosti** zkoumá, zda jsou dvě veličiny v kontingenční tabulce nezávislé.",
+      "para": 7,
+      "start": 200.718,
+      "end": 206.839
+    },
+    {
+      "text": "Nulová hypotéza tvrdí, že sdružené pravděpodobnosti jsou součinem marginálních pravděpodobností.",
+      "para": 7,
+      "start": 206.839,
+      "end": 213.866
+    },
+    {
+      "text": "Použijeme opět chí kvadrát statistiku, která má asymptoticky rozdělení $\\chi^2_{(r-1)(c-1)}$; počet stupňů volnosti je součin počtu řádků bez jedné a počtu sloupců bez jedné.",
+      "para": 7,
+      "start": 213.866,
+      "end": 226.152
+    }
+  ]
+}

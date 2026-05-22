@@ -1,0 +1,116 @@
+{
+  "id": "NI-SPOL-16",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 197.034,
+  "sentences": [
+    {
+      "text": "Model **PRAM** je idealizovaný paralelní počítač s $p$ procesory, které synchronně přistupují do společné sdílené paměti.",
+      "para": 0,
+      "start": 0,
+      "end": 9.929
+    },
+    {
+      "text": "Každý procesor má vlastní lokální paměť a zná svůj index, a všechny procesory provádějí ve stejném taktu tři typy instrukcí: čtení ze sdílené buňky, lokální operaci a zápis do sdílené buňky.",
+      "para": 0,
+      "start": 9.929,
+      "end": 25.199
+    },
+    {
+      "text": "V jednotkovém modelu trvá každá operace jeden takt, v globálním modelu trvá čtení i zápis konstantní čas větší než jedna.",
+      "para": 0,
+      "start": 25.199,
+      "end": 34.257
+    },
+    {
+      "text": "Konflikty při souběžném přístupu do téže buňky se řeší podle čtyř variant.",
+      "para": 1,
+      "start": 34.257,
+      "end": 39.926
+    },
+    {
+      "text": "Model **EREW** zakazuje souběžné čtení i zápis, model **CREW** povoluje souběžné čtení, ale zápis smí jen jeden procesor.",
+      "para": 1,
+      "start": 39.926,
+      "end": 51.236
+    },
+    {
+      "text": "Model **CRCW** povoluje i souběžný zápis, a to ve variantě prioritní, kde uspěje procesor s nejvyšší prioritou, náhodné, kde uspěje libovolný, a společné, kde musí být všechny zapisované hodnoty stejné.",
+      "para": 1,
+      "start": 51.236,
+      "end": 67.307
+    },
+    {
+      "text": "Asynchronní model, **APRAM**, předpokládá procesory bez centrálních hodin, které pracují nezávisle.",
+      "para": 2,
+      "start": 67.307,
+      "end": 75.251
+    },
+    {
+      "text": "Výpočet je posloupnost globálních fází oddělených bariérovou synchronizací, neboť přístup do sdílené paměti zde není jednotkový.",
+      "para": 2,
+      "start": 75.251,
+      "end": 85.261
+    },
+    {
+      "text": "Globální čtení nebo zápis trvá, dé, taktů, k po sobě jdoucích operací trvá, dé, plus, k, mínus jedna, a bariéra trvá, bé, závisející na počtu procesorů.",
+      "para": 2,
+      "start": 85.261,
+      "end": 96.886
+    },
+    {
+      "text": "**Paralelní zrychlení** je podíl času nejlepšího sekvenčního algoritmu a času paralelního algoritmu, a nemůže být asymptoticky větší než počet procesorů.",
+      "para": 3,
+      "start": 96.886,
+      "end": 108.371
+    },
+    {
+      "text": "Lineární zrychlení znamená, že zrychlení roste úměrně počtu procesorů, a je to hlavní cíl paralelizace: když počet procesorů stoupne ká krát, chceme, aby čas klesl ká krát.",
+      "para": 3,
+      "start": 108.371,
+      "end": 122.259
+    },
+    {
+      "text": "**Paralelní efektivnost** je podíl sekvenčního času a ceny, tedy zrychlení připadající na jedno jádro, a kvůli komunikační a synchronizační režii je vždy menší než jedna.",
+      "para": 4,
+      "start": 122.259,
+      "end": 134.742
+    },
+    {
+      "text": "Algoritmus je paralelně optimální, právě když má lineární zrychlení, je cenově optimální a má konstantní efektivnost.",
+      "para": 4,
+      "start": 134.742,
+      "end": 143.905
+    },
+    {
+      "text": "**Škálovatelnost** je schopnost algoritmu udržet paralelní optimalitu, když počet procesorů i velikost úlohy společně rostou nebo klesají.",
+      "para": 5,
+      "start": 143.905,
+      "end": 154.357
+    },
+    {
+      "text": "**Amdahlův zákon** platí pro pevnou velikost úlohy: má-li algoritmus sekvenční podíl, zrychlení nikdy nepřekročí převrácenou hodnotu tohoto podílu.",
+      "para": 6,
+      "start": 154.357,
+      "end": 165.249
+    },
+    {
+      "text": "Je-li sekvenční podíl deset procent, zrychlení nepřekročí deset, ať použijeme libovolně mnoho procesorů; paralelizace se tedy nasytí.",
+      "para": 6,
+      "start": 165.249,
+      "end": 175.132
+    },
+    {
+      "text": "**Gustafsonův zákon** naopak předpokládá, že s rostoucím počtem procesorů úměrně roste i velikost úlohy.",
+      "para": 7,
+      "start": 175.132,
+      "end": 183.18
+    },
+    {
+      "text": "Pak sekvenční část trvá konstantní čas a paralelní část škáluje lineárně, takže zrychlení v limitě roste až k počtu procesorů a větší úlohy lze řešit za stejný čas.",
+      "para": 7,
+      "start": 183.18,
+      "end": 197.034
+    }
+  ]
+}

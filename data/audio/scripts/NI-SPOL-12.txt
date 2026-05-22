@@ -1,0 +1,36 @@
+# Otázka SPOL-12 — Experimentální vyhodnocení algoritmů, zejména randomizovaných.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Při experimentálním vyhodnocení algoritmu nás zajímá závislost výstupní metriky na zadané vstupní metrice.
+> Při **experimentálním vyhodnocení** algoritmu nás zajímá závislost výstupní metriky na zadané vstupní metrice.
+Vstupem může být například velikost instance, výstupní metrikou pak doba běhu, počet kroků nebo dosažená kvalita řešení.
+Protože vstup i výstup bývají složité, popíšeme je jednoduššími čísly, tedy metrikami.
+
+Obecné schéma experimentální algoritmiky má tři kroky.
+Nejdřív generátor instancí vytvoří vstupy se zadanou hodnotou vstupní metriky, přičemž potlačuje varianci mezi instancemi.
+> Nejdřív **generátor instancí** vytvoří vstupy se zadanou hodnotou vstupní metriky, přičemž potlačuje varianci mezi instancemi.
+Pak na nich spustíme algoritmus a nakonec naměřená data zpracujeme statisticky a interpretujeme.
+
+Pro jednu hodnotu zadané metriky dostaneme z mnoha instancí celou sadu naměřených hodnot.
+Nejjednodušší je popsat je průměrem nebo mediánem.
+Poctivější je ale zkontrolovat statistické rozložení dat, protože nemusí být ani rovnoměrné, ani normální.
+Rozložení pak popíšeme jeho parametry, například střední hodnotou a směrodatnou odchylkou, což je vlastně komprese naměřených dat.
+
+U randomizovaného algoritmu přibývá druhý zdroj variance, samotná náhodnost uvnitř algoritmu.
+> U **randomizovaného algoritmu** přibývá druhý zdroj variance, samotná náhodnost uvnitř algoritmu.
+I na jediné instanci proto musíme algoritmus spustit mnohokrát a z opakovaných běhů udělat statistiku.
+Počet kroků algoritmu se tak stává náhodnou veličinou a srovnáváme histogramy úspěšných běhů.
+
+Užitečným nástrojem je odhadnutá distribuční funkce, anglicky E C D F.
+> Užitečným nástrojem je odhadnutá distribuční funkce, anglicky **ECDF**.
+Pro každý krok udává pravděpodobnost, že algoritmus úspěšně skončil nejpozději v tomto kroku.
+Distribuční funkce dvou variant algoritmu se dají vykreslit do jednoho grafu, a pokud se neprotínají, jedna varianta druhou dominuje a je lepší.
+Pokud se protnou, žádná varianta striktně nedominuje; při krátkém časovém limitu může být lepší jedna, při dlouhém druhá, a je potřeba hlubší analýza.
+
+Vyhodnocení randomizovaného algoritmu na celé sadě instancí má dvě úrovně zpracování, protože existují dva zdroje variance.
+Nejdřív přes hodnoty generátoru náhodných čísel uděláme statistiku pro každou instanci zvlášť, dokud nemáme spolehlivá data.
+Pak přes instance uděláme statistiku ze statistik, podobně jako u algoritmu bez randomizace.
+Obě úrovně je nutné posuzovat odděleně, neboť metoda potlačení variance se na nich může lišit a spolehlivost výsledku je třeba posoudit zvlášť.
+Závěry o tom, který algoritmus je lepší, je proto vhodné opřít o testování statistických hypotéz, ne jen o pouhé srovnání průměrů.

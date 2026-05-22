@@ -1,0 +1,33 @@
+# Otázka SPOL-11 — Význam tříd NP a NPH pro praktické výpočty.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Třída P obsahuje rozhodovací problémy, které umíme vyřešit algoritmem v polynomiálním čase.
+> Třída **P** obsahuje rozhodovací problémy, které umíme vyřešit algoritmem v polynomiálním čase.
+Třída N P obsahuje problémy, u kterých sice nemusíme umět rychle najít řešení, ale máme-li předložené řešení, takzvaného svědka, umíme ho v polynomiálním čase ověřit.
+> Třída **NP** obsahuje problémy, u kterých sice nemusíme umět rychle najít řešení, ale máme-li předložené řešení, takzvaného svědka, umíme ho v polynomiálním čase ověřit.
+Každý problém ze třídy P leží i ve třídě N P, protože když umíme řešení rovnou spočítat, umíme ho i ověřit.
+> Každý problém ze třídy P leží i ve třídě NP, protože když umíme řešení rovnou spočítat, umíme ho i ověřit.
+Otevřenou otázkou zůstává, zda se obě třídy rovnají; všeobecně se ale věří, že P se nerovná N P.
+> Otevřenou otázkou zůstává, zda se obě třídy rovnají; všeobecně se ale věří, že $P \neq NP$.
+
+Klíčovým nástrojem je polynomiální převod jednoho problému na druhý.
+Problém je N P těžký, jestliže se na něj dají efektivně převést všechny problémy ze třídy N P.
+> Problém je **NP-těžký**, jestliže se na něj dají efektivně převést všechny problémy ze třídy NP.
+Problém je N P úplný, jestliže je N P těžký a zároveň sám patří do třídy N P.
+> Problém je **NP-úplný**, jestliže je NP-těžký a zároveň sám patří do třídy NP.
+N P úplné problémy jsou tedy ty nejtěžší ve třídě N P.
+
+Cookova věta dokazuje, že problém splnitelnosti logické formule, takzvaný S A T, je N P úplný.
+> **Cookova věta** dokazuje, že problém splnitelnosti logické formule, takzvaný SAT, je NP-úplný.
+Tím je zaručeno, že třída N P úplných problémů není prázdná, a otevírá se cesta k důkazům N P úplnosti převodem na již známý problém.
+Všechny N P úplné problémy tvoří třídu ekvivalence: jsou navzájem polynomiálně převoditelné.
+Praktický důsledek je zásadní: kdyby existoval polynomiální algoritmus na jediný N P úplný problém, díky převodům by řešil polynomiálně všechny problémy ze třídy N P.
+
+Pro praktické výpočty z toho plynou dobré i špatné zprávy.
+Dobrá zpráva: je-li problém v N P, není horší než N P a předložené řešení vždy umíme efektivně zkontrolovat.
+Další dobrá zpráva: i u N P úplného problému není vyloučen praktický převod na známé problémy s dobrými řešiči, například na S A T.
+Špatná zpráva: u N P úplného problému může být hledání přesného řešení v nejhorším případě časově neúnosné.
+Takový převod přitom nemusí být prakticky výhodný, takže v praxi často sáhneme po aproximaci nebo heuristice.
+Zařazení problému do tříd N P a N P těžkých nám tedy předem říká, zda má smysl hledat přesný rychlý algoritmus, nebo zda se rovnou zaměřit na přibližné řešení.

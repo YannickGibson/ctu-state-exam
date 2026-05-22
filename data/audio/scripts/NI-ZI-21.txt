@@ -1,0 +1,43 @@
+# Otázka ZI-21 — Autoregresní a klouzavé průměrové modely s metodami identifikace
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Autoregresní model řádu, pé, popisuje hodnotu řady jako lineární kombinaci, pé, předchozích hodnot, k níž se přičte konstanta a bílý šum.
+> **Autoregresní model** řádu $p$ popisuje hodnotu řady jako lineární kombinaci $p$ předchozích hodnot, k níž se přičte konstanta a bílý šum.
+> $X_t = c + \phi_1 X_{t-1} + \ldots + \phi_p X_{t-p} + \varepsilon_t$
+Koeficienty, fí, jsou regresní parametry modelu.
+> Koeficienty $\phi_i$ jsou regresní parametry modelu.
+Autoregresní model nemusí být stacionární; je stacionární právě tehdy, když všechny kořeny jeho charakteristického polynomu leží vně jednotkové kružnice.
+Například model prvního řádu je stacionární, pokud je koeficient, fí jedna, v absolutní hodnotě menší než jedna; pro hodnotu rovnou jedné vznikne náhodná procházka.
+
+Model klouzavých průměrů řádu, kvé, vyjadřuje hodnotu řady jako lineární kombinaci současného a, kvé, předchozích šumů.
+> **Model klouzavých průměrů** řádu $q$ vyjadřuje hodnotu řady jako lineární kombinaci současného a $q$ předchozích šumů.
+> $X_t = \mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \ldots + \theta_q \varepsilon_{t-q}$
+Zatímco autoregrese propaguje minulost přímo přes předchozí hodnoty řady, klouzavé průměry zachycují krátkodobé náhodné šoky.
+Model klouzavých průměrů je vždy stacionární, protože jde o konečnou kombinaci stacionárního šumu.
+U něj naopak zkoumáme invertibilitu: je invertibilní, pokud kořeny jeho charakteristického polynomu leží vně jednotkové kružnice.
+> U něj naopak zkoumáme **invertibilitu**: je invertibilní, pokud kořeny jeho charakteristického polynomu leží vně jednotkové kružnice.
+Invertibilní model klouzavých průměrů lze přepsat na nekonečnou autoregresi s klesajícími koeficienty, což je důležité pro odhad i predikci.
+
+Smíšený model arma spojuje obě části, autoregresní i klouzavé průměry.
+> Smíšený model **ARMA** spojuje obě části, autoregresní i klouzavé průměry.
+Je stacionární podle kořenů autoregresního polynomu a invertibilní podle kořenů polynomu klouzavých průměrů.
+
+Klíčovými nástroji pro identifikaci modelu jsou autokorelační a parciální autokorelační funkce.
+Autokorelační funkce udává korelaci hodnot řady vzdálených o dané zpoždění a získáme ji jako poměr autokovariance k varianci.
+> **Autokorelační funkce** udává korelaci hodnot řady vzdálených o dané zpoždění a získáme ji jako poměr autokovariance k varianci, $\rho(\tau) = \gamma(\tau)/\gamma(0)$.
+Parciální autokorelační funkce udává korelaci hodnoty se zpožděnou hodnotou po odstranění vlivu všech hodnot mezilehlých.
+> **Parciální autokorelační funkce** udává korelaci hodnoty se zpožděnou hodnotou po odstranění vlivu všech hodnot mezilehlých.
+U autoregresního modelu autokorelační funkce klesá geometricky nebo oscilačně, zatímco parciální autokorelační funkce se uřízne za zpožděním, pé.
+U modelu klouzavých průměrů je tomu naopak: autokorelační funkce se uřízne za zpožděním, kvé, a parciální klesá postupně.
+U smíšeného modelu klesají postupně obě funkce, takže jeho identifikace je obtížnější.
+
+Celý postup shrnuje Box-Jenkinsova metodologie.
+> Celý postup shrnuje **Box-Jenkinsova metodologie**.
+Nejprve podle autokorelační a parciální autokorelační funkce zvolíme řády, pé a kvé.
+Pak odhadneme parametry: u autoregrese metodou nejmenších čtverců nebo Yuleovými-Walkerovými rovnicemi, u klouzavých průměrů numerickou optimalizací věrohodnosti.
+> Pak odhadneme parametry: u autoregrese metodou nejmenších čtverců nebo **Yuleovými-Walkerovými rovnicemi**, u klouzavých průměrů numerickou optimalizací věrohodnosti.
+Mezi kandidátními modely vybíráme ten s nejmenším informačním kritériem, tedy kritériem A I C nebo B I C, která penalizují počet parametrů.
+Nakonec model ověříme: rezidua musí být bílý šum, což testujeme Ljungovým-Boxovým testem a kontrolou jejich autokorelační funkce.
+> Nakonec model ověříme: rezidua musí být bílý šum, což testujeme **Ljungovým-Boxovým testem** a kontrolou jejich autokorelační funkce.

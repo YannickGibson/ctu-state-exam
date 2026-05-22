@@ -1,0 +1,45 @@
+# Otázka ZI-14 — Principy bayesovského modelování
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+V bayesovském modelování s odhadovaným parametrem, théta, nakládáme jako s náhodnou veličinou, která má své pravděpodobnostní rozdělení.
+> V bayesovském modelování s odhadovaným parametrem $\theta$ nakládáme jako s náhodnou veličinou, která má své pravděpodobnostní rozdělení.
+Nehledáme tedy jednu pevnou hodnotu, ale celé rozdělení, které kvantifikuje míru naší neurčitosti o parametru.
+Vztah mezi parametrem a daty popisuje Bayesova věta: aposteriorní hustota je úměrná součinu věrohodnosti a apriorní hustoty, dělenému marginální věrohodností.
+> Vztah mezi parametrem a daty popisuje Bayesova věta: aposteriorní hustota je úměrná součinu věrohodnosti a apriorní hustoty, dělenému marginální věrohodností.
+
+Apriorní rozdělení je počáteční znalost o parametru, théta, před zohledněním dat.
+> **Apriorní rozdělení** je počáteční znalost o parametru $\theta$ před zohledněním dat.
+Chová se podobně jako lidské přesvědčení: čím je utaženější, tedy má menší rozptyl, tím neochotněji reaguje na novou informaci z dat.
+Věrohodnost je pravděpodobnost pozorovaných dat při daném parametru, théta.
+Aposteriorní rozdělení je naše znalost o parametru, théta, už po zohlednění dat.
+> **Aposteriorní rozdělení** je naše znalost o parametru $\theta$ už po zohlednění dat.
+Marginální věrohodnost ve jmenovateli je jen normalizační konstanta, nezávislá na parametru, théta, a často ji proto vynecháme a pracujeme s neznormalizovanou hustotou.
+
+Bayesovský odhad je svou povahou sekvenční: pozorování přidáváme jedno po druhém.
+Aposteriorní rozdělení z prvního kroku slouží jako apriorní rozdělení pro krok druhý.
+S novými daty se tak naše znalost postupně zpřesňuje, a nemusíme přitom přepočítávat všechna předchozí pozorování.
+Pokud jsou pozorování podmíněně nezávislá, je výsledek nezávislý na pořadí, takže sekvenční update po jednom datu dá totéž jako update všemi daty najednou.
+
+Rodinu apriorních rozdělení nazýváme konjugovanou k dané věrohodnosti, jestliže aposteriorní rozdělení patří do stejné rodiny jako apriorní.
+> Rodinu apriorních rozdělení nazýváme **konjugovanou** k dané věrohodnosti, jestliže aposteriorní rozdělení patří do stejné rodiny jako apriorní.
+Výhodou je, že aposteriorní rozdělení má analyticky uzavřený tvar a Bayesův update se ztriviální na přičtení suficientní statistiky k hyperparametrům apriorna.
+Hyperparametry jsou parametry apriorního rozdělení, takto je slovně odlišujeme od parametrů modelu.
+
+Klasickým příkladem je dvojice beta a binomické rozdělení.
+Pravděpodobnost úspěchu, pé, modelujeme beta rozdělením s hyperparametry, a, a, bé.
+> Pravděpodobnost úspěchu $p$ modelujeme beta rozdělením s hyperparametry $a$ a $b$.
+Pozorujeme-li, en, pokusů a v nich, ká, úspěchů, je aposteriorní rozdělení opět beta, s prvním hyperparametrem, a, plus ká, a druhým hyperparametrem, bé, plus en mínus ká.
+> Pozorujeme-li $n$ pokusů a v nich $k$ úspěchů, je aposteriorní rozdělení opět beta, s prvním hyperparametrem $a + k$ a druhým hyperparametrem $b + n - k$.
+Hyperparametry se chovají jako počty pseudoúspěchů a pseudoneúspěchů z pomyslného dřívějšího experimentu.
+Aposteriorní střední hodnota je váženým průměrem apriorní znalosti a dat.
+
+Další konjugované dvojice jsou gamma rozdělení pro intenzitu Poissonova rozdělení, nebo Dirichletovo rozdělení pro multinomické rozdělení.
+Speciálním případem jsou neinformativní apriorna, například ploché rovnoměrné rozdělení, nebo Jeffreysovo apriorno, které je invariantní vůči reparametrizaci.
+
+Pomocí aposteriorního rozdělení také predikujeme nová pozorování.
+Posteriorní prediktivní rozdělení vznikne marginalizací přes parametr, théta, takže kombinuje neurčitost o parametru i o samotném pozorování.
+> Posteriorní prediktivní rozdělení vznikne marginalizací přes parametr $\theta$, takže kombinuje neurčitost o parametru i o samotném pozorování.
+Pokud aposteriorní rozdělení není žádná běžná distribuce, sahá se k aproximačním metodám typu Monte Carlo nebo variačním metodám.

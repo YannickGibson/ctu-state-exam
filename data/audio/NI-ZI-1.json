@@ -1,0 +1,170 @@
+{
+  "id": "NI-ZI-1",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 245.866,
+  "sentences": [
+    {
+      "text": "**Automatické plánování** je úloha hledání posloupnosti akcí, takzvaného **plánu**, která vede z počátečního stavu do stavu splňujícího cíl.",
+      "para": 0,
+      "start": 0,
+      "end": 10.417
+    },
+    {
+      "text": "Zadání tvoří **počáteční stav**, **cílová formule** a množina **akcí**.",
+      "para": 0,
+      "start": 10.417,
+      "end": 15.772
+    },
+    {
+      "text": "Klasické plánování předpokládá prostředí plně pozorovatelné, deterministické, konečné a statické, a plánuje se offline, tedy nejdřív se naplánuje a pak vykoná.",
+      "para": 0,
+      "start": 15.772,
+      "end": 27.698
+    },
+    {
+      "text": "Standardním formalismem je **STRIPS**, ve kterém je stav množina logických literálů za předpokladu uzavřeného světa.",
+      "para": 1,
+      "start": 27.698,
+      "end": 36.361
+    },
+    {
+      "text": "Každá akce má předpoklad, tedy literály, které musí ve stavu platit, dále přídavný seznam s literály, které se přidají, a mazací seznam s literály, které se odeberou.",
+      "para": 1,
+      "start": 36.361,
+      "end": 48.717
+    },
+    {
+      "text": "Akci lze provést, jen pokud je její předpoklad podmnožinou aktuálního stavu, a nový stav vznikne odebráním mazacího seznamu a přidáním přídavného seznamu.",
+      "para": 1,
+      "start": 48.717,
+      "end": 60.852
+    },
+    {
+      "text": "Rozšířením STRIPS je jazyk **PDDL**, který přidává typy, podmínkové efekty, číselné fluenty a časové akce.",
+      "para": 1,
+      "start": 60.852,
+      "end": 69.318
+    },
+    {
+      "text": "Klasické algoritmy prohledávají stavový prostor dopředně od počátečního stavu, nebo zpětně regresí od cíle.",
+      "para": 2,
+      "start": 69.318,
+      "end": 77.378
+    },
+    {
+      "text": "Strom dosažitelných stavů má ale velký větvící faktor, řádově $O(k^d)$ uzlů, kde $k$ je počet aplikovatelných akcí na stav.",
+      "para": 2,
+      "start": 77.378,
+      "end": 87.122
+    },
+    {
+      "text": "Proto se používá heuristické prohledávání, nebo plánování s částečným uspořádáním akcí.",
+      "para": 2,
+      "start": 87.122,
+      "end": 94.532
+    },
+    {
+      "text": "**Plánovací graf** je vrstevnatý orientovaný graf, ve kterém se střídají stavové a akční vrstvy.",
+      "para": 3,
+      "start": 94.532,
+      "end": 101.639
+    },
+    {
+      "text": "Stavová vrstva obsahuje fakta dosažitelná nejdéle za daný počet kroků, akční vrstva obsahuje aplikovatelné akce a takzvané no operation akce, které přenášejí fakta dál.",
+      "para": 3,
+      "start": 101.639,
+      "end": 114.32
+    },
+    {
+      "text": "Vzniká relaxací dosažitelnosti, kdy se ignorují negativní efekty akcí, a slouží jako nutná podmínka dosažitelnosti cíle.",
+      "para": 3,
+      "start": 114.32,
+      "end": 123.611
+    },
+    {
+      "text": "Klíčovým pojmem je vzájemné vyloučení, takzvaný **mutex**.",
+      "para": 3,
+      "start": 123.611,
+      "end": 128.292
+    },
+    {
+      "text": "Dvě akce jsou v mutexu, pokud jsou závislé, tedy mají konfliktní efekty nebo jedna ničí předpoklad druhé, nebo pokud jsou jejich předpoklady v mutexu.",
+      "para": 3,
+      "start": 128.292,
+      "end": 140.125
+    },
+    {
+      "text": "Dva atomy jsou v mutexu, jsou-li všechny dvojice akcí, které je vyrábějí, navzájem v mutexu.",
+      "para": 3,
+      "start": 140.125,
+      "end": 147.384
+    },
+    {
+      "text": "Algoritmus **GraphPlan** má dvě fáze, které střídá.",
+      "para": 4,
+      "start": 147.384,
+      "end": 151.265
+    },
+    {
+      "text": "Nejprve expanduje plánovací graf, dokud poslední vrstva neobsahuje všechny cílové atomy a žádná jejich dvojice není v mutexu.",
+      "para": 4,
+      "start": 151.265,
+      "end": 160.544
+    },
+    {
+      "text": "Poté se pokusí extrahovat plán prohledáváním grafu od konce, kdy v každé vrstvě hledá bez mutexovou množinu akcí splňující daný cíl.",
+      "para": 4,
+      "start": 160.544,
+      "end": 171.042
+    },
+    {
+      "text": "Při neúspěchu graf rozšíří o další vrstvu, a pokud se graf stabilizuje bez nalezení řešení, úloha je neřešitelná.",
+      "para": 4,
+      "start": 171.042,
+      "end": 179.415
+    },
+    {
+      "text": "Plánovací graf se používá buď přímo jako plánovač, nebo jako zdroj přípustné heuristiky pro heuristické prohledávání.",
+      "para": 4,
+      "start": 179.415,
+      "end": 187.974
+    },
+    {
+      "text": "Plánování lze také kompilovat do jiných formalismů.",
+      "para": 5,
+      "start": 187.974,
+      "end": 191.982
+    },
+    {
+      "text": "Při kompilaci do problému splnitelnosti, takzvaného **SAT**, se zafixuje horizont s pevným počtem kroků a každému faktu i akci v každém čase se přiřadí výroková proměnná.",
+      "para": 5,
+      "start": 191.982,
+      "end": 204.802
+    },
+    {
+      "text": "Klauzulemi se zakóduje počáteční stav, cíl, předpoklady a efekty akcí, axiomy rámce a omezení nejvýše jedné akce za krok.",
+      "para": 5,
+      "start": 204.802,
+      "end": 214.418
+    },
+    {
+      "text": "Pak se zavolá řešič SAT, a je-li formule splnitelná, plán se zrekonstruuje, jinak se horizont zvětší.",
+      "para": 5,
+      "start": 214.418,
+      "end": 221.967
+    },
+    {
+      "text": "Analogicky lze plánování kompilovat do problému splňování omezení, kde proměnné jsou stavy a akce, nebo do celočíselného lineárního programování pro úlohy s číselnými zdroji.",
+      "para": 6,
+      "start": 221.967,
+      "end": 235.53
+    },
+    {
+      "text": "Pokročilá rozšíření zahrnují hierarchické plánování s rozkladem úloh na podúkoly, časové plánování a plánování pro více agentů.",
+      "para": 6,
+      "start": 235.53,
+      "end": 245.866
+    }
+  ]
+}

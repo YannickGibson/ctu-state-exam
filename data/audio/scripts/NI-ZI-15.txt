@@ -1,0 +1,43 @@
+# Otázka ZI-15 — Stavové modely a sekvenční bayesovský odhad
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# Bold only the core terms named in the question, once, at their definition.
+# See AUDIOBOOKS.md.
+
+Stavový model popisuje dynamický systém, který má skrytý, tedy nepozorovatelný stav, a pozorování.
+> **Stavový model** popisuje dynamický systém, který má skrytý, tedy nepozorovatelný stav, a pozorování.
+Přechodová rovnice říká, jak se stav vyvíjí v čase z předchozího stavu a procesního šumu.
+Pozorovací rovnice říká, jak ze stavu vzniká měření, zatížené šumem pozorování.
+Stav tedy pozorujeme jen nepřímo, skrze měření.
+Důležitým speciálním případem je lineární gaussovský stavový model, kde obě rovnice jsou lineární a oba šumy mají normální rozdělení.
+Tento model je zároveň skrytým markovským modelem a uplatní se při sledování polohy, v ekonomickém modelování nebo u časových řad.
+
+Cílem sekvenčního bayesovského odhadu je udržovat filtrovanou hustotu stavu podmíněnou všemi dosavadními pozorováními.
+> Cílem **sekvenčního bayesovského odhadu** je udržovat filtrovanou hustotu stavu podmíněnou všemi dosavadními pozorováními.
+Obecný bayesovský rekurzivní filtr běží ve dvou krocích.
+Krok predikce, tedy časová aktualizace, propaguje hustotu stavu přes přechodový model pomocí Chapmanovy-Kolmogorovovy rovnice.
+Krok korekce, tedy datová aktualizace, zapracuje nové pozorování pomocí Bayesovy věty.
+Pro lineární gaussovský model má tento obecný filtr uzavřené řešení, kterým je Kalmanův filtr.
+
+Kalmanův filtr udržuje odhad stavu a jeho kovarianční matici.
+> **Kalmanův filtr** udržuje odhad stavu a jeho kovarianční matici.
+V predikci posune odhad přes přechodovou matici a zvětší kovarianci o procesní šum.
+V korekci spočítá Kalmanovo zesílení a opraví predikci podle inovace, což je rozdíl mezi skutečným pozorováním a tím predikovaným.
+Čím větší je zesílení, tím větší důraz se klade na nová měření, ale tím hůře se filtruje šum.
+Aposteriorní rozdělení je vždy gaussovské, plně popsané střední hodnotou a kovariancí, a odhad je optimální ve smyslu minimální střední kvadratické chyby.
+
+Pokud jsou přechodová nebo pozorovací funkce nelineární, uzavřené řešení už neexistuje a nastupuje nelineární odhad stavu.
+> Pokud jsou přechodová nebo pozorovací funkce nelineární, uzavřené řešení už neexistuje a nastupuje **nelineární odhad stavu**.
+Rozšířený Kalmanův filtr funkce lokálně linearizuje Taylorovým rozvojem prvního řádu kolem aktuálního odhadu a pak použije běžné rovnice Kalmanova filtru.
+> Rozšířený Kalmanův filtr funkce lokálně linearizuje Taylorovým rozvojem prvního řádu kolem aktuálního odhadu a pak použije běžné rovnice Kalmanova filtru.
+Je jen přibližný, může i divergovat, ale za rozumných podmínek funguje dobře a je standardem v G P S navigaci.
+
+Při silnější nelinearitě se používá takzvaný unscented Kalmanův filtr.
+Ten místo derivací zvolí deterministicky několik bodů, sigma bodů, kolem odhadu, prožene je nelineární funkcí a z výsledku zrekonstruuje momenty.
+Je přesnější než rozšířený filtr a nepotřebuje počítat gradient.
+
+Nejobecnější metodou je částicový filtr, který reprezentuje aposteriorní rozdělení sadou vážených vzorků, kterým říkáme částice.
+> Nejobecnější metodou je **částicový filtr**, který reprezentuje aposteriorní rozdělení sadou vážených vzorků, kterým říkáme částice.
+V kroku predikce každou částici prožene přechodovým modelem, v kroku korekce jí upraví váhu podle věrohodnosti pozorování, a váhy normalizuje.
+Časem ale většinu váhy převezme jediná částice, tomu se říká degenerace vah, a řeší se převzorkováním, kdy se úspěšné částice replikují a neúspěšné zahodí.
+Částicový filtr zvládá libovolnou nelinearitu i ne-gaussovský šum a s rostoucím počtem částic je asymptoticky přesný, jeho slabinou je ale prokletí dimenzionality.

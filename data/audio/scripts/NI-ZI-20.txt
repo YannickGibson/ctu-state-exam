@@ -1,0 +1,42 @@
+# Otázka ZI-20 — Dekompozice časových řad, typy stacionarity, náhodná procházka a bílý šum
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Časovou řadu chápeme jako náhodný proces, tedy posloupnost náhodných veličin, iks té, indexovaných časem.
+> Časovou řadu chápeme jako náhodný proces, tedy posloupnost náhodných veličin $X_t$ indexovaných časem.
+Místo celé sdružené distribuce řadu obvykle popisujeme jen jejími momenty.
+Těmi jsou střední hodnota, variance a autokovariance, což je kovariance mezi dvojicí hodnot v různých časech.
+> Těmi jsou střední hodnota, variance a **autokovariance** $\gamma(t_1, t_2) = \mathrm{cov}(X_{t_1}, X_{t_2})$, kovariance mezi dvojicí hodnot v různých časech.
+
+Časovou řadu lze rozložit na komponenty, tomu říkáme dekompozice.
+> Časovou řadu lze rozložit na komponenty, tomu říkáme **dekompozice**.
+Trend je dlouhodobý vývoj střední hodnoty, sezónnost je pravidelně se opakující kolísání s pevnou periodou, cyklus jsou neperiodické dlouhodobé fluktuace a reziduum je náhodná složka.
+> **Trend** je dlouhodobý vývoj střední hodnoty, **sezónnost** je pravidelně se opakující kolísání s pevnou periodou, cyklus jsou neperiodické dlouhodobé fluktuace a reziduum je náhodná složka.
+V aditivním modelu je řada součtem trendu, sezónnosti a rezidua.
+> V aditivním modelu je řada součtem trendu, sezónnosti a rezidua: $X_t = T_t + S_t + R_t$.
+V multiplikativním modelu je řada jejich součinem; to se hodí, když amplituda sezónnosti roste s úrovní řady, neboť logaritmováním přejdeme zpět na aditivní model.
+> V multiplikativním modelu je řada jejich součinem $X_t = T_t \cdot S_t \cdot R_t$; to se hodí, když amplituda sezónnosti roste s úrovní řady, neboť logaritmováním přejdeme zpět na aditivní model.
+Trend se odhaduje klouzavým průměrem nebo regresí, k samotné dekompozici slouží klasická metoda nebo robustnější metoda S T L založená na lokální regresi.
+
+Říkáme, že řada je striktně neboli silně stacionární, pokud se posunem v čase nezmění sdružená distribuce libovolné podmnožiny hodnot.
+> Říkáme, že řada je **striktně** neboli silně **stacionární**, pokud se posunem v čase nezmění sdružená distribuce libovolné podmnožiny hodnot.
+Posun v čase tedy nemění žádnou statistickou charakteristiku.
+Řada je slabě neboli kovariančně stacionární, pokud jsou v čase neměnné jen momenty prvního a druhého řádu.
+> Řada je **slabě** neboli kovariančně **stacionární**, pokud jsou v čase neměnné jen momenty prvního a druhého řádu.
+To znamená, že střední hodnota je konstantní a autokovariance závisí pouze na rozdílu časů, nikoli na jejich poloze.
+V praxi nám slabá stacionarita stačí; striktní stacionarita slabou zaručuje, pokud existují momenty druhého řádu, výjimkou je třeba Cauchyovo rozdělení.
+
+Bílý šum je proces s nulovou střední hodnotou, konstantní konečnou variancí a nulovou autokovariancí pro každé nenulové zpoždění.
+> **Bílý šum** je proces s nulovou střední hodnotou, konstantní konečnou variancí a nulovou autokovariancí pro každé nenulové zpoždění $\tau \ne 0$.
+Jednotlivé hodnoty jsou nezávislé a stejně rozdělené; pokud jsou normální, mluvíme o gaussovském bílém šumu.
+Bílý šum je stacionární a z minulých hodnot nelze nic predikovat, protože jsou navzájem nekorelované.
+
+Náhodná procházka začíná v nule a každá další hodnota vznikne přičtením bílého šumu k hodnotě předchozí.
+> **Náhodná procházka** začíná v nule a každá další hodnota vznikne přičtením bílého šumu k hodnotě předchozí: $X_t = X_{t-1} + Z_t$.
+Procházka je tedy součtem všech dosavadních šumů.
+Její střední hodnota je nulová, ale variance roste lineárně s časem, a proto náhodná procházka stacionární není.
+> Její střední hodnota je nulová, ale variance roste lineárně s časem, $\mathrm{var}(X_t) = t\sigma^2$, a proto náhodná procházka stacionární není.
+Její přírůstky jsou ovšem rovny bílému šumu, a tedy stacionární jsou.
+Náhodná procházka s driftem navíc v každém kroku přičítá konstantu, takže získá lineární trend.
+Klasickým použitím náhodné procházky je modelování cen akcií nebo Brownova pohybu ve fyzice.

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { supabase } from '../supabaseClient.js';
-import { findActiveSentence } from '../audioSync.js';
+import { findActiveSentence, groupParagraphs } from '../audioSync.js';
 import InlineMarkdown from './InlineMarkdown.jsx';
 
 // Narrated-answer player panel.
@@ -11,11 +11,17 @@ import InlineMarkdown from './InlineMarkdown.jsx';
 // - The <audio> element is hidden — playback is driven only by the play/pause
 //   control and by clicking transcript sentences, so there is no native
 //   scrubber to confuse users.
-// - The sentence highlight is driven by a requestAnimationFrame loop while
-//   playing, so it always tracks the real playback position (including
-//   immediately after a seek).
+// - The transcript is grouped into paragraphs (`timing.sentences[].para`); the
+//   highlight is driven by a requestAnimationFrame loop while playing, so it
+//   always tracks the real playback position (including after a seek).
 //
 // Mounted only while the panel is open; unmounting stops playback.
+// Formats a duration in seconds as M:SS.
+function formatDuration(seconds) {
+  const total = Math.max(0, Math.round(seconds || 0));
+  return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
+}
+
 export default function AnswerAudio({ questionId, timing }) {
   const [activeIdx, setActiveIdx] = useState(-1);
   const [playing, setPlaying] = useState(false);
@@ -26,6 +32,8 @@ export default function AnswerAudio({ questionId, timing }) {
   const audioUrl = supabase.storage
     .from('answer-audio')
     .getPublicUrl(`${questionId}.mp3`).data.publicUrl;
+
+  const paragraphs = useMemo(() => groupParagraphs(timing.sentences), [timing]);
 
   // Track the spoken sentence on every animation frame while playing.
   useEffect(() => {
@@ -44,7 +52,7 @@ export default function AnswerAudio({ questionId, timing }) {
   // Keep the highlighted sentence visible within the scrollable transcript.
   useEffect(() => {
     if (activeIdx < 0 || !transcriptRef.current) return;
-    const el = transcriptRef.current.children[activeIdx];
+    const el = transcriptRef.current.querySelector('.audio-sentence.is-active');
     if (el) el.scrollIntoView({ block: 'nearest' });
   }, [activeIdx]);
 
@@ -106,19 +114,31 @@ export default function AnswerAudio({ questionId, timing }) {
             >
               {playing ? <Pause size={18} aria-hidden /> : <Play size={18} aria-hidden />}
             </button>
+            <span className="answer-audio-duration">{formatDuration(timing.duration)}</span>
             <span className="muted answer-audio-hint">Click any sentence to jump to it.</span>
           </div>
           <div className="answer-audio-transcript" ref={transcriptRef}>
-            {timing.sentences.map((s, i) => (
-              <button
-                type="button"
-                key={i}
-                className={`audio-sentence${i === activeIdx ? ' is-active' : ''}`}
-                onClick={() => seekTo(i)}
-                title="Jump to this sentence"
-              >
-                <InlineMarkdown>{s.text}</InlineMarkdown>
-              </button>
+            {paragraphs.map((group, gi) => (
+              <p className="audio-paragraph" key={gi}>
+                {group.map((s) => (
+                  <span
+                    key={s.index}
+                    role="button"
+                    tabIndex={0}
+                    className={`audio-sentence${s.index === activeIdx ? ' is-active' : ''}`}
+                    onClick={() => seekTo(s.index)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        seekTo(s.index);
+                      }
+                    }}
+                    title="Jump to this sentence"
+                  >
+                    <InlineMarkdown>{s.text}</InlineMarkdown>
+                  </span>
+                ))}
+              </p>
             ))}
           </div>
         </>

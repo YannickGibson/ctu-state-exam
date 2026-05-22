@@ -1,0 +1,50 @@
+# Otázka ZI-2 — Splňování omezení s konečnými doménami, pokročilé prohledávání.
+# One sentence per line; blank line = paragraph break. A bare line is the SPOKEN
+# text; an optional following ">" line is the DISPLAYED text (LaTeX + **bold**).
+# See AUDIOBOOKS.md.
+
+Problém splňování omezení je trojice tvořená množinou proměnných, množinou jejich konečných domén a množinou omezení.
+> **Problém splňování omezení** je trojice $(X, D, C)$ tvořená množinou proměnných, množinou jejich konečných domén a množinou omezení.
+Proměnné určují, co můžeme rozhodnout, domény dávají možnosti a omezení svazují hodnoty podmnožin proměnných.
+Řešením je úplné přiřazení hodnot z domén proměnným tak, aby byla splněna všechna omezení současně.
+Typickými příklady jsou problém osmi dam, barvení grafu, sudoku nebo rozvrhování.
+
+Omezení lze reprezentovat extenzionálně tabulkou povolených kombinací, nebo intenzionálně jako predikát či aritmetický výraz.
+Zvláštní roli mají globální omezení, například takzvané all different, které vynucuje, že všechny proměnné nabývají navzájem různých hodnot, a má efektivní filtrační algoritmus.
+> Zvláštní roli mají globální omezení, například $\mathrm{AllDifferent}$, které vynucuje, že všechny proměnné nabývají navzájem různých hodnot, a má efektivní filtrační algoritmus.
+
+Základním řešicím postupem je backtracking, tedy prohledávání do hloubky ve stromě přiřazení.
+> Základním řešicím postupem je **backtracking**, tedy prohledávání do hloubky ve stromě přiřazení.
+V každém uzlu rozšíříme částečné přiřazení o jednu proměnnou, a narazíme-li na porušené omezení, zrušíme poslední rozhodnutí a zkusíme jinou hodnotu.
+Naivní backtracking je ale neefektivní, protože využívá omezení příliš pasivně a zapomíná již odvedenou práci.
+
+Dopředná kontrola po každém přiřazení odebere z domén nepřiřazených sousedů hodnoty neslučitelné s tímto přiřazením.
+> **Dopředná kontrola** po každém přiřazení odebere z domén nepřiřazených sousedů hodnoty neslučitelné s tímto přiřazením.
+Pokud se některá doména vyprázdní, můžeme se vrátit ihned, aniž bychom čekali na ohodnocení dalších proměnných.
+Silnější je hranová konzistence, kdy je dvojice proměnných konzistentní, pokud pro každou hodnotu první proměnné existuje slučitelná podpora v doméně druhé.
+> Silnější je **hranová konzistence**, kdy je dvojice proměnných konzistentní, pokud pro každou hodnotu první proměnné existuje slučitelná podpora v doméně druhé.
+Algoritmus á cé tři opakovaně odstraňuje hodnoty bez podpory, dokud se domény mění, a pracuje v čase úměrném počtu hran krát třetí mocnina velikosti domény.
+> Algoritmus **AC-3** opakovaně odstraňuje hodnoty bez podpory, dokud se domény mění, a pracuje v čase $O(\mathrm{ed}^3)$.
+Když hranovou konzistenci udržujeme po každém přiřazení, dostáváme metodu maintaining arc consistency, jeden z nejpoužívanějších přístupů.
+> Když hranovou konzistenci udržujeme po každém přiřazení, dostáváme metodu **maintaining arc consistency**, jeden z nejpoužívanějších přístupů.
+
+Účinnost prohledávání zvyšují heuristiky pořadí, které jsou doménově nezávislé.
+Při výběru proměnné volíme heuristikou nejvíce omezené proměnné tu s nejmenší doménou, protože těžká rozhodnutí se vyplatí neodkládat.
+Při výběru hodnoty volíme heuristikou nejméně omezující hodnoty tu, která sousedním proměnným ponechá co největší volnost.
+
+Pokročilé prohledávání zlepšuje zpracování konfliktů.
+Backjumping místo chronologického návratu skočí přímo k proměnné, která konflikt způsobila, na základě takzvané konfliktní množiny.
+> **Backjumping** místo chronologického návratu skočí přímo k proměnné, která konflikt způsobila, na základě takzvané konfliktní množiny.
+Učení zaznamenává kombinace přiřazení vedoucí ke sporu jako nové omezení, takzvaný nogood, čímž ořezává budoucí strom.
+> Učení zaznamenává kombinace přiřazení vedoucí ke sporu jako nové omezení, takzvaný **nogood**, čímž ořezává budoucí strom.
+Nogood je logickým důsledkem omezení a specifické nogoody lze skládat zobecněným rezolučním pravidlem do obecnějších.
+
+Alternativou k systematickému prohledávání je lokální prohledávání.
+Metoda min conflicts začne z náhodného úplného přiřazení a v každém kroku přehodnotí konfliktní proměnnou na hodnotu, která minimalizuje počet porušených omezení.
+> Metoda **min-conflicts** začne z náhodného úplného přiřazení a v každém kroku přehodnotí konfliktní proměnnou na hodnotu, která minimalizuje počet porušených omezení.
+Je velmi efektivní pro rozsáhlé problémy, ale na rozdíl od systematických metod nedokáže prokázat neřešitelnost.
+
+Strukturu úlohy lze využít: má-li graf omezení tvar stromu, řešíme ho v polynomiálním čase pomocí směrové hranové konzistence.
+> Strukturu úlohy lze využít: má-li graf omezení tvar stromu, řešíme ho v čase $O(nd^2)$ pomocí směrové hranové konzistence.
+Obecně je ale rozhodnutí o existenci řešení en pé těžký problém, takže v nejhorším případě řešíme exponenciálně dlouho.
+> Obecně je ale rozhodnutí o existenci řešení NP-těžký problém, takže v nejhorším případě řešíme exponenciálně dlouho.

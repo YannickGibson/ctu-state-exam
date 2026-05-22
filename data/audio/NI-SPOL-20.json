@@ -1,0 +1,140 @@
+{
+  "id": "NI-SPOL-20",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 230.04,
+  "sentences": [
+    {
+      "text": "Paralelní **redukce** zpracuje pole prvků asociativní, případně komutativní binární operací a vrátí jediný skalár, totiž součin nebo součet všech prvků.",
+      "para": 0,
+      "start": 0,
+      "end": 11.856
+    },
+    {
+      "text": "Je to operace všichni jednomu, její paralelní čas má lineární i logaritmickou složku a spodní mez je logaritmus z, en.",
+      "para": 0,
+      "start": 11.856,
+      "end": 20.601
+    },
+    {
+      "text": "Redukce je normální hyperkubický algoritmus, takže je optimální na hyperkubických sítích; implementovat ji lze i na binárním stromu, na mřížce nebo na modelu E R E W P R A M.",
+      "para": 0,
+      "start": 20.601,
+      "end": 34.002
+    },
+    {
+      "text": "V MPI redukci provádí funkce `MPI_Reduce`, jejíž výsledek skončí v kořenovém procesu.",
+      "para": 1,
+      "start": 34.002,
+      "end": 40.622
+    },
+    {
+      "text": "Operaci určuje parametr, mohou to být předdefinované operace jako součet, maximum nebo maximum s lokalizací, nebo uživatelská operace.",
+      "para": 1,
+      "start": 40.622,
+      "end": 51.132
+    },
+    {
+      "text": "Varianta **`MPI_Allreduce`** je redukce všichni všem: výsledek skončí u všech procesů, operace nemá kořen a je uzlově symetrická.",
+      "para": 1,
+      "start": 51.132,
+      "end": 60.341
+    },
+    {
+      "text": "**Prefixový součet** zpracuje pole asociativní a komutativní operací a vrátí pole, kde $i$-tý prvek je součtem všech prvků od začátku až po index $i$.",
+      "para": 2,
+      "start": 60.341,
+      "end": 73.08
+    },
+    {
+      "text": "Klasickou aplikací je řadicí algoritmus CountingSort.",
+      "para": 2,
+      "start": 73.08,
+      "end": 77.541
+    },
+    {
+      "text": "Na modelu E R E W P R A M počítá prefixový součet indukční algoritmus.",
+      "para": 3,
+      "start": 77.541,
+      "end": 83.894
+    },
+    {
+      "text": "Po, jé, tém kroku obsahuje každá buňka částečný součet okna délky dvě na, jé plus jedna, takže celý výpočet trvá logaritmus z, en, kroků, stejně jako paralelní redukce.",
+      "para": 3,
+      "start": 83.894,
+      "end": 96.703
+    },
+    {
+      "text": "Na nepřímém stromu jsou vstupní data v listech a vnitřní uzly počítají.",
+      "para": 4,
+      "start": 96.703,
+      "end": 101.999
+    },
+    {
+      "text": "Vzestupné vlny spouštějí sestupné vlny a celkem je potřeba dvojnásobek výšky stromu kroků; pro úplný binární strom nebo motýlek je to logaritmus z, en.",
+      "para": 4,
+      "start": 101.999,
+      "end": 113.554
+    },
+    {
+      "text": "Na hyperkrychli se uzly linearizují lexikograficky a algoritmus má, er, kroků, přičemž každý procesor udržuje jeden registr s prefixem a druhý kombinující vysílání všichni všem.",
+      "para": 4,
+      "start": 113.554,
+      "end": 127.024
+    },
+    {
+      "text": "Na ortogonálních mřížkách se uzly nejprve linearizují po řádcích a výpočet má vodorovnou, svislou a opět vodorovnou fázi.",
+      "para": 5,
+      "start": 127.024,
+      "end": 136.338
+    },
+    {
+      "text": "Na libovolné souvislé topologii se sestaví kostra do šířky, uzly se očíslují postorder a výpočet trvá řádově průměr grafu.",
+      "para": 5,
+      "start": 136.338,
+      "end": 145.733
+    },
+    {
+      "text": "Škálovatelný prefixový součet má tři fáze: každý proces nejprve sekvenčně spočítá lokální prefixový součet svého bloku, pak proběhne paralelní globální prefixový součet přes celkové součty bloků, a nakonec každý proces přičte přijatý posun ke svým lokálním hodnotám.",
+      "para": 6,
+      "start": 145.733,
+      "end": 167.539
+    },
+    {
+      "text": "Jeho čas má lineární i logaritmickou složku, takže má stejnou škálovatelnost jako paralelní redukce.",
+      "para": 6,
+      "start": 167.539,
+      "end": 175.762
+    },
+    {
+      "text": "Na asynchronním modelu A P R A M se mezi kroky vkládá bariéra, čímž logaritmická složka přejde na druhou mocninu logaritmu.",
+      "para": 6,
+      "start": 175.762,
+      "end": 185.447
+    },
+    {
+      "text": "**Segmentový prefixový součet** rozdělí vstupní pole na segmenty a počítá prefixové součty izolovaně uvnitř každého segmentu.",
+      "para": 7,
+      "start": 185.447,
+      "end": 194.819
+    },
+    {
+      "text": "Hlavní myšlenkou je, že se provede jediný globální prefixový součet s modifikovanou binární operací, která pracuje se značkou segmentu; je-li původní operace asociativní, je asociativní i ta modifikovaná.",
+      "para": 7,
+      "start": 194.819,
+      "end": 210.483
+    },
+    {
+      "text": "Prefixový součet má řadu aplikací.",
+      "para": 8,
+      "start": 210.483,
+      "end": 213.632
+    },
+    {
+      "text": "Patří mezi ně zhušťovací problém, paralelní RadixSort, paralelní binární sčítačka s predikcí přenosu, řešení tridiagonální soustavy rovnic a stabilní paralelní QuickSort, který využívá právě segmentovou variantu.",
+      "para": 8,
+      "start": 213.632,
+      "end": 230.04
+    }
+  ]
+}

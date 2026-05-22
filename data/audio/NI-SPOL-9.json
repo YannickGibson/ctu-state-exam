@@ -1,0 +1,140 @@
+{
+  "id": "NI-SPOL-9",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 194.804,
+  "sentences": [
+    {
+      "text": "**Čítací proces** $\\{N_t\\}$ je náhodný proces, jehož trajektorie je nezáporná, celočíselná a neklesající.",
+      "para": 0,
+      "start": 0,
+      "end": 7.375
+    },
+    {
+      "text": "**Poissonův proces** je čítací proces, ve kterém jsou časy mezi událostmi nezávislé a mají exponenciální rozdělení.",
+      "para": 0,
+      "start": 7.375,
+      "end": 16.399
+    },
+    {
+      "text": "Ekvivalentně jej lze definovat přes přírůstky: počet událostí v intervalu má Poissonovo rozdělení a přírůstky na disjunktních intervalech jsou nezávislé.",
+      "para": 0,
+      "start": 16.399,
+      "end": 27.941
+    },
+    {
+      "text": "Poissonův proces je spojitým protějškem binomického procesu; klíčem je bezpaměťovost exponenciálního rozdělení.",
+      "para": 0,
+      "start": 27.941,
+      "end": 36.443
+    },
+    {
+      "text": "Bezpaměťovost znamená, že pravděpodobnost dalšího čekání nezávisí na tom, jak dlouho jsme již čekali.",
+      "para": 1,
+      "start": 36.443,
+      "end": 44.003
+    },
+    {
+      "text": "Exponenciální rozdělení je jediné spojité rozdělení s touto vlastností, a právě proto je základem markovských řetězců se spojitým časem.",
+      "para": 1,
+      "start": 44.003,
+      "end": 54.211
+    },
+    {
+      "text": "**Markovský řetězec se spojitým časem** má spočetnou množinu stavů, spojitý čas a splňuje markovskou podmínku.",
+      "para": 2,
+      "start": 54.211,
+      "end": 62.341
+    },
+    {
+      "text": "Je homogenní, pokud matice přechodu závisí jen na délce časového intervalu, a platí pro něj Chapmanova Kolmogorovova rovnice.",
+      "para": 2,
+      "start": 62.341,
+      "end": 71.55
+    },
+    {
+      "text": "Poissonův proces je příkladem homogenního markovského řetězce se spojitým časem.",
+      "para": 2,
+      "start": 71.55,
+      "end": 77.393
+    },
+    {
+      "text": "Klíčovým objektem je **matice skokových intenzit** $\\mathbf Q$, definovaná jako derivace matice přechodu v nule.",
+      "para": 3,
+      "start": 77.393,
+      "end": 84.489
+    },
+    {
+      "text": "Pro malé časové kroky popisuje intenzitu skoku z jednoho stavu do druhého.",
+      "para": 3,
+      "start": 84.489,
+      "end": 89.786
+    },
+    {
+      "text": "Její mimodiagonální prvky jsou nezáporné, diagonální prvky nekladné a každý řádkový součet je roven nule.",
+      "para": 3,
+      "start": 89.786,
+      "end": 97.869
+    },
+    {
+      "text": "Mezi řetězci se spojitým a diskrétním časem existuje přímá souvislost.",
+      "para": 4,
+      "start": 97.869,
+      "end": 103.584
+    },
+    {
+      "text": "Vezmeme-li diskrétní řetězec s maticí přechodu $\\mathbf D$ a načasujeme jeho kroky Poissonovým procesem s intenzitou $\\lambda$, dostaneme řetězec se spojitým časem, jehož matice skokových intenzit je $\\mathbf Q = \\lambda(\\mathbf D - \\mathbf I)$.",
+      "para": 4,
+      "start": 103.584,
+      "end": 121.593
+    },
+    {
+      "text": "Tuto konstrukci lze obrátit: ze skokových intenzit zvolíme dostatečně velkou, lambda, sestrojíme stochastickou matici, dé, a trajektorii řetězce simulujeme jako diskrétní řetězec časovaný Poissonovým procesem.",
+      "para": 4,
+      "start": 121.593,
+      "end": 137.49
+    },
+    {
+      "text": "Vývoj rozdělení v čase popisují Kolmogorovy rovnice.",
+      "para": 5,
+      "start": 137.49,
+      "end": 141.475
+    },
+    {
+      "text": "**Kolmogorovy rovnice**: dopředná $\\mathbf P'(t) = \\mathbf P(t) \\mathbf Q$ a zpětná $\\mathbf P'(t) = \\mathbf Q \\mathbf P(t)$.",
+      "para": 5,
+      "start": 141.475,
+      "end": 151.648
+    },
+    {
+      "text": "Řešením je maticová exponenciála $\\mathbf P(t) = e^{\\mathbf Q t}$.",
+      "para": 5,
+      "start": 151.648,
+      "end": 157.641
+    },
+    {
+      "text": "**Stacionární rozdělení** je rozdělení, které se v čase nemění; je jím vektor $\\boldsymbol\\pi$, pro který platí $\\boldsymbol\\pi \\mathbf Q = \\mathbf 0$.",
+      "para": 6,
+      "start": 157.641,
+      "end": 167.048
+    },
+    {
+      "text": "Pro nerozložitelný řetězec platí: existuje-li stacionární rozdělení, je jediné a matice přechodu k němu v čase konverguje; jinak konvergují pravděpodobnosti k nule.",
+      "para": 6,
+      "start": 167.048,
+      "end": 178.951
+    },
+    {
+      "text": "Pro konečnou množinu stavů stacionární rozdělení vždy existuje.",
+      "para": 6,
+      "start": 178.951,
+      "end": 183.876
+    },
+    {
+      "text": "Často pomáhá **podmínka detailní rovnováhy** $\\pi_j Q_{ji} = \\pi_i Q_{ij}$, podle které je tok mezi dvěma stavy oběma směry stejný; je-li splněna, je dané rozdělení stacionární.",
+      "para": 6,
+      "start": 183.876,
+      "end": 194.804
+    }
+  ]
+}

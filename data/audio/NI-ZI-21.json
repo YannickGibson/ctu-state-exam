@@ -1,0 +1,140 @@
+{
+  "id": "NI-ZI-21",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 196.452,
+  "sentences": [
+    {
+      "text": "$X_t = c + \\phi_1 X_{t-1} + \\ldots + \\phi_p X_{t-p} + \\varepsilon_t$",
+      "para": 0,
+      "start": 0,
+      "end": 10.336
+    },
+    {
+      "text": "Koeficienty $\\phi_i$ jsou regresní parametry modelu.",
+      "para": 0,
+      "start": 10.336,
+      "end": 14.332
+    },
+    {
+      "text": "Autoregresní model nemusí být stacionární; je stacionární právě tehdy, když všechny kořeny jeho charakteristického polynomu leží vně jednotkové kružnice.",
+      "para": 0,
+      "start": 14.332,
+      "end": 26.096
+    },
+    {
+      "text": "Například model prvního řádu je stacionární, pokud je koeficient, fí jedna, v absolutní hodnotě menší než jedna; pro hodnotu rovnou jedné vznikne náhodná procházka.",
+      "para": 0,
+      "start": 26.096,
+      "end": 38.207
+    },
+    {
+      "text": "$X_t = \\mu + \\varepsilon_t + \\theta_1 \\varepsilon_{t-1} + \\ldots + \\theta_q \\varepsilon_{t-q}$",
+      "para": 1,
+      "start": 38.207,
+      "end": 47.254
+    },
+    {
+      "text": "Zatímco autoregrese propaguje minulost přímo přes předchozí hodnoty řady, klouzavé průměry zachycují krátkodobé náhodné šoky.",
+      "para": 1,
+      "start": 47.254,
+      "end": 56.789
+    },
+    {
+      "text": "Model klouzavých průměrů je vždy stacionární, protože jde o konečnou kombinaci stacionárního šumu.",
+      "para": 1,
+      "start": 56.789,
+      "end": 64.105
+    },
+    {
+      "text": "U něj naopak zkoumáme **invertibilitu**: je invertibilní, pokud kořeny jeho charakteristického polynomu leží vně jednotkové kružnice.",
+      "para": 1,
+      "start": 64.105,
+      "end": 74.011
+    },
+    {
+      "text": "Invertibilní model klouzavých průměrů lze přepsat na nekonečnou autoregresi s klesajícími koeficienty, což je důležité pro odhad i predikci.",
+      "para": 1,
+      "start": 74.011,
+      "end": 84.521
+    },
+    {
+      "text": "Smíšený model **ARMA** spojuje obě části, autoregresní i klouzavé průměry.",
+      "para": 2,
+      "start": 84.521,
+      "end": 90.549
+    },
+    {
+      "text": "Je stacionární podle kořenů autoregresního polynomu a invertibilní podle kořenů polynomu klouzavých průměrů.",
+      "para": 2,
+      "start": 90.549,
+      "end": 98.853
+    },
+    {
+      "text": "Klíčovými nástroji pro identifikaci modelu jsou autokorelační a parciální autokorelační funkce.",
+      "para": 3,
+      "start": 98.853,
+      "end": 106.669
+    },
+    {
+      "text": "**Autokorelační funkce** udává korelaci hodnot řady vzdálených o dané zpoždění a získáme ji jako poměr autokovariance k varianci, $\\rho(\\tau) = \\gamma(\\tau)/\\gamma(0)$.",
+      "para": 3,
+      "start": 106.669,
+      "end": 116.714
+    },
+    {
+      "text": "**Parciální autokorelační funkce** udává korelaci hodnoty se zpožděnou hodnotou po odstranění vlivu všech hodnot mezilehlých.",
+      "para": 3,
+      "start": 116.714,
+      "end": 125.773
+    },
+    {
+      "text": "U autoregresního modelu autokorelační funkce klesá geometricky nebo oscilačně, zatímco parciální autokorelační funkce se uřízne za zpožděním, pé.",
+      "para": 3,
+      "start": 125.773,
+      "end": 136.898
+    },
+    {
+      "text": "U modelu klouzavých průměrů je tomu naopak: autokorelační funkce se uřízne za zpožděním, kvé, a parciální klesá postupně.",
+      "para": 3,
+      "start": 136.898,
+      "end": 146.548
+    },
+    {
+      "text": "U smíšeného modelu klesají postupně obě funkce, takže jeho identifikace je obtížnější.",
+      "para": 3,
+      "start": 146.548,
+      "end": 153.285
+    },
+    {
+      "text": "Celý postup shrnuje **Box-Jenkinsova metodologie**.",
+      "para": 4,
+      "start": 153.285,
+      "end": 157.119
+    },
+    {
+      "text": "Nejprve podle autokorelační a parciální autokorelační funkce zvolíme řády, pé a kvé.",
+      "para": 4,
+      "start": 157.119,
+      "end": 163.867
+    },
+    {
+      "text": "Pak odhadneme parametry: u autoregrese metodou nejmenších čtverců nebo **Yuleovými-Walkerovými rovnicemi**, u klouzavých průměrů numerickou optimalizací věrohodnosti.",
+      "para": 4,
+      "start": 163.867,
+      "end": 175.804
+    },
+    {
+      "text": "Mezi kandidátními modely vybíráme ten s nejmenším informačním kritériem, tedy kritériem A I C nebo B I C, která penalizují počet parametrů.",
+      "para": 4,
+      "start": 175.804,
+      "end": 186.268
+    },
+    {
+      "text": "Nakonec model ověříme: rezidua musí být bílý šum, což testujeme **Ljungovým-Boxovým testem** a kontrolou jejich autokorelační funkce.",
+      "para": 4,
+      "start": 186.268,
+      "end": 196.452
+    }
+  ]
+}

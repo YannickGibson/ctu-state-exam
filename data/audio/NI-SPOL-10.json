@@ -1,0 +1,134 @@
+{
+  "id": "NI-SPOL-10",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 187.707,
+  "sentences": [
+    {
+      "text": "**Systém hromadné obsluhy** popisuje zákazníky, kteří přicházejí, jsou obsluhováni a odcházejí.",
+      "para": 0,
+      "start": 0,
+      "end": 7.085
+    },
+    {
+      "text": "Příchody jsou dány nezávislými časy mezi zákazníky s intenzitou příchodů $\\lambda$, časy obsluhy jsou rovněž nezávislé s intenzitou obsluhy $\\mu$ a server má $c$ obslužných míst.",
+      "para": 0,
+      "start": 7.085,
+      "end": 20.776
+    },
+    {
+      "text": "Proces hromadné obsluhy zaznamenává počet zákazníků v systému, tedy na serveru i ve frontě.",
+      "para": 0,
+      "start": 20.776,
+      "end": 28.058
+    },
+    {
+      "text": "Klíčovou veličinou je **zátěž** $\\varrho = \\lambda/(c\\mu)$, podíl intenzity příchodů ku celkové intenzitě obsluhy.",
+      "para": 1,
+      "start": 28.058,
+      "end": 34.631
+    },
+    {
+      "text": "Je-li zátěž menší než jedna, ustálí se systém na stabilním rovnovážném rozdělení; je-li rovna jedné nebo větší, počet zákazníků roste nade všechny meze.",
+      "para": 1,
+      "start": 34.631,
+      "end": 45.931
+    },
+    {
+      "text": "Systémy popisujeme **Kendallovou notací**.",
+      "para": 2,
+      "start": 45.931,
+      "end": 48.801
+    },
+    {
+      "text": "Udává rozdělení příchodů, rozdělení obsluhy, počet serverů, kapacitu systému, velikost populace a disciplínu obsluhy.",
+      "para": 2,
+      "start": 48.801,
+      "end": 58.649
+    },
+    {
+      "text": "Písmeno em značí exponenciální, tedy markovské rozdělení, písmeno dé degenerované a písmeno gé obecné rozdělení.",
+      "para": 2,
+      "start": 58.649,
+      "end": 67.707
+    },
+    {
+      "text": "Systém **M|M|1** má poissonovské příchody, exponenciální obsluhu a jeden server.",
+      "para": 3,
+      "start": 67.707,
+      "end": 74.258
+    },
+    {
+      "text": "Jde o proces zrodu a zániku, tedy markovský řetězec se spojitým časem, kde intenzita přechodu nahoru je intenzita příchodů a intenzita přechodu dolů je intenzita obsluhy.",
+      "para": 3,
+      "start": 74.258,
+      "end": 87.751
+    },
+    {
+      "text": "Pro zátěž menší než jedna má stacionární rozdělení geometrický tvar: $\\pi_n = (1-\\varrho)\\varrho^n$.",
+      "para": 3,
+      "start": 87.751,
+      "end": 98.83
+    },
+    {
+      "text": "Střední počet zákazníků v systému je $EN = \\varrho/(1-\\varrho)$.",
+      "para": 3,
+      "start": 98.83,
+      "end": 104.428
+    },
+    {
+      "text": "Doba čekání ve frontě je nulová s pravděpodobností jedna mínus zátěž, a je-li kladná, má exponenciální rozdělení.",
+      "para": 3,
+      "start": 104.428,
+      "end": 112.523
+    },
+    {
+      "text": "Systém **M|M|∞** má nekonečně mnoho serverů, takže žádný zákazník nečeká.",
+      "para": 4,
+      "start": 112.523,
+      "end": 118.784
+    },
+    {
+      "text": "Jeho stacionární rozdělení je Poissonovo a systém je stabilní pro libovolnou intenzitu příchodů.",
+      "para": 4,
+      "start": 118.784,
+      "end": 125.799
+    },
+    {
+      "text": "Systém **M|M|c** má $c$ paralelních serverů a společnou frontu.",
+      "para": 5,
+      "start": 125.799,
+      "end": 131.2
+    },
+    {
+      "text": "Jeho stacionární rozdělení je po částech: pro malý počet zákazníků má tvar jako u nekonečna serverů, pro větší počet přechází v geometrický pokles a existuje právě tehdy, když je zátěž menší než jedna.",
+      "para": 5,
+      "start": 131.2,
+      "end": 146.934
+    },
+    {
+      "text": "Velmi obecným tvrzením je **Littleova věta**.",
+      "para": 6,
+      "start": 146.934,
+      "end": 150.35
+    },
+    {
+      "text": "Pro každý striktně stacionární systém hromadné obsluhy platí $EN = \\lambda \\cdot ET$, střední počet zákazníků v systému je roven intenzitě příchodů krát střední doba strávená v systému.",
+      "para": 6,
+      "start": 150.35,
+      "end": 163.217
+    },
+    {
+      "text": "Síla věty je v její obecnosti: neklade téměř žádné požadavky na rozdělení příchodů, rozdělení obsluhy ani na disciplínu fronty.",
+      "para": 6,
+      "start": 163.217,
+      "end": 173.541
+    },
+    {
+      "text": "Pro systém M|M|1 z ní dostaneme $ET = \\frac{1}{\\mu - \\lambda}$, což souhlasí s odvozením přes dobu čekání.",
+      "para": 6,
+      "start": 173.541,
+      "end": 187.707
+    }
+  ]
+}

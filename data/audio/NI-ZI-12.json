@@ -1,0 +1,140 @@
+{
+  "id": "NI-ZI-12",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 198.368,
+  "sentences": [
+    {
+      "text": "Lineární regrese modeluje cílovou proměnnou jako $Y = \\boldsymbol w^T \\boldsymbol x + \\varepsilon$ s $E\\varepsilon = 0$.",
+      "para": 0,
+      "start": 0,
+      "end": 10.858
+    },
+    {
+      "text": "Metoda nejmenších čtverců minimalizuje $\\|\\boldsymbol Y - \\mathbf X \\boldsymbol w\\|^2$ a řešením je $\\hat{\\boldsymbol w} = (\\mathbf X^T \\mathbf X)^{-1} \\mathbf X^T \\boldsymbol Y$.",
+      "para": 0,
+      "start": 10.858,
+      "end": 20.207
+    },
+    {
+      "text": "Hřebenová regrese přidá regularizaci a minimalizuje $\\|\\boldsymbol Y - \\mathbf X \\boldsymbol w\\|^2 + \\lambda \\|\\boldsymbol w\\|^2$.",
+      "para": 0,
+      "start": 20.207,
+      "end": 30.205
+    },
+    {
+      "text": "K nelineárnímu modelu se dostaneme nahrazením původních příznaků **bázovými funkcemi**.",
+      "para": 1,
+      "start": 30.205,
+      "end": 36.396
+    },
+    {
+      "text": "Bázové funkce jsou nelineární transformace, například mocniny nebo indikátory, a převedou data do nového $M$ rozměrného prostoru příznaků.",
+      "para": 1,
+      "start": 36.396,
+      "end": 47.626
+    },
+    {
+      "text": "Model zůstává lineární v parametrech, jen už v tomto novém prostoru.",
+      "para": 1,
+      "start": 47.626,
+      "end": 52.783
+    },
+    {
+      "text": "Mnoho lineárních modelů lze přepsat do **duální reprezentace**.",
+      "para": 2,
+      "start": 52.783,
+      "end": 57.43
+    },
+    {
+      "text": "Vektor vah omezíme na $\\boldsymbol w = \\boldsymbol\\Phi^T \\boldsymbol\\alpha$, takže místo $M$ parametrů optimalizujeme jen $N$ koeficientů.",
+      "para": 2,
+      "start": 57.43,
+      "end": 70.459
+    },
+    {
+      "text": "V duální podobě vystupují vstupy už jen prostřednictvím skalárních součinů transformovaných bodů.",
+      "para": 2,
+      "start": 70.459,
+      "end": 77.776
+    },
+    {
+      "text": "Tyto součiny shromažďuje **Gramova matice** $\\mathbf G = \\boldsymbol\\Phi \\boldsymbol\\Phi^T$, jejíž prvky jsou $G_{ij} = k(\\boldsymbol x_i, \\boldsymbol x_j)$.",
+      "para": 2,
+      "start": 77.776,
+      "end": 84.86
+    },
+    {
+      "text": "Klíčové pozorování je **jádrový trik**.",
+      "para": 3,
+      "start": 84.86,
+      "end": 87.731
+    },
+    {
+      "text": "Protože vstupy vystupují jen jako skalární součiny, nahradíme je přímo jádrovou funkcí $k(\\boldsymbol x, \\boldsymbol y)$.",
+      "para": 3,
+      "start": 87.731,
+      "end": 99.065
+    },
+    {
+      "text": "Tím implicitně pracujeme ve vysoce, případně i nekonečně rozměrném prostoru, aniž bychom v něm cokoli explicitně reprezentovali.",
+      "para": 3,
+      "start": 99.065,
+      "end": 108.471
+    },
+    {
+      "text": "Aby jádro odpovídalo nějaké bázové reprezentaci, musí být **pozitivně semidefinitní**, takové jádro se nazývá Mercerovo.",
+      "para": 4,
+      "start": 108.471,
+      "end": 117.948
+    },
+    {
+      "text": "Podmínka znamená, že Gramova matice je pozitivně semidefinitní pro libovolnou volbu bodů.",
+      "para": 4,
+      "start": 117.948,
+      "end": 124.359
+    },
+    {
+      "text": "Příkladem je lineární jádro, polynomiální jádro $k(x,y) = (x^T y + c)^d$ a Gaussovo neboli **R B F** jádro $k(x,y) = \\exp(-\\|x-y\\|^2 / 2l^2)$.",
+      "para": 4,
+      "start": 124.359,
+      "end": 134.892
+    },
+    {
+      "text": "Ke každému jádru existuje **reprodukující jádrový Hilbertův prostor** s reprodukční vlastností $\\langle k(\\cdot, \\boldsymbol x), f \\rangle = f(\\boldsymbol x)$.",
+      "para": 4,
+      "start": 134.892,
+      "end": 150.371
+    },
+    {
+      "text": "Stejný princip využívá metoda podpůrných vektorů, zkráceně **SVM**.",
+      "para": 5,
+      "start": 150.371,
+      "end": 155.9
+    },
+    {
+      "text": "Je to binární klasifikátor, jehož rozhodovací nadrovina je volena tak, aby maximalizovala **odstup** od nejbližších trénovacích bodů.",
+      "para": 5,
+      "start": 155.9,
+      "end": 165.109
+    },
+    {
+      "text": "Optimalizujeme $\\min_{\\boldsymbol w, b} \\tfrac12\\|\\boldsymbol w\\|^2$ za podmínek $y_i(\\boldsymbol w^T \\boldsymbol x_i + b) \\ge 1$.",
+      "para": 5,
+      "start": 165.109,
+      "end": 174.109
+    },
+    {
+      "text": "Lagrangeova duální forma vede k $f(\\boldsymbol x) = \\sum_i \\alpha_i y_i k(\\boldsymbol x_i, \\boldsymbol x) + b$ a rozhoduje znaménko $f(\\boldsymbol x)$.",
+      "para": 5,
+      "start": 174.109,
+      "end": 188.357
+    },
+    {
+      "text": "Varianta s **měkkým odstupem** používá pantovou ztrátu $L_i = \\max(0, 1 - y_i f(\\boldsymbol x_i))$.",
+      "para": 5,
+      "start": 188.357,
+      "end": 198.368
+    }
+  ]
+}

@@ -16,22 +16,29 @@ sentence-level highlighting via the "Listen" button on the question detail page.
 
 A script is a list of sentences, **one sentence per line**. Each line is the **spoken**
 text (what the TTS engine reads). It may be followed by a line starting with `>` giving
-the **displayed** text for that sentence (shown in the web transcript). With no `>` line,
-the displayed text equals the spoken text.
+the **displayed** text for that sentence (the web transcript). With no `>` line, the
+displayed text equals the spoken text.
+
+A **blank line starts a new paragraph**. Group sentences that belong together (a
+definition and the sentences elaborating it) into one paragraph, and separate distinct
+concepts with a blank line — the player renders each paragraph as a spaced block, for
+easier following. Lines starting with `#` are comments (ignored).
 
 ```
-Okruh je neprázdná množina, em, se dvěma operacemi.
-> Okruh je neprázdná množina $M$ se dvěma operacemi.
-Každé těleso je zároveň oborem integrity.
+Dva nenulové prvky nazýváme dělitelé nuly, pokud je jejich součin roven nule.
+> Dva nenulové prvky nazýváme **dělitelé nuly**, pokud je jejich součin roven nule.
+Obor integrity je komutativní okruh, ve kterém dělitelé nuly nejsou.
+> **Obor integrity** je komutativní okruh, ve kterém dělitelé nuly nejsou.
+
+Těleso je okruh, kde každý nenulový prvek má inverzi.
+> **Těleso** je okruh, kde každý nenulový prvek má inverzi.
 ```
 
-- Blank lines and lines starting with `#` are ignored — use `#` for section comments.
 - One line = one sentence = one highlightable, click-to-seek unit in the player.
-
-**Why two forms.** The spoken text is tuned for the TTS engine (variables spelled out,
-commas for pacing, no symbols); the displayed text uses real notation so the reader sees
-`$R$`, not "er". Keeping both on adjacent lines guarantees they stay aligned — the timing
-map is per sentence, so two separate files would risk drifting out of sync.
+- **No intro, no section titles.** Do not open with a sentence naming the question
+  ("Otázka číslo 2...") and do not write standalone heading sentences ("Okruh.") — start
+  straight into the content. The page already shows the question; paragraphs replace
+  section headings.
 
 ## Rules for the SPOKEN line
 
@@ -48,15 +55,18 @@ be heard.
 5. **Wrap every variable mention in commas** for a clear pause: `množina, em, je ...`.
 6. **Drop definition/theorem numbers** ("Definice 31.1") — state the concept directly.
 7. **Acronyms read letter-by-letter:** space them — `AES` → "A E S".
-8. **Length: aim for ~3 minutes** ≈ 350–400 words across the script. First line names
-   the question (`Otázka číslo <N> ze <skupina>. <téma>.`).
+8. **Length: aim for ~2–3 minutes** of audio across the whole script.
 
 ## Rules for the DISPLAYED (`>`) line
 
 - Use real notation and inline LaTeX (`$...$`, rendered with KaTeX): `$M$`, `$R[x]$`,
   `$p^n$`, `$\mathrm{GF}(p^n)$`, `$P(x) = \sum_i a_i x^i$`.
+- **Bold only the core terms the question itself names**, each at the single sentence
+  where it is introduced and defined — `**term**`. Do not bold supporting or minor
+  terms, and do not repeat the bold on later mentions.
 - Correct capitalization and casing: `AES`, `GF` — not "a es", "gé ef".
-- Add a `>` line **only** when the displayed form differs from the spoken line.
+- Add a `>` line whenever the displayed form differs from the spoken line — whether for
+  notation or for bold.
 
 ## Generating and publishing
 
@@ -66,8 +76,8 @@ node scripts/upload-audio.js   NI-SPOL-2     # publish    -> uploads .mp3 to Sup
 ```
 
 `generate-audio.js` synthesizes each sentence separately (so its exact offset is known)
-and writes `data/audio/<QID>.mp3` plus `data/audio/<QID>.json` (the timing map). Default
-speed is `LENGTH_SCALE=0.8`; override per run, e.g.
+and writes `data/audio/<QID>.mp3` plus `data/audio/<QID>.json` (the timing map, with each
+sentence's `para` index). Default speed is `LENGTH_SCALE=0.8`; override per run, e.g.
 `LENGTH_SCALE=0.9 node scripts/generate-audio.js NI-SPOL-2` (higher = slower).
 
 `upload-audio.js` pushes the `.mp3` to Supabase Storage (creating the bucket on first

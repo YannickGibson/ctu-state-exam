@@ -1,0 +1,170 @@
+{
+  "id": "NI-ZI-5",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 218.315,
+  "sentences": [
+    {
+      "text": "Reálná data bývají špinavá: obsahují šum, chybějící hodnoty, nekonzistence i nevyvážené třídy.",
+      "para": 0,
+      "start": 0,
+      "end": 7.514
+    },
+    {
+      "text": "Cílem čištění dat je tyto problémy odstranit, protože bez kvalitních dat nezískáme dobrý výsledek.",
+      "para": 0,
+      "start": 7.514,
+      "end": 15.121
+    },
+    {
+      "text": "Chybějící hodnoty se v datech objevují v různých podobách, jako prázdné pole, nula, tečka, číslo 999 nebo zkratka NA.",
+      "para": 1,
+      "start": 15.121,
+      "end": 25.561
+    },
+    {
+      "text": "Důležité je, že prázdnou hodnotu nelze automaticky odlišit od skutečně chybějící: nevíme, zda zákazník omáčku odmítl, nebo ji prodavač jen zapomněl zapsat.",
+      "para": 1,
+      "start": 25.561,
+      "end": 37.801
+    },
+    {
+      "text": "Podle mechanismu rozlišujeme tři typy chybějících hodnot.",
+      "para": 2,
+      "start": 37.801,
+      "end": 41.763
+    },
+    {
+      "text": "**MCAR** znamená, že hodnota chybí zcela náhodně, nezávisle na čemkoli.",
+      "para": 2,
+      "start": 41.763,
+      "end": 47.744
+    },
+    {
+      "text": "**MAR** znamená, že chybění závisí jen na pozorovaných hodnotách.",
+      "para": 2,
+      "start": 47.744,
+      "end": 53.204
+    },
+    {
+      "text": "**MNAR** znamená, že chybění závisí na samotné nepozorované hodnotě.",
+      "para": 2,
+      "start": 53.204,
+      "end": 58.977
+    },
+    {
+      "text": "Nejjednodušší metoda je vynechání záznamů s chybějícími hodnotami, ale ztrácíme tím data a je vhodná jen pro zcela náhodné chybění.",
+      "para": 3,
+      "start": 58.977,
+      "end": 68.975
+    },
+    {
+      "text": "Druhá metoda je doplnění průměrem nebo mediánem sloupce, případně nejčastější hodnotou u kategorických proměnných.",
+      "para": 3,
+      "start": 68.975,
+      "end": 77.395
+    },
+    {
+      "text": "Sofistikovanější metody hodnotu predikují: regresní doplnění natrénuje model z ostatních sloupců a metoda $k$ nejbližších sousedů doplní průměr sousedních záznamů.",
+      "para": 3,
+      "start": 77.395,
+      "end": 89.612
+    },
+    {
+      "text": "Lze také přidat indikátor, který říká, zda hodnota chyběla, protože i samotné chybění může nést informaci.",
+      "para": 3,
+      "start": 89.612,
+      "end": 98.507
+    },
+    {
+      "text": "**Odlehlé hodnoty** jsou hodnoty výrazně odlišné od většiny dat; mohou to být chyby měření, nebo skutečné extrémy.",
+      "para": 4,
+      "start": 98.507,
+      "end": 106.567
+    },
+    {
+      "text": "K jejich detekci slouží **z-skóre**, kdy za odlehlou považujeme hodnotu vzdálenou od průměru více než tři směrodatné odchylky.",
+      "para": 4,
+      "start": 106.567,
+      "end": 115.603
+    },
+    {
+      "text": "Pravidlo mezikvartilového rozpětí označí hodnoty ležící daleko za prvním nebo třetím kvartilem; to je princip krabicového grafu.",
+      "para": 4,
+      "start": 115.603,
+      "end": 125.079
+    },
+    {
+      "text": "Pokročilejší je **faktor lokální odlehlosti**, který porovnává hustotu bodu s hustotou jeho sousedů.",
+      "para": 5,
+      "start": 125.079,
+      "end": 132.198
+    },
+    {
+      "text": "Hodnota kolem jedné znamená běžný bod, hodnota výrazně větší než jedna značí odlehlý bod v řidší oblasti.",
+      "para": 5,
+      "start": 132.198,
+      "end": 140.131
+    },
+    {
+      "text": "Odlehlé body lze také odhalit shlukovou analýzou jako body mimo všechny shluky.",
+      "para": 5,
+      "start": 140.131,
+      "end": 146.194
+    },
+    {
+      "text": "Při řešení můžeme odlehlé hodnoty odstranit, ponechat, oříznout na zvolené percentily nebo použít robustní statistiky odolné vůči extrémům.",
+      "para": 5,
+      "start": 146.194,
+      "end": 156.669
+    },
+    {
+      "text": "O **nevyvážená data** jde, když je jedna třída mnohem častější než ostatní, například u detekce podvodů nebo vzácných nemocí.",
+      "para": 6,
+      "start": 156.669,
+      "end": 165.808
+    },
+    {
+      "text": "Klasifikátor pak má tendenci předpovídat většinovou třídu a může být zdánlivě přesný, ale prakticky bezcenný.",
+      "para": 6,
+      "start": 165.808,
+      "end": 174.356
+    },
+    {
+      "text": "Proto je přesnost zavádějící metrika a hodnotíme spíše preciznost, úplnost a jejich harmonický průměr.",
+      "para": 6,
+      "start": 174.356,
+      "end": 182.009
+    },
+    {
+      "text": "Vyvažování řešíme na úrovni dat vzorkováním.",
+      "para": 7,
+      "start": 182.009,
+      "end": 185.785
+    },
+    {
+      "text": "Podvzorkování náhodně odebere body z většinové třídy, nadvzorkování naopak menšinovou třídu rozšíří.",
+      "para": 7,
+      "start": 185.785,
+      "end": 193.567
+    },
+    {
+      "text": "Metoda **SMOTE** generuje nové menšinové body interpolací mezi existujícím bodem a jeho nejbližšími sousedy.",
+      "para": 7,
+      "start": 193.567,
+      "end": 201.661
+    },
+    {
+      "text": "Na úrovni algoritmu pomáhají třídní váhy, učení citlivé na náklady nebo posun rozhodovacího prahu.",
+      "para": 7,
+      "start": 201.661,
+      "end": 209.234
+    },
+    {
+      "text": "Lze také použít stratifikované vzorkování, které zachová zhruba stejný poměr tříd v trénovací i testovací množině.",
+      "para": 7,
+      "start": 209.234,
+      "end": 218.315
+    }
+  ]
+}

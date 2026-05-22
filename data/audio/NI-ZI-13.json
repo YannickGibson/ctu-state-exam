@@ -1,0 +1,134 @@
+{
+  "id": "NI-ZI-13",
+  "voice": "cs_CZ-jirka-medium",
+  "lengthScale": 0.8,
+  "duration": 192.444,
+  "sentences": [
+    {
+      "text": "Doporučovací úlohu lze chápat jako **ratingovou matici** $R$, jejíž řádky odpovídají uživatelům a sloupce položkám.",
+      "para": 0,
+      "start": 0,
+      "end": 8.931
+    },
+    {
+      "text": "Většina prvků matice je neznámá a cílem je předpovědět chybějící hodnoty, tedy hodnocení, které by uživatel dal dané položce.",
+      "para": 0,
+      "start": 8.931,
+      "end": 18.779
+    },
+    {
+      "text": "**Maticová faktorizace** vyjadřuje ratingovou matici jako součin dvou matic nízké hodnosti $R \\approx U V^T$.",
+      "para": 1,
+      "start": 18.779,
+      "end": 25.77
+    },
+    {
+      "text": "Matice $U$ přiřazuje každému uživateli vektor latentních faktorů a matice $V$ přiřazuje takový vektor každé položce, počet faktorů $d$ je mnohem menší než počet uživatelů i položek.",
+      "para": 1,
+      "start": 25.77,
+      "end": 41.005
+    },
+    {
+      "text": "Myšlenka vychází ze singulárního rozkladu a jde vlastně o snížení dimenze projekcí do nižšího prostoru.",
+      "para": 1,
+      "start": 41.005,
+      "end": 48.694
+    },
+    {
+      "text": "Předpovězené hodnocení uživatele pro položku je pak skalární součin jejich latentních vektorů.",
+      "para": 1,
+      "start": 48.694,
+      "end": 55.976
+    },
+    {
+      "text": "Matice, u, a, vé, hledáme jako řešení optimalizační úlohy.",
+      "para": 2,
+      "start": 55.976,
+      "end": 61.017
+    },
+    {
+      "text": "Minimalizujeme $\\sum_{(i,j)\\in\\Omega}(r_{i,j} - \\boldsymbol u_i^T \\boldsymbol v_j)^2 + \\lambda(\\sum\\|\\boldsymbol u_i\\|^2 + \\sum\\|\\boldsymbol v_j\\|^2)$ jen přes známé indexy $\\Omega$.",
+      "para": 2,
+      "start": 61.017,
+      "end": 72.874
+    },
+    {
+      "text": "Suma jen přes pozorované indexy je zásadní, protože většina hodnocení chybí, a regularizace brání přeučení.",
+      "para": 2,
+      "start": 72.874,
+      "end": 81.375
+    },
+    {
+      "text": "Úlohu řeší stochastický gradientní sestup nebo metoda střídavých nejmenších čtverců.",
+      "para": 2,
+      "start": 81.375,
+      "end": 87.751
+    },
+    {
+      "text": "Vedle faktorizačních metod existují metody založené na paměti, takzvané **kolaborativní filtrování**.",
+      "para": 3,
+      "start": 87.751,
+      "end": 95.242
+    },
+    {
+      "text": "Pro daného uživatele najdeme $k$ nejbližších uživatelů a jejich hodnocení agregujeme jako vážený průměr podle míry podobnosti.",
+      "para": 3,
+      "start": 95.242,
+      "end": 104.672
+    },
+    {
+      "text": "Tento přístup nevyžaduje žádný trénink, jen prochází uložená data.",
+      "para": 3,
+      "start": 104.672,
+      "end": 109.957
+    },
+    {
+      "text": "Klíčem je volba míry podobnosti uživatelů.",
+      "para": 4,
+      "start": 109.957,
+      "end": 113.536
+    },
+    {
+      "text": "Naivní počet společných položek je zavádějící, protože velmi aktivní uživatelé pak vycházejí podobní téměř každému.",
+      "para": 4,
+      "start": 113.536,
+      "end": 122.432
+    },
+    {
+      "text": "**Jaccardova podobnost** dělí velikost průniku velikostí sjednocení: $J(i,l) = |U_i \\cap U_l| / |U_i \\cup U_l| \\in [0,1]$.",
+      "para": 4,
+      "start": 122.432,
+      "end": 134.265
+    },
+    {
+      "text": "**Kosinová podobnost** měří kosinus úhlu mezi vektory hodnocení: $\\cos\\theta = \\langle \\boldsymbol a, \\boldsymbol b\\rangle / (\\|\\boldsymbol a\\|\\|\\boldsymbol b\\|)$.",
+      "para": 4,
+      "start": 134.265,
+      "end": 146.679
+    },
+    {
+      "text": "Faktorizaci lze rozšířit o modelování nejistoty.",
+      "para": 5,
+      "start": 146.679,
+      "end": 150.687
+    },
+    {
+      "text": "**Faktorizace zohledňující jistotu** modeluje rozptyl predikce parametry nejistoty, bayesovská varianta používá konjugované priory a Gibbsovo vzorkování.",
+      "para": 5,
+      "start": 150.687,
+      "end": 166.015
+    },
+    {
+      "text": "Modernější přístupy zahrnují pravděpodobnostní maticovou faktorizaci a její bayesovskou verzi.",
+      "para": 6,
+      "start": 166.015,
+      "end": 179.206
+    },
+    {
+      "text": "Dále neuronové kolaborativní filtrování, variační autoenkodéry, sekvenční modely a grafové neuronové sítě nad bipartitním grafem uživatelů a položek.",
+      "para": 6,
+      "start": 179.206,
+      "end": 192.444
+    }
+  ]
+}
