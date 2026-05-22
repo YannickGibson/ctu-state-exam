@@ -1,10 +1,10 @@
 import { useEffect, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import StatusBadge from './StatusBadge.jsx';
+import { useSearchParams } from 'react-router-dom';
+import QuestionsTable from './QuestionsTable.jsx';
 import DonutChart, { buildDonutData } from './DonutChart.jsx';
 import DeadlinePace from './DeadlinePace.jsx';
 
-export default function ProgressDonut({ questions }) {
+export default function ProgressDonut({ questions, onAction }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const openSubject = searchParams.get('subject');
 
@@ -74,27 +74,12 @@ export default function ProgressDonut({ questions }) {
                 ×
               </button>
             </header>
-            <ul className="subject-modal-list">
-              {modalSubject.questions.map((q) => (
-                <li key={q.id}>
-                  <Link
-                    to={`/questions/${q.id}`}
-                    className="subject-modal-item"
-                  >
-                    <span className="subject-modal-status">
-                      <StatusBadge progress={q.progress} />
-                    </span>
-                    <span className="subject-modal-num">
-                      {q.subject} {q.subjectIndex}
-                    </span>
-                    <span className="subject-modal-group muted">
-                      {q.group} {q.number}
-                    </span>
-                    <span className="subject-modal-text">{q.text}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="subject-modal-list">
+              <QuestionsTable
+                questions={modalSubject.questions}
+                onAction={onAction}
+              />
+            </div>
           </div>
         </div>
       )}
