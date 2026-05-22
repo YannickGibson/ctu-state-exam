@@ -1,4 +1,4 @@
-# ctu-state-exam
+# CTU State Exam Practice
 
 Self-hostable study webapp for Czech Technical University (ČVUT) state exam questions. Browse the question list, read tightly-cropped answers extracted from lecture PDFs (with deep links back to the source page for verification), and run subject-level quizzes.
 
