@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Check, Eye, RotateCcw } from 'lucide-react';
 import { MAX_PRACTICED } from '../config/limits.js';
 
@@ -14,23 +14,20 @@ export default function QuestionActions({ progress, onAction, compact = false, d
   const showReset = hasProgress;
   const showEye = !hasProgress;
   const [pulse, setPulse] = useState(false);
-  const lastCount = useRef(practicedCount);
 
+  // Clear the pulse flag once the animation has played.
   useEffect(() => {
-    if (practicedCount !== lastCount.current) {
-      lastCount.current = practicedCount;
-      if (practicedCount > 0) {
-        setPulse(true);
-        const t = setTimeout(() => setPulse(false), 260);
-        return () => clearTimeout(t);
-      }
-    }
-  }, [practicedCount]);
+    if (!pulse) return undefined;
+    const t = setTimeout(() => setPulse(false), 260);
+    return () => clearTimeout(t);
+  }, [pulse]);
 
   const fire = (event, action) => {
     event.stopPropagation();
     event.preventDefault();
     if (disabled) return;
+    // Pulse only on a real click, not when navigation loads an existing count.
+    if (action === 'practice') setPulse(true);
     onAction(action);
   };
 
