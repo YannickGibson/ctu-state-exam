@@ -6,7 +6,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "includeFiles": "data/{questions.json,answers/*.md,quizzes/*.json}"
+      "includeFiles": "data/{questions.json,answers/*.md,quizzes/*.json,audio/*.json}"
     }
   }
 }

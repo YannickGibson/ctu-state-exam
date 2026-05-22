@@ -187,3 +187,33 @@ describe('GET /api/auth/fit/callback — user creation idempotency (#5)', () => 
     });
   });
 });
+
+describe('GET /api/questions/:id — narration timing (#audio)', () => {
+  beforeEach(() => {
+    auth.getUser.mockResolvedValue(VALID);
+  });
+
+  it('bundles the narration timing map when one exists', async () => {
+    const res = await request(app)
+      .get('/api/questions/NI-SPOL-2')
+      .set('Authorization', 'Bearer good-token');
+    expect(res.status).toBe(200);
+    expect(res.body.audio).toBeTruthy();
+    expect(Array.isArray(res.body.audio.sentences)).toBe(true);
+  });
+
+  it('returns audio: null for a question with no narration', async () => {
+    const res = await request(app)
+      .get('/api/questions/NI-SPOL-1')
+      .set('Authorization', 'Bearer good-token');
+    expect(res.status).toBe(200);
+    expect(res.body.audio).toBeNull();
+  });
+
+  it('404s for an unknown question id', async () => {
+    const res = await request(app)
+      .get('/api/questions/NOPE-999')
+      .set('Authorization', 'Bearer good-token');
+    expect(res.status).toBe(404);
+  });
+});

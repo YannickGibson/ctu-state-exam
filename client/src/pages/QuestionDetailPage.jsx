@@ -9,6 +9,8 @@ import { MAX_PRACTICED } from '../config/limits.js';
 import { subjectHue } from '../config/subjects.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
+import AnswerAudio from '../components/AnswerAudio.jsx';
+import { Volume2 } from 'lucide-react';
 
 const ZERO = { practicedCount: 0, readPassively: false };
 const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
@@ -117,9 +119,11 @@ export default function QuestionDetailPage() {
   const [busy, setBusy] = useState(false);
   const [collapseAll, setCollapseAll] = useState(() => readCollapseDefault());
   const [overrides, setOverrides] = useState({});
+  const [audioOpen, setAudioOpen] = useState(false);
 
   useEffect(() => {
     setOverrides({});
+    setAudioOpen(false);
   }, [slug]);
 
   useEffect(() => {
@@ -276,6 +280,18 @@ export default function QuestionDetailPage() {
               Hide answer
             </span>
           </button>
+          {question.audio && (
+            <button
+              type="button"
+              className={`answer-audio-toggle${audioOpen ? ' is-on' : ''}`}
+              onClick={() => setAudioOpen((v) => !v)}
+              aria-pressed={audioOpen}
+              aria-label={audioOpen ? 'Stop narration' : 'Listen to the narrated answer'}
+              title={audioOpen ? 'Stop narration' : 'Listen to the narrated answer'}
+            >
+              <Volume2 size={18} aria-hidden />
+            </button>
+          )}
           {showAnswer && sections.length > 0 && (
             <button className="ghost" onClick={() => setAllCollapsed(!collapseAll)}>
               {collapseAll ? 'Expand all' : 'Collapse all'}
@@ -286,6 +302,10 @@ export default function QuestionDetailPage() {
           <QuestionActions progress={progress} onAction={mark} disabled={busy} />
         </div>
       </div>
+
+      {question.audio && audioOpen && (
+        <AnswerAudio questionId={question.id} timing={question.audio} />
+      )}
 
       {showAnswer && (
         <section className="answer">
