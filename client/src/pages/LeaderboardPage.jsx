@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getLeaderboard, getQuestions } from '../api.js';
 import DonutChart from '../components/DonutChart.jsx';
+import Spinner from '../components/Spinner.jsx';
 
 export default function LeaderboardPage() {
   const [entries, setEntries] = useState([]);
@@ -36,7 +37,7 @@ export default function LeaderboardPage() {
     });
   }, [entries, questions]);
 
-  if (loading) return <p className="muted">Loading…</p>;
+  if (loading) return <Spinner />;
   if (error) return <p className="error">Error: {error}</p>;
 
   return (

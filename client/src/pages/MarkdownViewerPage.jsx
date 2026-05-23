@@ -11,6 +11,7 @@ import {
   splitTopLevelPages,
   findTargetPage,
 } from '../markdownPrep.js';
+import Spinner from '../components/Spinner.jsx';
 
 function dirOf(filePath) {
   const idx = filePath.lastIndexOf('/');
@@ -321,7 +322,7 @@ export default function MarkdownViewerPage() {
       </article>
     );
   }
-  if (!content) return <p className="muted">Loading…</p>;
+  if (!content) return <Spinner />;
 
   return (
     <article className="md-viewer">

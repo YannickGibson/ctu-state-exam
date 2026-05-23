@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getQuizzes } from '../api.js';
+import Spinner from '../components/Spinner.jsx';
 
 export default function QuizzesPage() {
   const [quizzes, setQuizzes] = useState([]);
@@ -15,7 +16,7 @@ export default function QuizzesPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="muted">Loading…</p>;
+  if (loading) return <Spinner />;
   if (error) return <p className="error">Error: {error}</p>;
 
   return (

@@ -515,6 +515,26 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
      space via contain-intrinsic-size set inline per page. */
   content-visibility: auto;
 }
+
+.spinner-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--muted);
+  z-index: 100;
+}
+.spinner-svg {
+  animation: spinner-rotate 1s linear infinite;
+}
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner-svg { animation-duration: 3s; }
+}
 .answer pre {
   background: var(--surface-3);
   padding: 12px;

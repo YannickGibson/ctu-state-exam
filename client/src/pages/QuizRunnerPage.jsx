@@ -12,6 +12,7 @@ import {
   partKey,
   textIsCorrect,
 } from '../quizGrading.js';
+import Spinner from '../components/Spinner.jsx';
 
 function Markdown({ children }) {
   return (
@@ -48,7 +49,7 @@ export default function QuizRunnerPage() {
   }, [scope, subject]);
 
   if (error) return <p className="error">Error: {error}</p>;
-  if (!quiz) return <p className="muted">Loading…</p>;
+  if (!quiz) return <Spinner />;
 
   const allQuestions = quiz.questions || [];
   const scopeIsAll = !scope || scope === 'all';

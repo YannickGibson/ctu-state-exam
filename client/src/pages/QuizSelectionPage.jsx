@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getQuestions, getQuiz } from '../api.js';
+import Spinner from '../components/Spinner.jsx';
 
 function groupByQuestionId(questions) {
   const groups = new Map();
@@ -59,7 +60,7 @@ export default function QuizSelectionPage() {
   );
 
   if (error) return <p className="error">Error: {error}</p>;
-  if (!quiz) return <p className="muted">Loading…</p>;
+  if (!quiz) return <Spinner />;
 
   const hasAny = (quiz.questions || []).length > 0;
 

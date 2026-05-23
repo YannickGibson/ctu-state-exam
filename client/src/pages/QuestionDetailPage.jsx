@@ -13,6 +13,7 @@ import QuestionActions from '../components/QuestionActions.jsx';
 import AnswerAudio from '../components/AnswerAudio.jsx';
 import InlineMarkdown from '../components/InlineMarkdown.jsx';
 import { Volume2, ChevronLeft, ChevronRight, ChevronsLeft } from 'lucide-react';
+import Spinner from '../components/Spinner.jsx';
 
 const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
 
@@ -181,7 +182,7 @@ export default function QuestionDetailPage() {
   }
 
   if (error) return <p className="error">Error: {error}</p>;
-  if (!question || progressLoading) return <p className="muted">Loading…</p>;
+  if (!question || progressLoading) return <Spinner />;
 
   const progress = progressFor(question.id);
   const { body, sources } = extractSources(question.answer);

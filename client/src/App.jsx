@@ -13,6 +13,7 @@ import RequireAuth from './components/RequireAuth.jsx';
 import RedirectIfAuthed from './components/RedirectIfAuthed.jsx';
 import GitHubMark from './components/GitHubMark.jsx';
 import { useAuth } from './auth/AuthContext.jsx';
+import Spinner from './components/Spinner.jsx';
 
 function Header() {
   const { session, profile, signOut } = useAuth();
@@ -53,7 +54,7 @@ function Header() {
 
 function LeaderboardGate({ children }) {
   const { profile, ready } = useAuth();
-  if (!ready || !profile) return <p className="muted">Loading…</p>;
+  if (!ready || !profile) return <Spinner />;
   if (!profile.show_leaderboard) return <Navigate to="/questions" replace />;
   return children;
 }

@@ -4,6 +4,7 @@ import { ZERO } from '../progressCache.js';
 import { useProgress } from '../ProgressContext.jsx';
 import ProgressDonut from '../components/ProgressDonut.jsx';
 import QuestionsTable from '../components/QuestionsTable.jsx';
+import Spinner from '../components/Spinner.jsx';
 
 export default function QuestionsPage() {
   const { progress, loading: progressLoading, markProgress } = useProgress();
@@ -67,7 +68,7 @@ export default function QuestionsPage() {
     }
   }
 
-  if (questionsLoading || progressLoading) return <p className="muted">Loading…</p>;
+  if (questionsLoading || progressLoading) return <Spinner />;
   if (error) return <p className="error">Error: {error}</p>;
 
   return (
