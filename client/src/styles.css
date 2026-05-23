@@ -1331,3 +1331,48 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   .audio-sentence:not(.is-active):hover { background: var(--surface-2); }
 }
 .audio-sentence.is-active { background: var(--accent); color: #fff; }
+
+/* ---- podcast page ---- */
+.podcast { max-width: 874px; margin: 0 auto; }
+.podcast-heading { margin: 0 0 4px; }
+.podcast-subhead { margin: 0 0 16px; }
+.podcast-bar { flex-wrap: wrap; }
+.podcast-now-playing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 14px;
+}
+.podcast-failed-note { margin: 10px 0 0; font-size: 13px; }
+.podcast-transcript { max-height: 65vh; }
+.podcast-subject + .podcast-subject { margin-top: 18px; }
+.podcast-subject-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+.podcast-subject-header:hover { background: var(--surface-hover); }
+.podcast-subject-header:focus { outline: none; }
+.podcast-subject-header:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.podcast-subject-name { flex: 1; }
+.podcast-questions { line-height: 2.4; }
+.podcast-questions .audio-sentence {
+  /* Each question is shown as its own line item, not flowing prose. */
+  display: block;
+  margin: 4px 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+}

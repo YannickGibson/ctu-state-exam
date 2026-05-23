@@ -6,6 +6,7 @@ import QuizzesPage from './pages/QuizzesPage.jsx';
 import QuizSelectionPage from './pages/QuizSelectionPage.jsx';
 import QuizRunnerPage from './pages/QuizRunnerPage.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
+import PodcastPage from './pages/PodcastPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import FitCompletePage from './pages/FitCompletePage.jsx';
@@ -34,6 +35,7 @@ function Header() {
         <nav>
           <NavLink to="/questions" end>Questions</NavLink>
           <NavLink to="/quizzes" end>Quizzes</NavLink>
+          <NavLink to="/podcast">Podcast</NavLink>
           {profile?.show_leaderboard && (
             <NavLink to="/leaderboard">Leaderboard</NavLink>
           )}
@@ -128,6 +130,14 @@ export default function App() {
             element={
               <RequireAuth>
                 <QuizRunnerPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/podcast"
+            element={
+              <RequireAuth>
+                <PodcastPage />
               </RequireAuth>
             }
           />
