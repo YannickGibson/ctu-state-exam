@@ -13,6 +13,8 @@ $$\rho(\tau) = \frac{\gamma(\tau)}{\gamma(0)} = \frac{\mathrm{cov}(X_t, X_{t+\ta
 
 Confidence band $\pm 1.96/\sqrt{n}$ pro testování $\rho(\tau) = 0$ pod hypotézou bílého šumu (Bartlett).
 
+([otevřít v Markdown, Téma 2 — ACF, PACF, AR](/pdfs/ZI/SCR/SCR_Merged.md#tema-2-acf-pacf-autoregresni-modely))
+
 ---
 
 ## Parciální autokorelační funkce PACF
@@ -20,6 +22,8 @@ Confidence band $\pm 1.96/\sqrt{n}$ pro testování $\rho(\tau) = 0$ pod hypoté
 $\phi_{kk}$ je korelace $X_t$ a $X_{t-k}$ **po odstranění** vlivu mezilehlých hodnot $X_{t-1}, \ldots, X_{t-k+1}$. Spočítá se z regresí $X_t$ na $X_{t-1}, \ldots, X_{t-k}$ — poslední koeficient je $\phi_{kk}$.
 
 ACF a PACF jsou klíčové **diagnostické nástroje** pro identifikaci ARMA modelů.
+
+([otevřít v Markdown, Téma 2 — ACF, PACF, AR](/pdfs/ZI/SCR/SCR_Merged.md#tema-2-acf-pacf-autoregresni-modely))
 
 ---
 
@@ -47,6 +51,8 @@ AR(p) je **stacionární** ⇔ kořeny polynomu $\phi(z) = 1 - \phi_1 z - \ldots
 - **ACF AR(p)**: klesá geometricky / oscilačně (theoretically nenulová pro všechna $\tau$).
 - **PACF AR(p)**: **uřízne se** za zpožděním $p$ (parciální korelace $\phi_{kk} = 0$ pro $k > p$).
 
+([otevřít v Markdown, Téma 2 — ACF, PACF, AR](/pdfs/ZI/SCR/SCR_Merged.md#tema-2-acf-pacf-autoregresni-modely))
+
 ---
 
 ## MA(q) — Moving Average
@@ -71,6 +77,8 @@ $X_t = \varepsilon_t + \theta_1 \varepsilon_{t-1}$, $\gamma(0) = (1+\theta_1^2)\
 - **ACF MA(q)**: **uřízne se** za zpožděním $q$.
 - **PACF MA(q)**: klesá geometricky / oscilačně.
 
+([otevřít v Markdown, Téma 3 — MA a ARMA](/pdfs/ZI/SCR/SCR_Merged.md#tema-3-modely-ma-a-arma))
+
 ---
 
 ## ARMA(p, q) — smíšený model
@@ -82,6 +90,8 @@ Spojí AR a MA: $X_t = c + \phi_1 X_{t-1} + \ldots + \phi_p X_{t-p} + \varepsilo
 Stacionarita: kořeny $\phi(z)$ vně jednotkového kruhu. Invertibilita: kořeny $\theta(z)$ vně jednotkového kruhu.
 
 **ACF i PACF** klesají postupně (žádné nezpůsobné useknutí) — proto identifikace pomocí samotných ACF/PACF je u ARMA náročnější.
+
+([otevřít v Markdown, Téma 3 — MA a ARMA](/pdfs/ZI/SCR/SCR_Merged.md#tema-3-modely-ma-a-arma)) ([otevřít v Markdown, Odhad ARMA modelu](/pdfs/ZI/SCR/SCR_Merged.md#odhad-arma-modelu))
 
 ---
 
@@ -129,5 +139,7 @@ Závisí nelineárně na $\theta$, je třeba **numerická optimalizace**. Condit
 - **Ljung-Boxův test** na nezávislost reziduí (test bílého šumu).
 - **ACF reziduí** by neměla mít signifikantní hodnoty.
 - **Histogram** / Q-Q plot reziduí (normalita).
+
+([otevřít v Markdown, Téma 3 — Odhad ARMA modelu](/pdfs/ZI/SCR/SCR_Merged.md#odhad-arma-modelu))
 
 _Detailní výklad: [SCR_Merged.md Téma 2 a Téma 3](/pdfs/ZI/SCR/SCR_Merged.md)._

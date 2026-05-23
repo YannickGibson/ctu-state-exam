@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { subjectHue } from '../config/subjects.js';
 import StatusBadge from './StatusBadge.jsx';
 import QuestionActions from './QuestionActions.jsx';
+import InlineMarkdown from './InlineMarkdown.jsx';
 
 // Shared question list rendered by both the Questions page and the
 // subject-detail modal, so the two views always have an identical design.
@@ -41,7 +42,7 @@ export default function QuestionsTable({ questions, onAction }) {
             <td className="col-subject">
               {q.group} {q.number}
             </td>
-            <td className="q-text">{q.text}</td>
+            <td className="q-text"><InlineMarkdown>{q.text}</InlineMarkdown></td>
             <td className="col-actions">
               <QuestionActions
                 progress={q.progress}

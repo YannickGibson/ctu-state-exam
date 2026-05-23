@@ -1,6 +1,7 @@
 import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import QuestionsPage from './pages/QuestionsPage.jsx';
 import QuestionDetailPage from './pages/QuestionDetailPage.jsx';
+import MarkdownViewerPage from './pages/MarkdownViewerPage.jsx';
 import QuizzesPage from './pages/QuizzesPage.jsx';
 import QuizSelectionPage from './pages/QuizSelectionPage.jsx';
 import QuizRunnerPage from './pages/QuizRunnerPage.jsx';
@@ -94,6 +95,14 @@ export default function App() {
             element={
               <RequireAuth>
                 <QuestionDetailPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/md-viewer"
+            element={
+              <RequireAuth>
+                <MarkdownViewerPage />
               </RequireAuth>
             }
           />

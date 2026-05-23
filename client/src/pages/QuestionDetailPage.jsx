@@ -5,11 +5,13 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { getQuestion, getQuestions } from '../api.js';
+import { toPdfjsHref } from '../pdfLinks.js';
 import { useProgress } from '../ProgressContext.jsx';
 import { subjectHue } from '../config/subjects.js';
 import StatusBadge from '../components/StatusBadge.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
 import AnswerAudio from '../components/AnswerAudio.jsx';
+import InlineMarkdown from '../components/InlineMarkdown.jsx';
 import { Volume2, ChevronLeft, ChevronRight, ChevronsLeft } from 'lucide-react';
 
 const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
@@ -93,7 +95,7 @@ function AnswerMarkdown({ children }) {
       components={{
         a: ({ href, children: kids, ...rest }) =>
           href && href.startsWith('/pdfs/') ? (
-            <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+            <a href={toPdfjsHref(href)} target="_blank" rel="noopener noreferrer" {...rest}>
               {kids}
             </a>
           ) : (
@@ -246,7 +248,7 @@ export default function QuestionDetailPage() {
 
       <h1 className="detail-question">
         <span className="detail-label">QUESTION</span>
-        {question.text}
+        <InlineMarkdown>{question.text}</InlineMarkdown>
       </h1>
 
       <div className="detail-actions">
@@ -305,7 +307,9 @@ export default function QuestionDetailPage() {
                       onClick={() => toggleSection(i)}
                     >
                       <span className="answer-section-caret" aria-hidden>▾</span>
-                      <span className="answer-section-title">{s.title}</span>
+                      <span className="answer-section-title">
+                        <InlineMarkdown>{s.title}</InlineMarkdown>
+                      </span>
                     </button>
                     {expanded && (
                       <div className="answer-section-body">
@@ -318,7 +322,7 @@ export default function QuestionDetailPage() {
               {sources.length > 0 && (
                 <div className="answer-sources">
                   {sources.map((url) => (
-                    <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+                    <a key={url} href={toPdfjsHref(url)} target="_blank" rel="noopener noreferrer">
                       Otevřít zdrojový soubor
                     </a>
                   ))}

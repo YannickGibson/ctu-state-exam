@@ -19,6 +19,8 @@ s konvergencí $O(N^{-1/2})$ podle CLT (nezávislé na dimenzi).
 
 **Problém**: jak vzorkovat z komplikované $p(x)$?
 
+([otevřít v Markdown, Monte Carlo, rejection sampling](/pdfs/ZI/BML/BML_Merged.md#monte-carlo-rejection-sampling))
+
 ---
 
 ## Rejection sampling
@@ -42,6 +44,8 @@ $$p(x) \le M \cdot q(x) \quad \forall x$$
 - V vysoké dimenzi je rejection sampling **prakticky nepoužitelné** — $M$ roste exponenciálně.
 
 **Adaptivní rejection sampling (ARS)** — pro log-konkávní $p$ se $q$ konstruuje jako po částech lineární obálka log-hustoty.
+
+([otevřít v Markdown, Monte Carlo, rejection sampling](/pdfs/ZI/BML/BML_Merged.md#monte-carlo-rejection-sampling))
 
 ---
 
@@ -81,6 +85,8 @@ Nízká ESS (např. $< 10$) znamená, že málo vzorků nese skoro veškerou vá
 - **Reinforcement learning** — off-policy evaluation (vážení odměn proposal vs target policy).
 - **Particle filter** (sekvenční IS, viz NI-ZI-15).
 
+([otevřít v Markdown, Importance sampling](/pdfs/ZI/BML/BML_Merged.md#importance-sampling))
+
 ---
 
 ## Sequential Importance Sampling (SIS) a SIR
@@ -93,11 +99,15 @@ $$w_t^{(i)} = w_{t-1}^{(i)} \cdot \frac{p(y_t \mid x_t^{(i)}) \, p(x_t^{(i)} \mi
 
 Problém **váhové degenerace** — postupně 1 částice dominuje. Řešení: **resampling** (multinomial, systematic, residual) — vzorkuj $N$ částic s opakováním podle vah, vyresetuj váhy na $1/N$.
 
+([otevřít v Markdown, Monte Carlo, importance sampling, particle filtry](/pdfs/ZI/BML/BML_Merged.md#monte-carlo-importance-sampling-particle-filtry))
+
 ---
 
 ## Annealed importance sampling (AIS)
 
 Místo přímého IS od $q_0$ k $p$ použij **mezistupně** $q_0, q_1, \ldots, q_n = p$ (s postupně rostoucí "teplotou"). V každém kroku **lehká IS s malou divergencí**. Robustní pro vícemodální posteriory. Používá se k odhadu marginální věrohodnosti.
+
+([otevřít v Markdown, Importance sampling](/pdfs/ZI/BML/BML_Merged.md#importance-sampling))
 
 ---
 
@@ -110,6 +120,8 @@ Místo přímého IS od $q_0$ k $p$ použij **mezistupně** $q_0, q_1, \ldots, q
 - **Self-Normalized IS** — vážení normalizované.
 - **Stratified sampling** — vzorkuj rovnoměrně z různých regionů, važ podle pravděpodobnosti regionu.
 - **Reweighting v RL** — off-policy ratio $\pi(a|s)/\beta(a|s)$.
+
+([otevřít v Markdown, Importance sampling](/pdfs/ZI/BML/BML_Merged.md#importance-sampling))
 
 ---
 

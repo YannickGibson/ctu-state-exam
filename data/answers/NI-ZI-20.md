@@ -13,6 +13,8 @@ Zdroj: [SCR_Merged.md](/pdfs/ZI/SCR/SCR_Merged.md) (skripta NI-SCR, Téma 1 — 
 - variance $\sigma_t^2 = \mathrm{var}\,X_t$
 - **autokovariance** $\gamma(t_1, t_2) = \mathrm{cov}(X_{t_1}, X_{t_2})$; pro stacionární řadu $\gamma(\tau) = \mathrm{cov}(X_t, X_{t+\tau})$.
 
+([otevřít v Markdown, Téma 1](/pdfs/ZI/SCR/SCR_Merged.md#tema-1-uvod-do-problematiky-exponencialni-vyhlazovani))
+
 ---
 
 ## Typy stacionarity
@@ -36,6 +38,8 @@ $X_t$ a $X_{t+s}$ mají stejné rozdělení s periodou $s$.
 - **Trend stacionární**: $X_t = f(t) + \tilde X_t$, kde $f(t)$ je deterministický trend a $\tilde X_t$ stacionární.
 - **Difference stacionární**: $\Delta X_t = X_t - X_{t-1}$ je stacionární (typicky náhodná procházka).
 
+([otevřít v Markdown, Téma 1](/pdfs/ZI/SCR/SCR_Merged.md#tema-1-uvod-do-problematiky-exponencialni-vyhlazovani))
+
 ---
 
 ## Dekompozice časových řad
@@ -56,6 +60,8 @@ Klasický model:
 - **STL (Seasonal-Trend-Loess)**: robustnější, lokální regrese.
 - **X-13ARIMA-SEATS**: state-of-the-art pro ekonomická data.
 
+([otevřít v Markdown, Téma 1](/pdfs/ZI/SCR/SCR_Merged.md#tema-1-uvod-do-problematiky-exponencialni-vyhlazovani)) ([otevřít v Markdown, První modely: Exponenciální vyhlazování](/pdfs/ZI/SCR/SCR_Merged.md#prvni-modely-exponencialni-vyhlazovani-vyrovnavani))
+
 ---
 
 ## Bílý šum
@@ -66,6 +72,8 @@ $$E[X_t] = 0, \quad \mathrm{var}(X_t) = \sigma^2 < \infty, \quad \gamma(\tau) = 
 **i.i.d.** s nulovým průměrem. **Gaussovský bílý šum**: $X_t \sim \mathcal N(0, \sigma^2)$. Slabě (i striktně, pokud iid) stacionární. Žádná predikce ze samotného procesu — všechny minulé hodnoty jsou nekorelované. Praktické využití: zvuková syntéza, generátory náhodných čísel, testování modelů.
 
 ![Bílý šum](/pdfs/ZI/SCR/imgs/lecture_1/cell20-img06.svg)
+
+([otevřít v Markdown, Téma 1](/pdfs/ZI/SCR/SCR_Merged.md#tema-1-uvod-do-problematiky-exponencialni-vyhlazovani))
 
 ---
 
@@ -84,11 +92,15 @@ Aplikace: ceny akcií (klasický model), Brownův pohyb, velikost webu, populace
 
 ![Náhodná procházka](/pdfs/ZI/SCR/imgs/lecture_1/cell22-img07.svg)
 
+([otevřít v Markdown, Téma 1](/pdfs/ZI/SCR/SCR_Merged.md#tema-1-uvod-do-problematiky-exponencialni-vyhlazovani))
+
 ---
 
 ## Variabilita a transformace
 
 **Box-Coxova transformace** $y_t^{(\lambda)} = (y_t^\lambda - 1)/\lambda$ stabilizuje rozptyl. Pro $\lambda = 0$ to je logaritmus. Multiplikativní → aditivní řadu.
+
+([otevřít v Markdown, Téma 1](/pdfs/ZI/SCR/SCR_Merged.md#tema-1-uvod-do-problematiky-exponencialni-vyhlazovani))
 
 ---
 

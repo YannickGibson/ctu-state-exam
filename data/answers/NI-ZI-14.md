@@ -18,6 +18,8 @@ $$p(\theta \mid \mathcal D) = \frac{p(\mathcal D \mid \theta) \, p(\theta)}{p(\m
 
 Často $p(\theta \mid \mathcal D) \propto p(\mathcal D \mid \theta) p(\theta)$ — pracujeme s neznormalizovanou aposteriorní hustotou.
 
+([otevřít v Markdown, Přednáška 1](/pdfs/ZI/BML/BML_Merged.md#prednaska-1-zaklady-a-specifika-bayesovske-teorie))
+
 ---
 
 ## Bayesovské bodové odhady
@@ -29,6 +31,8 @@ $$p(\theta \mid \mathcal D) = \frac{p(\mathcal D \mid \theta) \, p(\theta)}{p(\m
 
 Na rozdíl od frekvenčního CI má bayesovský **přímou pravděpodobnostní interpretaci** podmíněnou daty.
 
+([otevřít v Markdown, Přednáška 1](/pdfs/ZI/BML/BML_Merged.md#prednaska-1-zaklady-a-specifika-bayesovske-teorie))
+
 ---
 
 ## Sekvenční bayesovský update
@@ -39,6 +43,8 @@ $$p(\theta \mid \mathcal D_1) \propto p(\mathcal D_1 \mid \theta) p(\theta)$$
 $$p(\theta \mid \mathcal D_1, \mathcal D_2) \propto p(\mathcal D_2 \mid \theta) p(\theta \mid \mathcal D_1)$$
 
 **Posteriorní z prvního kroku slouží jako prior pro druhý**. Pokud pozorování jsou podmíněně nezávislá při daném $\theta$, výsledek je nezávislý na pořadí.
+
+([otevřít v Markdown, Přednáška 2 — sekvenční odhad](/pdfs/ZI/BML/BML_Merged.md#prednaska-2-sekvencni-odhad-linearnich-modelu-predikce))
 
 ---
 
@@ -78,6 +84,8 @@ $$p \mid \mathcal D \sim \mathrm{Beta}(\alpha + k, \beta + n - k)$$
 - **Jeffreysův prior** $p(\theta) \propto \sqrt{|\det I(\theta)|}$, kde $I$ je Fisherova informace. Invariantní vůči reparametrizaci. Pro Bernoulli: $\mathrm{Beta}(1/2, 1/2)$.
 - **Conjugate** s velmi malými parametry (např. $\mathrm{Gamma}(\epsilon, \epsilon)$) — slabě informativní.
 
+([otevřít v Markdown, Přednáška 1](/pdfs/ZI/BML/BML_Merged.md#prednaska-1-zaklady-a-specifika-bayesovske-teorie))
+
 ---
 
 ## Predikce s aposteriorním rozdělením
@@ -89,6 +97,8 @@ Marginalizuje přes $\theta$ → kombinuje neurčitost o parametru i o pozorová
 
 **Příklad — beta-binomial**: posterior predictive je $\mathrm{BetaBinomial}(n, \alpha', \beta')$ — má širší ocas než binomial (extra disperze z neurčitosti parametru).
 
+([otevřít v Markdown, Přednáška 2](/pdfs/ZI/BML/BML_Merged.md#prednaska-2-sekvencni-odhad-linearnich-modelu-predikce))
+
 ---
 
 ## Hierarchické modely
@@ -97,6 +107,8 @@ Vícevrstvý prior:
 $$\theta_i \mid \phi \sim p(\theta_i \mid \phi), \quad \phi \sim p(\phi)$$
 
 Sdílení statistické síly přes skupiny (partial pooling). Aplikace: A/B testy s mnoha variantami, multi-task learning.
+
+([otevřít v Markdown, Přednáška 2](/pdfs/ZI/BML/BML_Merged.md#prednaska-2-sekvencni-odhad-linearnich-modelu-predikce))
 
 ---
 
@@ -109,6 +121,8 @@ $$\Sigma_n^{-1} = \Sigma_0^{-1} + \frac{1}{\sigma^2} X^T X$$
 $$\mu_n = \Sigma_n \left( \Sigma_0^{-1} \mu_0 + \frac{1}{\sigma^2} X^T y \right)$$
 
 Pro nekonečně rozptýlený prior (uniform improper) se posterior mean redukuje na OLS. Pro Gaussovský prior s $\mu_0 = 0$ se redukuje na **ridge regresi** (s $\lambda = \sigma^2 / \tau^2$).
+
+([otevřít v Markdown, Přednáška 2](/pdfs/ZI/BML/BML_Merged.md#prednaska-2-sekvencni-odhad-linearnich-modelu-predikce))
 
 ---
 

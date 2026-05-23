@@ -22,6 +22,8 @@ $$y_t = H x_t + v_t, \quad v_t \sim \mathcal N(0, R)$$
 
 Aplikace: tracking (GNSS, radar), kontrola, ekonomické modelování (HP filter), ARIMA implementace, target localization.
 
+([otevřít v Markdown, Stavové modely, Kalmanův filtr](/pdfs/ZI/BML/BML_Merged.md#stavove-modely-kalmanuv-filtr))
+
 ---
 
 ## Sekvenční bayesovský odhad
@@ -39,6 +41,8 @@ $$p(x_t \mid y_{1:t-1}) = \int p(x_t \mid x_{t-1}) \, p(x_{t-1} \mid y_{1:t-1}) 
 $$p(x_t \mid y_{1:t}) = \frac{p(y_t \mid x_t) \, p(x_t \mid y_{1:t-1})}{p(y_t \mid y_{1:t-1})}$$
 
 Toto je obecný optimální bayesovský filtr. Pro **lineární gaussovský** model má uzavřené řešení = **Kalmanův filtr**.
+
+([otevřít v Markdown, Stavový model](/pdfs/ZI/BML/BML_Merged.md#stavovy-model))
 
 ---
 
@@ -59,6 +63,8 @@ $$P_t = (I - K_t H) P_t^-$$
 **Vlastnosti**: optimální (MMSE) pro LGSS, BLUE pro jen-lineární modely.
 
 **Smoothing** (offline, retrospektivně): Rauch-Tung-Striebel (RTS) algoritmus počítá $p(x_t \mid y_{1:T})$ pro $t < T$, dopředný-zpětný průchod.
+
+([otevřít v Markdown, Kalmanův filtr](/pdfs/ZI/BML/BML_Merged.md#kalmanuv-filtr))
 
 ---
 
@@ -94,6 +100,8 @@ $$p(x_t \mid y_{1:t}) \approx \sum_{i=1}^N w_t^{(i)} \delta(x_t - x_t^{(i)})$$
 - **Curse of dimensionality**: potřebuje exponenciálně více částic s rostoucí dimenzí stavu.
 - **Degenerace vah** — postupně 1 částice nese skoro veškerou váhu; resampling řeší.
 
+([otevřít v Markdown, Nelineární stavové modely](/pdfs/ZI/BML/BML_Merged.md#nelinearni-stavove-modely)) ([otevřít v Markdown, Monte Carlo, importance sampling, particle filtry](/pdfs/ZI/BML/BML_Merged.md#monte-carlo-importance-sampling-particle-filtry))
+
 ---
 
 ## Predikce a smoothing
@@ -101,6 +109,8 @@ $$p(x_t \mid y_{1:t}) \approx \sum_{i=1}^N w_t^{(i)} \delta(x_t - x_t^{(i)})$$
 **Predikce $h$ kroků dopředu**: $p(x_{t+h} \mid y_{1:t}) = \int \prod p(x_{\tau+1} \mid x_\tau) p(x_t \mid y_{1:t}) d x_t \ldots$ Pro KF jednoduše propaguj $A^h$.
 
 **Smoothing**: $p(x_t \mid y_{1:T})$ pro $t < T$ — dopředný-zpětný průchod. Pro KF RTS, pro PF Forward-Backward / particle smoothing.
+
+([otevřít v Markdown, Kalmanův filtr](/pdfs/ZI/BML/BML_Merged.md#kalmanuv-filtr))
 
 ---
 
