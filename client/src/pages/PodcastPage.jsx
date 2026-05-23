@@ -391,10 +391,7 @@ export default function PodcastPage() {
                               onClick={() => jumpToQuestion(q.id)}
                               title={`Jump to ${q.subjectCode} ${q.subjectIndex}`}
                             >
-                              <strong>
-                                {q.subjectCode} {q.subjectIndex}.
-                              </strong>{' '}
-                              {q.text}
+                              <strong>{q.subjectIndex}.</strong> {q.text}
                             </button>
                             <button
                               type="button"

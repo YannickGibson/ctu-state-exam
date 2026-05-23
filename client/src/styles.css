@@ -453,10 +453,17 @@ button {
   border-radius: 8px;
   padding: 8px 14px;
 }
-button:hover:not(:disabled) { background: var(--accent-dark); }
+/* Hover on real pointer devices only — Chrome/Brave on Android leak a
+   sticky :hover after touch, which was turning .audio-sentence /
+   .podcast-jump / .podcast-caret dark-blue on tap and keeping them that
+   way (this rule's `var(--accent-dark)` would beat the class-level
+   transparent background by specificity). */
+@media (hover: hover) and (pointer: fine) {
+  button:hover:not(:disabled) { background: var(--accent-dark); }
+  button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
+}
 button:disabled { opacity: 0.45; cursor: not-allowed; }
 button.ghost { background: transparent; color: var(--accent); }
-button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
 
 .answer {
   background: var(--panel);
