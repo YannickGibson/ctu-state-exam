@@ -19513,9 +19513,9 @@ class PDFPageView extends BasePDFPageView {
           this.#useThumbnailCanvas.directDrawing = false;
         }
         this.cssTransform({
-          redrawAnnotationLayer: true,
-          redrawAnnotationEditorLayer: true,
-          redrawXfaLayer: true,
+          redrawAnnotationLayer: !postponeDrawing,
+          redrawAnnotationEditorLayer: !postponeDrawing,
+          redrawXfaLayer: !postponeDrawing,
           redrawTextLayer: !postponeDrawing,
           hideTextLayer: postponeDrawing
         });
