@@ -113,14 +113,15 @@ a { color: var(--accent); }
 .app-brand { display: flex; align-items: center; gap: 10px; }
 .app-logo { width: 28px; height: 28px; display: block; }
 .app-title { font-weight: 700; }
-.app-header nav { display: flex; gap: 16px; align-self: stretch; margin: -12px 0 -13px; }
+.app-header nav { display: flex; gap: 8px; align-self: stretch; margin: -12px 0 -13px; }
 .app-header nav a {
   text-decoration: none;
   color: var(--muted);
   font-weight: 600;
+  font-size: 16px;
   display: flex;
   align-items: center;
-  padding: 0 2px;
+  padding: 0 14px;
   border-bottom: 2px solid transparent;
 }
 .app-header nav a.active { color: var(--text); border-bottom-color: var(--accent); }
@@ -1007,13 +1008,13 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   .app-header nav {
     order: 3;
     flex-basis: 100%;
-    gap: 16px;
+    gap: 4px;
     flex-wrap: nowrap;
     overflow-x: auto;
     white-space: nowrap;
     margin: 0 0 -11px;
   }
-  .app-header nav a { flex: 0 0 auto; }
+  .app-header nav a { flex: 0 0 auto; padding: 10px 14px; }
   .header-spacer { flex: 1; }
   .header-user { margin-left: auto; }
   h1 { font-size: 19px; }
