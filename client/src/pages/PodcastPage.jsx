@@ -73,7 +73,6 @@ export default function PodcastPage() {
   const [currentTrackIdx, setCurrentTrackIdx] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
-  const [expandedSubjects, setExpandedSubjects] = useState(() => new Set());
   const [expandedQuestions, setExpandedQuestions] = useState(() => new Set());
   // questionId → timing map (sentences[]). Lazy-loaded on question expand.
   const [timings, setTimings] = useState(() => new Map());
@@ -189,6 +188,42 @@ export default function PodcastPage() {
     if (idx >= 0) jumpToTrack(idx);
   }
 
+  // Entry-point track index for the Nth question. First-of-subject → its
+  // subject intro (so the user hears "Předmět M P I. M P I, Otázka číslo 1.");
+  // otherwise → that question's intro ("M P I, Otázka číslo N.").
+  function entryTrackIdxFor(questionIdx) {
+    const q = questions[questionIdx];
+    if (!q) return -1;
+    const prevQ = questions[questionIdx - 1];
+    const firstOfSubject = !prevQ || prevQ.subjectCode !== q.subjectCode;
+    if (firstOfSubject) {
+      return tracks.findIndex(
+        (t) => t.kind === 'subjectIntro' && t.subjectCode === q.subjectCode
+      );
+    }
+    return tracks.findIndex((t) => t.kind === 'questionIntro' && t.questionId === q.id);
+  }
+
+  // The "currently active" question index — what the prev/next buttons step
+  // relative to. On a subjectIntro track, this is the first question of that
+  // subject (the one we're about to play).
+  function currentQuestionIdx() {
+    if (!current) return -1;
+    if (current.kind === 'subjectIntro') {
+      return questions.findIndex((q) => q.subjectCode === current.subjectCode);
+    }
+    return questions.findIndex((q) => q.id === current.questionId);
+  }
+
+  function skipQuestion(delta) {
+    const i = currentQuestionIdx();
+    if (i < 0) return;
+    const target = i + delta;
+    if (target < 0 || target >= questions.length) return;
+    const trackIdx = entryTrackIdxFor(target);
+    if (trackIdx >= 0) jumpToTrack(trackIdx);
+  }
+
   function jumpToSentence(qid, startSec) {
     const mainIdx = tracks.findIndex((t) => t.kind === 'questionMain' && t.questionId === qid);
     if (mainIdx < 0) return;
@@ -210,15 +245,6 @@ export default function PodcastPage() {
       audioRef.current.currentTime = pendingSeekRef.current;
       pendingSeekRef.current = null;
     }
-  }
-
-  function toggleSubject(code) {
-    setExpandedSubjects((prev) => {
-      const out = new Set(prev);
-      if (out.has(code)) out.delete(code);
-      else out.add(code);
-      return out;
-    });
   }
 
   function toggleQuestion(qid) {
@@ -277,10 +303,10 @@ export default function PodcastPage() {
           <button
             type="button"
             className="answer-audio-playpause"
-            onClick={() => jumpToTrack(currentTrackIdx - 1)}
-            disabled={currentTrackIdx === 0}
-            aria-label="Previous track"
-            title="Previous"
+            onClick={() => skipQuestion(-1)}
+            disabled={currentQuestionIdx() <= 0}
+            aria-label="Previous question"
+            title="Previous question"
           >
             <SkipBack size={18} aria-hidden />
           </button>
@@ -296,10 +322,10 @@ export default function PodcastPage() {
           <button
             type="button"
             className="answer-audio-playpause"
-            onClick={() => jumpToTrack(currentTrackIdx + 1)}
-            disabled={currentTrackIdx >= tracks.length - 1}
-            aria-label="Next track"
-            title="Next"
+            onClick={() => skipQuestion(1)}
+            disabled={currentQuestionIdx() >= questions.length - 1}
+            aria-label="Next question"
+            title="Next question"
           >
             <SkipForward size={18} aria-hidden />
           </button>
@@ -331,41 +357,28 @@ export default function PodcastPage() {
 
         <div className="answer-audio-transcript podcast-transcript">
           {subjects.map((s) => {
-            const subjectOpen = expandedSubjects.has(s.code);
             return (
               <div className="podcast-subject" key={s.code}>
-                <div className="podcast-row podcast-subject-row">
-                  <button
-                    type="button"
-                    className="podcast-jump podcast-subject-jump"
-                    onClick={() => jumpToSubject(s.code)}
-                    title={`Jump to start of ${s.subject}`}
+                <button
+                  type="button"
+                  className="podcast-jump podcast-subject-jump"
+                  onClick={() => jumpToSubject(s.code)}
+                  title={`Jump to start of ${s.subject}`}
+                >
+                  <span
+                    className="subject-pill"
+                    style={{ '--subject-hue': subjectHue(s.code) }}
                   >
-                    <span
-                      className="subject-pill"
-                      style={{ '--subject-hue': subjectHue(s.code) }}
-                    >
-                      {s.code}
-                    </span>
-                    <span className="podcast-subject-name">{s.subject}</span>
-                    <span className="muted">
-                      {s.items.length} {s.items.length === 1 ? 'question' : 'questions'}
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    className={`podcast-caret${subjectOpen ? ' is-open' : ''}`}
-                    onClick={() => toggleSubject(s.code)}
-                    aria-label={subjectOpen ? 'Collapse subject' : 'Expand subject'}
-                    aria-expanded={subjectOpen}
-                  >
-                    <ChevronDown size={20} aria-hidden />
-                  </button>
-                </div>
+                    {s.code}
+                  </span>
+                  <span className="podcast-subject-name">{s.subject}</span>
+                  <span className="muted">
+                    {s.items.length} {s.items.length === 1 ? 'question' : 'questions'}
+                  </span>
+                </button>
 
-                {subjectOpen && (
-                  <div className="podcast-subject-children">
-                    {s.items.map((q) => {
+                <div className="podcast-subject-children">
+                  {s.items.map((q) => {
                       const questionOpen = expandedQuestions.has(q.id);
                       const isPlayingThis = playingQuestionId === q.id;
                       const timing = timings.get(q.id);
@@ -417,7 +430,6 @@ export default function PodcastPage() {
                       );
                     })}
                   </div>
-                )}
               </div>
             );
           })}

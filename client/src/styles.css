@@ -1324,12 +1324,18 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   text-align: left;
   cursor: pointer;
   transition: background-color 0.12s ease, color 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-/* hover only on real pointer devices — avoids the highlight sticking after a
-   tap on touch screens */
-@media (hover: hover) {
+/* Hover only on real pointer devices (mouse, trackpad). Chrome on Android
+   used to wrongly match `(hover: hover)`, so we additionally require
+   `(pointer: fine)` to keep the gray bg from sticking after a tap. */
+@media (hover: hover) and (pointer: fine) {
   .audio-sentence:not(.is-active):hover { background: var(--surface-2); }
 }
+.audio-sentence:focus { outline: none; }
+.audio-sentence:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Touch feedback: gray flash on press, gone on release. */
+.audio-sentence:not(.is-active):active { background: var(--surface-2); }
 .audio-sentence.is-active { background: var(--accent); color: #fff; }
 
 /* ---- podcast page ---- */
@@ -1378,11 +1384,12 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
 .podcast-subject-jump { font-weight: 600; }
 .podcast-subject-name { flex: 1; }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .podcast-jump:hover { background: var(--surface-2); }
 }
 .podcast-jump:focus { outline: none; }
 .podcast-jump:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.podcast-jump:not(.is-active):active { background: var(--surface-2); }
 /* Question row reuses .audio-sentence for the active-highlight color, but
    we want it to flow as a block button rather than inline prose. */
 .podcast-jump.audio-sentence {
@@ -1408,11 +1415,12 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
 }
 .podcast-caret svg { transition: transform 0.15s ease; }
 .podcast-caret.is-open svg { transform: rotate(180deg); }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .podcast-caret:hover { background: var(--surface-2); color: var(--text); }
 }
 .podcast-caret:focus { outline: none; }
 .podcast-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.podcast-caret:active { background: var(--surface-2); color: var(--text); }
 
 .podcast-subject-children { padding: 4px 0 8px 12px; }
 .podcast-question-children {
