@@ -1345,34 +1345,88 @@ button.ghost:hover:not(:disabled) { background: var(--surface-accent); }
   font-size: 14px;
 }
 .podcast-failed-note { margin: 10px 0 0; font-size: 13px; }
+.podcast-loading { margin: 6px 12px; font-size: 13px; }
 .podcast-transcript { max-height: 65vh; }
-.podcast-subject + .podcast-subject { margin-top: 18px; }
-.podcast-subject-header {
+.podcast-subject + .podcast-subject { margin-top: 14px; }
+
+/* A row holds a left-side "jump" target (large) and a right-side caret
+   toggle. Two separate buttons for unambiguous touch targets on mobile. */
+.podcast-row {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.podcast-subject-row { border-bottom: 1px solid var(--border); }
+.podcast-question-row { border-bottom: 1px solid var(--border); }
+
+.podcast-jump {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--border);
-  padding: 8px 0;
-  margin-bottom: 6px;
+  padding: 10px 8px;
   cursor: pointer;
   font: inherit;
-  font-weight: 600;
   text-align: left;
   color: var(--text);
   -webkit-tap-highlight-color: transparent;
+  border-radius: 6px;
 }
-.podcast-subject-header:hover { background: var(--surface-hover); }
-.podcast-subject-header:focus { outline: none; }
-.podcast-subject-header:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.podcast-subject-jump { font-weight: 600; }
 .podcast-subject-name { flex: 1; }
-.podcast-questions { line-height: 2.4; }
-.podcast-questions .audio-sentence {
-  /* Each question is shown as its own line item, not flowing prose. */
+
+@media (hover: hover) {
+  .podcast-jump:hover { background: var(--surface-2); }
+}
+.podcast-jump:focus { outline: none; }
+.podcast-jump:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Question row reuses .audio-sentence for the active-highlight color, but
+   we want it to flow as a block button rather than inline prose. */
+.podcast-jump.audio-sentence {
+  display: flex;
+  margin: 0;
+  padding: 10px 8px;
+  border-radius: 6px;
+}
+
+.podcast-caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  flex: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 6px;
+  transition: transform 0.15s ease;
+}
+.podcast-caret svg { transition: transform 0.15s ease; }
+.podcast-caret.is-open svg { transform: rotate(180deg); }
+@media (hover: hover) {
+  .podcast-caret:hover { background: var(--surface-2); color: var(--text); }
+}
+.podcast-caret:focus { outline: none; }
+.podcast-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.podcast-subject-children { padding: 4px 0 8px 12px; }
+.podcast-question-children {
+  padding: 4px 0 8px 28px;
+  line-height: 1.7;
+}
+.podcast-sentence-row {
   display: block;
-  margin: 4px 0;
-  padding: 8px 10px;
-  border-radius: 8px;
+  width: 100%;
+  margin: 2px 0;
+  padding: 6px 10px;
+  border: none;
+  text-align: left;
+  font: inherit;
+  background: transparent;
+  border-radius: 6px;
 }

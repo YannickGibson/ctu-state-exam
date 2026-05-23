@@ -9,6 +9,7 @@ data/progress.json
 .tools/
 data/audio/*.wav
 data/audio/*.mp3
+data/audio/intros/
 .vercel/
 .DS_Store
 CLAUDE.md

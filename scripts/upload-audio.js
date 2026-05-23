@@ -16,6 +16,7 @@ const { createClient } = require('@supabase/supabase-js');
 
 const root = path.join(__dirname, '..');
 const audioDir = path.join(root, 'data', 'audio');
+const introsDir = path.join(audioDir, 'intros');
 const BUCKET = 'answer-audio';
 
 // Load .env so SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are available locally
@@ -30,7 +31,7 @@ try {
 async function main() {
   const arg = process.argv[2];
   if (!arg) {
-    console.error('Usage: node scripts/upload-audio.js <QUESTION-ID|all>');
+    console.error('Usage: node scripts/upload-audio.js <QUESTION-ID|all|intros>');
     process.exit(1);
   }
   const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } = process.env;
@@ -61,35 +62,58 @@ async function main() {
     console.log(`Created public bucket "${BUCKET}".`);
   }
 
-  const ids =
-    arg === 'all'
-      ? fs
-          .readdirSync(audioDir)
-          .filter((f) => f.endsWith('.mp3'))
-          .map((f) => f.replace(/\.mp3$/, ''))
-      : [arg];
-  if (ids.length === 0) {
-    console.error('No .mp3 files found in data/audio/ — run generate-audio.js first.');
-    process.exit(1);
+  // Build list of { localPath, storageKey } items based on the argument.
+  // - <QID>      : data/audio/<QID>.mp3       → <QID>.mp3
+  // - all        : every per-question .mp3 + every intro                 (does NOT skip intros)
+  // - intros     : every file under data/audio/intros/   → intros/<name>.mp3
+  const items = [];
+  if (arg === 'intros') {
+    if (fs.existsSync(introsDir)) {
+      for (const f of fs.readdirSync(introsDir)) {
+        if (!f.endsWith('.mp3')) continue;
+        items.push({ localPath: path.join(introsDir, f), storageKey: `intros/${f}` });
+      }
+    }
+    if (items.length === 0) {
+      console.error('No .mp3 files in data/audio/intros/ — run generate-podcast-intros.js first.');
+      process.exit(1);
+    }
+  } else if (arg === 'all') {
+    for (const f of fs.readdirSync(audioDir)) {
+      if (!f.endsWith('.mp3')) continue;
+      items.push({ localPath: path.join(audioDir, f), storageKey: f });
+    }
+    if (fs.existsSync(introsDir)) {
+      for (const f of fs.readdirSync(introsDir)) {
+        if (!f.endsWith('.mp3')) continue;
+        items.push({ localPath: path.join(introsDir, f), storageKey: `intros/${f}` });
+      }
+    }
+    if (items.length === 0) {
+      console.error('No .mp3 files found in data/audio/ — run generate-audio.js first.');
+      process.exit(1);
+    }
+  } else {
+    const file = path.join(audioDir, `${arg}.mp3`);
+    if (!fs.existsSync(file)) {
+      console.error(`Not found: ${file} (run generate-audio.js first).`);
+      process.exit(1);
+    }
+    items.push({ localPath: file, storageKey: `${arg}.mp3` });
   }
 
-  for (const id of ids) {
-    const file = path.join(audioDir, `${id}.mp3`);
-    if (!fs.existsSync(file)) {
-      console.error(`Skipping ${id}: ${file} not found (run generate-audio.js first).`);
-      continue;
-    }
+  for (const { localPath, storageKey } of items) {
     const { error } = await supabase.storage
       .from(BUCKET)
-      .upload(`${id}.mp3`, fs.readFileSync(file), {
+      .upload(storageKey, fs.readFileSync(localPath), {
         contentType: 'audio/mpeg',
         upsert: true,
       });
     if (error) {
-      console.error(`Upload ${id} failed:`, error.message);
+      console.error(`Upload ${storageKey} failed:`, error.message);
       process.exit(1);
     }
-    console.log(`Uploaded ${id}.mp3`);
+    console.log(`Uploaded ${storageKey}`);
   }
   console.log('Done.');
 }

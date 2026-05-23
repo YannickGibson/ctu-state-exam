@@ -1,4 +1,4 @@
-export const EXAM_DATE = new Date(2026, 5, 8);
+export const EXAM_DATE = new Date(2026, 5, 1);
 
 function toDate(input) {
   if (input instanceof Date) return input;

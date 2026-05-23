@@ -75,15 +75,15 @@ export default function DeadlinePace({ remaining }) {
   const date = formatExamDate(target);
   const days = daysUntilExam(target);
   const adjust = profile && (
-    <button type="button" className="deadline-adjust" onClick={startEdit} title="Set your own exam date">
+    <button type="button" className="deadline-adjust" onClick={startEdit} title="Set your own deadline date">
       (adjust)
     </button>
   );
 
   let body;
-  if (days < 0) body = `Exam date (${date}) has passed.`;
+  if (days < 0) body = `Deadline date (${date}) has passed.`;
   else if (days === 0)
-    body = remaining > 0 ? `Exam today (${date}) · ${remaining} left` : `Exam today (${date})`;
+    body = remaining > 0 ? `Deadline today (${date}) · ${remaining} left` : `Deadline today (${date})`;
   else if (remaining === 0) body = `${days} days left until ${date} · all practiced`;
   else {
     const perDay = (Math.ceil((remaining / days) * 100) / 100).toFixed(2);
