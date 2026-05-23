@@ -59,7 +59,13 @@ function splitIntoSections(body) {
   const introLines = [];
   const sections = [];
   let current = null;
+  let droppedTitle = false;
   for (const line of body.split('\n')) {
+    if (!droppedTitle && current === null && /^#\s+/.test(line)) {
+      // The page header already shows the question title; skip the leading H1.
+      droppedTitle = true;
+      continue;
+    }
     const m = /^##\s+(.+?)\s*$/.exec(line);
     if (m) {
       if (current) sections.push({ title: current.title, content: stripTrim(current.lines.join('\n')) });

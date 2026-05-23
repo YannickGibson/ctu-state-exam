@@ -42,6 +42,14 @@ Zdroj: [MPI_Merged.pdf](/pdfs/SPOL/MPI_Merged.pdf) (skripta NI-MPI, kap. 8.2, 9)
 
 ![Definice 9.2 Darbouxův integrál na obecné oblasti](/answer-imgs/NI-SPOL-4/p42_def_obecna_oblast.png)
 
+**Dva typy oblastí (typ 1 / typ 2).** ([otevřít v PDF, str. 44](/pdfs/SPOL/MPI_Merged.pdf#page=44))
+
+![Typ 1 a typ 2 oblasti](/answer-imgs/NI-SPOL-4/p44_typ1_typ2.png)
+
+**Věta 9.6 — Fubini pro obecnou oblast** (převod dvojného integrálu na dvojnásobný podle typu oblasti). ([otevřít v PDF, str. 44](/pdfs/SPOL/MPI_Merged.pdf#page=44))
+
+![Věta 9.6 Fubini pro obecnou oblast](/answer-imgs/NI-SPOL-4/p44_veta_9_6.png)
+
 ---
 
 ## Kritérium integrability
