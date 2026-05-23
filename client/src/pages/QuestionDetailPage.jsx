@@ -12,7 +12,7 @@ import StatusBadge from '../components/StatusBadge.jsx';
 import QuestionActions from '../components/QuestionActions.jsx';
 import AnswerAudio from '../components/AnswerAudio.jsx';
 import InlineMarkdown from '../components/InlineMarkdown.jsx';
-import { Volume2, ChevronLeft, ChevronRight, ChevronsLeft } from 'lucide-react';
+import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
 import Spinner from '../components/Spinner.jsx';
 
 const COLLAPSE_DEFAULT_KEY = 'studying.answerSectionsCollapsedDefault';
@@ -201,14 +201,6 @@ export default function QuestionDetailPage() {
   return (
     <article className="detail">
       <div className="detail-meta-row">
-        <Link
-          to="/questions"
-          className="rotate-btn"
-          aria-label="Back to questions"
-          title="Back to questions"
-        >
-          <ChevronsLeft size={20} aria-hidden />
-        </Link>
         <div className="detail-meta">
           <span
             className="subject-pill"
