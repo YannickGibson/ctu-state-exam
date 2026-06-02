@@ -24,10 +24,15 @@ function TeachPill({ t }) {
   // Appended asked-only subjects carry a bare code (e.g. "ADM"); the declared
   // courses already read "NI-VSM" etc. Prefix the bare ones so all badges match.
   const label = t.subjectCode && t.label === t.subjectCode ? `NI-${t.label}` : t.label;
+  // Wrap in ONE inline child: the pill is display:inline-flex, which collapses
+  // whitespace-only nodes between flex items. Keeping label+count inside a
+  // single span puts the space in normal inline flow so it renders (and copies).
   return (
     <Pill code={t.subjectCode} title={t.subjectCode || t.label}>
-      {label}
-      {t.count != null && <>{' '}<b className="ax">(asked {t.count}x)</b></>}
+      <span className="tp">
+        {label}
+        {t.count != null && <b className="ax"> (asked {t.count}x)</b>}
+      </span>
     </Pill>
   );
 }
