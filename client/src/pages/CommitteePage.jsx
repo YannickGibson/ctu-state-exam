@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getCommittee } from '../api.js';
 import { subjectHue } from '../config/subjects.js';
 import { ZERO } from '../progressCache.js';
@@ -97,31 +97,99 @@ function MemberCard({ m }) {
   );
 }
 
-function RankedRow({ q, progress, onAction, onOpen }) {
+function ExaminerChips({ examiners, unattributed }) {
+  if (!examiners.length && !unattributed) {
+    return <span className="muted" style={{ fontSize: '11.5px' }}>no asking recorded</span>;
+  }
   return (
-    <div className="cq-row" onClick={onOpen} role="button" tabIndex={0}
-      onKeyDown={(e) => { if (e.key === 'Enter') onOpen(); }}>
-      <span className="cq-rank">{q.rank}</span>
-      <Pill code={q.subjectCode} title={q.id}>{q.ref}</Pill>
-      <span className="cq-text"><InlineMarkdown>{q.text}</InlineMarkdown></span>
-      <span className="cq-meta">
-        <span className={`cq-prob ${q.tier}`} title="estimated chance this committee asks it">
-          {q.probability}%
+    <>
+      {examiners.map((e, i) => (
+        <span key={i} className={e.ours ? 'exc' : 'exc-other'}>
+          {e.ours ? '★ ' : ''}{e.name} ×{e.count}
         </span>
-        <span className="cq-bar"><span style={{ width: `${q.barPct}%` }} /></span>
-        <span className="cq-count" title="asked by this committee / total recorded (FIT-Wiki 2012–2026)">
-          {q.committeeCount}/{q.totalCount}×
-        </span>
-        <StatusBadge progress={progress} />
-        <QuestionActions progress={progress} onAction={onAction} compact />
-      </span>
+      ))}
+      {unattributed > 0 && (
+        <span className="exc-other" style={{ opacity: 0.7 }}>+{unattributed} unnamed</span>
+      )}
+    </>
+  );
+}
+
+function RankedTable({ questions, progressFor, onAction }) {
+  const [open, setOpen] = useState(() => new Set());
+  const toggle = (id) =>
+    setOpen((s) => {
+      const n = new Set(s);
+      if (n.has(id)) n.delete(id); else n.add(id);
+      return n;
+    });
+  return (
+    <div className="cq-table-wrap">
+      <table className="cq2">
+        <thead>
+          <tr>
+            <th className="cq2-rank">#</th>
+            <th>Subj</th>
+            <th>Question</th>
+            <th className="right" title="AI-estimated likelihood this committee asks the question — a heuristic weighting of the FIT-Wiki logs, not an exact formula">AI-est. %</th>
+            <th className="right" title="times asked by THIS committee (FIT-Wiki 2012–2026)">By committee</th>
+            <th className="right" title="times asked by anyone on record (FIT-Wiki 2012–2026)">Total asked</th>
+            <th>Status</th>
+            <th aria-label="actions" />
+          </tr>
+        </thead>
+        <tbody>
+          {questions.map((q) => {
+            const progress = progressFor(q.id) || ZERO;
+            const isOpen = open.has(q.id);
+            return (
+              <Fragment key={q.id}>
+                <tr className="cq2-row" onClick={() => toggle(q.id)}>
+                  <td className="cq2-rank">{q.rank}</td>
+                  <td><Pill code={q.subjectCode} title={q.id}>{q.ref}</Pill></td>
+                  <td className="cq2-q">
+                    <span className="cq2-caret">{isOpen ? '▾' : '▸'}</span>
+                    <InlineMarkdown>{q.text}</InlineMarkdown>
+                  </td>
+                  <td className="right"><span className="cq-prob">{q.probability}%</span></td>
+                  <td className="right cq2-num">{q.committeeCount}</td>
+                  <td className="right cq2-num">{q.totalCount}</td>
+                  <td onClick={(e) => e.stopPropagation()}><StatusBadge progress={progress} /></td>
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <QuestionActions progress={progress} onAction={(a) => onAction(q.id, a)} compact />
+                  </td>
+                </tr>
+                {isOpen && (
+                  <tr className="cq2-detail">
+                    <td colSpan={8}>
+                      <div className="cq2-detbody">
+                        <div className="prow">
+                          <div className="plabel">Every teacher who has asked it <span className="muted">(this committee ★ green)</span></div>
+                          <ExaminerChips examiners={q.examiners} unattributed={q.unattributed} />
+                        </div>
+                        <div className="prow">
+                          <div className="plabel">By year (FIT-Wiki logs 2012–2026)</div>
+                          {q.byYear.length
+                            ? q.byYear.map((y, i) => <span key={i} className="yc">{y.p.replace(' ', '')}·{y.n}</span>)
+                            : <span className="muted" style={{ fontSize: '11.5px' }}>none recorded</span>}
+                          <b style={{ marginLeft: '6px' }}>Σ {q.totalCount}×</b>
+                        </div>
+                        <Link className="cq2-open" to={`/questions/${q.slug}`}>Open question &amp; answer →</Link>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </Fragment>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
 
 export default function CommitteePage() {
   const { progressFor, markProgress, loading: progressLoading } = useProgress();
-  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -165,27 +233,11 @@ export default function CommitteePage() {
       </div>
 
       <h2>All 42 questions, ranked by likelihood this committee asks it</h2>
-      <div className="cq-list">
-        <div className="cq-head">
-          <span className="cq-rank">#</span>
-          <span className="cq-h-subj">subj</span>
-          <span className="cq-text">Questions</span>
-          <span className="cq-meta">
-            <span>P(asked)</span>
-            <span className="cq-h-count">committee / total</span>
-            <span className="cq-h-status">status</span>
-          </span>
-        </div>
-        {data.ranked.map((q) => (
-          <RankedRow
-            key={q.id}
-            q={q}
-            progress={progressFor(q.id) || ZERO}
-            onAction={(action) => handleAction(q.id, action)}
-            onOpen={() => navigate(`/questions/${q.slug}`)}
-          />
-        ))}
-      </div>
+      <p className="cq-note">
+        The % is an <b>AI-estimated</b> likelihood (a committee-weighted heuristic over the FIT-Wiki
+        logs, not an exact formula). Click a row to see every teacher who's asked it and when.
+      </p>
+      <RankedTable questions={data.ranked} progressFor={progressFor} onAction={handleAction} />
 
       <h2>What to study, in priority order</h2>
       <div className="cq-table-wrap">

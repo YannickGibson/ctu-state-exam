@@ -1509,6 +1509,27 @@ button.ghost { background: transparent; color: var(--accent); }
 .cq-bar > span { display: block; height: 100%; background: var(--accent); }
 .cq-count { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--surface-accent); padding: 1px 7px; border-radius: 20px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .cq-h-count, .cq-h-status { font-weight: 700; }
+.cq-note { font-size: 12.5px; color: var(--muted); margin: 6px 0 8px; max-width: 720px; }
+
+/* aligned ranked TABLE with expandable detail rows */
+.cq2 { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.cq2 thead th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .4px; background: var(--surface-2); padding: 8px 10px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.cq2 thead th.right { text-align: right; }
+.cq2 td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.cq2 td.right { text-align: right; }
+.cq2-rank { color: var(--muted); font-variant-numeric: tabular-nums; width: 34px; text-align: right; }
+.cq2-num { font-variant-numeric: tabular-nums; color: var(--text); }
+.cq2-row { cursor: pointer; }
+.cq2-row:hover td { background: var(--surface-hover); }
+.cq2-q { color: var(--text); min-width: 220px; overflow-wrap: anywhere; }
+.cq2-caret { color: var(--muted); font-size: 11px; margin-right: 6px; }
+.cq2-detail > td { background: var(--surface-3); padding: 0; border-bottom: 2px solid var(--border); }
+.cq2-detbody { padding: 10px 14px 12px; }
+.cq2-open { display: inline-block; margin-top: 10px; font-size: 12.5px; font-weight: 700; color: var(--accent); text-decoration: none; }
+.cq2-open:hover { text-decoration: underline; }
+.committee .exc { display: inline-block; margin: 2px 5px 2px 0; padding: 1px 9px; border-radius: 6px; font-size: 12px; font-weight: 700; background: var(--correct-bg); border: 1px solid var(--border); color: var(--correct-fg); }
+.committee .exc-other { display: inline-block; margin: 2px 5px 2px 0; padding: 1px 9px; border-radius: 6px; font-size: 12px; font-weight: 600; background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); }
+.committee .yc { display: inline-block; margin: 2px 4px 2px 0; padding: 1px 7px; border-radius: 6px; font-size: 11.5px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-strong); font-variant-numeric: tabular-nums; }
 
 /* --- priority table --- */
 .cq-table-wrap { overflow-x: auto; }
