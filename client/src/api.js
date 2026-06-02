@@ -43,6 +43,8 @@ export const getQuestions = () => cachedRequest('/api/questions');
 export const getQuestion = (id) => cachedRequest(`/api/questions/${encodeURIComponent(id)}`);
 export const getQuizzes = () => cachedRequest('/api/quizzes');
 export const getQuiz = (subject) => cachedRequest(`/api/quizzes/${encodeURIComponent(subject)}`);
+// Private committee analysis — gated server-side to the allowlisted usernames.
+export const getCommittee = () => cachedRequest('/api/committee');
 
 const ZERO = { practicedCount: 0, readPassively: false };
 

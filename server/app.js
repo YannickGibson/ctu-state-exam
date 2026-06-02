@@ -21,6 +21,20 @@ const answersDir = path.join(dataDir, 'answers');
 const quizzesDir = path.join(dataDir, 'quizzes');
 const audioDir = path.join(dataDir, 'audio');
 
+// Private committee analysis: ONE JSON read from the sources/ submodule. This is
+// safe despite the header note — that warning is specifically about
+// `express.static(sources/)`, which makes the file tracer bundle the whole
+// 189 MB dir. A single readFileSync of one declared file (see vercel.json
+// `includeFiles`) only pulls in that file. Served by handleGetCommittee, gated
+// to the two allowlisted usernames below.
+const committeeFile = path.join(root, 'sources', 'committee', 'committee-2026.json');
+// Authorize by the server-set, confirmation-protected email. FIT OAuth creates
+// each user with email = <fit-username>@fit.cvut.cz (see the callback handler),
+// and Supabase email changes require confirming a link sent to the NEW address,
+// so an attacker cannot claim these. Do NOT gate on user_metadata — the client
+// can rewrite it via supabase.auth.updateUser and spoof the allowlist.
+const COMMITTEE_ALLOW_EMAILS = ['gibsoyan@fit.cvut.cz', 'kvasvojt@fit.cvut.cz'];
+
 function readJSON(file, fallback) {
   try {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -179,10 +193,26 @@ async function requireAuth(req, res, next) {
 // (/pdfs, /answer-imgs) without duplicating verification logic.
 app.requireAuth = requireAuth;
 
+function isCommitteeAllowed(user) {
+  const email = (user && typeof user.email === 'string' ? user.email : '').toLowerCase();
+  return COMMITTEE_ALLOW_EMAILS.includes(email);
+}
+
+// Private committee analysis — authed AND on the email allowlist.
+async function handleGetCommittee(req, res) {
+  if (!isCommitteeAllowed(req.user)) {
+    return res.status(403).json({ error: 'forbidden' });
+  }
+  const data = readJSON(committeeFile, null);
+  if (!data) return res.status(404).json({ error: 'committee data not found' });
+  res.json(data);
+}
+
 app.get('/api/questions', requireAuth, handleListQuestions);
 app.get('/api/questions/:id', requireAuth, handleGetQuestion);
 app.get('/api/quizzes', requireAuth, handleListQuizzes);
 app.get('/api/quizzes/:subject', requireAuth, handleGetQuiz);
+app.get('/api/committee', requireAuth, handleGetCommittee);
 
 /*
  * Session cookie sync.

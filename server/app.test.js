@@ -216,3 +216,49 @@ describe('GET /api/questions/:id — narration timing (#audio)', () => {
     expect(res.status).toBe(404);
   });
 });
+
+describe('GET /api/committee — email allowlist gate', () => {
+  const userWithEmail = (email) => ({
+    // Adversarial: a spoofed user_metadata.username must NOT grant access —
+    // only the server-set email is trusted.
+    data: { user: { id: 'user-1', email, user_metadata: { username: 'gibsoyan' } } },
+    error: null,
+  });
+
+  it('rejects anonymous requests (401)', async () => {
+    const res = await request(app).get('/api/committee');
+    expect(res.status).toBe(401);
+    expect(auth.getUser).not.toHaveBeenCalled();
+  });
+
+  it('forbids an authenticated user whose email is not allowed (403), even with spoofed metadata', async () => {
+    auth.getUser.mockResolvedValue(userWithEmail('attacker@fit.cvut.cz'));
+    const res = await request(app)
+      .get('/api/committee')
+      .set('Authorization', 'Bearer good-token');
+    expect(res.status).toBe(403);
+    expect(res.body.error).toBe('forbidden');
+  });
+
+  it('forbids when the user has no email (403)', async () => {
+    auth.getUser.mockResolvedValue({ data: { user: { id: 'u', user_metadata: { username: 'gibsoyan' } } }, error: null });
+    const res = await request(app)
+      .get('/api/committee')
+      .set('Authorization', 'Bearer good-token');
+    expect(res.status).toBe(403);
+  });
+
+  it('serves the data to an allowlisted email (case-insensitive)', async () => {
+    auth.getUser.mockResolvedValue(userWithEmail('Gibsoyan@fit.cvut.cz'));
+    const res = await request(app)
+      .get('/api/committee')
+      .set('Authorization', 'Bearer good-token');
+    // 200 when the private submodule JSON is present; 404 if absent (e.g. CI
+    // without the submodule). Either way the gate let the allowed user through.
+    expect([200, 404]).toContain(res.status);
+    if (res.status === 200) {
+      expect(Array.isArray(res.body.members)).toBe(true);
+      expect(Array.isArray(res.body.ranked)).toBe(true);
+    }
+  });
+});

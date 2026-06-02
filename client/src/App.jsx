@@ -10,10 +10,13 @@ import PodcastPage from './pages/PodcastPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import FitCompletePage from './pages/FitCompletePage.jsx';
+import CommitteePage from './pages/CommitteePage.jsx';
 import RequireAuth from './components/RequireAuth.jsx';
+import RequireUsername from './components/RequireUsername.jsx';
 import RedirectIfAuthed from './components/RedirectIfAuthed.jsx';
 import GitHubMark from './components/GitHubMark.jsx';
 import { useAuth } from './auth/AuthContext.jsx';
+import { COMMITTEE_ALLOW, isCommitteeUser } from './config/committee.js';
 import Spinner from './components/Spinner.jsx';
 
 function Header() {
@@ -38,6 +41,9 @@ function Header() {
           <NavLink to="/podcast">Podcast</NavLink>
           {profile?.show_leaderboard && (
             <NavLink to="/leaderboard">Leaderboard</NavLink>
+          )}
+          {isCommitteeUser(profile?.username) && (
+            <NavLink to="/committee">Committee</NavLink>
           )}
         </nav>
       )}
@@ -148,6 +154,16 @@ export default function App() {
                 <LeaderboardGate>
                   <LeaderboardPage />
                 </LeaderboardGate>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/committee"
+            element={
+              <RequireAuth>
+                <RequireUsername allow={COMMITTEE_ALLOW}>
+                  <CommitteePage />
+                </RequireUsername>
               </RequireAuth>
             }
           />

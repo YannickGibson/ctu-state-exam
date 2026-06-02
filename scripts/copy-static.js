@@ -18,7 +18,7 @@ if (!fs.existsSync(dist)) {
   process.exit(1);
 }
 
-function copyDir(src, dest, { required = false } = {}) {
+function copyDir(src, dest, { required = false, filter } = {}) {
   const missing = !fs.existsSync(src);
   const empty = !missing && fs.readdirSync(src).filter((n) => n !== '.git' && n !== 'README.md').length === 0;
   if (missing || empty) {
@@ -32,10 +32,20 @@ function copyDir(src, dest, { required = false } = {}) {
     return;
   }
   fs.mkdirSync(dest, { recursive: true });
-  fs.cpSync(src, dest, { recursive: true });
+  fs.cpSync(src, dest, { recursive: true, ...(filter ? { filter } : {}) });
   console.log(`copy-static: ${path.relative(root, src)} -> ${path.relative(root, dest)}`);
 }
 
 const REQUIRE_PDFS = process.env.REQUIRE_PDFS !== '0';
-copyDir(path.join(root, 'sources'), path.join(dist, 'pdfs'), { required: REQUIRE_PDFS });
+// Exclude sources/committee/ from the public /pdfs static layer: that subtree
+// holds the private committee analysis + photos, served ONLY via the
+// allowlist-gated /api/committee route. Keep it out of the CDN entirely.
+const sourcesRoot = path.join(root, 'sources');
+copyDir(sourcesRoot, path.join(dist, 'pdfs'), {
+  required: REQUIRE_PDFS,
+  filter: (srcPath) => {
+    const rel = path.relative(sourcesRoot, srcPath);
+    return rel !== 'committee' && !rel.startsWith('committee' + path.sep);
+  },
+});
 copyDir(path.join(root, 'data', 'answers', 'imgs'), path.join(dist, 'answer-imgs'));

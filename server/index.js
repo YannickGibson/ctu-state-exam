@@ -35,6 +35,10 @@ const PORT = process.env.PORT || 3001;
  * function size limit for sources/) or moving them to Supabase Storage with
  * signed URLs.
  */
+// Never expose the private committee data/photos via the generic /pdfs mount —
+// they are served only by the allowlist-gated /api/committee route. (Prod is
+// covered by the copy-static.js exclusion; this guards local dev too.)
+app.use('/pdfs/committee', (req, res) => res.status(404).end());
 app.use('/pdfs', app.requireAuth, express.static(path.join(root, 'sources')));
 app.use(
   '/answer-imgs',
