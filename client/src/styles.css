@@ -568,13 +568,21 @@ button.ghost { background: transparent; color: var(--accent); }
   vertical-align: top;
 }
 .answer th { background: var(--surface-3); font-weight: 600; }
-.answer-sources {
-  margin-top: 20px;
+.answer-sources,
+.detail-sources {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.answer-sources a {
+.answer-sources { margin-top: 20px; }
+/* Always-visible page footer: reachable without expanding the answer. */
+.detail-sources {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.answer-sources a,
+.detail-sources a {
   display: inline-block;
   padding: 6px 12px;
   background: var(--surface-3);
@@ -583,7 +591,8 @@ button.ghost { background: transparent; color: var(--accent); }
   font-size: 14px;
   text-decoration: none;
 }
-.answer-sources a:hover { background: var(--surface-2); }
+.answer-sources a:hover,
+.detail-sources a:hover { background: var(--surface-2); }
 
 /* ---- quizzes ---- */
 .quiz-grid {

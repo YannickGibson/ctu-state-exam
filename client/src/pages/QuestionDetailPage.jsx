@@ -318,15 +318,6 @@ export default function QuestionDetailPage() {
                   </div>
                 );
               })}
-              {sources.length > 0 && (
-                <div className="answer-sources">
-                  {sources.map((url) => (
-                    <a key={url} href={toPdfjsHref(url)} target="_blank" rel="noopener noreferrer">
-                      Otevřít zdrojový soubor
-                    </a>
-                  ))}
-                </div>
-              )}
             </>
           ) : (
             <p className="muted">
@@ -334,6 +325,16 @@ export default function QuestionDetailPage() {
             </p>
           )}
         </section>
+      )}
+
+      {sources.length > 0 && (
+        <footer className="detail-sources">
+          {sources.map((url) => (
+            <a key={url} href={toPdfjsHref(url)} target="_blank" rel="noopener noreferrer">
+              Otevřít zdrojový soubor
+            </a>
+          ))}
+        </footer>
       )}
     </article>
   );
