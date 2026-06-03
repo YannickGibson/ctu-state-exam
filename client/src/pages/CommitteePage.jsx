@@ -83,7 +83,13 @@ function MemberCard({ m }) {
                     {q.dates && <div className="cm-aq-dates">📅 {q.dates}</div>}
                     {q.quotes.map((qt, j) => (
                       <blockquote key={j} className="cm-quote">
-                        <span className="cm-quote-term">{qt.term}</span> {qt.text}
+                        {qt.term && <span className="cm-quote-term">{qt.term}</span>}
+                        {qt.grade && <span className="cm-quote-grade">známka {qt.grade}</span>}
+                        {qt.text}
+                        {qt.url && (
+                          <a className="cm-quote-src" href={qt.url} target="_blank" rel="noreferrer"
+                            onClick={(e) => e.stopPropagation()}>zdroj ↗</a>
+                        )}
                       </blockquote>
                     ))}
                   </div>
