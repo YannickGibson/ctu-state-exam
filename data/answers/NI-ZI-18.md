@@ -1,4 +1,4 @@
-# SVD rozklad matice, výpočet a aplikace ve strojovém učení.
+# Maticové faktorizace pomocí SVD, její výpočet, vlastnosti a použití ve strojovém učení: souvislost s metodou hlavních komponent (PCA)
 
 Zdroj: [PON_Merged.pdf](/pdfs/ZI/PON_Merged.pdf) (skripta NI-PON, kapitola 2.3 — SVD)
 

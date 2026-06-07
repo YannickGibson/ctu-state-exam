@@ -1,4 +1,4 @@
-# QR rozklad: metody výpočtu a aplikace pro vlastní čísla.
+# QR rozklad: metody výpočtu, použití při výpočtu odhadu metodou nejmenších čtverců, QR algoritmus pro hledání vlastních čísel.
 
 Zdroj: [PON_Merged.pdf](/pdfs/ZI/PON_Merged.pdf) (skripta NI-PON — Vybrané partie z optimalizace a numeriky, kapitola 2)
 

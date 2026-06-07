@@ -1,4 +1,4 @@
-# Metody hodnocení a výběru příznaků: univariátní/multivariátní a filtrační přístupy.
+# Metody pro hodnocení a výběr příznaků (univarietní/multivarietní metody, filtrační/wrapper/embedded metody). Selektivní/adaptivní metody redukce počtu instancí: Condensed Nearest Neighbor (CNN), Delauney/Gabriel/RNG grafy, Wilsonova editace, Multi-edit metoda, Tomkovy spoje.
 
 Zdroj: [PDD_Merged.pdf](/pdfs/ZI/PDD_Merged.pdf) (slides NI-PDD, Lecture 3 — Feature ranking and selection)
 

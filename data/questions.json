@@ -207,7 +207,7 @@
     "subjectCode": "UMI",
     "subjectIndex": 1,
     "slug": "UMI-1",
-    "text": "Automatické plánování, plánovací graf, kompilace plánování do jiných formalismů."
+    "text": "Automatické plánování, plánovací graf, kompilace plánování do jiných formalismů jako je SAT nebo CSP, hierarchické plánování, plánování v prostoru plánů. Plánování pohybu a problém lokalizace v robotice."
   },
   {
     "id": "NI-ZI-2",
@@ -217,7 +217,7 @@
     "subjectCode": "UMI",
     "subjectIndex": 2,
     "slug": "UMI-2",
-    "text": "Splňování omezení s konečnými doménami (CSP), pokročilé prohledávání."
+    "text": "Splňování omezení s konečnými doménami (CSP), pokročilé prohledávání (backjumping, dynamický backtracking), filtrace domén a lokální konzistenční techniky, globální omezení, rozhodovací heuristiky."
   },
   {
     "id": "NI-ZI-3",
@@ -227,7 +227,7 @@
     "subjectCode": "UMI",
     "subjectIndex": 3,
     "slug": "UMI-3",
-    "text": "Systematické a lokální splňování v logice (DPLL, CDCL, WalkSAT)."
+    "text": "Systematické a lokální splňování v logice (DPLL, CDCL, WalkSAT, posílání zpráv). Automatické uvažování, rozhodování v teoriích prvního řádu, obecná rezoluce, princip SAT-modulovaných teorií (SMT). Zpracování přirozeného jazyka."
   },
   {
     "id": "NI-ZI-4",
@@ -237,7 +237,7 @@
     "subjectCode": "PDD",
     "subjectIndex": 1,
     "slug": "PDD-1",
-    "text": "Metody hodnocení a výběru příznaků: univariátní/multivariátní a filtrační přístupy."
+    "text": "Metody pro hodnocení a výběr příznaků (univarietní/multivarietní metody, filtrační/wrapper/embedded metody). Selektivní/adaptivní metody redukce počtu instancí: Condensed Nearest Neighbor (CNN), Delauney/Gabriel/RNG grafy, Wilsonova editace, Multi-edit metoda, Tomkovy spoje."
   },
   {
     "id": "NI-ZI-5",
@@ -247,7 +247,7 @@
     "subjectCode": "PDD",
     "subjectIndex": 2,
     "slug": "PDD-2",
-    "text": "Algoritmy pro řešení chybějících hodnot, detekci odlehlých hodnot a vyvažování dat."
+    "text": "Algoritmy pro nahrazování chybějících hodnot. Detekce a ošetření odlehlých hodnot. Vyvažování skupin dat (undersampling/oversampling metody)."
   },
   {
     "id": "NI-ZI-6",
@@ -257,7 +257,7 @@
     "subjectCode": "PDD",
     "subjectIndex": 3,
     "slug": "PDD-3",
-    "text": "Lineární projekce dat: PCA, LDA a nelineární redukce dimenze."
+    "text": "Lineární projekce dat do prostoru o méně dimenzích: metoda hlavních komponent (PCA), lineární diskriminační analýza (LDA). Nelineární metody redukce dimensionality (Sammonova projekce)."
   },
   {
     "id": "NI-ZI-7",
@@ -267,7 +267,7 @@
     "subjectCode": "MVI",
     "subjectIndex": 1,
     "slug": "MVI-1",
-    "text": "Učení dopředných neuronových sítí, konvoluční neuronové sítě."
+    "text": "Učení dopředných neuronových sítí, konvoluční neuronové sítě a jejich regularizace."
   },
   {
     "id": "NI-ZI-8",
@@ -277,7 +277,7 @@
     "subjectCode": "MVI",
     "subjectIndex": 2,
     "slug": "MVI-2",
-    "text": "Autoenkodéry a generativní neuronové sítě."
+    "text": "Autoencodery a generativní neuronové sítě."
   },
   {
     "id": "NI-ZI-9",
@@ -287,7 +287,7 @@
     "subjectCode": "MVI",
     "subjectIndex": 3,
     "slug": "MVI-3",
-    "text": "Rekurentní neuronové sítě a neuroevoluce."
+    "text": "Rekurentní neuronové sítě a jejich učení, neuroevoluce."
   },
   {
     "id": "NI-ZI-10",
@@ -297,7 +297,7 @@
     "subjectCode": "MVI",
     "subjectIndex": 4,
     "slug": "MVI-4",
-    "text": "Transformery, mechanismy pozornosti, transfer a meta learning."
+    "text": "Transformery, pozornostní mechanismy, transfer a meta learning."
   },
   {
     "id": "NI-ZI-11",
@@ -307,7 +307,7 @@
     "subjectCode": "ADM",
     "subjectIndex": 1,
     "slug": "ADM-1",
-    "text": "Ansámblové metody (Bagging, Boosting) a bias-variance rozklad."
+    "text": "Ensemble metody (např. Bagging, Boosting) z pohledu bias-variance dekompozice."
   },
   {
     "id": "NI-ZI-12",
@@ -317,7 +317,7 @@
     "subjectCode": "ADM",
     "subjectIndex": 2,
     "slug": "ADM-2",
-    "text": "Jádrové metody, jádrová regrese a Support Vector Machines."
+    "text": "Jádrové metody: jádrová regrese, bázové funkce, Support Vector Machine (SVM): separabilní a neseparabilní případ."
   },
   {
     "id": "NI-ZI-13",
@@ -327,7 +327,7 @@
     "subjectCode": "ADM",
     "subjectIndex": 3,
     "slug": "ADM-3",
-    "text": "Doporučovací algoritmy a faktorizační metody."
+    "text": "Algoritmy pro doporučování: základní přístupy a způsob vyhodnocení kvality, faktorizační metody pro doporučování."
   },
   {
     "id": "NI-ZI-14",
@@ -337,7 +337,7 @@
     "subjectCode": "BML",
     "subjectIndex": 1,
     "slug": "BML-1",
-    "text": "Principy bayesovského modelování: apriorní/aposteriorní rozdělení a konjugovaná rozdělení."
+    "text": "Principy bayesovského modelování - pojmy model, apriorní a aposteriorní distribuce. Exponenciální třída distribucí, konjugovaná apriorna a jejich význam v bayesovském odhadu. Příklad konjugovaného apriorna."
   },
   {
     "id": "NI-ZI-15",
@@ -347,7 +347,7 @@
     "subjectCode": "BML",
     "subjectIndex": 2,
     "slug": "BML-2",
-    "text": "Stavové modely, sekvenční bayesovský odhad a nelineární odhad stavu."
+    "text": "Stavové modely: rovnice pro vývoj stavu a rovnice měření, rozdíly mezi nimi. Bayesovský sekvenční odhad stavových modelůa jejich vliv na apriorní distribuci (znalost). Možnosti odhadu stavů v případě nelinearity (pouze vyjmenovat)."
   },
   {
     "id": "NI-ZI-16",
@@ -357,7 +357,7 @@
     "subjectCode": "BML",
     "subjectIndex": 3,
     "slug": "BML-3",
-    "text": "Rejection a importance sampling a metody vážení."
+    "text": "Rejection sampling (RS) a importance sampling (IS): důvody používání RS a IS, jejich základní principy a rozdíly, efektivita práce se vzorky. Stanovení vah v IS a možnosti jejich normování."
   },
   {
     "id": "NI-ZI-17",
@@ -367,7 +367,7 @@
     "subjectCode": "PON",
     "subjectIndex": 1,
     "slug": "PON-1",
-    "text": "QR rozklad: metody výpočtu a aplikace pro vlastní čísla."
+    "text": "QR rozklad: metody výpočtu, použití při výpočtu odhadu metodou nejmenších čtverců, QR algoritmus pro hledání vlastních čísel."
   },
   {
     "id": "NI-ZI-18",
@@ -377,7 +377,7 @@
     "subjectCode": "PON",
     "subjectIndex": 2,
     "slug": "PON-2",
-    "text": "SVD rozklad matice, výpočet a aplikace ve strojovém učení."
+    "text": "Maticové faktorizace pomocí SVD, její výpočet, vlastnosti a použití ve strojovém učení: souvislost s metodou hlavních komponent (PCA)"
   },
   {
     "id": "NI-ZI-19",
@@ -387,7 +387,7 @@
     "subjectCode": "PON",
     "subjectIndex": 3,
     "slug": "PON-3",
-    "text": "Hladká optimalizace bez omezení, gradientní metody a volba kroku."
+    "text": "Hladká optimalizace (bez vazeb), spádové metody, volba směru a délky kroku."
   },
   {
     "id": "NI-ZI-20",
@@ -397,7 +397,7 @@
     "subjectCode": "SCR",
     "subjectIndex": 1,
     "slug": "SCR-1",
-    "text": "Dekompozice časových řad, typy stacionarity, náhodná procházka a bílý šum."
+    "text": "Časové řady: aditivní a multiplikativní dekompozice, momenty (střední hodnota, rozptyl, autokovariance). Druhy stacionarity a rozdíl mezi nimi. Základní vlastnosti náhodné procházky a bílého šumu."
   },
   {
     "id": "NI-ZI-21",
@@ -407,7 +407,7 @@
     "subjectCode": "SCR",
     "subjectIndex": 2,
     "slug": "SCR-2",
-    "text": "Autoregresní a klouzavé průměrové modely s metodami identifikace."
+    "text": "Autoregresní modely (AR) a modely klouzavých průměrů (MA): základní vlastnosti modelů/procesů, jejich stacionarita. Zápis AR a MA, včetně zápisu pomocí operátoru zpoždění. Identifikace řádů AR a MA z autokorelačních funkcí a pomocí informačních kritérií."
   },
   {
     "id": "NI-ZI-22",
@@ -417,6 +417,6 @@
     "subjectCode": "SCR",
     "subjectIndex": 3,
     "slug": "SCR-3",
-    "text": "ARIMA modely: integrace, diferencování a reprezentace parametrů."
+    "text": "Smíšené modely ARIMA: základní vlastnosti modelů/procesů, integrování a diferencování. Zápis ARIMA, včetně zápisu pomocí operátorů zpoždění a diference, speciální případy podle hodnot p, d, q. Problém redundance parametrů."
   }
 ]

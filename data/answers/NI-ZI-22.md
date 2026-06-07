@@ -1,4 +1,4 @@
-# ARIMA modely: integrace, diferencování a reprezentace parametrů.
+# Smíšené modely ARIMA: základní vlastnosti modelů/procesů, integrování a diferencování. Zápis ARIMA, včetně zápisu pomocí operátorů zpoždění a diference, speciální případy podle hodnot p, d, q. Problém redundance parametrů.
 
 Zdroj: [SCR_Merged.md](/pdfs/ZI/SCR/SCR_Merged.md) (skripta NI-SCR, Téma 4 — Operátor B, ARIMA)
 

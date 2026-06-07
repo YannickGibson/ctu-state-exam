@@ -1,4 +1,4 @@
-# Algoritmy pro řešení chybějících hodnot, detekci odlehlých hodnot a vyvažování dat.
+# Algoritmy pro nahrazování chybějících hodnot. Detekce a ošetření odlehlých hodnot. Vyvažování skupin dat (undersampling/oversampling metody).
 
 Zdroj: [PDD_Merged.pdf](/pdfs/ZI/PDD_Merged.pdf) (slides NI-PDD, Lectures 4–5 — Problems in data, data cleaning)
 

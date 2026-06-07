@@ -1,4 +1,4 @@
-# Hladká optimalizace bez omezení, gradientní metody a volba kroku.
+# Hladká optimalizace (bez vazeb), spádové metody, volba směru a délky kroku.
 
 Zdroj: [PON_Merged.pdf](/pdfs/ZI/PON_Merged.pdf) (skripta NI-PON, kapitola 3 — Optimalizace)
 

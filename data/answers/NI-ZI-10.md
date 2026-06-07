@@ -1,4 +1,4 @@
-# Transformery, mechanismy pozornosti, transfer a meta learning.
+# Transformery, pozornostní mechanismy, transfer a meta learning.
 
 Zdroj: [MVI_Merged.pdf](/pdfs/ZI/MVI_Merged.pdf) (slides NI-MVI, Lecture 8 — Transformers)
 

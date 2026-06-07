@@ -1,4 +1,4 @@
-# Systematické a lokální splňování v logice (DPLL, CDCL, WalkSAT).
+# Systematické a lokální splňování v logice (DPLL, CDCL, WalkSAT, posílání zpráv). Automatické uvažování, rozhodování v teoriích prvního řádu, obecná rezoluce, princip SAT-modulovaných teorií (SMT). Zpracování přirozeného jazyka.
 
 Zdroj: [UMI_Merged.pdf](/pdfs/ZI/UMI_Merged.pdf) (slides NI-UMI, sekce SAT)
 

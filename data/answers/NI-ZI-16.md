@@ -1,4 +1,4 @@
-# Rejection a importance sampling a metody vážení.
+# Rejection sampling (RS) a importance sampling (IS): důvody používání RS a IS, jejich základní principy a rozdíly, efektivita práce se vzorky. Stanovení vah v IS a možnosti jejich normování.
 
 Zdroj: [BML_Merged.md](/pdfs/ZI/BML/BML_Merged.md) (skripta NI-BML, Přednášky 4–5 — Monte Carlo, rejection sampling, importance sampling)
 

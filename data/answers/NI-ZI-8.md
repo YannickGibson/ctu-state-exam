@@ -1,4 +1,4 @@
-# Autoenkodéry a generativní neuronové sítě.
+# Autoencodery a generativní neuronové sítě.
 
 Zdroj: [MVI_Merged.pdf](/pdfs/ZI/MVI_Merged.pdf) (slides NI-MVI, Lectures 3 & 6 — Autoenkodéry, VAE, GAN)
 

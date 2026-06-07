@@ -1,4 +1,4 @@
-# Stavové modely, sekvenční bayesovský odhad a nelineární odhad stavu.
+# Stavové modely: rovnice pro vývoj stavu a rovnice měření, rozdíly mezi nimi. Bayesovský sekvenční odhad stavových modelůa jejich vliv na apriorní distribuci (znalost). Možnosti odhadu stavů v případě nelinearity (pouze vyjmenovat).
 
 Zdroj: [BML_Merged.md](/pdfs/ZI/BML/BML_Merged.md) (skripta NI-BML, Přednášky 3 + 5 — Kalmanův filtr a Particle filter)
 

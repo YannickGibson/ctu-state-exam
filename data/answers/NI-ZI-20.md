@@ -1,4 +1,4 @@
-# Dekompozice časových řad, typy stacionarity, náhodná procházka a bílý šum.
+# Časové řady: aditivní a multiplikativní dekompozice, momenty (střední hodnota, rozptyl, autokovariance). Druhy stacionarity a rozdíl mezi nimi. Základní vlastnosti náhodné procházky a bílého šumu.
 
 Zdroj: [SCR_Merged.md](/pdfs/ZI/SCR/SCR_Merged.md) (skripta NI-SCR, Téma 1 — Úvod do problematiky)
 

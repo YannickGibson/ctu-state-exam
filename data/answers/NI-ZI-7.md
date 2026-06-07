@@ -1,4 +1,4 @@
-# Učení dopředných neuronových sítí, konvoluční neuronové sítě.
+# Učení dopředných neuronových sítí, konvoluční neuronové sítě a jejich regularizace.
 
 Zdroj: [MVI_Merged.pdf](/pdfs/ZI/MVI_Merged.pdf) (slides NI-MVI, Lectures 3 & 4)
 

@@ -1,4 +1,4 @@
-# Ansámblové metody (Bagging, Boosting) a bias-variance rozklad.
+# Ensemble metody (např. Bagging, Boosting) z pohledu bias-variance dekompozice.
 
 Zdroj: [ADM_Merged.pdf](/pdfs/ZI/ADM_Merged.pdf) (slides NI-ADM, lecture 5)
 

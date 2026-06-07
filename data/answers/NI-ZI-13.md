@@ -1,4 +1,4 @@
-# Doporučovací algoritmy a faktorizační metody.
+# Algoritmy pro doporučování: základní přístupy a způsob vyhodnocení kvality, faktorizační metody pro doporučování.
 
 Zdroj: [ADM_Merged.pdf](/pdfs/ZI/ADM_Merged.pdf) (slides NI-ADM, Recommender Systems 1/2)
 

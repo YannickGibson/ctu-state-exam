@@ -1,4 +1,4 @@
-# Jádrové metody, jádrová regrese a Support Vector Machines.
+# Jádrové metody: jádrová regrese, bázové funkce, Support Vector Machine (SVM): separabilní a neseparabilní případ.
 
 Zdroj: [ADM_Merged.pdf](/pdfs/ZI/ADM_Merged.pdf) (slides NI-ADM, lecture 10 — Kernel regression)
 

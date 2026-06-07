@@ -1,4 +1,4 @@
-# Automatické plánování, plánovací graf, kompilace plánování do jiných formalismů.
+# Automatické plánování, plánovací graf, kompilace plánování do jiných formalismů jako je SAT nebo CSP, hierarchické plánování, plánování v prostoru plánů. Plánování pohybu a problém lokalizace v robotice.
 
 Zdroj: [UMI_Merged.pdf](/pdfs/ZI/UMI_Merged.pdf) (slides NI-UMI, sekce Automatické plánování)
 

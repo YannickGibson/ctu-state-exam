@@ -1,4 +1,4 @@
-# Rekurentní neuronové sítě a neuroevoluce.
+# Rekurentní neuronové sítě a jejich učení, neuroevoluce.
 
 Zdroj: [MVI_Merged.pdf](/pdfs/ZI/MVI_Merged.pdf) (slides NI-MVI, Lecture 7 — Recurrent NNs)
 

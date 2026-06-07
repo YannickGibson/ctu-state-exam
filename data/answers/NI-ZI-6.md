@@ -1,4 +1,4 @@
-# Lineární projekce dat: PCA, LDA a nelineární redukce dimenze.
+# Lineární projekce dat do prostoru o méně dimenzích: metoda hlavních komponent (PCA), lineární diskriminační analýza (LDA). Nelineární metody redukce dimensionality (Sammonova projekce).
 
 Zdroj: [PDD_Merged.pdf](/pdfs/ZI/PDD_Merged.pdf) (slides NI-PDD, Lecture 8 — Data Projections)
 

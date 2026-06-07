@@ -1,4 +1,4 @@
-# Splňování omezení s konečnými doménami (CSP), pokročilé prohledávání.
+# Splňování omezení s konečnými doménami (CSP), pokročilé prohledávání (backjumping, dynamický backtracking), filtrace domén a lokální konzistenční techniky, globální omezení, rozhodovací heuristiky.
 
 Zdroj: [UMI_Merged.pdf](/pdfs/ZI/UMI_Merged.pdf) (slides NI-UMI, sekce CSP)
 

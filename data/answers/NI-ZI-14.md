@@ -1,4 +1,4 @@
-# Principy bayesovského modelování: apriorní/aposteriorní rozdělení a konjugovaná rozdělení.
+# Principy bayesovského modelování - pojmy model, apriorní a aposteriorní distribuce. Exponenciální třída distribucí, konjugovaná apriorna a jejich význam v bayesovském odhadu. Příklad konjugovaného apriorna.
 
 Zdroj: [BML_Merged.md](/pdfs/ZI/BML/BML_Merged.md) (skripta NI-BML, Přednášky 1–2)
 
